@@ -29,7 +29,7 @@
                     aria-label="Account"
                     aria-haspopup="true"
                 >
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->firstname }}
                 </button>
             </x-slot>
 

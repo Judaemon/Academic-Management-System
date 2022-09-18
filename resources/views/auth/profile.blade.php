@@ -29,12 +29,12 @@
             @method('PUT')
 
             <div class="mt-4">
-                <x-label for="name" :value="__('Name')"/>
+                <x-label for="Firstname" :value="__('Firstname')"/>
                 <x-input type="text"
                          id="name"
                          name="name"
                          class="block w-full"
-                         value="{{ old('name', auth()->user()->name) }}"
+                         value="{{ old('name', auth()->user()->firstname) }}"
                          required/>
                 @error('name')
                     <span class="text-xs text-red-600 dark:text-red-400">

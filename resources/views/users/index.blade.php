@@ -25,7 +25,7 @@
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
-                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Firstname</th>
                         <th class="px-4 py-3">Email</th>
                     </tr>
                     </thead>
@@ -33,7 +33,7 @@
                     @foreach($users as $user)
                         <tr class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
-                                {{ $user->name }}
+                                {{ $user->firstname }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $user->email }}
