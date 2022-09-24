@@ -5,8 +5,6 @@ namespace Database\Seeders;
 use App\Models\Setting;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
 use Carbon\Carbon;
 
 class SettingSeeder extends Seeder
@@ -20,15 +18,14 @@ class SettingSeeder extends Seeder
     {
         $setting = [
             [
-                'id' => '1',
-                'system_name' => 'CAIMS',
-                'school_name' => 'CAIMS',
-                // 'logo' => '',
-                'address' => 0,
+                'system_name' => 'CAIMS Name',
+                'school_name' => 'CAIM School Name',
+                'logo' => '/images/system-assets/logo/CAIMS_Logo_small.png',
+                'address' => 'School Address',
                 
-                'mobile_1' => '9631532939',
-                'mobile_2' => '9719646154',
-                'telephone_1' => '2124567890',
+                'mobile_1' => '1234567890',
+                'mobile_2' => '0987654321',
+                'telephone_1' => '1029384756',
                 
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
