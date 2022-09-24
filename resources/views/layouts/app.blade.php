@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html x-data="data" lang="en">
 <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-        <title>{{ setting('system_name') }}</title>
+    <title>{{ setting('system_name') }}</title>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <!-- Scripts -->
-        <script src="{{ asset('js/init-alpine.js') }}"></script>
+    @wireUiScripts
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/init-alpine.js') }}"></script>
+
+    @livewireStyles
 </head>
 <body>
-<div
-    class="flex h-screen bg-gray-50"
-    :class="{ 'overflow-hidden': isSideMenuOpen }"
->
-    <!-- Desktop sidebar -->
-    @include('layouts.navigation')
-    <!-- Mobile sidebar -->
-    <!-- Backdrop -->
-    @include('layouts.navigation-mobile')
-    <div class="flex flex-col flex-1 w-full">
-        @include('layouts.top-menu')
-        <main class="h-full overflow-y-auto">
-            <div class="container px-6 mx-auto grid">
-                <h2 class="my-6 text-2xl font-semibold text-gray-700">
-                    {{ $header }}
-                </h2>
+    <!-- WireUI Dialog -->
+    <x-dialog />
 
-                {{ $slot }}
-            </div>
-        </main>
+    <div class="flex h-screen bg-gray-50" :class="{ 'overflow-hidden': isSideMenuOpen }">
+
+        <!-- Desktop sidebar -->
+        @include('layouts.navigation')
+        
+        <!-- Mobile sidebar -->
+        <!-- Backdrop -->
+        @include('layouts.navigation-mobile')
+
+        <div class="flex flex-col flex-1 w-full">
+
+            <!-- Top Menu(Logout and My profile) -->
+            @include('layouts.top-menu')
+
+            <main class="h-full overflow-y-auto">
+                <div class="container px-6 mx-auto grid">
+                    {{ $slot }}
+                </div>
+            </main>
+        </div>
+
     </div>
-</div>
+
+    @livewire('livewire-ui-modal')
+    @livewireScripts
 </body>
 </html>
