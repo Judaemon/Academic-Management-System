@@ -7,57 +7,44 @@
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
-                <h1 class="mb-4 text-xl font-semibold text-gray-700">
+                <h1 class="mb-4 text-2xl font-bold text-gray-700">
                     Login
                 </h1>
-
-                <x-auth-validation-errors :errors="$errors"/>
 
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                    <!-- Input[ype="email"] -->
-                    <div class="mt-4">
-                        <x-label :value="__('Email')"/>
-                        <x-input type="email"
-                                 id="email"
-                                 name="email"
-                                 value="{{ old('email') }}"
-                                 class="block w-full"
-                                 required
-                                 autofocus/>
+                    <div class="mb-4">
+                        <x-input name="email" label="Email" placeholder="caims@edu.gmail.com" autofocus/>
                     </div>
 
                     <!-- Input[ype="password"] -->
-                    <div class="mt-4">
-                        <x-label for="password" :value="__('Password')"/>
+                    <div class="mb-4">
+                        <x-input type="password" name="password" label="Password" placeholder="Secret Password" autofocus/>
+                    </div>
+
+                    {{-- <div class="mt-4">
+                        <x-label for="password" />
                         <x-input type="password"
                                  id="password"
                                  name="password"
                                  class="block w-full"/>
-                    </div>
+                    </div> --}}
 
                     <div class="flex mt-6 text-sm">
-                        <label class="flex items-center dark:text-gray-400">
-                            <input type="checkbox"
-                                   name="remember"
-                                   class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple">
-                            <span class="ml-2">{{ __('Remember me') }}</span>
-                        </label>
+                        <x-checkbox class="text-gray-700!" name="remember_me" md label="Remember me"/>
                     </div>
 
                     <div class="mt-4">
-                        <x-button class="block w-full">
-                            {{ __('Log in') }}
-                        </x-button>
+                        <x-button type="submit" label="Log in" positive class="w-full" />
                     </div>
                 </form>
 
-                <hr class="my-8"/>
+                <hr class="mt-10 mb-8"/>
 
                 @if (Route::has('password.request'))
                     <p class="mt-4">
-                        <a class="text-sm font-medium text-primary-600 hover:underline"
+                        <a class="text-sm font-medium text-secondary-600 hover:underline"
                            href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
