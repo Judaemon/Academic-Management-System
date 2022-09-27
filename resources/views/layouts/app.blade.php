@@ -37,7 +37,7 @@
             @include('layouts.top-menu')
 
             <main class="h-full overflow-y-auto">
-                <div class="container px-6 mx-auto grid">
+                <div class="container p-4 mx-auto grid">
                     {{ $slot }}
                 </div>
             </main>
