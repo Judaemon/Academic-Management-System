@@ -18,14 +18,14 @@ class SettingSeeder extends Seeder
     {
         $setting = [
             [
-                'system_name' => 'CAIMS Name',
+                'system_name' => 'ISCP AIMS',
                 'school_name' => 'CAIM School Name',
-                'logo' => '/images/system-assets/logo/CAIMS_Logo_small.png',
-                'address' => 'School Address',
+                'logo' => 'images\system-assets\default\logo\iscp_logo.png',
+                'address' => 'Biringan Philippines',
                 
-                'mobile_1' => '1234567890',
-                'mobile_2' => '0987654321',
-                'telephone_1' => '1029384756',
+                'mobile_1' => '0968-227-6795',
+                'mobile_2' => '0917-895-0544',
+                'telephone_1' => '',
                 
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),

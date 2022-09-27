@@ -1,7 +1,12 @@
 <aside class="z-10 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
     <div class="py-4 text-gray-500">
-        <a class="ml-6 text-lg font-bold text-gray-800" href="{{ route('dashboard') }}">
-            {{ setting('system_name') }}
+
+        <a class="" href="{{ route('dashboard') }}">
+            <div class="flex flex-row items-center px-4">
+                <img aria-hidden="true" class="h-10" src="{{ asset(setting('logo')) }}" alt="logo"/>
+                
+                <h1 class="ml-2 text-2xl font-bold text-gray-800">{{ setting('system_name') }}</h1>
+            </div>
         </a>
 
         <ul class="mt-6">
