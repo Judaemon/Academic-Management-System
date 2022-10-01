@@ -42,30 +42,30 @@ class UserSeeder extends Seeder
         // ->assignRole('Staff');
 
         
-        // User::create([
-        //     'id' => '3',
-        //     'firstname' => 'teacherf',
-        //     'lastname' => 'teacherl',
-        //     'email' => 'teacher@teacher.com',
-        //     'account_type' => 'Teacher',
-        //     'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //     'password' => Hash::make('teacher'),
-        //     'remember_token' => NULL,
-        //     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        // ])->assignRole('Teacher');
+        User::create([
+            'id' => '3',
+            'firstname' => 'teacherf',
+            'lastname' => 'teacherl',
+            'email' => 'teacher@teacher.com',
+            'account_type' => 'Teacher',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('teacher'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Teacher');
 
-        // User::create([
-        //     'id' => '4',
-        //     'firstname' => 'studentf',
-        //     'lastname' => 'studentl',
-        //     'email' => 'student@student.com',
-        //     'account_type' => 'Student',
-        //     'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //     'password' => Hash::make('student'),
-        //     'remember_token' => NULL,
-        //     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        // ])->assignRole('Student');
+        User::create([
+            'id' => '4',
+            'firstname' => 'studentf',
+            'lastname' => 'studentl',
+            'email' => 'student@student.com',
+            'account_type' => 'Student',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Student');
     }
 }
