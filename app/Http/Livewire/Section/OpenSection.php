@@ -32,7 +32,7 @@ class OpenSection extends ModalComponent
     public function mount(section $section)
     {
         $this->section = $section;
-        $this->cardTitle = $section->firstname." Information";
+        $this->cardTitle = $section->name." Information";
     }
 
     public function render()
@@ -71,7 +71,7 @@ class OpenSection extends ModalComponent
 
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'User information successfully saved.'
+            $description = 'Section information successfully saved.'
         );
     }
 
@@ -79,7 +79,7 @@ class OpenSection extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this user?',
+            'description' => 'Delete this section?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',

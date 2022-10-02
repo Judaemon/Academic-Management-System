@@ -2,15 +2,7 @@
     <x-card title="{{ $cardTitle }}">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
             <div class="col-span-4">
-                <x-input wire:model.defer="subject.firstname" label="Firstname" placeholder="John" />
-            </div>
-
-            <div class="col-span-4">
-                <x-input wire:model.defer="subject.lastname" label="Lastname" placeholder="Doe" />
-            </div>
-
-            <div class="col-span-4">
-                <x-input wire:model.defer="subject.email" label="Email" placeholder="Doe" />
+                <x-input wire:model.defer="subject.name" label="Name" placeholder="Science" />
             </div>
         </div>
 

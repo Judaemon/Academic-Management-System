@@ -17,9 +17,7 @@ class OpenSubject extends ModalComponent
     protected function rules()
     {
         return [
-            'subject.firstname' => ['required'],
-            'subject.lastname' => ['required'],
-            'subject.email' => ['required', 'email', 'unique:subject,email, '.$this->subject->id],
+            'subject.name' => ['required'],
             // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
@@ -29,7 +27,7 @@ class OpenSubject extends ModalComponent
     public function mount(subject $subject)
     {
         $this->subject = $subject;
-        $this->cardTitle = $subject->firstname." Information";
+        $this->cardTitle = $subject->name." Information";
     }
 
     public function render()
@@ -68,7 +66,7 @@ class OpenSubject extends ModalComponent
 
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'User information successfully saved.'
+            $description = 'Subject information successfully saved.'
         );
     }
 
@@ -76,7 +74,7 @@ class OpenSubject extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this user?',
+            'description' => 'Delete this subject?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',

@@ -18,9 +18,9 @@ class CreateSubject extends Component
     protected function rules()
     {
         return [
-            'subject.firstname' => ['required'],
-            'subject.lastname' => ['required'],
-            'subject.email' => ['required', 'email', 'unique:subjects,email'],
+            'subject.name' => ['required'],
+            // 'subject.lastname' => ['required'],
+            // 'subject.email' => ['required', 'email', 'unique:subjects,email'],
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
@@ -39,7 +39,7 @@ class CreateSubject extends Component
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create the user?',
+            'description' => 'Create the subject?',
             'icon'        => 'question',
             'accept'      => [
                 'label'  => 'Yes, create it',
@@ -55,11 +55,11 @@ class CreateSubject extends Component
     public function submit()
     {
         Subject::create([
-            'firstname' => $this->subject['firstname'],
-            'lastname' => $this->subject['lastname'],
-            'email' => $this->subject['email'],
-            'password' => Hash::make($this->subject['password']),
-            // 'account_type' => $this->account_type,
+            'name' => $this->subject['name'],
+            // 'lastname' => $this->subject['lastname'],
+            // 'email' => $this->subject['email'],
+            // 'password' => Hash::make($this->subject['password']),
+            // // 'account_type' => $this->account_type,
         ]);
 
         $this->emit('refreshDatatable');
@@ -68,7 +68,7 @@ class CreateSubject extends Component
         
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'User successfully Created.'
+            $description = 'Subject successfully Created.'
         );
     }
 }

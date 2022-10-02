@@ -20,19 +20,9 @@ class SubjectTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make("Name", "name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Firstname", "firstname")
-                ->sortable()
-                ->searchable(),
-            Column::make("Lastname", "lastname")
-                ->sortable()
-                ->searchable(),
-            Column::make("Email", "email")
-                ->sortable()
-                ->searchable(),
-            Column::make("Actions", "id")->view('livewire.subject.actions-col'),
         ];
     }
 }

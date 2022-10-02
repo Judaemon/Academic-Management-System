@@ -12,10 +12,7 @@ class Subject extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'password',
+        'name',
     ];
 
     protected $hidden = [

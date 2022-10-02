@@ -60,8 +60,8 @@ class CreateSection extends Component
             'name' => $this->section['name'],
             'subjects_id' => $this->section['subjects_id'],
             'class_limit' => $this->section['class_limit'],
-            'column_5' => Hash::make($this->section['column_5']),
-            'grade_level_id' => Hash::make($this->section['grade_level_id']),
+            'column_5' => $this->section['column_5'],
+            'grade_level_id' => $this->section['grade_level_id'],
             // 'account_type' => $this->account_type,
         ]);
 
