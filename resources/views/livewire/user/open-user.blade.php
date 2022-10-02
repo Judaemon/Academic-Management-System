@@ -16,7 +16,12 @@
 
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
-                <x-button flat negative label="Delete" wire:click="deleteDialog" />
+                @can('delete_users')
+                    <x-button flat negative label="Delete" wire:click="deleteDialog" />
+                    
+                @else
+                    <div></div>
+                @endcan
         
                 <div class="flex space-x-2">
                     <x-button flat label="Cancel" wire:click="$emit('closeModal')" />

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\settings;
+namespace App\Http\Livewire\Settings;
 
 use App\Models\Setting;
 use Livewire\Component;
@@ -53,13 +53,21 @@ class UpdateSettings extends Component
 
     public function submit()
     {
-        $this->validate();
-
-        $this->setting->save();
-
-        $this->dialog()->success(
-            $title = 'Successful!',
-            $description = 'Refresh the page to see it take effect.'
-        );
+        // Check if user has permission
+        if (!auth()->user()->can('update_system')) {
+            $this->dialog()->error(
+                $title = 'Error !!!',
+                $description = 'You do not have permission for this action.'
+            );
+        }else{
+            $this->validate();
+    
+            $this->setting->save();
+    
+            $this->dialog()->success(
+                $title = 'Successful!',
+                $description = 'Refresh the page to see it take effect.'
+            );
+        }
     }
 }

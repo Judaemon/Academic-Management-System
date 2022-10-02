@@ -54,21 +54,28 @@ class CreateUser extends Component
 
     public function submit()
     {
-        User::create([
-            'firstname' => $this->user['firstname'],
-            'lastname' => $this->user['lastname'],
-            'email' => $this->user['email'],
-            'password' => Hash::make($this->user['password']),
-            // 'account_type' => $this->account_type,
-        ]);
-
-        $this->emit('refreshDatatable');
-
-        $this->reset();
-        
-        $this->dialog()->success(
-            $title = 'Successful!',
-            $description = 'User successfully Created.'
-        );
+        if (!auth()->user()->can('create_user')) {
+            $this->dialog()->error(
+                $title = 'Error !!!',
+                $description = 'You do not have permission for this action.'
+            );
+        }else{
+            User::create([
+                'firstname' => $this->user['firstname'],
+                'lastname' => $this->user['lastname'],
+                'email' => $this->user['email'],
+                'password' => Hash::make($this->user['password']),
+                // 'account_type' => $this->account_type,
+            ]);
+    
+            $this->emit('refreshDatatable');
+    
+            $this->reset();
+            
+            $this->dialog()->success(
+                $title = 'Successful!',
+                $description = 'User successfully Created.'
+            );
+        }
     }
 }

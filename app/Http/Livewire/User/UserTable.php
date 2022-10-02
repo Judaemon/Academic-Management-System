@@ -13,13 +13,11 @@ class UserTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-
-        // $this->setSearchDebounce(1000);
     }
 
     public function columns(): array
     {
-        return [
+        $columns = [
             Column::make("Id", "id")
                 ->sortable()
                 ->searchable(),
@@ -32,7 +30,14 @@ class UserTable extends DataTableComponent
             Column::make("Email", "email")
                 ->sortable()
                 ->searchable(),
-            Column::make("Actions", "id")->view('livewire.user.actions-col'),
         ];
+
+
+        // Check if user has permission
+        if (auth()->user()->can('read_user')) {
+            array_push($columns, Column::make("Actions", "id")->view('livewire.user.actions-col'));
+        }
+
+        return $columns;
     }
 }

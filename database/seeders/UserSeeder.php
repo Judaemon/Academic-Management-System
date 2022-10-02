@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'id' => '1',
             'firstname' => 'Super Admin',
             'lastname' => 'Super Admin',
             'email' => 'sadmin@sadmin.com',
@@ -24,30 +23,24 @@ class UserSeeder extends Seeder
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        // ->assignRole('Super Admin');
+        ])->assignRole('Super Admin');
 
-        // User::create([
-        //     'id' => '2',
-        //     'firstname' => 'stafff',
-        //     'lastname' => 'staffl',
-        //     'email' => 'staff@staff.com',
-        //     'account_type' => 'Staff',
-        //     'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //     'password' => Hash::make('staff'),
-        //     'remember_token' => NULL,
-        //     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        // ])
-        // ->assignRole('Staff');
+        User::create([
+            'firstname' => 'admin F',
+            'lastname' => 'admin L',
+            'email' => 'admin@admin.com',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('admin'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Admin');
 
         
         User::create([
-            'id' => '3',
-            'firstname' => 'teacherf',
-            'lastname' => 'teacherl',
+            'firstname' => 'teacher F',
+            'lastname' => 'teacher L',
             'email' => 'teacher@teacher.com',
-            'account_type' => 'Teacher',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('teacher'),
             'remember_token' => NULL,
@@ -56,11 +49,9 @@ class UserSeeder extends Seeder
         ])->assignRole('Teacher');
 
         User::create([
-            'id' => '4',
-            'firstname' => 'studentf',
-            'lastname' => 'studentl',
+            'firstname' => 'student F',
+            'lastname' => 'student L',
             'email' => 'student@student.com',
-            'account_type' => 'Student',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('student'),
             'remember_token' => NULL,
