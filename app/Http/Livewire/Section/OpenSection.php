@@ -102,7 +102,7 @@ class OpenSection extends ModalComponent
 
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'User deleted successfully.'
+            $description = 'Section deleted successfully.'
         );
     }
 

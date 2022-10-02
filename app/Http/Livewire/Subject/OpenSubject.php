@@ -58,7 +58,7 @@ class OpenSubject extends ModalComponent
 
     public function submit()
     {
-        $this->user->save();
+        $this->subject->save();
 
         $this->emit('refreshDatatable');
 
@@ -89,7 +89,7 @@ class OpenSubject extends ModalComponent
 
     public function delete()
     {
-        $this->user->delete();
+        $this->subject->delete();
 
         $this->closeModal();
 
@@ -97,7 +97,7 @@ class OpenSubject extends ModalComponent
 
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'User deleted successfully.'
+            $description = 'Subject deleted successfully.'
         );
     }
 
