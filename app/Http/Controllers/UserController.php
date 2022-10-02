@@ -8,8 +8,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate();
+        if (!auth()->user()->can('view_users')) {
+            return redirect('/dashboard');
+        }
 
-        return view('users.index', compact('users'));
+        return view('users.index');
     }
 }

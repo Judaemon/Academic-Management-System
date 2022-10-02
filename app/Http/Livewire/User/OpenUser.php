@@ -26,7 +26,7 @@ class OpenUser extends ModalComponent
         ];
     }
 
-    public function mount(USer $user)
+    public function mount(User $user)
     {
         $this->user = $user;
         $this->cardTitle = $user->firstname." Information";
@@ -60,16 +60,24 @@ class OpenUser extends ModalComponent
 
     public function submit()
     {
-        $this->user->save();
+        // Check if user has permission
+        if (!auth()->user()->can('update_user')) {
+            $this->dialog()->error(
+                $title = 'Error !!!',
+                $description = 'You do not have permission for this action.'
+            );
+        }else{
+            $this->user->save();
 
-        $this->emit('refreshDatatable');
+            $this->emit('refreshDatatable');
 
-        $this->closeModal();
+            $this->closeModal();
 
-        $this->dialog()->success(
-            $title = 'Successful!',
-            $description = 'User information successfully saved.'
-        );
+            $this->dialog()->success(
+                $title = 'Successful!',
+                $description = 'User information successfully saved.'
+            );
+        }
     }
 
     public function deleteDialog()
@@ -91,16 +99,24 @@ class OpenUser extends ModalComponent
 
     public function delete()
     {
-        $this->user->delete();
+        // Check if user has permission
+        if (!auth()->user()->can('delete_user')) {
+            $this->dialog()->error(
+                $title = 'Error !!!',
+                $description = 'You do not have permission for this action.'
+            );
+        }else{
+            $this->user->delete();
 
-        $this->closeModal();
-
-        $this->emit('refreshDatatable');
-
-        $this->dialog()->success(
-            $title = 'Successful!',
-            $description = 'User deleted successfully.'
-        );
+            $this->closeModal();
+    
+            $this->emit('refreshDatatable');
+    
+            $this->dialog()->success(
+                $title = 'Successful!',
+                $description = 'User deleted successfully.'
+            );
+        }
     }
 
     public static function modalMaxWidth(): string
