@@ -105,6 +105,10 @@ class CreateRole extends Component
                 $description = 'Role successfully created.'
             );
         }
-        
+    }
+
+    public function closeModal()
+    {
+        $this->createRoleModal = false;
     }
 }

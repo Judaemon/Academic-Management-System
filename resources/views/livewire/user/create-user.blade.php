@@ -25,7 +25,7 @@
 
             <x-slot name="footer">
                 <div class="flex justify-end gap-x-4">
-                    <x-button flat label="Cancel" wire:click="$emit('closeModal')" />
+                    <x-button flat label="Cancel" wire:click="closeModal" />
 
                     <x-button wire:click="save" type="button" primary label="Save" />
                 </div>

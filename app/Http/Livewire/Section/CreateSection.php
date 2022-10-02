@@ -23,8 +23,6 @@ class CreateSection extends Component
             'section.class_limit' => ['required'],
             'section.column_5' => ['required'],
             'section.grade_level_id' => ['required'],
-            // 'user.password' => ['required', 'min:8', 'confirmed'],
-            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
@@ -62,7 +60,6 @@ class CreateSection extends Component
             'class_limit' => $this->section['class_limit'],
             'column_5' => $this->section['column_5'],
             'grade_level_id' => $this->section['grade_level_id'],
-            // 'account_type' => $this->account_type,
         ]);
 
         $this->emit('refreshDatatable');

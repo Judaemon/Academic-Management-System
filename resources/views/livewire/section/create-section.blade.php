@@ -12,7 +12,6 @@
                     <x-input wire:model.defer="section.subjects_id" label="Subjects ID" placeholder="x" />
                 </div>
 
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
                     <x-input wire:model.defer="section.class_limit" label="Class Limit" placeholder="00" />
                 </div>
@@ -24,7 +23,6 @@
                 <div class="col-span-4">
                     <x-input wire:model.defer="section.grade_level_id" label="Grade Level ID" placeholder="1" />
                 </div>
-                {{-- read link security reason ignore nalang muna --}}
             </div>
 
             <x-slot name="footer">

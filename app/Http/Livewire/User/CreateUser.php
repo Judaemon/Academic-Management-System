@@ -78,4 +78,9 @@ class CreateUser extends Component
             );
         }
     }
+
+    public function closeModal()
+    {
+        $this->modalCreate = false;
+    }
 }

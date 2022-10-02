@@ -24,7 +24,7 @@
                 @endcan
         
                 <div class="flex space-x-2">
-                    <x-button flat label="Cancel" wire:click="$emit('closeModal')" />
+                    <x-button flat label="Cancel" wire:click="z" />
                     <x-button wire:click="save" type="button" primary label="Save" />
                 </div>
             </div>
