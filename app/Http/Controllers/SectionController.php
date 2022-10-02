@@ -14,7 +14,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        $sections = Section::paginate();
+
+        return view('sections.index', compact('sections'));
     }
 
     /**
