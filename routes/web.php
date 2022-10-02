@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
+    Route::get('roles', [\App\Http\Controllers\RolesController::class, 'index'])->name('roles.index');
+    
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-    Route::put('settings', [\App\Http\Controllers\SettingController::class, 'update'])->name('setting.update');
-
 });

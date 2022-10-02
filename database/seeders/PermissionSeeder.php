@@ -41,7 +41,6 @@ class PermissionSeeder extends Seeder
 
         $system_permissions = [
             'view_system',
-            'read_system',
             'update_system',
         ];
         

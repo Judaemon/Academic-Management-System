@@ -24,7 +24,6 @@ class RoleSeeder extends Seeder
             'update_role',
 
             'view_system',
-            'read_system',
         ]);
 
         Role::create(['name' => 'Teacher']);

@@ -5,7 +5,7 @@
             <div class="flex flex-row items-center px-4">
                 <img aria-hidden="true" class="h-10" src="{{ asset(setting('logo')) }}" alt="logo"/>
                 
-                <h1 class="ml-2 text-2xl font-bold text-gray-800">{{ setting('system_name') }}</h1>
+                <h1 class="ml-4 text-2xl font-bold text-gray-800">{{ setting('system_name') }}</h1>
             </div>
         </a>
 
@@ -22,6 +22,7 @@
                 </x-nav-link>
             </li>
 
+            @can('view_users')
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                     <x-slot name="icon">
@@ -34,6 +35,7 @@
                     {{ __('Users') }}
                 </x-nav-link>
             </li>
+            @endcan
 
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">
@@ -76,6 +78,20 @@
                 </template>
             </li>
 
+            @can('view_roles')
+            <li class="relative px-6 py-3">
+                <x-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
+                    <x-slot name="icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                          </svg>
+                    </x-slot>
+                    {{ __('Roles and Permission') }}
+                </x-nav-link>
+            </li>
+            @endcan
+
+            @can('view_system')
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('setting.index') }}" :active="request()->routeIs('setting.index')">
                     <x-slot name="icon">
@@ -87,6 +103,7 @@
                     {{ __('System Setting') }}
                 </x-nav-link>
             </li>
+            @endcan
         </ul>
     </div>
 </aside>
