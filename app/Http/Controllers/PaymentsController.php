@@ -10,7 +10,7 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-        $payment = Payments::paginate();
+        $payments = Payments::paginate();
 
         return view('livewire.payments.index', compact('payments'));
     }
