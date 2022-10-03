@@ -27,7 +27,7 @@ class AcademicYearTable extends DataTableComponent
         ];
 
         if (auth()->user()->can('read_user')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.payments.actions-col'));
+            array_push($columns, Column::make("Actions", "id")->view('livewire.academic-year.actions-col'));
         }
 
         return $columns;
