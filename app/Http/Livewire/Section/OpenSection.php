@@ -23,13 +23,10 @@ class OpenSection extends ModalComponent
             'section.class_limit' => ['required'],
             'section.column_5' => ['required'],
             'section.grade_level_id' => ['required'],
-            // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
-            // 'user.password' => ['required', 'min:8', 'confirmed'],
-            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
-    public function mount(section $section)
+    public function mount(Section $section)
     {
         $this->section = $section;
         $this->cardTitle = $section->name." Information";

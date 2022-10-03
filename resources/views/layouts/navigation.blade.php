@@ -5,7 +5,7 @@
             <div class="flex flex-row items-center px-4">
                 <img aria-hidden="true" class="h-10" src="{{ asset(setting('logo')) }}" alt="logo"/>
                 
-                <h1 class="ml-4 text-2xl font-bold text-gray-800">{{ setting('system_name') }}</h1>
+                <h1 class="ml-4 text-2xl font-bold text-gray-800">{{ setting('institute_acronym') }}</h1>
             </div>
         </a>
 
@@ -128,6 +128,12 @@
                 </x-nav-link>
             </li>
             @endcan
+
+            {{-- student --}}
+            {{-- student --}}
+        
+            {{-- teacher --}}
+            {{-- teacher --}}
         </ul>
     </div>
 </aside>

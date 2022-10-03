@@ -18,7 +18,6 @@
             <div class="flex justify-between gap-x-4">
                 @can('delete_users')
                     <x-button flat negative label="Delete" wire:click="deleteDialog" />
-                    
                 @else
                     <div></div>
                 @endcan

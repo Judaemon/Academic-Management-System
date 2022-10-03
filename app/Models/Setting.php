@@ -10,8 +10,8 @@ class Setting extends Model
     use HasFactory;
 
     public $fillable = [
-        'system_name',
-        'school_name',
+        'institute_name',
+        'institute_acronym',
         'logo',
         'address'
         ,
