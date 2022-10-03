@@ -2,17 +2,17 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use App\Models\AcademicYear;
-use WireUi\Traits\Actions;
 
-class CreateAcademicYear extends Component
+class EditAcademicYear extends ModalComponent
 {
-    use Actions;
-
-    public $modalCreate;
-
     public $academic_year;
+
+    public function mount(AcademicYear $academic_year)
+    {
+        $this->academic_year = $academic_year;
+    }
 
     protected function rules()
     {
@@ -24,23 +24,23 @@ class CreateAcademicYear extends Component
 
     public function render()
     {
-        return view('livewire.academic-year.create-academic-year');
+        return view('livewire.academic-year.edit-academic-year');
     }
 
     public function save(): void
     {
         $this->validate();
 
-        $this->modalCreate = false;
+        $this->modalReadUpdateDelete = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create Academic Year Level?',
+            'description' => 'Save the information?',
             'icon'        => 'question',
             'accept'      => [
-                'label'  => 'Yes, create it',
+                'label'  => 'Yes, save it',
                 'method' => 'submit',
-                'params' => 'Created',
+                'params' => 'Saved',
             ],
             'reject' => [
                 'label'  => 'No, cancel',
@@ -50,30 +50,22 @@ class CreateAcademicYear extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_academic_year')) {
+        if (!auth()->user()->can('update_academic_year')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
         }else{
-            AcademicYear::create([
-                'year' => $this->academic_year['year'],
-                'curriculum' => $this->academic_year['curriculum'],
-            ]);
-    
+            $this->user->save();
+
             $this->emit('refreshDatatable');
-    
-            $this->reset();
-            
+
+            $this->closeModal();
+
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'Academic Year successfully Created.'
+                $description = 'User information successfully Updated.'
             );
         }
-    }
-
-    public function closeModal()
-    {
-        $this->modalCreate = false;
     }
 }
