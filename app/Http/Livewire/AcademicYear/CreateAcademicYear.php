@@ -55,7 +55,7 @@ class CreateAcademicYear extends Component
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
-        }else{
+        } else {
             AcademicYear::create([
                 'year' => $this->academic_year['year'],
                 'curriculum' => $this->academic_year['curriculum'],

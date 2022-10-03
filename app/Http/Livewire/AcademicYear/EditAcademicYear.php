@@ -4,14 +4,18 @@ namespace App\Http\Livewire\AcademicYear;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\AcademicYear;
+use WireUi\Traits\Actions;
 
 class EditAcademicYear extends ModalComponent
 {
+    use Actions;
+
     public $academic_year;
 
     public function mount(AcademicYear $academic_year)
     {
         $this->academic_year = $academic_year;
+        $this->card_title = "Edit ".$academic_year->year;
     }
 
     protected function rules()
@@ -30,8 +34,6 @@ class EditAcademicYear extends ModalComponent
     public function save(): void
     {
         $this->validate();
-
-        $this->modalReadUpdateDelete = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -55,8 +57,11 @@ class EditAcademicYear extends ModalComponent
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
-        }else{
-            $this->user->save();
+        } else {
+            $this->academic_year->forceFill([
+                'year' => $this->academic_year['year'],
+                'curriculum' => $this->academic_year['curriculum'],
+            ])->save();
 
             $this->emit('refreshDatatable');
 

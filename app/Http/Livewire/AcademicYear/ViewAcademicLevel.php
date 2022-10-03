@@ -4,7 +4,6 @@ namespace App\Http\Livewire\AcademicYear;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\AcademicYear;
-use WireUi\Traits\Actions;
 
 class ViewAcademicLevel extends ModalComponent
 {

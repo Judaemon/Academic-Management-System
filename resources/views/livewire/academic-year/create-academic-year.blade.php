@@ -23,4 +23,4 @@
             </x-slot>
         </x-card>
     </x-modal>
-  </div>
+</div>
