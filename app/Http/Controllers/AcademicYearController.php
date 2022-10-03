@@ -12,6 +12,6 @@ class AcademicYearController extends Controller
     {
         $academic_year = AcademicYear::paginate();
 
-        return view('livewire.payments.index', compact('academic_year'));
+        return view('livewire.academic-year.index', compact('academic_year'));
     }
 }
