@@ -2,8 +2,8 @@
 
     <div class="p-4 bg-white rounded-lg shadow-xs overflow-hidden">
         <div class="px-2 py-4 flex justify-between">
-            <h2 class="text-2xl font-semibold text-gray-700">School Fees</h2>
-            {{-- <livewire:academic-year.create-academic-year /> --}}
+            <h2 class="text-2xl font-semibold text-gray-700">Academic Year</h2>
+            <livewire:academic-year.create-academic-year />
         </div>
 
         <div class="datatable-container h-64 w-full rounded-lg border shadow-xs p-2">
