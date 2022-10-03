@@ -42,7 +42,9 @@ return new class extends Migration
 
             // educational background
             $table->string('school_kinder')->nullable();
+            $table->string('school_kindergrad')->nullable();
             $table->string('school_elementary')->nullable();
+            $table->string('school_elementarygrad')->nullable();
             $table->string('school_juniorhigh')->nullable();
 
             // academic information
