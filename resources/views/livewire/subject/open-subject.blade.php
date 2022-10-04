@@ -11,7 +11,7 @@
                 <x-button flat negative label="Delete" wire:click="deleteDialog" />
         
                 <div class="flex space-x-2">
-                    <x-button flat label="Cancel" wire:click="$emit('closeModal')" />
+                    <x-button flat label="Cancel" wire:click="closeModal" />
                     <x-button wire:click="save" type="button" primary label="Save" />
                 </div>
             </div>
