@@ -32,4 +32,5 @@ class AcademicYearTable extends DataTableComponent
 
         return $columns;
     }
+
 }
