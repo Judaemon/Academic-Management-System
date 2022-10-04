@@ -17,17 +17,20 @@
     </div>
     <!-- Modal footer -->
     <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-        <x-button 
-        icon="pencil" 
-        info 
-        onclick="livewire.emit('openModal', 'academic-year.edit-academic-year', {{ json_encode(['academic_year' => $academic_year->id]) }})" 
-        label="Edit" 
-    />
-    <x-button 
-        icon="trash" 
-        negative 
-        onclick="#"  
-        label="Remove"
-    />
+        @can('edit_academic_year')
+            <x-button 
+              icon="pencil" 
+              info 
+              onclick="livewire.emit('openModal', 'academic-year.edit-academic-year', {{ json_encode(['academic_year' => $academic_year->id]) }})" 
+              label="Edit" 
+            />
+        @elsecan('delete_academic_year')
+            <x-button 
+              icon="trash" 
+              negative 
+              onclick="#"  
+              label="Remove"
+            />
+        @endcan
     </div>
 </div>

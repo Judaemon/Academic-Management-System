@@ -55,7 +55,7 @@ class CreatePayments extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_user')) {
+        if (!auth()->user()->can('create_payment')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
