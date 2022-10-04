@@ -20,7 +20,6 @@ class CreateUser extends Component
         return [
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
-
             'user.email' => ['required', 'email', 'unique:users,email'],
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
