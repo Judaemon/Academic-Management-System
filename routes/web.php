@@ -27,4 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('roles', [\App\Http\Controllers\RolesController::class, 'index'])->name('roles.index');
 
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
+
+    Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
+
+    Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
+
+    Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academicyear.index');
+
 });
