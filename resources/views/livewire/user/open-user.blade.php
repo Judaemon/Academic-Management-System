@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="col-span-12"> 
                 <!-- personal information -->
-                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -24,7 +24,8 @@
 
                 <!-- di ko maayos tong date picker -->
                 <div class="col-span-4">
-                    <x-datetime-picker wire:model.defer="user.birthdate" label="Birth Date" placeholder="Birth Date" />
+                    <!-- <x-datetime-picker wire:model.defer="user.birthdate" label="Birth Date" placeholder="Birth Date" /> -->
+                    <x-input wire:model.defer="user.birthdate" label="Birth Date" placeholder="YYYY/MM/DD" />
                 </div>
 
                 <div class="col-span-4">
@@ -55,7 +56,7 @@
 
                 <!-- physical information -->
                 <div class="col-span-12"> 
-                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -68,7 +69,7 @@
 
                 <!-- contact information -->
                 <div class="col-span-12"> 
-                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -86,7 +87,7 @@
 
                 <!-- educational background -->
                 <div class="col-span-12"> 
-                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -103,7 +104,7 @@
 
                 <!-- academic information -->
                 <div class="col-span-12"> 
-                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -124,7 +125,7 @@
 
                 <!-- government beneficiary -->
                 <div class="col-span-12"> 
-                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify. If no, type N/A.</x-card>
+                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -133,7 +134,7 @@
 
                 <!-- guardian information -->
                 <div class="col-span-12"> 
-                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -158,7 +159,7 @@
 
                 <!-- parents information -->
                 <div class="col-span-12"> 
-                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-12"> 
