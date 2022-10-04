@@ -8,9 +8,9 @@
             @endcan
         </div>
         
-        <div class="datatable-container w-full rounded-lg border shadow-xs p-4">
-            {{-- need filter for different roles --}}
-            @livewire('user.user-table')
+        <div class="datatable-container w-full rounded-lg border shadow-xs p-4 overflow-x-auto">
+            <!-- need filter for different roles -->
+                @livewire('user.user-table')
         </div>
     </div>
 </x-app-layout>
