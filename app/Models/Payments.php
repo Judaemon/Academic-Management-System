@@ -14,4 +14,14 @@ class Payments extends Model
         'payment_value',
         'academic_year_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function academic_year()
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
 }

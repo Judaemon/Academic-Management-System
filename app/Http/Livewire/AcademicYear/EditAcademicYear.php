@@ -52,7 +52,7 @@ class EditAcademicYear extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('update_academic_year')) {
+        if (!auth()->user()->can('edit_academic_year')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
