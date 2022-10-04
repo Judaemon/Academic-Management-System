@@ -2,25 +2,22 @@
 
 namespace App\Http\Livewire\Payments;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use App\Models\User;
 use App\Models\Payments;
 use App\Models\AcademicYear;
 use WireUi\Traits\Actions;
 
-class CreatePayments extends Component
+class EditPayment extends ModalComponent
 {
-    public $modalCreate;
     public $payment;
 
     use Actions;
 
-    public function render()
+    public function mount(Payments $payment)
     {
-        return view('livewire.payments.create-payments', [
-            'academic_year' => AcademicYear::all(),
-            'users' => User::all(),
-        ]);
+        $this->payment = $payment;
+        $this->card_title = "Edit Payment";
     }
 
     protected function rules()
@@ -32,6 +29,14 @@ class CreatePayments extends Component
         ];
     }
 
+    public function render()
+    {
+        return view('livewire.payments.edit-payment', [
+            'academic_year' => AcademicYear::all(),
+            'users' => User::all(),
+        ]);
+    }
+
     public function save(): void
     {
         $this->validate();
@@ -40,7 +45,7 @@ class CreatePayments extends Component
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create Payment?',
+            'description' => "Edit This User's Payment Information ?",
             'icon'        => 'question',
             'accept'      => [
                 'label'  => 'Yes, create it',
@@ -55,31 +60,26 @@ class CreatePayments extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_user')) {
+        if (!auth()->user()->can('edit_payment')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
-        }else{
-            Payments::create([
+        } else {
+            $this->payment->forceFill([
                 'user_id' => $this->payment['user_id'],
                 'payment_value' => $this->payment['payment_value'],
                 'academic_year_id' => $this->payment['academic_year_id'],
-            ]);
+            ])->save();
     
             $this->emit('refreshDatatable');
     
-            $this->reset();
+            $this->closeModal();
             
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'School Fee successfully Created.'
+                $description = 'School Fee successfully Updated.'
             );
         }
-    }
-
-    public function closeModal()
-    {
-        $this->modalCreate = false;
     }
 }
