@@ -17,6 +17,7 @@ class OpenUser extends ModalComponent
     protected function rules()
     {
         return [
+            // personal info
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
             'user.middlename' => ['required'],
@@ -28,34 +29,44 @@ class OpenUser extends ModalComponent
             'user.gender' => ['required'],
             'user.mothertongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwdid' => ['required', 'pwdid', 'unique:users,pwdid, '.$this->user->id],
-            'user.height' => ['required'],
-            'user.weight' => ['required'],
+            'user.pwdid' => ['pwdid', 'unique:users,pwdid, '.$this->user->id],
+
+            // physical info
+            'user.height' => [],
+            'user.weight' => [],
+
+            // contact info
             'user.mobilenumber' => ['required', 'mobilenumber', 'unique:users,mobilenumber, '.$this->user->id],
             'user.address' => ['required'],
-            'user.school_kinder' => ['required'],
-            'user.school_kindergrad' => ['required'],
-            'user.school_elementary' => ['required'],
-            'user.school_elementarygrad' => ['required'],
-            'user.school_juniorhigh' => ['required'],
-            'user.lrn' => ['required', 'lrn', 'unique:users,lrn, '.$this->user->id],
-            'user.esc' => ['required', 'esc', 'unique:users,esc, '.$this->user->id],
-            'user.qvr' => ['required', 'qvr', 'unique:users,qvr, '.$this->user->id],
-            'user.public' => ['required', 'public', 'unique:users,public, '.$this->user->id],
-            'user.beneficiary' => ['required'],
-            'user.guardian_name' => ['required'],
-            'user.guardian_number' => ['required', 'guardian_number', 'unique:users,guardian_number, '.$this->user->id],
-            'user.guardian_occupation' => ['required'],
-            'user.guardian_address' => ['required'],
-            'user.guardian_relationship' => ['required'],
-            'user.mparent_name' => ['required'],
-            'user.mparent_number' => ['required', 'mparent_number', 'unique:users,mparent_number, '.$this->user->id],
-            'user.mparent_occupation' => ['required'],
-            'user.mparent_address' => ['required'],
-            'user.fparent_name' => ['required'],
-            'user.fparent_number' => ['required', 'fparent_number', 'unique:users,fparent_number, '.$this->user->id],
-            'user.fparent_occupation' => ['required'],
-            'user.fparent_address' => ['required'],
+
+            // educational background
+            'user.school_kinder' => [],
+            'user.school_kindergrad' => [],
+            'user.school_elementary' => [],
+            'user.school_elementarygrad' => [],
+            'user.school_juniorhigh' => [],
+
+            // academic information
+            'user.lrn' => ['lrn', 'unique:users,lrn, '.$this->user->id],
+            'user.esc' => ['esc', 'unique:users,esc, '.$this->user->id],
+            'user.qvr' => ['qvr', 'unique:users,qvr, '.$this->user->id],
+            'user.public' => ['public', 'unique:users,public, '.$this->user->id],
+
+            // beneficiary, guardian, and parents info
+            'user.beneficiary' => [],
+            'user.guardian_name' => [],
+            'user.guardian_number' => ['guardian_number', 'unique:users,guardian_number, '.$this->user->id],
+            'user.guardian_occupation' => [],
+            'user.guardian_address' => [],
+            'user.guardian_relationship' => [],
+            'user.mparent_name' => [],
+            'user.mparent_number' => ['mparent_number', 'unique:users,mparent_number, '.$this->user->id],
+            'user.mparent_occupation' => [],
+            'user.mparent_address' => [],
+            'user.fparent_name' => [],
+            'user.fparent_number' => ['fparent_number', 'unique:users,fparent_number, '.$this->user->id],
+            'user.fparent_occupation' => [],
+            'user.fparent_address' => [],
             // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],

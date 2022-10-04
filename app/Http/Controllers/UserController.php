@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 
-// test
-// use Validator;
-
 class UserController extends Controller
 {
     public function index()

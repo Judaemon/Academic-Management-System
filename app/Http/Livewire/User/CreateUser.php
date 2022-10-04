@@ -18,6 +18,7 @@ class CreateUser extends Component
     protected function rules()
     {
         return [
+            // personal info
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
             'user.email' => ['required', 'email', 'unique:users,email'],
@@ -31,34 +32,47 @@ class CreateUser extends Component
             'user.gender' => ['required'],
             'user.mothertongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwdid' => ['required', 'pwdid', 'unique:users,pwdid'],
-            'user.height' => ['required'],
-            'user.weight' => ['required'],
+            'user.pwdid' => ['pwdid', 'unique:users,pwdid'],
+
+            // physical info
+            'user.height' => [],
+            'user.weight' => [],
+
+            // contact info
             'user.mobilenumber' => ['required', 'mobilenumber', 'unique:users,mobilenumber'],
             'user.address' => ['required'],
-            'user.school_kinder' => ['required'],
-            'user.school_kindergrad' => ['required'],
-            'user.school_elementary' => ['required'],
-            'user.school_elementarygrad' => ['required'],
-            'user.school_juniorhigh' => ['required'],
-            'user.lrn' => ['required', 'lrn', 'unique:users,lrn'],
-            'user.esc' => ['required', 'esc', 'unique:users,esc'],
-            'user.qvr' => ['required', 'qvr', 'unique:users,qvr'],
-            'user.public' => ['required', 'public', 'unique:users,public'],
-            'user.beneficiary' => ['required'],
-            'user.guardian_name' => ['required'],
-            'user.guardian_number' => ['required', 'guardian_number', 'unique:users,guardian_number'],
-            'user.guardian_occupation' => ['required'],
-            'user.guardian_address' => ['required'],
-            'user.guardian_relationship' => ['required'],
-            'user.mparent_name' => ['required'],
-            'user.mparent_number' => ['required', 'mparent_number', 'unique:users,mparent_number'],
-            'user.mparent_occupation' => ['required'],
-            'user.mparent_address' => ['required'],
-            'user.fparent_name' => ['required'],
-            'user.fparent_number' => ['required', 'fparent_number', 'unique:users,fparent_number'],
-            'user.fparent_occupation' => ['required'],
-            'user.fparent_address' => ['required'],
+
+            // educational background
+            'user.school_kinder' => [],
+            'user.school_kindergrad' => [],
+            'user.school_elementary' => [],
+            'user.school_elementarygrad' => [],
+            'user.school_juniorhigh' => [],
+
+            // academic info
+            'user.lrn' => ['lrn', 'unique:users,lrn'],
+            'user.esc' => ['esc', 'unique:users,esc'],
+            'user.qvr' => ['qvr', 'unique:users,qvr'],
+            'user.public' => ['public', 'unique:users,public'],
+
+            // beneficiary, guardian, and parents info
+            'user.beneficiary' => [],
+
+            'user.guardian_name' => [],
+            'user.guardian_number' => ['guardian_number', 'unique:users,guardian_number'],
+            'user.guardian_occupation' => [],
+            'user.guardian_address' => [],
+            'user.guardian_relationship' => [],
+
+            'user.mparent_name' => [],
+            'user.mparent_number' => ['mparent_number', 'unique:users,mparent_number'],
+            'user.mparent_occupation' => [],
+            'user.mparent_address' => [],
+
+            'user.fparent_name' => [],
+            'user.fparent_number' => ['fparent_number', 'unique:users,fparent_number'],
+            'user.fparent_occupation' => [],
+            'user.fparent_address' => [],
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
@@ -99,6 +113,7 @@ class CreateUser extends Component
             );
         }else{
             User::create([
+                // personal info
                 'firstname' => $this->user['firstname'],
                 'lastname' => $this->user['lastname'],
                 'email' => $this->user['email'],
@@ -112,18 +127,28 @@ class CreateUser extends Component
                 'mothertongue' => $this->user['mothertongue'],
                 'nationality' => $this->user['nationality'],
                 'pwdid' => $this->user['pwdid'],
+
+                // physical info
                 'height' => $this->user['height'],
                 'weight' => $this->user['weight'],
+
+                // contact info
                 'mobilenumber' => $this->user['mobilenumber'],
                 'address' => $this->user['address'],
+
+                // educational background
                 'school_kinder' => $this->user['school_kinder'],
                 'school_kindergrad' => $this->user['school_kindergrad'],
                 'school_elementary' => $this->user['school_elementary'],
                 'school_elementarygrad' => $this->user['school_elementarygrad'],
+
+                // academic info
                 'lrn' => $this->user['lrn'],
                 'esc' => $this->user['esc'],
                 'qvr' => $this->user['qvr'],
                 'public' => $this->user['public'],
+
+                // beneficiary, guardian, and parents info
                 'beneficiary' => $this->user['beneficiary'],
                 'guardian_name' => $this->user['guardian_name'],
                 'guardian_number' => $this->user['guardian_number'],
