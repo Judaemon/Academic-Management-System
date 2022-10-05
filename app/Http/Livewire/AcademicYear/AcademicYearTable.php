@@ -19,10 +19,16 @@ class AcademicYearTable extends DataTableComponent
     {
         $columns = [
             Column::make("Id", "id")
+            ->searchable()
                 ->sortable(),
-            Column::make("Year", "year")
+            Column::make("Year", "start_year")
+                ->searchable()
+                ->sortable(),
+            Column::make("Year", "end_year")
+                ->searchable()
                 ->sortable(),
             Column::make("Curriculum", "curriculum")
+                ->searchable()
                 ->sortable(),
         ];
 

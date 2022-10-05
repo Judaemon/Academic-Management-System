@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use LivewireUI\Modal\ModalComponent;
 use App\Models\AcademicYear;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
 class EditAcademicYear extends ModalComponent
@@ -15,13 +15,14 @@ class EditAcademicYear extends ModalComponent
     public function mount(AcademicYear $academic_year)
     {
         $this->academic_year = $academic_year;
-        $this->card_title = "Edit ".$academic_year->year;
+        $this->card_title = "Editing Academic Year";
     }
 
     protected function rules()
     {
         return [
-            'academic_year.year' => ['required'],
+            'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
+            'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
             'academic_year.curriculum' => ['required'],
         ];
     }
@@ -58,10 +59,7 @@ class EditAcademicYear extends ModalComponent
                 $description = 'You do not have permission for this action.'
             );
         } else {
-            $this->academic_year->forceFill([
-                'year' => $this->academic_year['year'],
-                'curriculum' => $this->academic_year['curriculum'],
-            ])->save();
+            $this->academic_year->save();
 
             $this->emit('refreshDatatable');
 
@@ -69,7 +67,7 @@ class EditAcademicYear extends ModalComponent
 
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'User information successfully Updated.'
+                $description = 'Academic information successfully Updated.'
             );
         }
     }

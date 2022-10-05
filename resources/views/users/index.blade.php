@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 rounded-lg shadow-xs">
-        <div class="px-2 py-4 flex justify-between">
+        <div class="p-4 flex justify-between">
             <h2 class="text-2xl font-semibold text-gray-700">Users</h2>
 
             @can('create_user')

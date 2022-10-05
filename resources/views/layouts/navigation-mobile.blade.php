@@ -124,7 +124,7 @@
 
             {{-- Academic: isAcademicMenuOpen --}}
             <li class="relative px-6 py-3">
-                @if (request()->routeIs('academic_year.index') || request()->routeIs('subjects.index') || request()->routeIs('sections.index'))
+                @if (request()->routeIs('subjects.index') || request()->routeIs('sections.index'))
                     <div x-init="toggleAcademicMenu"></div>
                 @endif
 
@@ -193,7 +193,7 @@
 
             {{-- Admin:  isAdminMenuOpen --}}
             <li class="relative px-6 py-3">
-                @if (request()->routeIs('roles.index') || request()->routeIs('setting.index'))
+                @if (request()->routeIs('roles.index') || request()->routeIs('setting.index') || request()->routeIs('academic_year.index'))
                     <div x-init="toggleAdminMenu"></div>
                 @endif
 

@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="p-4 bg-white rounded-lg shadow-xs overflow-hidden">
-        <div class="px-2 py-4 flex justify-between">
+        <div class="p-4 flex justify-between">
             <h2 class="text-2xl font-semibold text-gray-700">Payments</h2>
             
             @livewire('payments.create-payments')
