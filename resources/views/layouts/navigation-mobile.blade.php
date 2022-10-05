@@ -65,7 +65,7 @@
 
             {{-- Accounting: isAccountingMenuOpen --}}
             <li class="relative px-6 py-3">
-                @if (request()->routeIs('fees.index') || request()->routeIs('payments.index') || request()->routeIs('sections.index'))
+                @if (request()->routeIs('fees.index') || request()->routeIs('payments.index'))
                     <div x-init="toggleAccountingMenu"></div>
                 @endif
 

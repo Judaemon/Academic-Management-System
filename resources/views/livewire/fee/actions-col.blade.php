@@ -8,7 +8,7 @@
     <x-button 
         icon="trash" 
         negative 
-        onclick="#"  
+        onclick="livewire.emit('openModal', 'fee.delete-fee', {{ json_encode(['fee' => $value]) }})" 
         label="Remove"
     />
 </div>
