@@ -1,10 +1,10 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
     <div class="col-span-4">
-        <x-input wire:model.defer="setting.system_name" label="System Name" placeholder="System Name" />
+        <x-input wire:model.defer="setting.institute_name" label="Institute Name" placeholder="School Name" />
     </div>
 
     <div class="col-span-4">
-        <x-input wire:model.defer="setting.school_name" label="School name" placeholder="School name" />
+        <x-input wire:model.defer="setting.institute_acronym" label="Institute acronym" placeholder="CAIMS" />
     </div>
 
     <div class="col-span-4">

@@ -71,4 +71,9 @@ class CreateSection extends Component
             $description = 'Section successfully Created.'
         );
     }
+
+    public function closeModal()
+    {
+        $this->modalCreate = false;
+    }
 }

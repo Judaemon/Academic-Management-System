@@ -71,4 +71,9 @@ class CreateSubject extends Component
             $description = 'Subject successfully Created.'
         );
     }
+    
+    public function closeModal()
+    {
+        $this->modalCreate = false;
+    }
 }

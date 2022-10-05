@@ -18,14 +18,25 @@ class SettingSeeder extends Seeder
     {
         $setting = [
             [
-                'system_name' => 'ISCP AIMS',
-                'school_name' => 'International State College of the Philippines',
+                'institute_name' => 'International State College of the Philippines',
+                'institute_acronym' => 'ISCP AIMS',
                 'logo' => 'images\system-assets\default\logo\iscp_logo.png',
                 'address' => 'Biringan Philippines',
                 
+                'email' => 'iscp@gmail.com',
                 'mobile_1' => '0968-227-6795',
                 'mobile_2' => '0917-895-0544',
-                'telephone_1' => '(02) 470-8922',
+
+                'academic_year' => '2022',
+                'profile_editing' => false,
+                'notification_type' => "none",
+                'notify_grades' => false,
+                'notify_payments' => false,
+                
+                'website_link' => 'google.com',
+                'facebook_link' => 'facebook.com',
+                'instagram_link' => 'instagram.com',
+                'twitter_link' => 'twitter.com',
                 
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),

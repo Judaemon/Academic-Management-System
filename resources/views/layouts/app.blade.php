@@ -7,7 +7,7 @@
 
     <link rel="icon" href="{{url(setting('logo'))}}" type="image/x-icon">
 
-    <title>{{ setting('system_name') }}</title>
+    <title>{{ setting('institute_name') }}</title>
 
     @wireUiScripts
 

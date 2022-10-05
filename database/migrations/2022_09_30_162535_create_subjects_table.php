@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('subject_code');
+
+            $table->foreignId('teacher_id')->references('id')->on('users')->nullable();
+
             $table->timestamps();
         });
     }
