@@ -85,7 +85,7 @@
 
                 {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="Doe" />
+                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
