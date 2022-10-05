@@ -6,32 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
             $table->string('fee_name');
-            $table->bigInteger('academic_year_id')
-                  ->unsigned();
-            $table->timestamps();
+            $table->decimal('cost');
 
-            $table->foreign('academic_year_id')
+            $table->foreignId('academic_year_id')
+                  ->unsigned()
                   ->references('id')
                   ->on('academic_years')
                   ->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('fees');

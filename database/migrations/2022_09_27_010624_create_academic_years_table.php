@@ -6,26 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->string('year');
+            $table->string('start_year');
+            $table->string('end_year');
             $table->text('curriculum');
+            
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('academic_years');
