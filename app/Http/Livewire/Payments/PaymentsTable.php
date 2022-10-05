@@ -20,15 +20,15 @@ class PaymentsTable extends DataTableComponent
         $columns = [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("User id", "user_id")
+            Column::make("User", "user.firstname", " ", "user.lastname")
                 ->sortable(),
-            Column::make("Payment value", "payment_value")
+            Column::make("Payment Value", "payment_value")
                 ->sortable(),
-            Column::make("Academic year id", "academic_year_id")
+            Column::make("Academic Year", "academic_year.year")
                 ->sortable(),
         ];
 
-        if (auth()->user()->can('read_user')) {
+        if (auth()->user()->can('read_payments')) {
             array_push($columns, Column::make("Actions", "id")->view('livewire.payments.actions-col'));
         }
 

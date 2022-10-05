@@ -22,12 +22,12 @@ class FeesTable extends DataTableComponent
                 ->sortable(),
             Column::make("Fee Name", "fee_name")
                 ->sortable(),
-            Column::make("Academic Year Id", "academic_year_id")
+            Column::make("Academic Year", "academic_year.year")
                 ->sortable(),
         ];
 
-        if (auth()->user()->can('read_user')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.fees.actions-col'));
+        if (auth()->user()->can('read_school_fees')) {
+            array_push($columns, Column::make("Actions", "id")->view('livewire.school_fees.actions-col'));
         }
 
         return $columns;

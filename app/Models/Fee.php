@@ -13,4 +13,10 @@ class Fee extends Model
         'fee_name',
         'academic_year_id',
     ];
+
+    public function academic_year()
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
+
 }
