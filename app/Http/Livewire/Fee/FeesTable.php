@@ -26,8 +26,8 @@ class FeesTable extends DataTableComponent
                 ->sortable(),
         ];
 
-        if (auth()->user()->can('read_school_fees')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.school_fees.actions-col'));
+        if (auth()->user()->can('read_fees')) {
+            array_push($columns, Column::make("Actions", "id")->view('livewire.fee.actions-col'));
         }
 
         return $columns;

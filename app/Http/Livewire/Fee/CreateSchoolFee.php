@@ -16,7 +16,7 @@ class CreateSchoolFee extends Component
 
     public function render()
     {
-        return view('livewire.school_fees.create-school-fee', [
+        return view('livewire.fee.create-school-fee', [
             'academic_year' => AcademicYear::all(),
         ]);
     }

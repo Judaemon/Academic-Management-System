@@ -13,8 +13,8 @@ class UpdateSettings extends Component
     public Setting $setting;
 
     protected $rules = [
-        'setting.system_name' => ['required'],
-        'setting.school_name' => ['required'],
+        'setting.institute_name' => ['required'],
+        'setting.institute_acronym' => ['required'],
         'setting.logo' => ['required'],
         'setting.address' => ['required'],
         'setting.mobile_1' => ['required'],

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Fee;
 
-use LivewireUI\Modal\ModalComponent;
-use App\Models\Fee;
 use App\Models\AcademicYear;
+use App\Models\Fee;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
 class EditSchoolFee extends ModalComponent
@@ -29,7 +29,7 @@ class EditSchoolFee extends ModalComponent
 
     public function render()
     {
-        return view('livewire.school_fees.edit-school-fee', [
+        return view('livewire.fee.edit-school-fee', [
             'academic_year' => AcademicYear::all(),
         ]);
     }
@@ -37,8 +37,6 @@ class EditSchoolFee extends ModalComponent
     public function save(): void
     {
         $this->validate();
-
-        $this->modalCreate = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',

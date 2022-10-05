@@ -10,8 +10,6 @@ class FeesController extends Controller
 {
     public function index()
     {
-        $fees = Fee::paginate();
-
-        return view('livewire.school_fees.index', compact('fees'));
+        return view('fees.index');
     }
 }

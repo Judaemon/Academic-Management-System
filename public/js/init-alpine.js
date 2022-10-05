@@ -18,9 +18,19 @@ document.addEventListener('alpine:init', () => {
             this.isSideMenuOpen = false
         },
 
-        isMultiLevelMenuOpen: false,
-        toggleMultiLevelMenu() {
-            this.isMultiLevelMenuOpen = !this.isMultiLevelMenuOpen
+        isAdminMenuOpen: false,
+        toggleAdminMenu() {
+            this.isAdminMenuOpen = !this.isAdminMenuOpen
+        },
+
+        isAcademicMenuOpen: false,
+        toggleAcademicMenu() {
+            this.isAcademicMenuOpen = !this.isAcademicMenuOpen
+        },
+
+        isAccountingMenuOpen: false,
+        toggleAccountingMenu() {
+            this.isAccountingMenuOpen = !this.isAccountingMenuOpen
         }
     }))
 })
