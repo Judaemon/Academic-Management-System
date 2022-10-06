@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                ->references('id')->on('users')->onDelete('cascade');
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
 
             $table->decimal('payment_value');
             

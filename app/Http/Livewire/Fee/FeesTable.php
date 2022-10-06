@@ -22,8 +22,10 @@ class FeesTable extends DataTableComponent
                 ->sortable(),
             Column::make("Fee Name", "fee_name")
                 ->sortable(),
-            Column::make("Academic Year", "academic_year.year")
+            Column::make("Fee Cost", "cost")
                 ->sortable(),
+            // Column::make("Grade Level", "grade_level_id")
+            //     ->sortable(),
         ];
 
         if (auth()->user()->can('read_fees')) {
