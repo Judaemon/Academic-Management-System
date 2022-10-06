@@ -61,11 +61,11 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.height" label="Height (in cm)" placeholder="165 cm" />
+                    <x-input type="number" wire:model.defer="user.height" label="Height (in cm)" placeholder="165 cm" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.weight" label="Weight (in kg)" placeholder="70 kg" />
+                    <x-input type="number" wire:model.defer="user.weight" label="Weight (in kg)" placeholder="70 kg" />
                 </div>
 
                 <!-- contact information -->
@@ -96,7 +96,15 @@
                 </div>
 
                 <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
+                </div>
+
+                <div class="col-span-4">
                     <x-input wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">

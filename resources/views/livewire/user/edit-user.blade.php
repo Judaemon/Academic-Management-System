@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.mobilenumber" label="Contact Number" placeholder="09*********" />
+                    <x-input readonly value="{{$user->mobilenumber}}" label="Contact Number" placeholder="09*********" />
                 </div>
 
                 <div class="col-span-4">
@@ -80,7 +80,7 @@
 
                 {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="sample@email.com" />
+                    <x-input readonly autocomplete="randomshitparadimagautocomplete" value="{{$user->email}}" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
@@ -93,7 +93,15 @@
                 </div>
 
                 <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
+                </div>
+
+                <div class="col-span-4">
                     <x-input wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">
@@ -140,7 +148,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->guardian_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -169,7 +177,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.mparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->mparent_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -188,7 +196,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.fparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->fparent_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -211,11 +219,11 @@
 
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
-                @can('delete_users')
+                <!-- @can('delete_users')
                     <x-button flat negative label="Delete" wire:click="deleteDialog" />
                 @else
                     <div></div>
-                @endcan
+                @endcan -->
         
                 <div class="flex space-x-2">
                     <x-button flat label="Cancel" wire:click="closeModal" />

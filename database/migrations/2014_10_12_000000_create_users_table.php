@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('pwdid')->unique()->nullable();
 
             // physical information
-            $table->integer('height')->unsigned();
-            $table->integer('weight')->unsigned();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
 
             // contact information
             $table->string('mobilenumber')->unique();

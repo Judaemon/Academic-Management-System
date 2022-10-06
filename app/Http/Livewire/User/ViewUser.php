@@ -78,4 +78,9 @@ class ViewUser extends ModalComponent
     {
         return view('livewire.user.view-user');
     }
+
+    public static function modalMaxWidth(): string
+    {
+        return '7xl';
+    }
 }

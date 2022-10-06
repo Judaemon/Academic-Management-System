@@ -1,7 +1,7 @@
 <div wire:ignore.self class="form-container">
     <x-card title="{{ $cardTitle }}">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
-        <div class="col-span-12"> 
+        <div class="col-span-12">
                 <!-- personal information -->
                     <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
@@ -93,7 +93,15 @@
                 </div>
 
                 <div class="col-span-4">
+                    <x-input readonly wire:model.defer="user.school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
+                </div>
+
+                <div class="col-span-4">
                     <x-input readonly wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input readonly wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">

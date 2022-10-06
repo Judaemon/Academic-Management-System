@@ -32,50 +32,84 @@ class CreateUser extends Component
             'user.gender' => ['required'],
             'user.mothertongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwdid' => ['nullable', 'unique:users,pwdid'],
+            'user.pwdid' => ['unique:users,pwdid'],
 
             // physical info
-            'user.height' => ['nullable'],
-            'user.weight' => ['nullable'],
+            'user.height' => [],
+            'user.weight' => [],
 
             // contact info
             'user.mobilenumber' => ['required', 'unique:users,mobilenumber'],
             'user.address' => ['required'],
 
             // educational background
-            'user.school_kinder' => ['nullable'],
-            'user.school_kindergrad' => ['nullable'],
-            'user.school_elementary' => ['nullable'],
-            'user.school_elementarygrad' => ['nullable'],
-            'user.school_juniorhigh' => ['nullable'],
+            'user.school_kinder' => [],
+            'user.school_kindergrad' => [],
+            'user.school_elementary' => [],
+            'user.school_elementarygrad' => [],
+            'user.school_juniorhigh' => [],
 
             // academic info
-            'user.lrn' => ['nullable', 'unique:users,lrn'],
-            'user.esc' => ['nullable', 'unique:users,esc'],
-            'user.qvr' => ['nullable', 'unique:users,qvr'],
-            'user.public' => ['nullable', 'unique:users,public'],
+            'user.lrn' => ['unique:users,lrn'],
+            'user.esc' => ['unique:users,esc'],
+            'user.qvr' => ['unique:users,qvr'],
+            'user.public' => ['unique:users,public'],
 
             // beneficiary, guardian, and parents info
-            'user.beneficiary' => ['nullable'],
+            'user.beneficiary' => [],
 
-            'user.guardian_name' => ['nullable'],
-            'user.guardian_number' => ['nullable', 'unique:users,guardian_number'],
-            'user.guardian_occupation' => ['nullable'],
-            'user.guardian_address' => ['nullable'],
-            'user.guardian_relationship' => ['nullable'],
+            'user.guardian_name' => [],
+            'user.guardian_number' => ['unique:users,guardian_number'],
+            'user.guardian_occupation' => [],
+            'user.guardian_address' => [],
+            'user.guardian_relationship' => [],
 
-            'user.mparent_name' => ['nullable'],
-            'user.mparent_number' => ['nullable', 'unique:users,mparent_number'],
-            'user.mparent_occupation' => ['nullable'],
-            'user.mparent_address' => ['nullable'],
+            'user.mparent_name' => [],
+            'user.mparent_number' => ['unique:users,mparent_number'],
+            'user.mparent_occupation' => [],
+            'user.mparent_address' => [],
 
-            'user.fparent_name' => ['nullable'],
-            'user.fparent_number' => ['nullable', 'unique:users,fparent_number'],
-            'user.fparent_occupation' => ['nullable'],
-            'user.fparent_address' => ['nullable'],
+            'user.fparent_name' => [],
+            'user.fparent_number' => ['unique:users,fparent_number'],
+            'user.fparent_occupation' => [],
+            'user.fparent_address' => [],
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
+    }
+
+    public function mount(User $user)
+    {
+        $this->pwdid = null;
+        $this->height = null;
+        $this->weight = null;
+
+        $this->school_kinder = null;
+        $this->school_kindergrad = null;
+        $this->school_elementary = null;
+        $this->school_elementarygrad = null;
+        $this->school_juniorhigh = null;
+
+        $this->lrn = null;
+        $this->esc = null;
+        $this->qvr = null;
+        $this->beneficiary = null;
+
+        $this->guardian_name = null;
+        $this->guardian_number = null;
+        $this->guardian_occupation = null;
+        $this->guardian_address = null;
+        $this->guardian_relationship = null;
+
+        $this->mparent_name = null;
+        $this->mparent_number = null;
+        $this->mparent_occupation = null;
+        $this->mparent_address = null;
+
+        $this->fparent_name = null;
+        $this->fparent_number = null;
+        $this->fparent_occupation = null;
+        $this->fparent_address = null;
     }
 
     public function render()
@@ -106,6 +140,8 @@ class CreateUser extends Component
 
     public function submit()
     {
+        //dd($this->user['pwdid']);
+
         if (!auth()->user()->can('create_user')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
@@ -169,7 +205,7 @@ class CreateUser extends Component
     
             $this->emit('refreshDatatable');
     
-            $this->reset();
+            //$this->reset();
             
             $this->dialog()->success(
                 $title = 'Successful!',
