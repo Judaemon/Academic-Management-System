@@ -24,7 +24,7 @@ class CreateFee extends Component
     protected function rules()
     {
         return [
-            'fee_name' => 'required|min:5',
+            'fee_name' => 'required|min:5|max:35',
             'amount' => 'required|numeric',
             // 'fee.grade_level_id' => 'required'
         ];
