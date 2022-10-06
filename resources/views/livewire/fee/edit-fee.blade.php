@@ -2,13 +2,13 @@
     <x-card title="{{ $card_title }}">
         <div class="grid grid-cols-1 gap-4">
           <div class="col-span-4">
-            <x-input wire:model.defer="school_fee.fee_name" label="School Fee Name" />
+            <x-input wire:model.defer="fee.fee_name" label="School Fee Name" />
           </div>
 
           <div class="col-span-4">
             <x-native-select 
               label="Select Academic Year" 
-              wire:model.defer="school_fee.academic_year_id"
+              wire:model.defer="fee.academic_year_id"
             >
               @foreach ($academic_year as $academic_year)
                 <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>

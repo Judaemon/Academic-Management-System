@@ -10,7 +10,7 @@ class DeleteFee extends ModalComponent
 {
     use Actions;
 
-    public $school_fee;
+    public $fee;
 
     public function mount(Fee $fee)
     {

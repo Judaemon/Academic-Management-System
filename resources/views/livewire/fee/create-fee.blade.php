@@ -5,13 +5,13 @@
       <x-card title="CREATE SCHOOL FEE">
           <div class="grid grid-cols-1 gap-4">
               <div class="col-span-4">
-                  <x-input wire:model.defer="school_fee.fee_name" label="School Fee Name" placeholder="e.g.Tuition Fee, Miscellaneous Fee" />
+                  <x-input wire:model.defer="fee.fee_name" label="School Fee Name" placeholder="e.g.Tuition Fee, Miscellaneous Fee" />
               </div>
 
               <div class="col-span-4">
                   <x-native-select 
                     label="Select Academic Year" 
-                    wire:model.defer="school_fee.academic_year_id"
+                    wire:model.defer="fee.academic_year_id"
                   >
                     <option class="text-gray-300" selected><--- Select academic year level ---></option>
                     @foreach ($academic_year as $academic_year)
