@@ -29,6 +29,6 @@
     </div>
 
     <div class="col-span-12 flex justify-end">
-        <x-button wire:click="save" type="button" primary label="Update" />
+        <x-button wire:click="save" type="button" icon="shield-check" negative label="Save" />
     </div>
 </div>
