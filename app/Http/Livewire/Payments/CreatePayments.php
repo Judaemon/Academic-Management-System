@@ -29,9 +29,9 @@ class CreatePayments extends Component
     protected function rules()
     {
         return [
-            'user_id' => 'required',
-            'amount_paid' => 'required',
-            'fee_id' => 'required'
+            'user_id' => 'required|unique:users,id,'.$this->user_id,
+            'amount_paid' => 'required|numeric',
+            'fee_id' => 'required|unique:fees,id,'.$this->fee_id
         ];
     }
 

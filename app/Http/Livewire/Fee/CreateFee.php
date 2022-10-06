@@ -25,7 +25,7 @@ class CreateFee extends Component
     {
         return [
             'fee_name' => 'required|min:5',
-            'amount' => 'required',
+            'amount' => 'required|numeric',
             // 'fee.grade_level_id' => 'required'
         ];
     }
