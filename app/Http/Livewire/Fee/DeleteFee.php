@@ -27,7 +27,7 @@ class DeleteFee extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this fee?',
+            'description' => $this->fee->fee_name." will be Permanently Deleted?",
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',

@@ -4,28 +4,29 @@ namespace App\Http\Livewire\Fee;
 
 use Livewire\Component;
 use App\Models\Fee;
-use App\Models\AcademicYear;
 use WireUi\Traits\Actions;
 
 class CreateFee extends Component
 {
-    public $modalCreate;
-    public $fee;
-
     use Actions;
+
+    public $modalCreate;
+    public 
+      $fee_name, 
+      $cost,
+      $grade_level_id;
 
     public function render()
     {
-        return view('livewire.fee.create-fee', [
-            'academic_year' => AcademicYear::all(),
-        ]);
+        return view('livewire.fee.create-fee');
     }
 
     protected function rules()
     {
         return [
-            'fee.fee_name' => 'required',
-            'fee.academic_year_id' => 'required'
+            'fee_name' => 'required|min:5',
+            'cost' => 'required',
+            // 'fee.grade_level_id' => 'required'
         ];
     }
 
@@ -57,10 +58,11 @@ class CreateFee extends Component
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
-        }else{
+        } else {
             Fee::create([
-                'fee_name' => $this->fee['fee_name'],
-                'academic_year_id' => $this->fee['academic_year_id'],
+                'fee_name' => $this->fee_name,
+                'cost' => $this->cost,
+                // 'grade_level_id' => $this->fee['grade_level_id'],
             ]);
     
             $this->emit('refreshDatatable');

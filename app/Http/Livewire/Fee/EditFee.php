@@ -11,27 +11,32 @@ class EditFee extends ModalComponent
 {
     use Actions;
 
-    public $fee;
+    public 
+      $fee,
+      $fee_name, 
+      $cost,
+      $grade_level_id;
 
     public function mount(Fee $fee)
     {
         $this->fee = $fee;
+        $this->fee_name = $fee->fee_name;
+        $this->cost = $fee->cost;
         $this->card_title = "Edit ".$fee->fee_name;
     }
 
     protected function rules()
     {
         return [
-            'fee.fee_name' => 'required',
-            'fee.academic_year_id' => 'required',
+            'fee_name' => 'required|min:5',
+            'cost' => 'required',
+            // 'fee.grade_level_id' => 'required'
         ];
     }
 
     public function render()
     {
-        return view('livewire.fee.edit-fee', [
-            'academic_year' => AcademicYear::all(),
-        ]);
+        return view('livewire.fee.edit-fee');
     }
 
     public function save(): void
@@ -62,8 +67,9 @@ class EditFee extends ModalComponent
             );
         } else {
             $this->fee->forceFill([
-                'fee_name' => $this->fee['fee_name'],
-                'academic_year_id' => $this->fee['academic_year_id'],
+                'fee_name' => $this->fee_name,
+                'cost' => $this->cost,
+                // 'grade_level_id' => $this->fee['grade_level_id'],
             ])->save();
     
             $this->emit('refreshDatatable');
@@ -72,7 +78,7 @@ class EditFee extends ModalComponent
             
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'School Fee successfully Updated.'
+                $description = $this->fee_name.' successfully Updated.'
             );
         }
     }

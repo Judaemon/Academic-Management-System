@@ -6,7 +6,7 @@
             @livewire('fee.create-fee')
         </div>
 
-        <div class="datatable-container h-64 w-full rounded-lg border shadow-xs p-2">
+        <div class="datatable-container min-h-64 w-full rounded-lg border shadow-xs p-2">
             @livewire('fee.fees-table')
         </div>
     </div>
