@@ -17,10 +17,10 @@ return new class extends Migration
 
             $table->decimal('payment_value');
             
-            $table->foreignId('academic_year_id')
+            $table->foreignId('fee_id')
                   ->unsigned()
                   ->references('id')
-                  ->on('academic_years')
+                  ->on('fees')
                   ->onDelete('cascade');
         });
     }
