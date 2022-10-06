@@ -13,7 +13,7 @@ class CreateFee extends Component
     public $modalCreate;
     public 
       $fee_name, 
-      $cost,
+      $amount,
       $grade_level_id;
 
     public function render()
@@ -25,7 +25,7 @@ class CreateFee extends Component
     {
         return [
             'fee_name' => 'required|min:5',
-            'cost' => 'required',
+            'amount' => 'required',
             // 'fee.grade_level_id' => 'required'
         ];
     }
@@ -61,7 +61,7 @@ class CreateFee extends Component
         } else {
             Fee::create([
                 'fee_name' => $this->fee_name,
-                'cost' => $this->cost,
+                'amount' => $this->amount,
                 // 'grade_level_id' => $this->fee['grade_level_id'],
             ]);
     

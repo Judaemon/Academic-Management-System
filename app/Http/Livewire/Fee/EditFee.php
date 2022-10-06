@@ -14,14 +14,14 @@ class EditFee extends ModalComponent
     public 
       $fee,
       $fee_name, 
-      $cost,
+      $amount,
       $grade_level_id;
 
     public function mount(Fee $fee)
     {
         $this->fee = $fee;
         $this->fee_name = $fee->fee_name;
-        $this->cost = $fee->cost;
+        $this->amount = $fee->amount;
         $this->card_title = "Edit ".$fee->fee_name;
     }
 
@@ -29,7 +29,7 @@ class EditFee extends ModalComponent
     {
         return [
             'fee_name' => 'required|min:5',
-            'cost' => 'required',
+            'amount' => 'required',
             // 'fee.grade_level_id' => 'required'
         ];
     }
@@ -68,7 +68,7 @@ class EditFee extends ModalComponent
         } else {
             $this->fee->forceFill([
                 'fee_name' => $this->fee_name,
-                'cost' => $this->cost,
+                'amount' => $this->amount,
                 // 'grade_level_id' => $this->fee['grade_level_id'],
             ])->save();
     

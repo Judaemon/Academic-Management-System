@@ -11,7 +11,7 @@ class Fee extends Model
 
     protected $fillable = [
         'fee_name',
-        'cost',
+        'amount',
         // 'grade_level_id'
     ];
 

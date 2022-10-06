@@ -16,7 +16,7 @@
                     <x-inputs.currency 
                       label="Fee Amount" 
                       placeholder="e.g.20000" 
-                      wire:model.defer="cost" 
+                      wire:model.defer="amount" 
                     />
                 </div>
 

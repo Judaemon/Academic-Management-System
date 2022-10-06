@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
             $table->string('fee_name');
-            $table->decimal('cost')
+            $table->decimal('amount')
                   ->default('0.00');
 
             // $table->foreignId('grade_level_id')

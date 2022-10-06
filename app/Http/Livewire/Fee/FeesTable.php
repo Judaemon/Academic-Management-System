@@ -22,7 +22,7 @@ class FeesTable extends DataTableComponent
                 ->sortable(),
             Column::make("Fee Name", "fee_name")
                 ->sortable(),
-            Column::make("Fee Cost", "cost")
+            Column::make("Amount", "amount")
                 ->sortable(),
             // Column::make("Grade Level", "grade_level_id")
             //     ->sortable(),

@@ -12,7 +12,7 @@
             <div class="col-span-4">
                 <x-inputs.currency 
                   label="Fee Amount" 
-                  wire:model.defer="cost" 
+                  wire:model.defer="amount" 
                 />
             </div>
 
