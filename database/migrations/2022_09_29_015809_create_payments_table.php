@@ -15,13 +15,16 @@ return new class extends Migration
                   ->on('users')
                   ->onDelete('cascade');
 
-            $table->decimal('payment_value');
+            $table->decimal('amount_paid')
+                  ->default('0.00');
             
             $table->foreignId('fee_id')
                   ->unsigned()
                   ->references('id')
                   ->on('fees')
                   ->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
