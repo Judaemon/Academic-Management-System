@@ -1,40 +1,38 @@
 <?php
 
-namespace App\Http\Livewire\Subject;
+namespace App\Http\Livewire\Section;
 
-use App\Models\Subject;
+use App\Models\Section;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class OpenSubject extends ModalComponent
+class EditSection extends ModalComponent
 {
     use Actions;
 
     public $modalReadUpdateDelete;
 
-    public $subject;
+    public $section;
 
     protected function rules()
     {
         return [
-            'subject.name' => ['required'],
-            'subject.teacher_id' => ['nullable'],
-            'subject.subject_code' => ['required'],
-            // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
-            // 'user.password' => ['required', 'min:8', 'confirmed'],
-            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
+            'section.name' => ['required'],
+            'section.capacity' => ['required'],
+            'section.teacher_id' => ['nullable'],
+            'section.grade_level_id' => ['required'],
         ];
     }
 
-    public function mount(subject $subject)
+    public function mount(Section $section)
     {
-        $this->subject = $subject;
-        $this->cardTitle = $subject->name." Information";
+        $this->section = $section;
+        $this->cardTitle = $section->name." Information";
     }
 
     public function render()
     {
-        return view('livewire.subject.open-subject');
+        return view('livewire.section.edit-section');
     }
 
     public function save(): void
@@ -60,7 +58,7 @@ class OpenSubject extends ModalComponent
 
     public function submit()
     {
-        $this->subject->save();
+        $this->section->save();
 
         $this->emit('refreshDatatable');
 
@@ -68,7 +66,7 @@ class OpenSubject extends ModalComponent
 
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'Subject information successfully saved.'
+            $description = 'Section information successfully saved.'
         );
     }
 
@@ -76,7 +74,7 @@ class OpenSubject extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this subject?',
+            'description' => 'Delete this section?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
@@ -91,7 +89,7 @@ class OpenSubject extends ModalComponent
 
     public function delete()
     {
-        $this->subject->delete();
+        $this->section->delete();
 
         $this->closeModal();
 
@@ -99,7 +97,7 @@ class OpenSubject extends ModalComponent
 
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'Subject deleted successfully.'
+            $description = 'Section deleted successfully.'
         );
     }
 

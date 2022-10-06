@@ -1,5 +1,5 @@
 <div>
-    <x-button primary onclick="$openModal('modalCreate')" label="CREATE NEW " />
+    <x-button primary onclick="$openModal('modalCreate')" label="CREATE SECTION " />
     
     <x-modal wire:model.defer="modalCreate" max-width="5xl">
         <x-card title="Create form">

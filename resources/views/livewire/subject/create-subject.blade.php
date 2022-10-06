@@ -1,5 +1,5 @@
 <div>
-    <x-button primary onclick="$openModal('modalCreate')" label="CREATE NEW " />
+    <x-button primary onclick="$openModal('modalCreate')" label="CREATE SUBJECT " />
     
     <x-modal wire:model.defer="modalCreate" max-width="5xl">
         <x-card title="Create form">
@@ -15,9 +15,6 @@
                 <div class="col-span-4">
                     <x-input wire:model.defer="subject.subject_code" label="Subject Code" placeholder="THESCS1" />
                 </div>
-
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
-                {{-- read link security reason ignore nalang muna --}}
             </div>
 
             <x-slot name="footer">
