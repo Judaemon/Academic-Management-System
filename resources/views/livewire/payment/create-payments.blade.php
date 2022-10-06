@@ -1,8 +1,8 @@
 <div>
-  <x-button primary onclick="$openModal('modalCreate')" label="CREATE PAYMENT " />
+  <x-button primary onclick="$openModal('modalCreate')" label="CREATE PAYMENT RECORD" />
   
   <x-modal wire:model.defer="modalCreate" max-width="2xl">
-      <x-card title="CREATE PAYMENT">
+      <x-card title="CREATE PAYMENT RECORD">
           <div class="grid grid-cols-1 gap-4">
               <div class="col-span-4">
                 {{-- <x-select
@@ -20,30 +20,34 @@
                 /> --}}
                   <x-native-select 
                     label="Select User" 
-                    wire:model.defer="payment.user_id"
+                    wire:model.defer="user_id"
                   >
-                    <option class="text-gray-300" selected><--- Select user ---></option>
-                    @foreach ($users as $user)
-                      <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>
-                    @endforeach
-                </x-native-select>
+                      <option class="text-gray-300" selected><--- Select user ---></option>
+                      @foreach ($users as $user)
+                          <option value="{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }}</option>
+                      @endforeach
+                  </x-native-select>
               </div>
 
               <div class="col-span-4">
-                  <x-input wire:model.defer="payment.payment_value" label="Payment Value" placeholder="00.00" />
+                  <x-inputs.currency 
+                    label="Amount Paid" 
+                    placeholder="0.00" 
+                    wire:model.defer="amount_paid" 
+                  />
               </div>
 
               <div class="col-span-4">
-                <x-native-select 
-                  label="Select Academic Year" 
-                  wire:model.defer="payment.academic_year_id"
-                >
-                  <option class="text-gray-300" selected><--- Select academic year level ---></option>
-                  @foreach ($academic_year as $academic_year)
-                    <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>
-                  @endforeach
-                </x-native-select>
-            </div>
+                  <x-native-select 
+                    label="Fee Paid" 
+                    wire:model.defer="fee_id"
+                  >
+                      <option class="text-gray-300" selected><--- Select fee type ---></option>
+                      @foreach ($fees as $fees)
+                          <option value="{{ $fees->id }}">{{ $fees->fee_name }}</option>
+                      @endforeach
+                  </x-native-select>
+              </div>
           </div>
 
           <x-slot name="footer">

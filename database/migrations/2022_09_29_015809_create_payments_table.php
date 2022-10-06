@@ -24,7 +24,7 @@ return new class extends Migration
                   ->on('fees')
                   ->onDelete('cascade');
 
-            $table->timestamps();
+                  $table->timestamps();
         });
     }
 
