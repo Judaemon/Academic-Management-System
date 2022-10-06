@@ -61,6 +61,30 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Super Admin');
 
+        //Accountant
+        User::create([
+            'firstname' => 'Leonardo',
+            'middlename' => 'Haroon',
+            'lastname' => 'Jamie',
+            'suffix' => 'SA',
+            'birthdate' => '1995-12-01',
+            'birthplace' => 'Baguio City',
+            'religion' => 'Catholic',
+            'gender' => 'Male',
+            'mothertongue' => 'English',
+            'nationality' => 'Filipino',
+            'height' => '170',
+            'weight' => '70',
+            'mobilenumber' => '09164739198',
+            'email' => 'leonardJamie@a.caims.com',
+            'address' => 'Guisad Central, Baguio City',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('finance'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Accountant');
+
         // User::create([
         //     'firstname' => 'admin F',
         //     'lastname' => 'admin L',
