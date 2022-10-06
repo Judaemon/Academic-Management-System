@@ -19,6 +19,8 @@ class CreateSubject extends Component
     {
         return [
             'subject.name' => ['required'],
+            'subject.teacher_id' => ['nullable'],
+            'subject.subject_code' => ['required'],
             // 'subject.lastname' => ['required'],
             // 'subject.email' => ['required', 'email', 'unique:subjects,email'],
             // 'user.password' => ['required', 'min:8', 'confirmed'],
@@ -56,6 +58,8 @@ class CreateSubject extends Component
     {
         Subject::create([
             'name' => $this->subject['name'],
+            'teacher_id' => $this->subject['teacher_id'],
+            'subject_code' => $this->subject['subject_code'],
             // 'lastname' => $this->subject['lastname'],
             // 'email' => $this->subject['email'],
             // 'password' => Hash::make($this->subject['password']),

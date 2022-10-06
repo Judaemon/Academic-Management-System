@@ -19,9 +19,8 @@ class OpenSection extends ModalComponent
     {
         return [
             'section.name' => ['required'],
-            'section.subjects_id' => ['required'],
-            'section.class_limit' => ['required'],
-            'section.column_5' => ['required'],
+            'section.capacity' => ['required'],
+            'section.teacher_id' => ['nullable'],
             'section.grade_level_id' => ['required'],
         ];
     }

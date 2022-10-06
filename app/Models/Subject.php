@@ -13,6 +13,8 @@ class Subject extends Authenticatable
 
     protected $fillable = [
         'name',
+        'teacher_id',
+        'subject_code',
     ];
 
     protected $hidden = [

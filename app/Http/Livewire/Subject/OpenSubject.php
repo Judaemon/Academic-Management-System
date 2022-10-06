@@ -18,6 +18,8 @@ class OpenSubject extends ModalComponent
     {
         return [
             'subject.name' => ['required'],
+            'subject.teacher_id' => ['nullable'],
+            'subject.subject_code' => ['required'],
             // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],

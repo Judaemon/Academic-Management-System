@@ -22,10 +22,8 @@
                     <x-input wire:model.defer="user.suffix" label="Suffix" placeholder="Mr." />
                 </div>
 
-                <!-- di ko maayos tong date picker -->
                 <div class="col-span-4">
-                    <!-- <x-datetime-picker wire:model.defer="user.birthdate" label="Birth Date" placeholder="Birth Date" /> -->
-                    <x-input wire:model.defer="user.birthdate" label="Birth Date" placeholder="YYYY/MM/DD" />
+                    <x-input type="date" wire:model.defer="user.birthdate" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
