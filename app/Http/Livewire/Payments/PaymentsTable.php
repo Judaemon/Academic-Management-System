@@ -22,12 +22,18 @@ class PaymentsTable extends DataTableComponent
                 ->sortable(),
             Column::make("User", "user.firstname", " ", "user.lastname")
                 ->sortable(),
-            Column::make("Amount Paid", "amount_paid")
-                ->sortable(),
+            Column::make("Amount Paid")
+                ->sortable()
+                ->format(function($value) {
+                    return 'Php '.number_format($value, 2);
+                }),
             Column::make("Fee Type", "fee.fee_name")
                 ->sortable(),
             Column::make("Fee Amount", "fee.amount")
-                ->sortable(),
+                ->sortable()
+                ->format(function($value) {
+                    return 'Php '.number_format($value, 2);
+                }),
         ];
 
         if (auth()->user()->can('read_payments')) {

@@ -22,8 +22,11 @@ class FeesTable extends DataTableComponent
                 ->sortable(),
             Column::make("Fee Name", "fee_name")
                 ->sortable(),
-            Column::make("Amount", "amount")
-                ->sortable(),
+            Column::make("Amount")
+                ->sortable()
+                ->format(function($value) {
+                    return 'Php '.number_format($value, 2);
+                }),
             // Column::make("Grade Level", "grade_level_id")
             //     ->sortable(),
         ];
