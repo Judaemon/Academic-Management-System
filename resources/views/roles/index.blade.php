@@ -7,7 +7,7 @@
         @endcan
     </div>
 
-    <div class="datatable-container p-4 rounded-lg border shadow-xs overflow-hidden ">
+    <div class="datatable-container overflow-hidden px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
         @livewire('role.roles-table')
     </div>
 </x-app-layout>

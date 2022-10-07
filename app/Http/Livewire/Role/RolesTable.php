@@ -29,7 +29,7 @@ class RolesTable extends DataTableComponent
         ];
 
         // Check if user has permission
-        if (auth()->user()->can('read_role')) {
+        if (auth()->user()->can('read_role') || auth()->user()->can('update_role') || auth()->user()->can('delete_role')) {
             array_push($columns, Column::make("Actions", "id")->view('livewire.role.actions-col'));
         }
 
