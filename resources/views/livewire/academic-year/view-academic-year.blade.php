@@ -24,7 +24,6 @@
         <x-slot name="footer">
             <div class="flex justify-end gap-x-4">
                 <x-button primary icon="x" label="Close" wire:click="closeModal" />
-            
             </div>
         </x-slot>
     </x-card>

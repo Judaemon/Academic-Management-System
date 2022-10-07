@@ -32,7 +32,7 @@ class AcademicYearTable extends DataTableComponent
                 ->sortable(),
         ];
 
-        if (auth()->user()->can('read_academic_years')) {
+        if (auth()->user()->can('read_academic_years') || auth()->user()->can('update_academic_years') || auth()->user()->can('delete_academic_years')) {
             array_push($columns, Column::make("Actions", "id")->view('livewire.academic-year.actions-col'));
         }
 
