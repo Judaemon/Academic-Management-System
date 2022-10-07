@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-semibold text-gray-700">Settings</h2>
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">Settings</h2>
 
         <div>
             <div class="inline-flex overflow-hidden w-full bg-white rounded-lg shadow-md">
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="p-4 bg-white border rounded-lg shadow-xs">
+    <div class="">
         @livewire('settings.update-settings')
     </div>
 </x-app-layout>
