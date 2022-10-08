@@ -22,14 +22,22 @@ class PaymentsTable extends DataTableComponent
                 ->sortable(),
             Column::make("User", "user.firstname", " ", "user.lastname")
                 ->sortable(),
-            Column::make("Payment Value", "payment_value")
+            Column::make("Amount Paid")
+                ->sortable()
+                ->format(function($value) {
+                    return 'Php '.number_format($value, 2);
+                }),
+            Column::make("Fee Type", "fee.fee_name")
                 ->sortable(),
-            Column::make("Academic Year", "academic_year.year")
-                ->sortable(),
+            Column::make("Fee Amount", "fee.amount")
+                ->sortable()
+                ->format(function($value) {
+                    return 'Php '.number_format($value, 2);
+                }),
         ];
 
         if (auth()->user()->can('read_payments')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.payments.actions-col'));
+            array_push($columns, Column::make("Actions", "id")->view('livewire.payment.actions-col'));
         }
 
         return $columns;

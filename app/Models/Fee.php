@@ -11,12 +11,13 @@ class Fee extends Model
 
     protected $fillable = [
         'fee_name',
-        'academic_year_id',
+        'amount',
+        // 'grade_level_id'
     ];
 
-    public function academic_year()
-    {
-        return $this->belongsTo(AcademicYear::class);
-    }
+    // public function grade_level()
+    // {
+    //     return $this->belongsTo(AcademicYear::class);
+    // }
 
 }

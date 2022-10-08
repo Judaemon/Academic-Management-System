@@ -5,20 +5,23 @@ namespace App\Http\Livewire\Payments;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Payments;
-use App\Models\AcademicYear;
+use App\Models\Fee;
 use WireUi\Traits\Actions;
 
 class CreatePayments extends Component
 {
-    public $modalCreate;
-    public $payment;
-
     use Actions;
+
+    public $modalCreate;
+    public 
+      $user_id,
+      $amount_paid,
+      $fee_id;
 
     public function render()
     {
-        return view('livewire.payments.create-payments', [
-            'academic_year' => AcademicYear::all(),
+        return view('livewire.payment.create-payments', [
+            'fees' => Fee::all(),
             'users' => User::all(),
         ]);
     }
@@ -26,9 +29,9 @@ class CreatePayments extends Component
     protected function rules()
     {
         return [
-            'payment.user_id' => 'required',
-            'payment.payment_value' => 'required',
-            'payment.academic_year_id' => 'required'
+            'user_id' => 'required|unique:users,id,'.$this->user_id,
+            'amount_paid' => 'required|numeric',
+            'fee_id' => 'required|unique:fees,id,'.$this->fee_id
         ];
     }
 
@@ -40,10 +43,10 @@ class CreatePayments extends Component
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create Payment?',
+            'description' => 'Record Payment',
             'icon'        => 'question',
             'accept'      => [
-                'label'  => 'Yes, create it',
+                'label'  => 'Yes, record it',
                 'method' => 'submit',
                 'params' => 'Created',
             ],
@@ -55,16 +58,16 @@ class CreatePayments extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_user')) {
+        if (!auth()->user()->can('create_payment')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
         }else{
             Payments::create([
-                'user_id' => $this->payment['user_id'],
-                'payment_value' => $this->payment['payment_value'],
-                'academic_year_id' => $this->payment['academic_year_id'],
+                'user_id' => $this->user_id,
+                'amount_paid' => $this->amount_paid,
+                'fee_id' => $this->fee_id,
             ]);
     
             $this->emit('refreshDatatable');
@@ -73,7 +76,7 @@ class CreatePayments extends Component
             
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'School Fee successfully Created.'
+                $description = 'Payment has been Recorded.'
             );
         }
     }

@@ -11,8 +11,8 @@ class Payments extends Model
 
     protected $fillable = [
         'user_id',
-        'payment_value',
-        'academic_year_id',
+        'amount_paid',
+        'fee_id',
     ];
 
     public function user()
@@ -20,8 +20,8 @@ class Payments extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function academic_year()
+    public function fee()
     {
-        return $this->belongsTo(AcademicYear::class);
+        return $this->belongsTo(Fee::class);
     }
 }
