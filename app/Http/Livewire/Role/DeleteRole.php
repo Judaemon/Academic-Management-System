@@ -1,64 +1,68 @@
 <?php
 
-namespace App\Http\Livewire\Fee;
+namespace App\Http\Livewire\Role;
 
-use App\Models\Fee;
+use App\Models\Role;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class DeleteFee extends ModalComponent
+class DeleteRole extends ModalComponent
 {
     use Actions;
 
-    public $fee;
+    public $role;
 
-    public function mount(Fee $fee)
+    public function mount(Role $role)
     {
-        $this->fee = $fee;
+        $this->role = $role;
     }
 
     public function render()
     {
-        return view('livewire.fee.delete-fee');
+        return view('livewire.role.delete-role');
     }
 
     public function deleteDialog()
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => $this->fee->fee_name." will be Permanently Deleted",
+            'description' => 'Delete this role?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
-                'method' => 'submit',
+                'method' => 'delete',
                 'params' => 'Deleted',
             ],
             'reject' => [
                 'label'  => 'No, cancel',
+            ],
+            'onDismiss' => [
                 'method' => 'closeModal',
+                'params' => 'closeModal',
             ],
         ]);
     }
 
-    public function submit()
+    public function delete()
     {
         // Check if user has permission
-        if (!auth()->user()->can('delete_fee')) {
+        if (!auth()->user()->can('delete_role')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
         }else{
-            $this->fee->delete();
+            $this->role->delete();
 
             $this->closeModal();
-    
+
             $this->emit('refreshDatatable');
-    
+
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'Fee deleted successfully.'
+                $description = 'Role deleted successfully.'
             );
         }
+
     }
 }

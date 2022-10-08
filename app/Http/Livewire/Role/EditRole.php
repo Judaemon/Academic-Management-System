@@ -6,11 +6,9 @@ use App\Models\Role;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class ViewRole extends ModalComponent
+class EditRole extends ModalComponent
 {
     use Actions;
-
-    public $modalReadUpdateDelete;
 
     public $role;
 
@@ -91,7 +89,52 @@ class ViewRole extends ModalComponent
 
     public function render()
     {
-        return view('livewire.role.view-role');
+        return view('livewire.role.edit-role');
+    }
+
+    public function save(): void
+    {
+        $this->validate();
+
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Save the information?',
+            'icon'        => 'question',
+            'accept'      => [
+                'label'  => 'Yes, save it',
+                'method' => 'submit',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function submit()
+    {
+        // Check if user has permission
+        if (!auth()->user()->can('update_role')) {
+            $this->dialog()->error(
+                $title = 'Error !!!',
+                $description = 'You do not have permission for this action.'
+            );
+        }else{
+            $this->role->save();
+    
+            $permissions = array_merge($this->user_permissions, $this->role_permissions, $this->system_permissions);
+    
+            $this->role->syncPermissions($permissions);
+    
+            $this->emit('refreshDatatable');
+    
+            $this->closeModal();
+    
+            $this->dialog()->success(
+                $title = 'Successful!',
+                $description = 'User information successfully saved.'
+            );
+        }
     }
 
     public static function modalMaxWidth(): string

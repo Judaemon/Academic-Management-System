@@ -117,18 +117,6 @@
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
 
-                        <!-- academic years -->
-                        <li class="relative px-6 py-3">
-                            <x-nav-link href="{{ route('academic_year.index') }}" :active="request()->routeIs('academic_year.index')">
-                                <x-slot name="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                                    </svg>
-                                </x-slot>
-                                {{ __('Academic Year') }}
-                            </x-nav-link>
-                        </li>
-
                         <!-- sections -->
                         <li class="relative px-6 py-3">
                             <x-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.index')">
@@ -185,6 +173,18 @@
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
 
+                        <!-- academic years -->
+                        <li class="relative px-6 py-3">
+                            <x-nav-link href="{{ route('academic_year.index') }}" :active="request()->routeIs('academic_year.index')">
+                                <x-slot name="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                                    </svg>
+                                </x-slot>
+                                {{ __('Academic Year') }}
+                            </x-nav-link>
+                        </li>
+                        
                         @can('view_roles')
                         <li class="relative px-6 py-3">
                             <x-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
@@ -207,7 +207,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </x-slot>
-                                {{ __('System Setting') }}
+                                {{ __('Settings') }}
                             </x-nav-link>
                         </li>
                         @endcan

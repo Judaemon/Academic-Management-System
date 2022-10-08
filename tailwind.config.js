@@ -9,7 +9,7 @@ module.exports = {
     darkMode: 'class',
     content: [
         // Laravel
-        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
 
@@ -190,8 +190,11 @@ module.exports = {
                 0: "0",
                 xl: "36rem",
             },
+            // fontFamily: {
+            //     sans: ["Inter", ...defaultTheme.fontFamily.sans],
+            // },
             fontFamily: {
-                sans: ["Inter", ...defaultTheme.fontFamily.sans],
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },
     },

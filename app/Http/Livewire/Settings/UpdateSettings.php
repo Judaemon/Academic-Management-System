@@ -17,9 +17,22 @@ class UpdateSettings extends Component
         'setting.institute_acronym' => ['required'],
         'setting.logo' => ['required'],
         'setting.address' => ['required'],
+        'setting.academic_year' => ['required'],
+
+        'setting.profile_editing' => ['required'],
+        'setting.notify_grades' => ['required'],
+        'setting.notify_payments' => ['required'],
+        'setting.notification_type' => ['required'],
+
+        'setting.email' => ['required'],
         'setting.mobile_1' => ['required'],
         'setting.mobile_2' => ['required'],
         'setting.telephone_1' => ['required'],
+
+        'setting.website_link' => [],
+        'setting.facebook_link' => [],
+        'setting.instagram_link' => [],
+        'setting.twitter_link' => [],
     ];
 
     public function mount()
@@ -38,7 +51,7 @@ class UpdateSettings extends Component
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Youre updating system setting?',
+            'description' => "you're updating system setting?",
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, saved it',
