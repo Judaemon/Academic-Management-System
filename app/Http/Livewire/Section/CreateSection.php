@@ -19,9 +19,8 @@ class CreateSection extends Component
     {
         return [
             'section.name' => ['required'],
-            'section.subjects_id' => ['required'],
-            'section.class_limit' => ['required'],
-            'section.column_5' => ['required'],
+            'section.capacity' => ['required'],
+            'section.teacher_id' => ['nullable'],
             'section.grade_level_id' => ['required'],
         ];
     }
@@ -56,9 +55,8 @@ class CreateSection extends Component
     {
         Section::create([
             'name' => $this->section['name'],
-            'subjects_id' => $this->section['subjects_id'],
-            'class_limit' => $this->section['class_limit'],
-            'column_5' => $this->section['column_5'],
+            'capacity' => $this->section['capacity'],
+            'teacher_id' => $this->section['teacher_id'],
             'grade_level_id' => $this->section['grade_level_id'],
         ]);
 

@@ -1,12 +1,12 @@
 <div>
-    <x-button primary onclick="$openModal('modalCreate')" label="CREATE NEW " />
+    <x-button primary onclick="$openModal('modalCreate')" label="CREATE USER " />
     
     <x-modal wire:model.defer="modalCreate" max-width="5xl">
         <x-card title="Create form">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- personal information -->
                 <div class="col-span-12"> 
-                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -25,9 +25,8 @@
                     <x-input wire:model.defer="user.suffix" label="Suffix" placeholder="Mr." />
                 </div>
 
-                <!-- di ko maayos tong date picker -->
                 <div class="col-span-4">
-                    <x-datetime-picker wire:model.defer="user.birthdate" label="Birth Date" placeholder="Birth Date" />
+                    <x-input type="date" wire:model.defer="user.birthdate" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -58,20 +57,20 @@
 
                 <!-- physical information -->
                 <div class="col-span-12"> 
-                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.height" label="Height (in cm)" placeholder="165 cm" />
+                    <x-input type="number" wire:model.defer="user.height" label="Height (in cm)" placeholder="165 cm" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.weight" label="Weight (in kg)" placeholder="70 kg" />
+                    <x-input type="number" wire:model.defer="user.weight" label="Weight (in kg)" placeholder="70 kg" />
                 </div>
 
                 <!-- contact information -->
                 <div class="col-span-12"> 
-                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -84,12 +83,12 @@
 
                 {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="Doe" />
+                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
                 <div class="col-span-12"> 
-                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -97,7 +96,15 @@
                 </div>
 
                 <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
+                </div>
+
+                <div class="col-span-4">
                     <x-input wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">
@@ -106,7 +113,7 @@
 
                 <!-- academic information -->
                 <div class="col-span-12"> 
-                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -127,7 +134,7 @@
 
                 <!-- government beneficiary -->
                 <div class="col-span-12"> 
-                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify. If no, type N/A.</x-card>
+                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -136,7 +143,7 @@
 
                 <!-- guardian information -->
                 <div class="col-span-12"> 
-                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -161,7 +168,7 @@
 
                 <!-- parents information -->
                 <div class="col-span-12"> 
-                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-12"> 

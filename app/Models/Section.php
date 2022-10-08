@@ -13,9 +13,8 @@ class Section extends Authenticatable
 
     protected $fillable = [
         'name',
-        'subjects_id',
-        'class_limit',
-        'column_5',
+        'capacity',
+        'teacher_id',
         'grade_level_id',
     ];
 

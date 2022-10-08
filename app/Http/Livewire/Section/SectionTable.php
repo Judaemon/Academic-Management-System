@@ -23,13 +23,10 @@ class SectionTable extends DataTableComponent
             Column::make("Name", "name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Subjects ID", "subjects_id")
+            Column::make("Capacity", "capacity")
                 ->sortable()
                 ->searchable(),
-            Column::make("Class Limit", "class_limit")
-                ->sortable()
-                ->searchable(),
-            Column::make("Column 5", "column_5")
+            Column::make("Teacher ID", "teacher_id")
                 ->sortable()
                 ->searchable(),
             Column::make("Grade Level ID", "grade_level_id")
