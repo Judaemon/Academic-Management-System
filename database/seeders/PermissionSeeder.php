@@ -47,5 +47,28 @@ class PermissionSeeder extends Seeder
         foreach ($system_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
+
+        //ACCOUNTANT PERMISSIONS
+
+        $fee_permissions = [
+            'create_fee',
+            'read_fees',
+            'edit_fee',
+            'delete_fee',
+        ];
+
+        foreach ($fee_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $payment_permissions = [
+            'create_payment',
+            'read_payments',
+            'delete_payment',
+        ];
+
+        foreach ($payment_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
     }
 }
