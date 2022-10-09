@@ -3,6 +3,7 @@
     <div class="p-4 bg-white rounded-lg shadow-xs overflow-hidden">
         <div class="p-4 flex justify-between">
             <h2 class="text-2xl font-semibold text-gray-700">Payments</h2>
+            
             @livewire('payments.create-payments')
         </div>
 
