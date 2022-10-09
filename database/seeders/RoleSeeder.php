@@ -28,7 +28,17 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Teacher']);
 
-        Role::create(['name' => 'Accountant']);
+        Role::create(['name' => 'Accountant'])
+        ->syncPermissions([
+            'create_fee',
+            'read_fees',
+            'edit_fee',
+            'delete_fee',
+
+            'create_payment',
+            'read_payments',
+            'delete_payment',
+        ]);;
 
         Role::create(['name' => 'Student']);
     }
