@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             UserSeeder::class,
             FeeSeeder::class,
+            
+            SectionSeeder::class,
+            SubjectSeeder::class,
         ]);
     }
 }

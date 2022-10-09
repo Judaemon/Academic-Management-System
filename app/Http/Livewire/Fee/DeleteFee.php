@@ -15,7 +15,6 @@ class DeleteFee extends ModalComponent
     public function mount(Fee $fee)
     {
         $this->fee = $fee;
-        $this->card_title = "Delete ".$fee->fee_name;
     }
 
     public function render()

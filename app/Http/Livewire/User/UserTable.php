@@ -21,35 +21,18 @@ class UserTable extends DataTableComponent
             Column::make("ID", "id")
                 ->sortable()
                 ->searchable(),
-            Column::make("Firstname", "firstname")
+            Column::make("First Name", "firstname")
                 ->sortable()
                 ->searchable(),
-            Column::make("Lastname", "lastname")
+            Column::make("Last Name", "lastname")
                 ->sortable()
                 ->searchable(),
             Column::make("Email", "email")
                 ->sortable()
                 ->searchable(),
-            Column::make("Middlename", "middlename")
+            Column::make("Mobile Number", "mobilenumber")
                 ->sortable()
                 ->searchable(),
-            Column::make("Suffix", "suffix")
-                ->sortable()
-                ->searchable(),
-            Column::make("Birth Date", "birthdate")
-                ->sortable()
-                ->searchable(),
-            Column::make("Birth Place", "birthplace")
-                ->sortable()
-                ->searchable(),
-            Column::make("Religion", "religion")
-                ->sortable()
-                ->searchable(),
-            Column::make("Gender", "gender")
-                ->sortable()
-                ->searchable(),
-            // nag o-overlap sa screen na if add pa ako columns, need help here hehe
-            // or show ko lang mga important details tapos pwede naman i-open eh
         ];
 
 

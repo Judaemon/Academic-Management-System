@@ -22,16 +22,16 @@ class SettingSeeder extends Seeder
                 'institute_acronym' => 'ISCP AIMS',
                 'logo' => 'images\system-assets\default\logo\iscp_logo.png',
                 'address' => 'Biringan Philippines',
+                'academic_year' => '2022',
                 
                 'email' => 'iscp@gmail.com',
                 'mobile_1' => '0968-227-6795',
                 'mobile_2' => '0917-895-0544',
 
-                'academic_year' => '2022',
                 'profile_editing' => false,
-                'notification_type' => "none",
                 'notify_grades' => false,
                 'notify_payments' => false,
+                'notification_type' => "none",
                 
                 'website_link' => 'google.com',
                 'facebook_link' => 'facebook.com',

@@ -70,5 +70,17 @@ class PermissionSeeder extends Seeder
         foreach ($payment_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
+
+        $academic_years_permissions = [
+            'view_academic_year',
+            'create_academic_years',
+            'read_academic_years',
+            'update_academic_years',
+            'delete_academic_years',
+        ];
+        
+        foreach ($academic_years_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
     }
 }

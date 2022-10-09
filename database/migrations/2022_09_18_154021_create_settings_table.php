@@ -11,19 +11,18 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
 
-            // institute dapat
             $table->string("institute_name")->default("Sample CAIMS");
             $table->string("institute_acronym")->default("Sample CAIMS");
             $table->string("logo")->default("images\system-assets\default\logo\CAIMS_Logo_small_1.png");
-            $table->string("address")->default('Sample CAIMS Addresss');
+            $table->string("address")->default('Sample CAIMS Address');
+            $table->string("academic_year")->default('2022');
             
             // settings
-            $table->string("academic_year")->default('2022');
             $table->boolean("profile_editing")->default(false);
-            $table->string("notification_type")->default(null); // none | email | sms | both (email and sms)
             $table->boolean("notify_grades")->default(false);
             $table->boolean("notify_payments")->default(false);
-            // mga feature na pedeng enable and disable
+            $table->string("notification_type")->default(null); // none | email | sms | both (email and sms)
+            // mga feature na that can be enabled and disabled
             // profile editing: bool
             // notification type: none | email | sms | both (email and sms)
             // notify grades: bool

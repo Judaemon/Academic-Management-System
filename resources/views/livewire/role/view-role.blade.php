@@ -10,7 +10,7 @@
 
             <div class="col-span-12 flex justify-center center-label">
                 <div class="w-60">
-                    <x-input wire:model.defer="role.name" label="ROLE NAME" placeholder="Admin" />
+                    <x-input wire:model="role.name" label="ROLE NAME" placeholder="Admin" />
                 </div>
             </div>
         </div>
@@ -61,17 +61,8 @@
         </div>
         
         <x-slot name="footer">
-            <div class="flex justify-between gap-x-4">
-                @can('delete_role')
-                    <x-button flat negative label="Delete" wire:click="deleteDialog" />
-                @else
-                    <div></div>
-                @endcan
-        
-                <div class="flex space-x-2">
-                    <x-button flat label="Cancel" wire:click="$emit('closeModal')" />
-                    <x-button wire:click="save" type="button" primary label="Save" />
-                </div>
+            <div class="flex justify-end gap-x-4">
+                <x-button primary icon="x" label="Close" wire:click="closeModal" />
             </div>
         </x-slot>
     </x-card>

@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="col-span-12"> 
                 <!-- personal information -->
-                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -22,9 +22,8 @@
                     <x-input wire:model.defer="user.suffix" label="Suffix" placeholder="Mr." />
                 </div>
 
-                <!-- di ko maayos tong date picker -->
                 <div class="col-span-4">
-                    <x-datetime-picker wire:model.defer="user.birthdate" label="Birth Date" placeholder="Birth Date" />
+                    <x-input type="date" wire:model.defer="user.birthdate" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -55,7 +54,7 @@
 
                 <!-- physical information -->
                 <div class="col-span-12"> 
-                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -68,11 +67,11 @@
 
                 <!-- contact information -->
                 <div class="col-span-12"> 
-                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.mobilenumber" label="Contact Number" placeholder="09*********" />
+                    <x-input readonly value="{{$user->mobilenumber}}" label="Contact Number" placeholder="09*********" />
                 </div>
 
                 <div class="col-span-4">
@@ -81,12 +80,12 @@
 
                 {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="Doe" />
+                    <x-input readonly autocomplete="randomshitparadimagautocomplete" value="{{$user->email}}" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
                 <div class="col-span-12"> 
-                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -94,7 +93,15 @@
                 </div>
 
                 <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
+                </div>
+
+                <div class="col-span-4">
                     <x-input wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">
@@ -103,7 +110,7 @@
 
                 <!-- academic information -->
                 <div class="col-span-12"> 
-                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -124,7 +131,7 @@
 
                 <!-- government beneficiary -->
                 <div class="col-span-12"> 
-                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify. If no, type N/A.</x-card>
+                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -133,7 +140,7 @@
 
                 <!-- guardian information -->
                 <div class="col-span-12"> 
-                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-4">
@@ -141,7 +148,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->guardian_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -158,7 +165,7 @@
 
                 <!-- parents information -->
                 <div class="col-span-12"> 
-                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields. Type N/A if not applicable.</x-card>
+                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields.</x-card>
                 </div>
 
                 <div class="col-span-12"> 
@@ -170,7 +177,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.mparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->mparent_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -189,7 +196,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.fparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->fparent_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -212,11 +219,11 @@
 
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
-                @can('delete_users')
+                <!-- @can('delete_users')
                     <x-button flat negative label="Delete" wire:click="deleteDialog" />
                 @else
                     <div></div>
-                @endcan
+                @endcan -->
         
                 <div class="flex space-x-2">
                     <x-button flat label="Cancel" wire:click="closeModal" />

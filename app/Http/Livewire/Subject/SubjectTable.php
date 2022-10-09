@@ -23,6 +23,12 @@ class SubjectTable extends DataTableComponent
             Column::make("Name", "name")
                 ->sortable()
                 ->searchable(),
+            Column::make("Teacher ID", "teacher_id")
+                ->sortable()
+                ->searchable(),
+            Column::make("Subject Code", "subject_code")
+                ->sortable()
+                ->searchable(),
             Column::make("Actions", "id")->view('livewire.subject.actions-col'),
         ];
     }

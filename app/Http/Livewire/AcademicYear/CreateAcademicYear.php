@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use Livewire\Component;
 use App\Models\AcademicYear;
+use Livewire\Component;
 use WireUi\Traits\Actions;
 
 class CreateAcademicYear extends Component
@@ -14,10 +14,19 @@ class CreateAcademicYear extends Component
 
     public $academic_year;
 
+    public function mount()
+    {
+        $this->academic_year['start_year'] = null;
+        $this->academic_year['end_year'] = null;
+    }
+
+    // https://laravel-livewire.com/docs/2.x/input-validation
+    // error messaged should be changed
     protected function rules()
     {
         return [
-            'academic_year.year' => ['required'],
+            'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
+            'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
             'academic_year.curriculum' => ['required'],
         ];
     }
@@ -57,7 +66,8 @@ class CreateAcademicYear extends Component
             );
         } else {
             AcademicYear::create([
-                'year' => $this->academic_year['year'],
+                'start_year' => $this->academic_year['start_year'],
+                'end_year' => $this->academic_year['end_year'],
                 'curriculum' => $this->academic_year['curriculum'],
             ]);
     
