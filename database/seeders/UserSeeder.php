@@ -108,6 +108,29 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Teacher');
 
+        User::create([
+            'firstname' => 'Juliett',
+            'middlename' => 'Ambaken',
+            'lastname' => 'Killiy',
+            'suffix' => 'Ms.',
+            'birthdate' => '1996-11-11',
+            'birthplace' => 'Baguio City',
+            'religion' => 'Catholic',
+            'gender' => 'Female',
+            'mothertongue' => 'English',
+            'nationality' => 'Filipino',
+            'height' => '155',
+            'weight' => '63',
+            'mobilenumber' => '09165438295',
+            'email' => 'juliettKilliy@t.caims.com',
+            'address' => 'Guisad Central, Baguio City',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('teacher123'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Teacher');
+
         
         User::create([
             'firstname' => 'Alexander',
