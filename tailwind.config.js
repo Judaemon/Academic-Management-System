@@ -9,7 +9,7 @@ module.exports = {
     darkMode: 'class',
     content: [
         // Laravel
-    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
 
@@ -28,6 +28,7 @@ module.exports = {
         // https://github.com/wire-elements/modal
         './vendor/wire-elements/modal/resources/views/*.blade.php',
         './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
     ],
     // Livewire Modal
     // https://github.com/wire-elements/modal/issues/150
