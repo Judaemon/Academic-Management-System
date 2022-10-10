@@ -15,7 +15,7 @@ class ViewSection extends ModalComponent
             'section.name' => ['required'],
             'section.capacity' => ['required'],
             'section.teacher_id' => ['nullable'],
-            'section.grade_level_id' => ['required'],
+            'section.grade_level_id' => ['nullable'],
         ];
     }
     

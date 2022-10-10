@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             UserSeeder::class,
             
+            GradeLevelSeeder::class,
             SectionSeeder::class,
             SubjectSeeder::class,
         ]);

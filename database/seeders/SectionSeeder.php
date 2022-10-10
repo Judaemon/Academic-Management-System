@@ -15,59 +15,59 @@ class SectionSeeder extends Seeder
     public function run()
     {
         Section::create([
-            'name' => 'Grade 1 - Red',
+            'name' => 'Red',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '1',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 1 - Orange',
+            'name' => 'Orange',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '1',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 2 - Yellow',
+            'name' => 'Yellow',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '2',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 2 - Green',
+            'name' => 'Green',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '2',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 3 - Blue',
+            'name' => 'Blue',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '3',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 3 - Indigo',
+            'name' => 'Indigo',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '3',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 4 - Violet',
+            'name' => 'Violet',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '4',
+            'grade_level_id' => 1
         ]);
 
         Section::create([
-            'name' => 'Grade 4 - Gray',
+            'name' => 'Gray',
             'capacity' => '15',
             'teacher_id' => '3',
-            'grade_level_id' => '4',
+            'grade_level_id' => 1
         ]);
     }
 }

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->string('capacity');
 
             $table->foreignId('teacher_id')->references('id')->on('users')->nullable();
-            $table->string('grade_level_id'); // reference to grade_levels table
+
+            // $table->bigInteger('grade_level_id'); // reference to grade_levels table
+            $table->foreignId('grade_level_id')->references('id')->on('grade_levels')->default(0); // reference to grade_levels table
 
             $table->timestamps();
         });
