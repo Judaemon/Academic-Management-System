@@ -20,6 +20,9 @@ class SectionTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            Column::make("Grade Level ID", "grade_level_id")
+                ->sortable()
+                ->searchable(),
             Column::make("Name", "name")
                 ->sortable()
                 ->searchable(),
@@ -27,9 +30,6 @@ class SectionTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make("Teacher ID", "teacher_id")
-                ->sortable()
-                ->searchable(),
-            Column::make("Grade Level ID", "grade_level_id")
                 ->sortable()
                 ->searchable(),
             Column::make("Actions", "id")->view('livewire.section.actions-col'),

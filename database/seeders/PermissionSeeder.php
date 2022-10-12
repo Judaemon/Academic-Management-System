@@ -59,5 +59,50 @@ class PermissionSeeder extends Seeder
         foreach ($academic_years_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
+
+        $grade_levels_permissions = [
+            'view_grade_level',
+            'create_grade_levels',
+            'read_grade_levels',
+            'update_grade_levels',
+            'delete_grade_levels',
+        ];
+        
+        foreach ($grade_levels_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // $teacher_permissions = [
+        //     'view_grades',
+        //     'create_grade',
+        //     'read_grade',
+        //     'update_grade',
+        //     'delete_grade',
+
+        //     'view_sections',
+        //     'read_section',
+
+        //     'view_users',
+        //     'read_user',
+        // ];
+        
+        // foreach ($teacher_permissions as $permission) {
+        //     Permission::firstOrCreate(['name' => $permission]);
+        // }
+
+        // $student_permissions = [
+        //     'view_grades',
+        //     'read_grade',
+
+        //     'view_sections',
+        //     'read_section',
+
+        //     'view_users',
+        //     'read_user',
+        // ];
+        
+        // foreach ($student_permissions as $permission) {
+        //     Permission::firstOrCreate(['name' => $permission]);
+        // }
     }
 }

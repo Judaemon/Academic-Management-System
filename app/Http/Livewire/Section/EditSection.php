@@ -27,6 +27,7 @@ class EditSection extends ModalComponent
         return [
             'section.name' => ['required'],
             'section.capacity' => ['required'],
+
             'section.teacher_id' => ['required'],
             'teacher' => ['required', new Teacher],
             'section.grade_level_id' => ['required'],

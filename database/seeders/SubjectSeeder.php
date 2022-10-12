@@ -15,27 +15,27 @@ class SubjectSeeder extends Seeder
     public function run()
     {
         Subject::create([
-            'name' => 'Thesis 1',
+            'name' => 'Mathematics',
             'teacher_id' => '1',
-            'subject_code' => 'THESCS1',
+            'subject_code' => 'MATH',
         ]);
 
         Subject::create([
-            'name' => 'Thesis 2',
+            'name' => 'Filipino',
             'teacher_id' => '1',
-            'subject_code' => 'THESCS2',
+            'subject_code' => 'FIL',
         ]);
 
         Subject::create([
-            'name' => 'Social Practices',
+            'name' => 'Heograpiya, Kasaysayan & Sibika',
             'teacher_id' => '1',
-            'subject_code' => 'SOPRAC1',
+            'subject_code' => 'HEKASI',
         ]);
 
         Subject::create([
-            'name' => 'Emerging Technologies',
+            'name' => 'Science',
             'teacher_id' => '1',
-            'subject_code' => 'EMTECH1',
+            'subject_code' => 'SCI',
         ]);
     }
 }

@@ -21,13 +21,4 @@ class Subject extends Authenticatable
         'teacher_id',
         'subject_code',
     ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }

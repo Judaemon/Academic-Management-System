@@ -28,6 +28,7 @@ class CreateSection extends Component
         return [
             'section.name' => ['required'],
             'section.capacity' => ['required'],
+
             'teacher' => ['required', new Teacher],
             'section.grade_level_id' => ['required'],
         ];
