@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Subject;
 
 use App\Models\Subject;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
@@ -21,10 +20,6 @@ class CreateSubject extends Component
             'subject.name' => ['required'],
             'subject.teacher_id' => ['nullable'],
             'subject.subject_code' => ['required'],
-            // 'subject.lastname' => ['required'],
-            // 'subject.email' => ['required', 'email', 'unique:subjects,email'],
-            // 'user.password' => ['required', 'min:8', 'confirmed'],
-            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
@@ -60,10 +55,6 @@ class CreateSubject extends Component
             'name' => $this->subject['name'],
             'teacher_id' => $this->subject['teacher_id'],
             'subject_code' => $this->subject['subject_code'],
-            // 'lastname' => $this->subject['lastname'],
-            // 'email' => $this->subject['email'],
-            // 'password' => Hash::make($this->subject['password']),
-            // // 'account_type' => $this->account_type,
         ]);
 
         $this->emit('refreshDatatable');

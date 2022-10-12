@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Section;
 
 use App\Models\Section;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Subject;
+use App\Models\User;
+use App\Rules\Teacher;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
@@ -15,18 +17,30 @@ class CreateSection extends Component
 
     public $section;
 
+    public $subjects;
+    public $addSubject = [];
+
+    public $teachers;
+    public $teacher;
+
     protected function rules()
     {
         return [
             'section.name' => ['required'],
             'section.capacity' => ['required'],
-            'section.teacher_id' => ['nullable'],
-            'section.grade_level_id' => ['nullable'],
+
+            'teacher' => ['required', new Teacher],
+            'section.grade_level_id' => ['required'],
         ];
     }
 
     public function render()
     {
+        // search based on section.grade_level_id
+        $this->subjects = Subject::all();
+        
+        $this->teachers = User::role('Teacher')->get();
+
         return view('livewire.section.create-section');
     }
 
@@ -53,12 +67,14 @@ class CreateSection extends Component
 
     public function submit()
     {
-        Section::create([
+        $section = Section::create([
             'name' => $this->section['name'],
             'capacity' => $this->section['capacity'],
-            'teacher_id' => $this->section['teacher_id'],
+            'teacher_id' => $this->teacher,
             'grade_level_id' => $this->section['grade_level_id'],
         ]);
+
+        $section->subjects()->attach($this->addSubject);
 
         $this->emit('refreshDatatable');
 
@@ -70,7 +86,7 @@ class CreateSection extends Component
         );
     }
 
-    public function closeModal()
+    public function close()
     {
         $this->modalCreate = false;
     }

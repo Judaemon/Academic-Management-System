@@ -10,6 +10,16 @@ class Section extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
+
+    public function teachers()
+    {
+        return $this->hasMany(User::class);
+    }
+
     protected $fillable = [
         'name',
         'capacity',
