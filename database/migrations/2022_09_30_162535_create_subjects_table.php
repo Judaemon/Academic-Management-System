@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('subject_code');
 
             $table->foreignId('teacher_id')->references('id')->on('users')->nullable();
+            
+            $table->foreignId('grade_level_id')->references('id')->on('grade_levels');
 
             $table->timestamps();
         });

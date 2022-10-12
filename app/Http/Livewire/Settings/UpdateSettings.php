@@ -66,6 +66,8 @@ class UpdateSettings extends Component
 
     public function submit()
     {
+        cache()->forget('setting');
+
         // Check if user has permission
         if (!auth()->user()->can('update_system')) {
             $this->dialog()->error(

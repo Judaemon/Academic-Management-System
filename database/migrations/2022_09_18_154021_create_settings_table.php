@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean("notify_grades")->default(false);
             $table->boolean("notify_payments")->default(false);
             $table->string("notification_type")->default(null); // none | email | sms | both (email and sms)
+            $table->string("current_quarter")->default(1); // 1 | 2 | 3 | 4
             // mga feature na that can be enabled and disabled
             // profile editing: bool
             // notification type: none | email | sms | both (email and sms)

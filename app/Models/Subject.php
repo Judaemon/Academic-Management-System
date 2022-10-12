@@ -20,5 +20,6 @@ class Subject extends Authenticatable
         'name',
         'teacher_id',
         'subject_code',
+        'grade_level_id',
     ];
 }

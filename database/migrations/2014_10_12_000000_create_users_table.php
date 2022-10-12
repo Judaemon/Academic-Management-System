@@ -48,6 +48,11 @@ return new class extends Migration
             $table->string('qvr')->unique()->nullable();
             $table->string('public')->unique()->nullable();
 
+            $table->string('grade_level_id')->nullable();
+
+            // this means the user is enrolled on the current academic year
+            $table->boolean('currently_enrolled')->nullable();
+
             // government beneficiary
             $table->string('beneficiary')->nullable();
 
