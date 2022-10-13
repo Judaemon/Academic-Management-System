@@ -1,6 +1,6 @@
 <div wire:ignore.self>
     <x-card title="Edit Section">
-        {{-- <form wire:submit.prevent="save"> --}}
+        <form wire:submit.prevent="save">
             <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="section.name" label="Name" placeholder="Type section name here" />
@@ -52,9 +52,9 @@
             <x-slot name="footer">
                 <div class="flex justify-end gap-x-4">
                     <x-button flat label="Cancel" wire:click="closeModal" />
-                    <x-button wire:click="save" type="button" primary label="Save" />
+                    <x-button wire:click.prevent="save" type="submit" primary label="Save" />
                 </div>
             </x-slot>
-        {{-- </form> --}}
+        </form>
     </x-card>
 </div>

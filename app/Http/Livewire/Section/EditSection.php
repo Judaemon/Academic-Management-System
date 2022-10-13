@@ -68,6 +68,15 @@ class EditSection extends ModalComponent
         return view('livewire.section.edit-section');
     }
 
+    public function updatedGradeLevel($value)
+    {
+        $this->section_subjects = [];
+
+        $this->subjects = Subject::query()
+            ->where('grade_level_id', $value)
+            ->get();
+    }
+
     public function save(): void
     {
         $this->validate();
@@ -89,7 +98,6 @@ class EditSection extends ModalComponent
 
     public function submit()
     {
-
         $this->authorize('update_section');
         
         // passing the changes value to section if not the changes will not be saved 
