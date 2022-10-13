@@ -14,7 +14,7 @@
                     <x-select
                         label="Teacher"
                         wire:model.defer="teacher"
-                        placeholder="Select Teacher"
+                        placeholder="Select teacher"
                     >
                         @foreach ($teachers as $teacher)
                             <x-select.option label="{{ $teacher->firstname }} {{ $teacher->lastname }}" value="{{ $teacher->id }}" />

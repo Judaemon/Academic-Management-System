@@ -7,62 +7,60 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Models\GradeLevel;
 use App\Rules\Teacher;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
 class EditSection extends ModalComponent
 {
-    use Actions;
-
-    public $modalReadUpdateDelete;
+    use AuthorizesRequests, Actions;
 
     public $section;
 
-    public $teachers;
     public $teacher;
+    public $teachers;
+
+    public $grade_level;
+    public $grade_levels;
 
     public $section_subjects = [];
-
-    public $gradelevels;
-    public $gradelevel;
+    public $subjects;
 
     protected function rules()
     {
         return [
             'section.name' => ['required'],
             'section.capacity' => ['required'],
-
-            'section.teacher_id' => ['required'],
-
+            
             'teacher' => ['required', new Teacher],
-            'section.grade_level_id' => ['required'],
+            
+            'grade_level' => ['required'],
+            
+            'section_subjects' => ['required'],
         ];
     }
 
     public function mount(Section $section)
     {
-        // search based on section.grade_level_id
-        $this->gradelevels = GradeLevel::all();
-        
-        // used as option on select
-        $this->subjects = Subject::all();
+        $this->section = $section;
 
-        // used as option on select
         $this->teachers = User::role('Teacher')->get();
 
-        $this->section = $section;
+        $this->grade_levels = GradeLevel::all();
+        
+        $this->subjects = Subject::all();
 
         // converted to string because option value are string
         // if removed the teacher id is int and will not be selected 
         $this->teacher = (string)$section->teacher_id;
+        
+        $this->grade_level = (string)$section->grade_level_id;
 
         // subjects of section based on pivot table
-        $this->section_subjects = $this->section->subjects->pluck('id')->toArray();
+        $section_subjects = $section->subjects->pluck('id')->toArray();
 
         // used as selected values
-        $this->section_subjects = array_map('strval', $this->section_subjects);
-
-        $this->cardTitle = $section->name." Information";
+        $this->section_subjects = array_map('strval', $section_subjects);
     }
 
     public function render()
@@ -72,8 +70,6 @@ class EditSection extends ModalComponent
 
     public function save(): void
     {
-        
-
         $this->validate();
 
         $this->dialog()->confirm([
@@ -93,7 +89,10 @@ class EditSection extends ModalComponent
 
     public function submit()
     {
+
+        $this->authorize('update_section');
         
+        // passing the changes value to section if not the changes will not be saved 
         $this->section->teacher_id = $this->teacher;
         $this->section->grade_level_id = $this->grade_level;
         

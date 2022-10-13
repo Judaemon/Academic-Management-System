@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasRole('Teacher');
     }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
 }

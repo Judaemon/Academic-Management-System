@@ -43,11 +43,11 @@ class CreateSection extends ModalComponent
 
     public function mount()
     {
-        $this->subjects = Subject::all();
-
         $this->teachers = User::role('Teacher')->get();
 
         $this->grade_levels = GradeLevel::all();
+
+        $this->subjects = Subject::all();
     }
 
     public function render()

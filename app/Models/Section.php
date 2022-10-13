@@ -15,9 +15,9 @@ class Section extends Authenticatable
         return $this->belongsToMany(Subject::class);
     }
 
-    public function teachers()
+    public function teacher()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     protected $fillable = [
