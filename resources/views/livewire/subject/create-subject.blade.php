@@ -1,7 +1,7 @@
 <div>
     <x-button primary onclick="$openModal('modalCreate')" label="CREATE SUBJECT " />
     
-    <x-modal wire:model.defer="modalCreate" max-width="5xl">
+    <x-modal wire:model.defer="modalCreate" max-width="3xl">
         <x-card title="Create form">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="col-span-4">
