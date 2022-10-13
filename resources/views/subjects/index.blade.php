@@ -6,7 +6,8 @@
     <div class="p-4 rounded-lg shadow-xs">
         <div class="p-4 flex justify-between">
             <h2 class="text-2xl font-semibold text-gray-700">Subjects</h2>
-            @livewire('subject.create-subject')
+            {{-- @livewire('subject.create-subject') --}}
+            <x-button primary onclick="Livewire.emit('openModal', 'subject.create-subject')" label="CREATE SUBJECT " />
         </div>
 
         <div class="datatable-container w-full rounded-lg border shadow-xs p-4">

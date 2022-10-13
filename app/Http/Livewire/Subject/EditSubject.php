@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Subject;
 
+use App\Models\GradeLevel;
 use App\Models\Subject;
+use App\Rules\Teacher;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
@@ -10,23 +12,32 @@ class EditSubject extends ModalComponent
 {
     use Actions;
 
-    public $modalReadUpdateDelete;
-
     public $subject;
+
+    public $teacher;
+    public $grade_level;
 
     protected function rules()
     {
         return [
             'subject.name' => ['required'],
-            'subject.teacher_id' => ['nullable'],
+            'teacher' => ['required', new Teacher],
+            'subject.teacher_id' => [],
             'subject.subject_code' => ['required'],
+            'grade_level' => ['required'],
         ];
     }
 
     public function mount(subject $subject)
     {
         $this->subject = $subject;
-        $this->cardTitle = $subject->name." Information";
+        
+        // pass selected values to select
+        $this->teacher = $subject->teacher_id;
+        $this->grade_level = (string)$subject->grade_level_id;
+
+        // select options
+        $this->grade_levels = GradeLevel::all();
     }
 
     public function render()
@@ -37,8 +48,6 @@ class EditSubject extends ModalComponent
     public function save(): void
     {
         $this->validate();
-
-        $this->modalReadUpdateDelete = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -57,6 +66,9 @@ class EditSubject extends ModalComponent
 
     public function submit()
     {
+        $this->subject->teacher_id = $this->teacher;
+        $this->subject->grade_level_id = $this->grade_level;
+
         $this->subject->save();
 
         $this->emit('refreshDatatable');
@@ -69,39 +81,8 @@ class EditSubject extends ModalComponent
         );
     }
 
-    public function deleteDialog()
-    {
-        $this->dialog()->confirm([
-            'title'       => 'Are you Sure?',
-            'description' => 'Delete this subject?',
-            'icon'        => 'warning',
-            'accept'      => [
-                'label'  => 'Yes, delete it',
-                'method' => 'delete',
-                'params' => 'Deleted',
-            ],
-            'reject' => [
-                'label'  => 'No, cancel',
-            ],
-        ]);
-    }
-
-    public function delete()
-    {
-        $this->subject->delete();
-
-        $this->closeModal();
-
-        $this->emit('refreshDatatable');
-
-        $this->dialog()->success(
-            $title = 'Successful!',
-            $description = 'Subject deleted successfully.'
-        );
-    }
-
     public static function modalMaxWidth(): string
     {
-        return '7xl';
+        return '3xl';
     }
 }

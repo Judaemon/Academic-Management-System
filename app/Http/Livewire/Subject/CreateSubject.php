@@ -2,25 +2,38 @@
 
 namespace App\Http\Livewire\Subject;
 
+use App\Models\GradeLevel;
 use App\Models\Subject;
-use Livewire\Component;
+use App\Rules\Teacher;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class CreateSubject extends Component
+class CreateSubject extends ModalComponent
 {
     use Actions;
 
-    public $modalCreate;
-
     public $subject;
 
+    public $teacher;
+
+    public $grade_level;
+
+    public $grade_levels;
+    
     protected function rules()
     {
         return [
             'subject.name' => ['required'],
-            'subject.teacher_id' => ['nullable'],
+            'teacher' => ['required', new Teacher],
             'subject.subject_code' => ['required'],
+            'grade_level' => ['required'],
         ];
+    }
+
+
+    public function mount()
+    {
+        $this->grade_levels = GradeLevel::all();
     }
 
     public function render()
@@ -31,8 +44,6 @@ class CreateSubject extends Component
     public function save(): void
     {
         $this->validate();
-
-        $this->modalCreate = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -51,15 +62,21 @@ class CreateSubject extends Component
 
     public function submit()
     {
-        Subject::create([
+        
+        $tst =Subject::create([
             'name' => $this->subject['name'],
-            'teacher_id' => $this->subject['teacher_id'],
             'subject_code' => $this->subject['subject_code'],
+
+            'teacher_id' => $this->teacher,
+            'grade_level_id' => $this->grade_level,
+
         ]);
 
-        $this->emit('refreshDatatable');
+        // dd($tst);
 
-        $this->reset();
+        $this->closeModal();
+
+        $this->emit('refreshDatatable');
         
         $this->dialog()->success(
             $title = 'Successful!',
@@ -67,8 +84,8 @@ class CreateSubject extends Component
         );
     }
     
-    public function closeModal()
+    public static function modalMaxWidth(): string
     {
-        $this->modalCreate = false;
+        return '3xl';
     }
 }

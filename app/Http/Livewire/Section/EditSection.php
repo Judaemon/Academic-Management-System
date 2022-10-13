@@ -29,6 +29,7 @@ class EditSection extends ModalComponent
             'section.capacity' => ['required'],
 
             'section.teacher_id' => ['required'],
+
             'teacher' => ['required', new Teacher],
             'section.grade_level_id' => ['required'],
         ];
@@ -65,6 +66,8 @@ class EditSection extends ModalComponent
 
     public function save(): void
     {
+        
+
         $this->validate();
 
         $this->dialog()->confirm([
@@ -84,6 +87,10 @@ class EditSection extends ModalComponent
 
     public function submit()
     {
+        
+        $this->section->teacher_id = $this->teacher;
+        $this->section->grade_level_id = $this->grade_level;
+        
         $this->section->save();
 
         $this->section->subjects()->sync($this->section_subjects);
