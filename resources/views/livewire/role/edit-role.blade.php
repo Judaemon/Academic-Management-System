@@ -52,10 +52,10 @@
 
             <div class="flex flex-col w-full my-2">
                 <div class="main-checkbox py-2">
-                    <x-checkbox id="view_system" label="View System Settings" value="11" wire:model="system_permissions" />
+                    <x-checkbox id="view_setting" label="View System Settings" value="11" wire:model="system_permissions" />
                 </div>
                 <div class="sub-checkbox pl-5 mt-0 space-y-2">
-                    <x-checkbox id="update_system" label="Update  System Settings" value="12" wire:model="system_permissions" />
+                    <x-checkbox id="update_setting" label="Update  System Settings" value="12" wire:model="system_permissions" />
                 </div>                
             </div>
         </div>

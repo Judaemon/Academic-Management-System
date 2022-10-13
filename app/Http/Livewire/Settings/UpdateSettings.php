@@ -69,7 +69,7 @@ class UpdateSettings extends Component
         cache()->forget('setting');
 
         // Check if user has permission
-        if (!auth()->user()->can('update_system')) {
+        if (!auth()->user()->can('update_setting')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'

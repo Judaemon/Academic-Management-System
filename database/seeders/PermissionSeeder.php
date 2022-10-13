@@ -10,6 +10,10 @@ class PermissionSeeder extends Seeder
 {
     
     // potential permissions
+    // access_admin
+    // access_academic
+    // access_accounting
+
     // assign_role
     // 
     
@@ -39,20 +43,19 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        $system_permissions = [
-            'view_system',
-            'update_system',
+        $setting_permissions = [
+            'view_setting',
+            'update_setting',
         ];
         
-        foreach ($system_permissions as $permission) {
+        foreach ($setting_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        //ACCOUNTANT PERMISSIONS
-
         $fee_permissions = [
+            'view_fees',
             'create_fee',
-            'read_fees',
+            'read_fee',
             'edit_fee',
             'delete_fee',
         ];
@@ -62,8 +65,9 @@ class PermissionSeeder extends Seeder
         }
 
         $payment_permissions = [
+            'view_payments',
             'create_payment',
-            'read_payments',
+            'read_payment',
             'delete_payment',
         ];
 
@@ -71,27 +75,51 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        $academic_years_permissions = [
-            'view_academic_year',
-            'create_academic_years',
-            'read_academic_years',
-            'update_academic_years',
-            'delete_academic_years',
+        $academic_year_permissions = [
+            'view_academic_years',
+            'create_academic_year',
+            'read_academic_year',
+            'update_academic_year',
+            'delete_academic_year',
         ];
         
-        foreach ($academic_years_permissions as $permission) {
+        foreach ($academic_year_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        $grade_levels_permissions = [
-            'view_grade_level',
-            'create_grade_levels',
-            'read_grade_levels',
-            'update_grade_levels',
-            'delete_grade_levels',
+        $grade_level_permissions = [
+            'view_grade_levels',
+            'create_grade_level',
+            'read_grade_level',
+            'update_grade_level',
+            'delete_grade_level',
         ];
         
-        foreach ($grade_levels_permissions as $permission) {
+        foreach ($grade_level_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $section_permissions = [
+            'view_sections',
+            'create_section',
+            'read_section',
+            'update_section',
+            'delete_section',
+        ];
+        
+        foreach ($section_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $subject_permissions = [
+            'view_subjects',
+            'create_subject',
+            'read_subject',
+            'update_subject',
+            'delete_subject',
+        ];
+        
+        foreach ($subject_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
 
