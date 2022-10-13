@@ -7,54 +7,66 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Models\GradeLevel;
 use App\Rules\Teacher;
-use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class CreateSection extends Component
+class CreateSection extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
-    public $modalCreate;
+    public $name;
+    public $capacity;
 
-    public $section;
-
-    public $subjects;
-    public $addSubject = [];
-
-    public $teachers;
     public $teacher;
+    public $teachers;
 
-    public $gradelevels;
-    public $gradelevel;
+    public $grade_level;
+    public $grade_levels;
+
+    public $section_subjects = [];
+    public $subjects;
 
     protected function rules()
     {
         return [
-            'section.name' => ['required'],
-            'section.capacity' => ['required'],
+            'name' => ['required'],
+            'capacity' => ['required'],
 
             'teacher' => ['required', new Teacher],
-            'section.grade_level_id' => ['required'],
+            
+            'grade_level' => ['required'],
+
+            'section_subjects' => ['required'],
         ];
+    }
+
+    public function mount()
+    {
+        $this->subjects = Subject::all();
+
+        $this->teachers = User::role('Teacher')->get();
+
+        $this->grade_levels = GradeLevel::all();
     }
 
     public function render()
     {
-        // search based on section.grade_level_id
-        $this->subjects = Subject::all();
-        
-        $this->teachers = User::role('Teacher')->get();
-
-        $this->gradelevels = GradeLevel::all();
-
         return view('livewire.section.create-section');
+    }
+
+    public function updatedGradeLevel($value)
+    {
+        $this->section_subjects = [];
+
+        $this->subjects = Subject::query()
+            ->where('grade_level_id', $value)
+            ->get();
     }
 
     public function save(): void
     {
         $this->validate();
-
-        $this->modalCreate = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -73,32 +85,29 @@ class CreateSection extends Component
 
     public function submit()
     {
+        $this->authorize('create_section');
+
         $section = Section::create([
-            'name' => $this->section['name'],
-            'capacity' => $this->section['capacity'],
+            'name' => $this->name,
+            'capacity' => $this->capacity,
             'teacher_id' => $this->teacher,
-            'grade_level_id' => $this->section['name'],
+            'grade_level_id' => $this->grade_level,
         ]);
 
-        $section->subjects()->attach($this->addSubject);
+        $section->subjects()->attach($this->section_subjects);
 
         $this->emit('refreshDatatable');
 
-        $this->reset();
-        
+        $this->closeModal();
+
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'Section successfully Created.'
+            $description = 'Section successfully created.'
         );
-    }
-
-    public function close()
-    {
-        $this->modalCreate = false;
     }
 
     public static function modalMaxWidth(): string
     {
-        return 'md';
+        return '3xl';
     }
 }

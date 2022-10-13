@@ -20,7 +20,7 @@
 
     @livewireStyles
 </head>
-<body>
+<body wire:ignore.self>
     <!-- WireUI Dialog -->
     <x-dialog />
 
