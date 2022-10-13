@@ -11,20 +11,17 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                  ->references('id')
-                  ->on('users')
+                  ->constrained('users', 'id')
                   ->onDelete('cascade');
 
             $table->decimal('amount_paid')
                   ->default('0.00');
             
             $table->foreignId('fee_id')
-                  ->unsigned()
-                  ->references('id')
-                  ->on('fees')
+                  ->constrained('fees', 'id')
                   ->onDelete('cascade');
 
-                  $table->timestamps();
+            $table->timestamps();
         });
     }
 

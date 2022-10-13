@@ -27,6 +27,8 @@ class FeesTable extends DataTableComponent
                 ->format(function($value) {
                     return 'Php '.number_format($value, 2);
                 }),
+            Column::make("Academic Year", "academic_year.start_year")
+                ->sortable(),
             // Column::make("Grade Level", "grade_level_id")
             //     ->sortable(),
         ];
