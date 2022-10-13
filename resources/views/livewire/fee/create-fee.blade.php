@@ -20,6 +20,25 @@
                     />
                 </div>
 
+                <div class="col-span-4">
+                    <x-native-select 
+                      label="Select Academic Year" 
+                      wire:model.defer="academic_year_id"
+                    >
+                        <option 
+                          class="text-gray-300" 
+                          selected
+                        >
+                            <--- Select Academic Year --->
+                        </option>
+                        @foreach ($academic_years as $academic_year)
+                            <option value="{{ $academic_year->id }}">
+                              {{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}
+                            </option>
+                        @endforeach
+                    </x-native-select>
+                </div>
+
                 {{-- <div class="col-span-4">
                     <x-native-select 
                       label="Select Grade Level" 

@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Fee;
 
 use Livewire\Component;
-use App\Models\Fee;
 use WireUi\Traits\Actions;
+
+use App\Models\Fee;
+use App\Models\AcademicYear;
 
 class CreateFee extends Component
 {
@@ -14,11 +16,14 @@ class CreateFee extends Component
     public 
       $fee_name, 
       $amount,
+      $academic_year_id,
       $grade_level_id;
 
     public function render()
     {
-        return view('livewire.fee.create-fee');
+        return view('livewire.fee.create-fee', [
+            'academic_years' => AcademicYear::all(),
+        ]);
     }
 
     protected function rules()
@@ -26,7 +31,8 @@ class CreateFee extends Component
         return [
             'fee_name' => 'required|min:5|max:35',
             'amount' => 'required|numeric',
-            // 'fee.grade_level_id' => 'required'
+            'academic_year_id' => 'nullable|unique:academic_years,id,'.$this->academic_year_id,
+            // 'grade_level_id' => 'required'
         ];
     }
 
@@ -62,6 +68,7 @@ class CreateFee extends Component
             Fee::create([
                 'fee_name' => $this->fee_name,
                 'amount' => $this->amount,
+                'academic_year_id' => $this->academic_year_id,
                 // 'grade_level_id' => $this->fee['grade_level_id'],
             ]);
     

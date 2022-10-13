@@ -14,6 +14,11 @@ return new class extends Migration
             $table->decimal('amount')
                   ->default('0.00');
 
+            $table->foreignId('academic_year_id')
+                  ->nullable()
+                  ->constrained('academic_years', 'id')
+                  ->onDelete('cascade');
+
             // $table->foreignId('grade_level_id')
             //       ->unsigned()
             //       ->references('id')
