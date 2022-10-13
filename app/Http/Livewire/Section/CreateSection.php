@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Section;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\GradeLevel;
 use App\Rules\Teacher;
 use Livewire\Component;
 use WireUi\Traits\Actions;
@@ -23,6 +24,9 @@ class CreateSection extends Component
     public $teachers;
     public $teacher;
 
+    public $gradelevels;
+    public $gradelevel;
+
     protected function rules()
     {
         return [
@@ -40,6 +44,8 @@ class CreateSection extends Component
         $this->subjects = Subject::all();
         
         $this->teachers = User::role('Teacher')->get();
+
+        $this->gradelevels = GradeLevel::all();
 
         return view('livewire.section.create-section');
     }
@@ -71,7 +77,7 @@ class CreateSection extends Component
             'name' => $this->section['name'],
             'capacity' => $this->section['capacity'],
             'teacher_id' => $this->teacher,
-            'grade_level_id' => $this->section['grade_level_id'],
+            'grade_level_id' => $this->section['name'],
         ]);
 
         $section->subjects()->attach($this->addSubject);
@@ -89,5 +95,10 @@ class CreateSection extends Component
     public function close()
     {
         $this->modalCreate = false;
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return 'md';
     }
 }

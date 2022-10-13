@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Section;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\GradeLevel;
 use App\Rules\Teacher;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
@@ -22,6 +23,9 @@ class EditSection extends ModalComponent
 
     public $section_subjects = [];
 
+    public $gradelevels;
+    public $gradelevel;
+
     protected function rules()
     {
         return [
@@ -37,6 +41,8 @@ class EditSection extends ModalComponent
     public function mount(Section $section)
     {
         // search based on section.grade_level_id
+        $this->gradelevels = GradeLevel::all();
+        
         // used as option on select
         $this->subjects = Subject::all();
 
