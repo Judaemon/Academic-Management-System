@@ -69,4 +69,9 @@ class EditGradeLevel extends ModalComponent
             );
         }
     }
+
+    public static function modalMaxWidth(): string
+    {
+        return 'md';
+    }
 }
