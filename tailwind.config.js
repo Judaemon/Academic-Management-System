@@ -50,6 +50,8 @@ module.exports = {
             },
         }),
         colors: {
+            iscp_primary: '#012560',
+            iscp_secondary: '#4ad0ee',
             transparent: 'transparent',
             white: '#ffffff',
             black: '#000000',
@@ -215,8 +217,10 @@ module.exports = {
         placeholderColor: ["focus"],
         borderColor: ["focus", "hover"],
         boxShadow: ["focus"],
+        scrollbar: ['rounded'],
     },
     plugins: [
-        require("@tailwindcss/forms")
+        require("@tailwindcss/forms"),
+        require('tailwind-scrollbar'),
     ],
 };

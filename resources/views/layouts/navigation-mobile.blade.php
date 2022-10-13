@@ -236,7 +236,7 @@
                         </li>
                         @endcan
 
-                        @can('view_system')
+                        @can('view_setting')
                         <li class="relative px-6 py-3">
                             <x-nav-link href="{{ route('setting.index') }}" :active="request()->routeIs('setting.index')">
                                 <x-slot name="icon">
