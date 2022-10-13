@@ -15,7 +15,8 @@ return new class extends Migration
             $table->string("institute_acronym")->default("Sample CAIMS");
             $table->string("logo")->default("images\system-assets\default\logo\CAIMS_Logo_small_1.png");
             $table->string("address")->default('Sample CAIMS Address');
-            $table->string("academic_year")->default('2022');
+
+            $table->foreignId('academic_year_id')->constrained('academic_years', 'id')->onDelete('cascade');
             
             // settings
             $table->boolean("profile_editing")->default(false);
