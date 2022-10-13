@@ -2,18 +2,27 @@
 
 namespace App\Http\Livewire\Section;
 
+use App\Models\GradeLevel;
 use LivewireUI\Modal\ModalComponent;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ViewSection extends ModalComponent
 {
+    use AuthorizesRequests;
+
     public $section;
 
     public $teacher;
+    public $teachers;
 
-    public $gradelevel;
+    public $grade_level;
+    public $grade_levels;
+
+    public $section_subjects = [];
+    public $subjects;
 
     protected function rules()
     {
@@ -31,22 +40,27 @@ class ViewSection extends ModalComponent
     
     public function mount(Section $section)
     {
+        $this->authorize('view_section');
+
         $this->section = $section;
 
-        $this->teacher = User::find($section->teacher_id);
+        $this->teachers = User::role('Teacher')->get();
 
-        $this->gradelevel = User::find($section->grade_level_id);
+        $this->grade_levels = GradeLevel::all();
+        
+        $this->subjects = Subject::all();
+
+        // converted to string because option value are string
+        // if removed the teacher id is int and will not be selected 
+        $this->teacher = (string)$section->teacher_id;
+        
+        $this->grade_level = (string)$section->grade_level_id;
 
         // subjects of section based on pivot table
-        $this->section_subjects_ids = $this->section->subjects->pluck('id')->toArray();
-        
-        // used as option on select
-        $this->section_subjects = Subject::find($this->section_subjects_ids);
+        $section_subjects = $section->subjects->pluck('id')->toArray();
 
         // used as selected values
-        $this->section_subjects_ids_stringified = array_map('strval', $this->section_subjects_ids);
-
-        $this->cardTitle = $section->name." Information";
+        $this->section_subjects = array_map('strval', $section_subjects);
     }
 
     public function render()

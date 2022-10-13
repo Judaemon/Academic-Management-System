@@ -3,17 +3,20 @@
 namespace App\Http\Livewire\Section;
 
 use App\Models\Section;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
 class DeleteSection extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $section;
 
     public function mount(Section $section)
     {
+        $this->authorize('delete_section');
+
         $this->section = $section;
     }
 
@@ -46,23 +49,15 @@ class DeleteSection extends ModalComponent
 
     public function submit()
     {
-        // Check if user has permission
-        if (!auth()->user()->can('delete_section')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->section->delete();
+        $this->section->delete();
 
-            $this->closeModal();
-    
-            $this->emit('refreshDatatable');
-    
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Section deleted successfully.'
-            );
-        }
+        $this->closeModal();
+
+        $this->emit('refreshDatatable');
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Section deleted successfully.'
+        );
     }
 }
