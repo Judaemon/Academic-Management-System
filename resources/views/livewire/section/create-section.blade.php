@@ -24,9 +24,17 @@
                             @endforeach
                         </x-select>
                     </div>
-    
+
                     <div class="col-span-4">
-                        <x-input wire:model.defer="section.grade_level_id" label="Grade Level ID" placeholder="1" />
+                        <x-select
+                            label="Select Grade Level ID"
+                            wire:model.defer="grade_level_id"
+                            placeholder="Select Grade Level ID"
+                        >
+                            @foreach ($gradelevels as $gradelevel)
+                                <x-select.option label="{{ $gradelevel->name }}" value="{{ $gradelevel->id }}" />
+                            @endforeach
+                        </x-select>
                     </div>
     
                     <div class="col-span-8">

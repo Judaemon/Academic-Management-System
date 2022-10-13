@@ -13,6 +13,8 @@ class ViewSection extends ModalComponent
 
     public $teacher;
 
+    public $gradelevel;
+
     protected function rules()
     {
         return [
@@ -32,6 +34,8 @@ class ViewSection extends ModalComponent
         $this->section = $section;
 
         $this->teacher = User::find($section->teacher_id);
+
+        $this->gradelevel = User::find($section->grade_level_id);
 
         // subjects of section based on pivot table
         $this->section_subjects_ids = $this->section->subjects->pluck('id')->toArray();

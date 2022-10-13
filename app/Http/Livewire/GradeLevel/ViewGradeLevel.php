@@ -25,4 +25,9 @@ class ViewGradeLevel extends ModalComponent
     {
         return view('livewire.grade-level.view-grade-level');
     }
+
+    public static function modalMaxWidth(): string
+    {
+        return 'md';
+    }
 }
