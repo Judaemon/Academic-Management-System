@@ -7,49 +7,49 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.firstname" label="First Name" placeholder="Juan" />
+                    <x-input readonly value="{{ $user->firstname }}" label="First Name" placeholder="Juan" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.lastname" label="Last Name" placeholder="Dela Cruz" />
+                    <x-input readonly value="{{ $user->lastname }}" label="Last Name" placeholder="Dela Cruz" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.middlename" label="Middle Name" placeholder="Cardo" />
+                    <x-input readonly value="{{ $user->middlename }}" label="Middle Name" placeholder="Cardo" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.suffix" label="Suffix" placeholder="Mr." />
+                    <x-input readonly value="{{ $user->suffix }}" label="Suffix" placeholder="Mr." />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly type="date" wire:model.defer="user.birthdate" label="Birth Date" placeholder="" />
+                    <x-input readonly value="{{ $user->birthdate }}" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.birthplace" label="Birth Place" placeholder="Baguio" />
+                    <x-input readonly value="{{ $user->birthplace }}" label="Birth Place" placeholder="Baguio" />
                 </div>
 
                 <!-- drop down sana ng mga religions -->
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.religion" label="Religion" placeholder="Catholic" />
+                    <x-input readonly value="{{ $user->religion }}" label="Religion" placeholder="Catholic" />
                 </div>
 
                 <!-- drop down din sana pero di ko pa gets -->
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.gender" label="Gender" placeholder="Male/Female/Other" />
+                    <x-input readonly value="{{ $user->gender }}" label="Gender" placeholder="Male/Female/Other" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.mothertongue" label="Mother Tongue" placeholder="English" />
+                    <x-input readonly value="{{ $user->mothertongue }}" label="Mother Tongue" placeholder="English" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.nationality" label="Nationality" placeholder="Filipino" />
+                    <x-input readonly value="{{ $user->nationality }}" label="Nationality" placeholder="Filipino" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.pwdid" label="PWD ID" placeholder="XXXX0000" />
+                    <x-input readonly value="{{ $user->pwdid }}" label="PWD ID" placeholder="XXXX0000" />
                 </div>
 
                 <!-- physical information -->
@@ -58,11 +58,11 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.height" label="Height (in cm)" placeholder="165 cm" />
+                    <x-input readonly value="{{ $user->height }}" label="Height (in cm)" placeholder="165 cm" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.weight" label="Weight (in kg)" placeholder="70 kg" />
+                    <x-input readonly value="{{ $user->weight }}" label="Weight (in kg)" placeholder="70 kg" />
                 </div>
 
                 <!-- contact information -->
@@ -71,16 +71,16 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.mobilenumber" label="Contact Number" placeholder="09*********" />
+                    <x-input readonly value="{{ $user->mobilenumber }}" label="Contact Number" placeholder="09*********" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.address" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
+                    <x-input readonly value="{{ $user->address }}" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
                 {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input readonly autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.email" label="Email" placeholder="sample@email.com" />
+                    <x-input autocomplete="randomshitparadimagautocomplete" readonly value="{{ $user->email }}" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
@@ -89,23 +89,23 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.school_kinder" label="Kinder" placeholder="School Name" />
+                    <x-input readonly value="{{ $user->school_kinder }}" label="Kinder" placeholder="School Name" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
+                    <x-input readonly value="{{ $user->school_kindergrad }}" label="Year Graduated (Kinder)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                    <x-input readonly value="{{ $user->school_elementary }}" label="Elementary" placeholder="School Name" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)" placeholder="Year" />
+                    <x-input readonly value="{{ $user->school_elementarygrad }}" label="Year Graduated (Elementary)" placeholder="Year" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.school_juniorhigh" label="Junior High School" placeholder="School Name" />
+                    <x-input readonly value="{{ $user->school_juniorhigh }}" label="Junior High School" placeholder="School Name" />
                 </div>
 
                 <!-- academic information -->
@@ -114,19 +114,19 @@
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly wire:model.defer="user.lrn" label="Learner's Reference Number" placeholder="" />
+                    <x-input readonly value="{{ $user->lrn }}" label="Learner's Reference Number" placeholder="" />
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly wire:model.defer="user.esc" label="Education Service Contracting (ESC) No." placeholder="" />
+                    <x-input readonly value="{{ $user->esc }}" label="Education Service Contracting (ESC) No." placeholder="" />
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly wire:model.defer="user.qvr" label="Qualified Vouchers Recipients (QVR)" placeholder="" />
+                    <x-input readonly value="{{ $user->qvr }}" label="Qualified Vouchers Recipients (QVR)" placeholder="" />
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly wire:model.defer="user.public" label="Public" placeholder="" />
+                    <x-input readonly value="{{ $user->public }}" label="Public" placeholder="" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -135,7 +135,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.beneficiary" label="Beneficiary" placeholder="" />
+                    <x-input readonly value="{{ $user->beneficiary }}" label="Beneficiary" placeholder="" />
                 </div>
 
                 <!-- guardian information -->
@@ -144,23 +144,23 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.guardian_name" label="Guardian Full Name" placeholder="" />
+                    <x-input readonly value="{{ $user->guardian_name }}" label="Guardian Full Name" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.guardian_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{ $user->guardian_number }}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.guardian_occupation" label="Occupation" placeholder="" />
+                    <x-input readonly value="{{ $user->guardian_occupation }}" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.guardian_address" label="Address" placeholder="" />
+                    <x-input readonly value="{{ $user->guardian_address }}" label="Address" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.guardian_relationship" label="Relationship" placeholder="" />
+                    <x-input readonly value="{{ $user->guardian_relationship }}" label="Relationship" placeholder="" />
                 </div>
 
                 <!-- parents information -->
@@ -173,38 +173,38 @@
                 </div>
                 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.mparent_name" label="Full Name" placeholder="" />
+                    <x-input readonly value="{{ $user->mparent_name }}" label="Full Name" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.mparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{ $user->mparent_number }}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.mparent_occupation" label="Occupation" placeholder="" />
+                    <x-input readonly value="{{ $user->mparent_occupation }}" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.mparent_address" label="Address" placeholder="" />
+                    <x-input readonly value="{{ $user->mparent_address }}" label="Address" placeholder="" />
                 </div>
 
                 <div class="col-span-12"> 
                     <x-card>Father's Information:</x-card>
                 </div>
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.fparent_name" label="Full Name" placeholder="" />
+                    <x-input readonly value="{{ $user->fparent_name }}" label="Full Name" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.fparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{ $user->fparent_number }}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.fparent_occupation" label="Occupation" placeholder="" />
+                    <x-input readonly value="{{ $user->fparent_occupation }}" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly wire:model.defer="user.fparent_address" label="Address" placeholder="" />
+                    <x-input readonly value="{{ $user->fparent_address }}" label="Address" placeholder="" />
                 </div>
 
                 <!-- user password -->
@@ -213,7 +213,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-inputs.password  readonly autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.password" label="Password" placeholder="" />
+                    <x-inputs.password autocomplete="randomshitparadimagautocomplete" readonly value="{{ $user->password }}" label="Password" placeholder="" />
                 </div>
         </div>
 
