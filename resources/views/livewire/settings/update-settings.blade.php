@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="w-full flex flex-row py-4 gap-4 justify-between">
-        <div class="w-4/12">
-            <h2 class="text-lg font-medium">Institute Infomration</h2>
-            <p class="text-sm">Lorem ipsum dolor sit, nobis ea?</p>
+    <div class="w-full lg:flex lg:flex-row py-4 gap-4 justify-between">
+        <div class="px-4 sm:px-0 lg:w-4/12">
+            <h2 class="text-lg font-medium text-gray-900">Institute Infomration</h2>
+            <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, nobis ea?</p>
         </div>
 
-        <ul class="flex flex-col w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
+        <ul class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
             <li>
                 <x-input wire:model.defer="setting.institute_name" label="Institute Name" placeholder="School Name" />
             </li>
@@ -25,18 +25,18 @@
     </div>
 
     <div class="hidden sm:block">
-        <div class="py-8">
+        <div class="py-4 lg:py-8">
             <div class="border-t border-gray-200"></div>
         </div>
     </div>
 
-    <div class="w-full flex flex-row py-4 gap-4 justify-between">
-        <div class="w-4/12">
-            <h2 class="text-lg font-medium">Contact Information</h2>
-            <p class="text-sm">Lorem ipsum dolor sit, nobis ea?</p>
+    <div class="w-full lg:flex lg:flex-row py-4 gap-4 justify-between">
+        <div class="px-4 sm:px-0 lg:w-4/12">
+            <h2 class="text-lg font-medium text-gray-900">Contact Information</h2>
+            <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, nobis ea?</p>
         </div>
 
-        <ul class="flex flex-col w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
+        <ul class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
             <li>
                 <x-input wire:model.defer="setting.email" label="Email" placeholder="caims@gmail.com" />
             </li>
@@ -61,17 +61,17 @@
         </div>
     </div>
 
-    <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="lg:grid lg:grid-cols-3 lg:gap-6">
         <div class="px-4 sm:px-0">
             <h2 class="text-lg font-medium text-gray-900">Features </h2>
             <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, ea?</p>
         </div>
 
-        <div class="mt-5 md:mt-0 md:col-span-2">
+        <div class="mt-5 lg:mt-0 lg:col-span-2">
             <form wire:submit.prevent="">
                 <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md">
                     <div class="grid grid-cols-6 gap-6">
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-6 md:col-span-4">
                             <div class="">
                                 <x-checkbox id="profile_editing" label="Profile Editing" wire:model.defer="setting.profile_editing" />
                             </div>                    
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-6 md:col-span-4">
                             <div>
                                 <x-checkbox id="notify_grades" label="Notify Grades" wire:model.defer="setting.notify_grades" />
                             </div>
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-6 md:col-span-4">
                             <div>
                                 <x-checkbox label="Notify Payments" wire:model.defer="setting.notify_payments" />
                             </div>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="col-span-6 md:col-span-4">
                             <div class="pl-6">
                                 <x-input wire:model.defer="setting.notification_type" label="Notification Type" placeholder="School address" />
                             </div>
@@ -122,13 +122,13 @@
         </div>
     </div>
 
-    <div class="w-full flex flex-row py-4 gap-4 justify-between">
-        <div class="w-4/12">
-            <h2 class="text-lg font-medium">Social Medias</h2>
-            <p class="text-sm">Lorem ipsum dolor sit, nobis, ea?</p>
+    <div class="w-full lg:flex lg:flex-row py-4 gap-4 justify-between">
+        <div class="px-4 sm:px-0 lg:w-4/12">
+            <h2 class="text-lg font-medium text-gray-900">Social Medias</h2>
+            <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, nobis, ea?</p>
         </div>
-
-        <ul class="flex flex-col w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
+        
+        <ul class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
             <li>
                 <x-input wire:model.defer="setting.website_link" label="Website" placeholder="website.com" />
             </li>
