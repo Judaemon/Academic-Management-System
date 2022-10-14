@@ -41,13 +41,15 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Accountant'])
         ->syncPermissions([
+            'view_fees',
             'create_fee',
-            'read_fees',
+            'read_fee',
             'edit_fee',
             'delete_fee',
 
+            'view_payments',
             'create_payment',
-            'read_payments',
+            'read_payment',
             'delete_payment',
         ]);;
 
