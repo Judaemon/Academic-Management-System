@@ -153,6 +153,6 @@ class UserSeeder extends Seeder
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ])->assignRole('Student');
+        ])->assignRole('Admin');
     }
 }
