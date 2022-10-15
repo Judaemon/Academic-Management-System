@@ -38,12 +38,12 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-select
                         label="Gender"
-                        wire:model.defer="gender"
+                        wire:model.defer="user.gender"
                         placeholder="Select Gender"
                     >
-                            <x-select.option label="{{ $genderm }}" value="{{ $genderm }}" />
-                            <x-select.option label="{{ $genderf }}" value="{{ $genderf }}" />
-                            <x-select.option label="{{ $gendero }}" value="{{ $gendero }}" />
+                            <x-select.option label="Male" value="Male" />
+                            <x-select.option label="Female" value="Female" />
+                            <x-select.option label="Rather not say" value="Rather not say" />
                     </x-select>
                 </div>
 
@@ -133,7 +133,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.public" label="Public" placeholder="" />
+                    <x-input wire:model.defer="user.public_id" label="Public" placeholder="" />
                 </div>
 
                 <!-- government beneficiary -->

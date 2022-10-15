@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly value="{{ $user->public }}" label="Public" placeholder="" />
+                    <x-input readonly value="{{ $user->public_id }}" label="Public" placeholder="" />
                 </div>
 
                 <!-- government beneficiary -->

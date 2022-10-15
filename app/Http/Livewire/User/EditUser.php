@@ -16,9 +16,6 @@ class EditUser extends ModalComponent
     public $user;
 
     public $gender;
-    public $genderm = 'Male';
-    public $genderf = 'Female';
-    public $gendero = 'Rather not say';
 
     protected function rules()
     {
@@ -58,7 +55,7 @@ class EditUser extends ModalComponent
             'user.lrn' => ['unique:users,lrn'],
             'user.esc' => ['unique:users,esc'],
             'user.qvr' => ['unique:users,qvr'],
-            'user.public' => ['unique:users,public'],
+            'user.public_id' => ['unique:users,public_id'],
 
             // beneficiary, guardian, and parents info
             'user.beneficiary' => ['nullable'],

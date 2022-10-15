@@ -1,21 +1,18 @@
-<div>
-    <x-button primary onclick="$openModal('modalCreate')" label="ADD GRADE LEVEL" />
-    
-    <x-modal wire:model.defer="modalCreate" max-width="md">
-        <x-card title="New grade level">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
+<div wire:ignore.self>
+    <x-card title="Create Grade Level">
+        <form wire:submit.prevent="save">
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="col-span-12">
-                    <x-input wire:model.defer="grade_level.name" label="Grade Level Name" placeholder="" />
+                    <x-input wire:model.defer="name" label="Grade Level Name" placeholder="" />
                 </div>
             </div>
-  
+
             <x-slot name="footer">
                 <div class="flex justify-end gap-x-4">
                     <x-button flat label="Cancel" wire:click="closeModal" />
-  
-                    <x-button wire:click="save" type="button" primary label="Save" />
+                    <x-button wire:click.prevent="save" type="submit" primary label="Save" />
                 </div>
             </x-slot>
-        </x-card>
-    </x-modal>
+        </form>
+    </x-card>
 </div>

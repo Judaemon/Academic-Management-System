@@ -29,7 +29,7 @@ class EditSubject extends ModalComponent
         ];
     }
 
-    public function mount(subject $subject)
+    public function mount(Subject $subject)
     {
         $this->subject = $subject;
         
