@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('teachers', [UserController::class, 'teachers'])->name('users.teachers');
+Route::get('users', [UserController::class, 'users'])->name('users.users');
+
+Route::get('roles', [RolesController::class, 'roles'])->name('roles.roles');

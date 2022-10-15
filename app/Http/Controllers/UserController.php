@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function teachers(Request $request)
     {
-        // checks if there already a selected item
+        // It checks if there is already a selected item.
         if ($request->has('selected')) {
             return User::query()
                 ->role('Teacher')
@@ -38,5 +38,24 @@ class UserController extends Controller
                 ->where(DB::raw('CONCAT_WS(" ", firstname, lastname)'), 'like', "%{$request->search}%")
         )
         ->get();
+    }
+
+    public function users(Request $request)
+    {
+        return User::query()
+            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS name"), 'id')
+            ->orderBy('name')
+            ->when(
+                $request->search,
+                fn (Builder $query) => $query
+                    ->where(DB::raw('CONCAT_WS(" ", firstname, lastname)'), 'like', "%{$request->search}%")
+                    ->orWhere('id', 'like', "%{$request->search}%")
+            )
+            ->when(
+                $request->exists('selected'),
+                fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
+                fn (Builder $query) => $query->limit(10)
+            )
+            ->get();
     }
 }
