@@ -4,18 +4,16 @@ namespace App\Http\Livewire\User;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateUser extends Component
+class CreateUser extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $modalCreate;
-
     public $user;
-
+    
     protected function rules()
     {
         return [
@@ -79,7 +77,8 @@ class CreateUser extends Component
         ];
     }
 
-    public function mount(User $user)
+
+    public function mount()
     {
         $this->pwdid = null;
         $this->height = null;
@@ -122,11 +121,9 @@ class CreateUser extends Component
     {
         $this->validate();
 
-        $this->modalCreate = false;
-
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create the user?',
+            'description' => 'Create the User?',
             'icon'        => 'question',
             'accept'      => [
                 'label'  => 'Yes, create it',
@@ -143,15 +140,8 @@ class CreateUser extends Component
     {
         $this->authorize('create_user');
 
-        if (!auth()->user()->can('create_user')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            User::create([
-                // personal info
-                'firstname' => $this->user['firstname'],
+        $tst =User::create([
+            'firstname' => $this->user['firstname'],
                 'lastname' => $this->user['lastname'],
                 'email' => $this->user['email'],
                 'password' => Hash::make($this->user['password']),
@@ -200,23 +190,20 @@ class CreateUser extends Component
                 'fparent_number' => $this->user['fparent_number'],
                 'fparent_occupation' => $this->user['fparent_occupation'],
                 'fparent_address' => $this->user['fparent_address'],
-                
-                // 'account_type' => $this->account_type,
-            ]);
-    
-            $this->emit('refreshDatatable');
-    
-            //$this->reset();
-            
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'User successfully Created.'
-            );
-        }
-    }
+        ]);
 
-    public function closeModal()
+        $this->closeModal();
+
+        $this->emit('refreshDatatable');
+        
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Subject successfully Created.'
+        );
+    }
+    
+    public static function modalMaxWidth(): string
     {
-        $this->modalCreate = false;
+        return '5xl';
     }
 }
