@@ -13,6 +13,11 @@ class CreateUser extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $user;
+
+    public $gender;
+    public $genderm = 'Male';
+    public $genderf = 'Female';
+    public $gendero = 'Rather not say';
     
     protected function rules()
     {
@@ -23,8 +28,8 @@ class CreateUser extends ModalComponent
             'user.email' => ['required', 'unique:users,email'],
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
-            'user.middlename' => ['required'],
-            'user.suffix' => ['required'],
+            'user.middlename' => ['nullable'],
+            'user.suffix' => ['nullable'],
             'user.birthdate' => ['required'],
             'user.birthplace' => ['required'],
             'user.religion' => ['required'],
@@ -34,19 +39,19 @@ class CreateUser extends ModalComponent
             'user.pwdid' => ['unique:users,pwdid'],
 
             // physical info
-            'user.height' => [],
-            'user.weight' => [],
+            'user.height' => ['nullable'],
+            'user.weight' => ['nullable'],
 
             // contact info
             'user.mobilenumber' => ['required', 'unique:users,mobilenumber'],
             'user.address' => ['required'],
 
             // educational background
-            'user.school_kinder' => [],
-            'user.school_kindergrad' => [],
-            'user.school_elementary' => [],
-            'user.school_elementarygrad' => [],
-            'user.school_juniorhigh' => [],
+            'user.school_kinder' => ['nullable'],
+            'user.school_kindergrad' => ['nullable'],
+            'user.school_elementary' => ['nullable'],
+            'user.school_elementarygrad' => ['nullable'],
+            'user.school_juniorhigh' => ['nullable'],
 
             // academic info
             'user.lrn' => ['unique:users,lrn'],
@@ -55,23 +60,23 @@ class CreateUser extends ModalComponent
             'user.public' => ['unique:users,public'],
 
             // beneficiary, guardian, and parents info
-            'user.beneficiary' => [],
+            'user.beneficiary' => ['nullable'],
 
-            'user.guardian_name' => [],
+            'user.guardian_name' => ['nullable'],
             'user.guardian_number' => ['unique:users,guardian_number'],
-            'user.guardian_occupation' => [],
-            'user.guardian_address' => [],
-            'user.guardian_relationship' => [],
+            'user.guardian_occupation' => ['nullable'],
+            'user.guardian_address' => ['nullable'],
+            'user.guardian_relationship' => ['nullable'],
 
-            'user.mparent_name' => [],
+            'user.mparent_name' => ['nullable'],
             'user.mparent_number' => ['unique:users,mparent_number'],
-            'user.mparent_occupation' => [],
-            'user.mparent_address' => [],
+            'user.mparent_occupation' => ['nullable'],
+            'user.mparent_address' => ['nullable'],
 
-            'user.fparent_name' => [],
+            'user.fparent_name' => ['nullable'],
             'user.fparent_number' => ['unique:users,fparent_number'],
-            'user.fparent_occupation' => [],
-            'user.fparent_address' => [],
+            'user.fparent_occupation' => ['nullable'],
+            'user.fparent_address' => ['nullable'],
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];

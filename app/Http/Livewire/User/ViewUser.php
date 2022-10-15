@@ -9,15 +9,20 @@ class ViewUser extends ModalComponent
 {
     public $user;
 
+    public $gender;
+    public $genderm = 'Male';
+    public $genderf = 'Female';
+    public $gendero = 'Rather not say';
+
     protected function rules()
     {
         return [
             // personal info
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
-            'user.middlename' => ['required'],
+            'user.middlename' => ['nullable'],
             'user.email' => ['required', 'email', 'unique:users,email, '.$this->user->id],
-            'user.suffix' => ['required'],
+            'user.suffix' => ['nullable'],
             'user.birthdate' => ['required'],
             'user.birthplace' => ['required'],
             'user.religion' => ['required'],
