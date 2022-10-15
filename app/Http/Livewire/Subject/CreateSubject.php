@@ -63,7 +63,7 @@ class CreateSubject extends ModalComponent
     public function submit()
     {
         
-        $tst =Subject::create([
+        Subject::create([
             'name' => $this->subject['name'],
             'subject_code' => $this->subject['subject_code'],
 
@@ -71,8 +71,6 @@ class CreateSubject extends ModalComponent
             'grade_level_id' => $this->grade_level,
 
         ]);
-
-        // dd($tst);
 
         $this->closeModal();
 

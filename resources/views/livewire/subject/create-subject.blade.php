@@ -1,5 +1,5 @@
 <div wire:ignore.self>
-    <x-card title="Create form">
+    <x-card title="Create Subject">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
             <div class="col-span-6">
                 <x-input wire:model.defer="subject.name" label="Name" placeholder="Thesis 1" />

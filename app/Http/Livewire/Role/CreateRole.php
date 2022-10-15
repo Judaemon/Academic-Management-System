@@ -82,7 +82,7 @@ class CreateRole extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_user')) {
+        if (!auth()->user()->can('create_role')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'

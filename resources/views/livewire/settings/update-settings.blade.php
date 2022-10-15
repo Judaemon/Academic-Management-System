@@ -21,6 +21,20 @@
             <li>
                 <x-input wire:model.defer="setting.address" label="School address" placeholder="School address" />
             </li>
+
+            <li>
+                <x-select
+                    label="Academic Year"
+                    wire:model.defer="setting.academic_year_id"
+                    placeholder="Select academic year"
+                >
+                    @foreach ($academic_years as $academic_year)
+                        <x-select.option 
+                        value="{{ $academic_year->id }}" 
+                        label="{{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}" />
+                    @endforeach
+                </x-select>
+            </li>
         </ul>
     </div>
 
