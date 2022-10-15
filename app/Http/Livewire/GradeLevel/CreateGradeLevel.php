@@ -5,10 +5,11 @@ namespace App\Http\Livewire\GradeLevel;
 use App\Models\GradeLevel;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CreateGradeLevel extends Component
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $modalCreate;
 
@@ -56,6 +57,8 @@ class CreateGradeLevel extends Component
 
     public function submit()
     {
+        $this->authorize('create_grade_level');
+
         if (!auth()->user()->can('create_grade_level')) {
             $this->dialog()->error(
                 $title = 'Error !!!',

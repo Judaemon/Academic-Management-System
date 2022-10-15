@@ -5,10 +5,11 @@ namespace App\Http\Livewire\GradeLevel;
 use App\Models\GradeLevel;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EditGradeLevel extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $grade_level;
 
@@ -51,7 +52,9 @@ class EditGradeLevel extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('edit_grade_level')) {
+        $this->authorize('update_grade_level');
+
+        if (!auth()->user()->can('update_grade_level')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'

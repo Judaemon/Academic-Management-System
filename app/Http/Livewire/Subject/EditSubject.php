@@ -7,10 +7,11 @@ use App\Models\Subject;
 use App\Rules\Teacher;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EditSubject extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $subject;
 
@@ -66,6 +67,8 @@ class EditSubject extends ModalComponent
 
     public function submit()
     {
+        $this->authorize('update_subject');
+
         $this->subject->teacher_id = $this->teacher;
         $this->subject->grade_level_id = $this->grade_level;
 

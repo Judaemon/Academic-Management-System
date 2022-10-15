@@ -5,10 +5,11 @@ namespace App\Http\Livewire\User;
 use App\Models\User;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EditUser extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $modalReadUpdateDelete;
 
@@ -112,6 +113,9 @@ class EditUser extends ModalComponent
 
     public function submit()
     {
+
+        $this->authorize('update_user');
+
         // Check if user has permission
         if (!auth()->user()->can('update_user')) {
             $this->dialog()->error(

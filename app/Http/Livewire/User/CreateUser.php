@@ -6,10 +6,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CreateUser extends Component
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $modalCreate;
 
@@ -140,7 +141,7 @@ class CreateUser extends Component
 
     public function submit()
     {
-        //dd($this->user['pwdid']);
+        $this->authorize('create_user');
 
         if (!auth()->user()->can('create_user')) {
             $this->dialog()->error(

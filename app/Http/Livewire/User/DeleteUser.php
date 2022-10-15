@@ -5,10 +5,11 @@ namespace App\Http\Livewire\User;
 use App\Models\User;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeleteUser extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $user;
 
@@ -46,6 +47,8 @@ class DeleteUser extends ModalComponent
 
     public function submit()
     {
+        $this->authorize('delete_user');
+
         // Check if user has permission
         if (!auth()->user()->can('delete_user')) {
             $this->dialog()->error(
