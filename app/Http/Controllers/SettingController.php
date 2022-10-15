@@ -9,7 +9,7 @@ class SettingController extends Controller
 {
     public function index()
     {
-        if (!auth()->user()->can('view_setting')) {
+        if (!$this->authorize('view_setting')) {
             return redirect('/dashboard');
         }
 

@@ -2,42 +2,48 @@
 
 namespace App\Http\Livewire\Settings;
 
+use App\Models\AcademicYear;
 use App\Models\Setting;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
 class UpdateSettings extends Component
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public Setting $setting;
-
+    public $academic_years;
+    
     protected $rules = [
         'setting.institute_name' => ['required'],
         'setting.institute_acronym' => ['required'],
         'setting.logo' => ['required'],
         'setting.address' => ['required'],
-        'setting.academic_year' => ['required'],
+        'setting.academic_year_id' => ['required'],
 
-        'setting.profile_editing' => ['required'],
-        'setting.notify_grades' => ['required'],
-        'setting.notify_payments' => ['required'],
-        'setting.notification_type' => ['required'],
+        'setting.profile_editing' => ['nullable'],
+        'setting.notify_grades' => ['nullable'],
+        'setting.notify_payments' => ['nullable'],
+        'setting.notification_type' => ['nullable'],
 
         'setting.email' => ['required'],
         'setting.mobile_1' => ['required'],
         'setting.mobile_2' => ['required'],
         'setting.telephone_1' => ['required'],
 
-        'setting.website_link' => [],
-        'setting.facebook_link' => [],
-        'setting.instagram_link' => [],
-        'setting.twitter_link' => [],
+        'setting.website_link' => ['nullable'],
+        'setting.facebook_link' => ['nullable'],
+        'setting.instagram_link' => ['nullable'],
+        'setting.twitter_link' => ['nullable'],
     ];
 
     public function mount()
     {
         $this->setting = Setting::firstOrFail();
+        
+        $this->setting->academic_year_id = (string)$this->setting->academic_year_id;
+        $this->academic_years = AcademicYear::orderBy('id', 'desc')->take(5)->get();
     }
 
     public function render()
@@ -48,6 +54,7 @@ class UpdateSettings extends Component
     public function save(): void
     {
         $this->validate();
+        // dd($this->);
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -68,21 +75,15 @@ class UpdateSettings extends Component
     {
         cache()->forget('setting');
 
-        // Check if user has permission
-        if (!auth()->user()->can('update_setting')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->validate();
-    
-            $this->setting->save();
-    
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Refresh the page to see it take effect.'
-            );
-        }
+        $this->authorize('update_setting');
+
+        $this->validate();
+
+        $this->setting->save();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Refresh the page to see it take effect.'
+        );
     }
 }
