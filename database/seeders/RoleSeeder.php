@@ -47,6 +47,7 @@ class RoleSeeder extends Seeder
             'edit_fee',
             'delete_fee',
 
+            'view_payments',
             'create_payment',
             'read_payment',
             'delete_payment',
