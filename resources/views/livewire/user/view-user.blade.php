@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4">
         <div class="col-span-12">
                 <!-- personal information -->
-                    <x-card title="I. PERSONAL INFORMATION">Fill-out the necessary fields.</x-card>
+                    <h1><strong>I. PERSONAL INFORMATION</strong></h1>
                 </div>
 
                 <div class="col-span-4">
@@ -54,7 +54,7 @@
 
                 <!-- physical information -->
                 <div class="col-span-12"> 
-                    <x-card title="II. PHYSICAL INFORMATION">Fill-out the necessary fields.</x-card>
+                    <h1><strong>II. PHYSICAL INFORMATION</strong></h1>
                 </div>
 
                 <div class="col-span-4">
@@ -67,7 +67,7 @@
 
                 <!-- contact information -->
                 <div class="col-span-12"> 
-                    <x-card title="III. CONTACT INFORMATION">Fill-out the necessary fields.</x-card>
+                    <h1><strong>III. CONTACT INFORMATION</strong></h1>
                 </div>
 
                 <div class="col-span-4">
@@ -85,7 +85,7 @@
 
                 <!-- educational background -->
                 <div class="col-span-12"> 
-                    <x-card title="IV. EDUCATIONAL BACKGROUND">Fill-out the necessary fields.</x-card>
+                    <h1><strong>IV. EDUCATIONAL BACKGROUND</strong></h1>
                 </div>
 
                 <div class="col-span-4">
@@ -110,7 +110,7 @@
 
                 <!-- academic information -->
                 <div class="col-span-12"> 
-                    <x-card title="V. ACADEMIC INFORMATION">Fill-out the necessary fields.</x-card>
+                    <h1><strong>V. ACADEMIC INFORMATION</strong></h1>
                 </div>
 
                 <div class="col-span-6">
@@ -126,12 +126,12 @@
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly value="{{ $user->public }}" label="Public" placeholder="" />
+                    <x-input readonly value="{{ $user->public_id }}" label="Public" placeholder="" />
                 </div>
 
                 <!-- government beneficiary -->
                 <div class="col-span-12"> 
-                    <x-card title="VI. GOVERNMENT BENEFICIARY">If yes, please specify.</x-card>
+                    <h1><strong>VI. GOVERNMENT BENEFICIARY</strong></h1>
                 </div>
 
                 <div class="col-span-4">
@@ -140,7 +140,7 @@
 
                 <!-- guardian information -->
                 <div class="col-span-12"> 
-                    <x-card title="VII. GUARDIAN INFORMATION">Fill-out the necessary fields.</x-card>
+                    <h1><strong>VII. GUARDIAN INFORMATION</strong></h1>
                 </div>
 
                 <div class="col-span-4">
@@ -165,7 +165,7 @@
 
                 <!-- parents information -->
                 <div class="col-span-12"> 
-                    <x-card title="VIII. PARENTS INFORMATION">Fill-out the necessary fields.</x-card>
+                    <h1><strong>VIII. PARENTS INFORMATION</strong></h1>
                 </div>
 
                 <div class="col-span-12"> 
@@ -209,7 +209,7 @@
 
                 <!-- user password -->
                 <div class="col-span-12"> 
-                    <x-card title="PASSWORD">Enter User Password</x-card>
+                    <h1><strong>PASSWORD</strong></h1>
                 </div>
 
                 <div class="col-span-4">

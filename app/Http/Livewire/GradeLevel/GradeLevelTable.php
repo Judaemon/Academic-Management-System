@@ -26,7 +26,7 @@ class GradeLevelTable extends DataTableComponent
                 ->sortable(),
         ];
 
-        if (auth()->user()->can('read_grade_levels') || auth()->user()->can('update_grade_levels') || auth()->user()->can('delete_grade_levels')) {
+        if (auth()->user()->can('read_grade_level') || auth()->user()->can('update_grade_level') || auth()->user()->can('delete_grade_level')) {
             array_push($columns, Column::make("Actions", "id")->view('livewire.grade-level.actions-col'));
         }
 

@@ -9,15 +9,17 @@ class ViewUser extends ModalComponent
 {
     public $user;
 
+    public $gender;
+
     protected function rules()
     {
         return [
             // personal info
             'user.firstname' => ['required'],
             'user.lastname' => ['required'],
-            'user.middlename' => ['required'],
+            'user.middlename' => ['nullable'],
             'user.email' => ['required', 'email', 'unique:users,email, '.$this->user->id],
-            'user.suffix' => ['required'],
+            'user.suffix' => ['nullable'],
             'user.birthdate' => ['required'],
             'user.birthplace' => ['required'],
             'user.religion' => ['required'],
@@ -45,7 +47,7 @@ class ViewUser extends ModalComponent
             'user.lrn' => ['nullable', 'lrn', 'unique:users,lrn, '.$this->user->id],
             'user.esc' => ['nullable', 'esc', 'unique:users,esc, '.$this->user->id],
             'user.qvr' => ['nullable', 'qvr', 'unique:users,qvr, '.$this->user->id],
-            'user.public' => ['nullable', 'public', 'unique:users,public, '.$this->user->id],
+            'user.public_id' => ['nullable', 'public', 'unique:users,public_id, '.$this->user->id],
 
             // beneficiary, guardian, and parents info
             'user.beneficiary' => ['nullable'],

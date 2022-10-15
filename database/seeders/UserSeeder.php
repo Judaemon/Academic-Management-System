@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             'lrn' => 'QWER1234',
             'esc' => 'ZXCV1234',
             'qvr' => 'HJKL1234',
-            'public' => 'UIOP1234',
+            'public_id' => 'UIOP1234',
             'beneficiary' => 'Juan Dela Cruz',
             'guardian_name' => 'John Doe',
             'guardian_number' => '09176820722',

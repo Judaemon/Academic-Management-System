@@ -3,29 +3,28 @@
 namespace App\Http\Livewire\GradeLevel;
 
 use App\Models\GradeLevel;
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateGradeLevel extends Component
+class CreateGradeLevel extends ModalComponent
 {
-    use Actions;
-
-    public $modalCreate;
+    use AuthorizesRequests, Actions;
 
     public $grade_level;
 
-    public function mount()
-    {
-        $this->grade_level['name'] = null;
-    }
+    public $name;
 
-    // https://laravel-livewire.com/docs/2.x/input-validation
-    // error messaged should be changed
     protected function rules()
     {
         return [
-            'grade_level.name' => ['required'],
+            'name' => ['required'],
         ];
+    }
+
+    public function mount(GradeLevel $grade_level)
+    {
+        $this->grade_level = $grade_level;
     }
 
     public function render()
@@ -36,8 +35,6 @@ class CreateGradeLevel extends Component
     public function save(): void
     {
         $this->validate();
-
-        $this->modalCreate = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -56,6 +53,8 @@ class CreateGradeLevel extends Component
 
     public function submit()
     {
+        $this->authorize('create_grade_level');
+
         if (!auth()->user()->can('create_grade_level')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
@@ -63,11 +62,13 @@ class CreateGradeLevel extends Component
             );
         } else {
             GradeLevel::create([
-                'name' => $this->grade_level['name'],
+                'name' => $this->name,
             ]);
     
             $this->emit('refreshDatatable');
     
+            $this->closeModal();
+
             $this->reset();
             
             $this->dialog()->success(
@@ -77,8 +78,8 @@ class CreateGradeLevel extends Component
         }
     }
 
-    public function closeModal()
+    public static function modalMaxWidth(): string
     {
-        $this->modalCreate = false;
+        return 'md';
     }
 }

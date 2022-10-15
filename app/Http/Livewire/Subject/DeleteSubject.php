@@ -5,10 +5,11 @@ namespace App\Http\Livewire\Subject;
 use App\Models\Subject;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeleteSubject extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $subject;
 
@@ -46,6 +47,8 @@ class DeleteSubject extends ModalComponent
 
     public function submit()
     {
+        $this->authorize('delete_subject');
+
         // Check if user has permission
         if (!auth()->user()->can('delete_subject')) {
             $this->dialog()->error(

@@ -46,7 +46,7 @@ return new class extends Migration
             $table->string('lrn')->unique()->nullable();
             $table->string('esc')->unique()->nullable();
             $table->string('qvr')->unique()->nullable();
-            $table->string('public')->unique()->nullable();
+            $table->string('public_id')->unique()->nullable();
 
             $table->string('grade_level_id')->nullable();
 

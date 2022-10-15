@@ -7,10 +7,11 @@ use App\Models\Subject;
 use App\Rules\Teacher;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CreateSubject extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $subject;
 
@@ -62,7 +63,6 @@ class CreateSubject extends ModalComponent
 
     public function submit()
     {
-        
         Subject::create([
             'name' => $this->subject['name'],
             'subject_code' => $this->subject['subject_code'],

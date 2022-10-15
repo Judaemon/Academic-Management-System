@@ -38,7 +38,7 @@ class User extends Authenticatable
         'lrn',
         'esc',
         'qvr',
-        'public',
+        'public_id',
         'beneficiary',
         'guardian_name',
         'guardian_number',

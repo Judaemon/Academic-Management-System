@@ -4,112 +4,177 @@ namespace App\Http\Livewire\User;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateUser extends Component
+class CreateUser extends ModalComponent
 {
-    use Actions;
-
-    public $modalCreate;
+    use AuthorizesRequests, Actions;
 
     public $user;
+    
+    public $firstname;
+    public $lastname;
+    public $middlename;
+    public $email;
+    public $suffix;
+    public $birthdate;
+    public $birthplace;
+    public $religion;
+    public $gender;
+    public $mothertongue;
+    public $nationality;
+    public $pwdid;
 
+    public $height;
+    public $weight;
+
+    public $mobilenumber;
+    public $address;
+
+    public $school_kinder;
+    public $school_kindergrad;
+    public $school_elementary;
+    public $school_elementarygrad;
+    public $school_juniorhigh;
+
+    public $lrn;
+    public $esc;
+    public $qvr;
+    public $public_id;
+
+    public $beneficiary;
+
+    public $guardian_name;
+    public $guardian_number;
+    public $guardian_occupation;
+    public $guardian_address;
+    public $guardian_relationship;
+
+    public $mparent_name;
+    public $mparent_number;
+    public $mparent_occupation;
+    public $mparent_address;
+
+    public $fparent_name;
+    public $fparent_number;
+    public $fparent_occupation;
+    public $fparent_address;
+
+    public $password;
+    
     protected function rules()
     {
         return [
             // personal info
-            'user.firstname' => ['required'],
-            'user.lastname' => ['required'],
-            'user.email' => ['required', 'unique:users,email'],
-            'user.firstname' => ['required'],
-            'user.lastname' => ['required'],
-            'user.middlename' => ['required'],
-            'user.suffix' => ['required'],
-            'user.birthdate' => ['required'],
-            'user.birthplace' => ['required'],
-            'user.religion' => ['required'],
-            'user.gender' => ['required'],
-            'user.mothertongue' => ['required'],
-            'user.nationality' => ['required'],
-            'user.pwdid' => ['unique:users,pwdid'],
+            'email' => ['required', 'unique:users,email'],
+            'firstname' => ['required'],
+            'lastname' => ['required'],
+            'middlename' => ['nullable'],
+            'suffix' => ['nullable'],
+            'birthdate' => ['required'],
+            'birthplace' => ['required'],
+            'religion' => ['required'],
+            'gender' => ['required'],
+            'mothertongue' => ['required'],
+            'nationality' => ['required'],
+            'pwdid' => ['unique:users,pwdid'],
 
             // physical info
-            'user.height' => [],
-            'user.weight' => [],
+            'height' => ['nullable'],
+            'weight' => ['nullable'],
 
             // contact info
-            'user.mobilenumber' => ['required', 'unique:users,mobilenumber'],
-            'user.address' => ['required'],
+            'mobilenumber' => ['required', 'unique:users,mobilenumber'],
+            'address' => ['required'],
 
             // educational background
-            'user.school_kinder' => [],
-            'user.school_kindergrad' => [],
-            'user.school_elementary' => [],
-            'user.school_elementarygrad' => [],
-            'user.school_juniorhigh' => [],
+            'school_kinder' => ['nullable'],
+            'school_kindergrad' => ['nullable'],
+            'school_elementary' => ['nullable'],
+            'school_elementarygrad' => ['nullable'],
+            'school_juniorhigh' => ['nullable'],
 
             // academic info
-            'user.lrn' => ['unique:users,lrn'],
-            'user.esc' => ['unique:users,esc'],
-            'user.qvr' => ['unique:users,qvr'],
-            'user.public' => ['unique:users,public'],
+            'lrn' => ['unique:users,lrn'],
+            'esc' => ['unique:users,esc'],
+            'qvr' => ['unique:users,qvr'],
+            'public_id' => ['unique:users,public_id'],
 
             // beneficiary, guardian, and parents info
-            'user.beneficiary' => [],
+            'beneficiary' => ['nullable'],
 
-            'user.guardian_name' => [],
-            'user.guardian_number' => ['unique:users,guardian_number'],
-            'user.guardian_occupation' => [],
-            'user.guardian_address' => [],
-            'user.guardian_relationship' => [],
+            'guardian_name' => ['nullable'],
+            'guardian_number' => ['unique:users,guardian_number'],
+            'guardian_occupation' => ['nullable'],
+            'guardian_address' => ['nullable'],
+            'guardian_relationship' => ['nullable'],
 
-            'user.mparent_name' => [],
-            'user.mparent_number' => ['unique:users,mparent_number'],
-            'user.mparent_occupation' => [],
-            'user.mparent_address' => [],
+            'mparent_name' => ['nullable'],
+            'mparent_number' => ['unique:users,mparent_number'],
+            'mparent_occupation' => ['nullable'],
+            'mparent_address' => ['nullable'],
 
-            'user.fparent_name' => [],
-            'user.fparent_number' => ['unique:users,fparent_number'],
-            'user.fparent_occupation' => [],
-            'user.fparent_address' => [],
-            // 'user.password' => ['required', 'min:8', 'confirmed'],
+            'fparent_name' => ['nullable'],
+            'fparent_number' => ['unique:users,fparent_number'],
+            'fparent_occupation' => ['nullable'],
+            'fparent_address' => ['nullable'],
+            // 'password' => ['required', 'min:8'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
     public function mount(User $user)
     {
-        $this->pwdid = null;
-        $this->height = null;
-        $this->weight = null;
+        $this->firstname = $user->firstname;
+        $this->lastname = $user->lastname;
+        $this->email = $user->email;
+        $this->middlename = $user->middlename;
+        $this->suffix = $user->suffix;
+        $this->birthdate = $user->birthdate;
+        $this->birthplace = $user->birthplace;
+        $this->religion = $user->religion;
+        $this->gender = $user->gender;
+        $this->mothertongue = $user->mothertongue;
+        $this->nationality = $user->nationality;
+        $this->pwdid = $user->pwdid;
 
-        $this->school_kinder = null;
-        $this->school_kindergrad = null;
-        $this->school_elementary = null;
-        $this->school_elementarygrad = null;
-        $this->school_juniorhigh = null;
+        // physical info
+        $this->height = $user->height;
+        $this->weight = $user->weight;
 
-        $this->lrn = null;
-        $this->esc = null;
-        $this->qvr = null;
-        $this->beneficiary = null;
+        // contact info
+        $this->mobilenumber = $user->mobilenumber;
+        $this->address = $user->address;
 
-        $this->guardian_name = null;
-        $this->guardian_number = null;
-        $this->guardian_occupation = null;
-        $this->guardian_address = null;
-        $this->guardian_relationship = null;
+        // educational background
+        $this->school_kinder = $user->school_kinder;
+        $this->school_kindergrad = $user->school_kindergrad;
+        $this->school_elementary = $user->school_elementary;
+        $this->school_elementarygrad = $user->school_elementarygrad;
 
-        $this->mparent_name = null;
-        $this->mparent_number = null;
-        $this->mparent_occupation = null;
-        $this->mparent_address = null;
+        // academic info
+        $this->lrn = $user->lrn;
+        $this->esc = $user->esc;
+        $this->qvr = $user->qvr;
+        $this->public_id = $user->public_id;
 
-        $this->fparent_name = null;
-        $this->fparent_number = null;
-        $this->fparent_occupation = null;
-        $this->fparent_address = null;
+        // beneficiary, guardian, and parents info
+        $this->beneficiary = $user->beneficiary;
+        $this->guardian_name = $user->guardian_name;
+        $this->guardian_number = $user->guardian_number;
+        $this->guardian_occupation = $user->guardian_occupation;
+        $this->guardian_address = $user->guardian_address;
+        $this->guardian_relationship = $user->guardian_relationship;
+        $this->mparent_name = $user->mparent_name;
+        $this->mparent_number = $user->mparent_number;
+        $this->mparent_occupation = $user->mparent_occupation;
+        $this->mparent_address = $user->mparent_address;
+        $this->fparent_name = $user->fparent_name;
+        $this->fparent_number = $user->fparent_number;
+        $this->fparent_occupation = $user->fparent_occupation;
+        $this->fparent_address = $user->fparent_address;
     }
 
     public function render()
@@ -121,11 +186,9 @@ class CreateUser extends Component
     {
         $this->validate();
 
-        $this->modalCreate = false;
-
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create the user?',
+            'description' => 'Create the User?',
             'icon'        => 'question',
             'accept'      => [
                 'label'  => 'Yes, create it',
@@ -140,82 +203,73 @@ class CreateUser extends Component
 
     public function submit()
     {
-        //dd($this->user['pwdid']);
+        $this->authorize('create_user');
 
-        if (!auth()->user()->can('create_user')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            User::create([
-                // personal info
-                'firstname' => $this->user['firstname'],
-                'lastname' => $this->user['lastname'],
-                'email' => $this->user['email'],
-                'password' => Hash::make($this->user['password']),
-                'middlename' => $this->user['middlename'],
-                'suffix' => $this->user['suffix'],
-                'birthdate' => $this->user['birthdate'],
-                'birthplace' => $this->user['birthplace'],
-                'religion' => $this->user['religion'],
-                'gender' => $this->user['gender'],
-                'mothertongue' => $this->user['mothertongue'],
-                'nationality' => $this->user['nationality'],
-                'pwdid' => $this->user['pwdid'],
+        $user =User::create([
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastname,
+                'email' => $this->email,
+                'password' => Hash::make($this->password),
+                'middlename' => $this->middlename,
+                'suffix' => $this->suffix,
+                'birthdate' => $this->birthdate,
+                'birthplace' => $this->birthplace,
+                'religion' => $this->religion,
+                'gender' => $this->gender,
+                'mothertongue' => $this->mothertongue,
+                'nationality' => $this->nationality,
+                'pwdid' => $this->pwdid,
 
                 // physical info
-                'height' => $this->user['height'],
-                'weight' => $this->user['weight'],
+                'height' => $this->height,
+                'weight' => $this->weight,
 
                 // contact info
-                'mobilenumber' => $this->user['mobilenumber'],
-                'address' => $this->user['address'],
+                'mobilenumber' => $this->mobilenumber,
+                'address' => $this->address,
 
                 // educational background
-                'school_kinder' => $this->user['school_kinder'],
-                'school_kindergrad' => $this->user['school_kindergrad'],
-                'school_elementary' => $this->user['school_elementary'],
-                'school_elementarygrad' => $this->user['school_elementarygrad'],
+                'school_kinder' => $this->school_kinder,
+                'school_kindergrad' => $this->school_kindergrad,
+                'school_elementary' => $this->school_elementary,
+                'school_elementarygrad' => $this->school_elementarygrad,
 
                 // academic info
-                'lrn' => $this->user['lrn'],
-                'esc' => $this->user['esc'],
-                'qvr' => $this->user['qvr'],
-                'public' => $this->user['public'],
+                'lrn' => $this->lrn,
+                'esc' => $this->esc,
+                'qvr' => $this->qvr,
+                'public_id' => $this->public_id,
 
                 // beneficiary, guardian, and parents info
-                'beneficiary' => $this->user['beneficiary'],
-                'guardian_name' => $this->user['guardian_name'],
-                'guardian_number' => $this->user['guardian_number'],
-                'guardian_occupation' => $this->user['guardian_occupation'],
-                'guardian_address' => $this->user['guardian_address'],
-                'guardian_relationship' => $this->user['guardian_relationship'],
-                'mparent_name' => $this->user['mparent_name'],
-                'mparent_number' => $this->user['mparent_number'],
-                'mparent_occupation' => $this->user['mparent_occupation'],
-                'mparent_address' => $this->user['mparent_address'],
-                'fparent_name' => $this->user['fparent_name'],
-                'fparent_number' => $this->user['fparent_number'],
-                'fparent_occupation' => $this->user['fparent_occupation'],
-                'fparent_address' => $this->user['fparent_address'],
-                
-                // 'account_type' => $this->account_type,
-            ]);
-    
-            $this->emit('refreshDatatable');
-    
-            //$this->reset();
-            
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'User successfully Created.'
-            );
-        }
-    }
+                'beneficiary' => $this->beneficiary,
+                'guardian_name' => $this->guardian_name,
+                'guardian_number' => $this->guardian_number,
+                'guardian_occupation' => $this->guardian_occupation,
+                'guardian_address' => $this->guardian_address,
+                'guardian_relationship' => $this->guardian_relationship,
+                'mparent_name' => $this->mparent_name,
+                'mparent_number' => $this->mparent_number,
+                'mparent_occupation' => $this->mparent_occupation,
+                'mparent_address' => $this->mparent_address,
+                'fparent_name' => $this->fparent_name,
+                'fparent_number' => $this->fparent_number,
+                'fparent_occupation' => $this->fparent_occupation,
+                'fparent_address' => $this->fparent_address,
+                // 'password' => $this->password,
+        ]);
 
-    public function closeModal()
+        $this->closeModal();
+
+        $this->emit('refreshDatatable');
+        
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'User successfully Created.'
+        );
+    }
+    
+    public static function modalMaxWidth(): string
     {
-        $this->modalCreate = false;
+        return '5xl';
     }
 }
