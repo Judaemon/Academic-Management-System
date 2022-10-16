@@ -21,7 +21,8 @@ class PermissionSeeder extends Seeder
     {
         $user_permissions = [
             'view_users',
-            'create_user',
+            'create_student',
+            'create_account',
             'read_user',
             'update_user',
             'delete_user',

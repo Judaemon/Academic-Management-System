@@ -34,7 +34,7 @@ class EditUser extends ModalComponent
             'user.gender' => ['required'],
             'user.mothertongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwdid' => ['unique:users,pwdid'],
+            'user.pwdid' => ['nullable', 'unique:users,pwdid'],
 
             // physical info
             'user.height' => ['nullable'],
@@ -52,27 +52,27 @@ class EditUser extends ModalComponent
             'user.school_juniorhigh' => ['nullable'],
 
             // academic info
-            'user.lrn' => ['unique:users,lrn'],
-            'user.esc' => ['unique:users,esc'],
-            'user.qvr' => ['unique:users,qvr'],
-            'user.public_id' => ['unique:users,public_id'],
+            'user.lrn' => ['nullable', 'unique:users,lrn'],
+            'user.esc' => ['nullable', 'unique:users,esc'],
+            'user.qvr' => ['nullable', 'unique:users,qvr'],
+            'user.public_id' => ['nullable', 'unique:users,public_id'],
 
             // beneficiary, guardian, and parents info
             'user.beneficiary' => ['nullable'],
 
-            'user.guardian_name' => ['nullable'],
-            'user.guardian_number' => ['unique:users,guardian_number'],
+            'user.guardian_name' => ['required'],
+            'user.guardian_number' => ['required','unique:users,guardian_number'],
             'user.guardian_occupation' => ['nullable'],
-            'user.guardian_address' => ['nullable'],
-            'user.guardian_relationship' => ['nullable'],
+            'user.guardian_address' => ['required'],
+            'user.guardian_relationship' => ['required'],
 
             'user.mparent_name' => ['nullable'],
-            'user.mparent_number' => ['unique:users,mparent_number'],
+            'user.mparent_number' => ['nullable', 'unique:users,mparent_number'],
             'user.mparent_occupation' => ['nullable'],
             'user.mparent_address' => ['nullable'],
 
             'user.fparent_name' => ['nullable'],
-            'user.fparent_number' => ['unique:users,fparent_number'],
+            'user.fparent_number' => ['nullable', 'unique:users,fparent_number'],
             'user.fparent_occupation' => ['nullable'],
             'user.fparent_address' => ['nullable'],
             // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]

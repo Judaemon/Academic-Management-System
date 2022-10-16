@@ -57,11 +57,11 @@ return new class extends Migration
             $table->string('beneficiary')->nullable();
 
             // guardian information
-            $table->string('guardian_name')->nullable();
-            $table->string('guardian_number')->unique()->nullable();
+            $table->string('guardian_name');
+            $table->string('guardian_number')->unique();
             $table->string('guardian_occupation')->nullable();
-            $table->string('guardian_address')->nullable();
-            $table->string('guardian_relationship')->nullable();
+            $table->string('guardian_address');
+            $table->string('guardian_relationship');
 
             // parent information
             $table->string('mparent_name')->nullable();
@@ -72,6 +72,12 @@ return new class extends Migration
             $table->string('fparent_number')->unique()->nullable();
             $table->string('fparent_occupation')->nullable();
             $table->string('fparent_address')->nullable();
+
+            // for account information
+            $table->string('pag_ibig')->unique()->nullable();
+            $table->string('philhealth')->unique()->nullable();
+            $table->string('sss')->unique()->nullable();
+            $table->string('tin')->unique()->nullable();
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

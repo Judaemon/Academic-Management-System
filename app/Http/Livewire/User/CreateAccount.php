@@ -12,8 +12,6 @@ class CreateAccount extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $account;
-    
     public $firstname;
     public $lastname;
     public $middlename;
@@ -30,10 +28,15 @@ class CreateAccount extends ModalComponent
     public $height;
     public $weight;
 
+    public $beneficiary;
+
+    public $pag_ibig;
+    public $philhealth;
+    public $sss;
+    public $tin;
+
     public $mobilenumber;
     public $address;
-
-    public $password;
     
     protected function rules()
     {
@@ -50,17 +53,25 @@ class CreateAccount extends ModalComponent
             'gender' => ['required'],
             'mothertongue' => ['required'],
             'nationality' => ['required'],
-            'pwdid' => ['unique:users,pwdid'],
+            'pwdid' => ['nullable', 'unique:users,pwdid'],
 
             // physical info
             'height' => ['nullable'],
             'weight' => ['nullable'],
 
+            // beneficiary
+            'beneficiary' => ['nullable'],
+
             // contact info
             'mobilenumber' => ['required', 'unique:users,mobilenumber'],
             'address' => ['required'],
 
-            // 'password' => ['required', 'min:8'],
+            // additional account info
+            'pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
+            'philhealth' => ['nullable', 'unique:users,philhealth'],
+            'sss' => ['nullable', 'unique:users,sss'],
+            'tin' => ['nullable', 'unique:users,tin'],
+
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
@@ -91,7 +102,7 @@ class CreateAccount extends ModalComponent
 
     public function submit()
     {
-        $this->authorize('create_user');
+        $this->authorize('create_account');
 
         $user =User::create([
                 'firstname' => $this->firstname,
@@ -112,11 +123,18 @@ class CreateAccount extends ModalComponent
                 'height' => $this->height,
                 'weight' => $this->weight,
 
+                // beneficiary
+                'beneficiary' => $this->beneficiary,
+
                 // contact info
                 'mobilenumber' => $this->mobilenumber,
                 'address' => $this->address,
 
-                // 'password' => $this->password,
+                // additional account info
+                'pag_ibig' => $this->pag_ibig,
+                'philhealth' => $this->philhealth,
+                'sss' => $this->sss,
+                'tin' => $this->tin,
         ]);
 
         $this->closeModal();

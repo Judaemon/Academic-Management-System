@@ -51,11 +51,11 @@ class ViewUser extends ModalComponent
 
             // beneficiary, guardian, and parents info
             'user.beneficiary' => ['nullable'],
-            'user.guardian_name' => ['nullable'],
-            'user.guardian_number' => ['nullable', 'guardian_number', 'unique:users,guardian_number, '.$this->user->id],
+            'user.guardian_name' => ['required'],
+            'user.guardian_number' => ['required','guardian_number', 'unique:users,guardian_number'.$this->user->id],
             'user.guardian_occupation' => ['nullable'],
-            'user.guardian_address' => ['nullable'],
-            'user.guardian_relationship' => ['nullable'],
+            'user.guardian_address' => ['required'],
+            'user.guardian_relationship' => ['required'],
             'user.mparent_name' => ['nullable'],
             'user.mparent_number' => ['nullable', 'mparent_number', 'unique:users,mparent_number, '.$this->user->id],
             'user.mparent_occupation' => ['nullable'],
