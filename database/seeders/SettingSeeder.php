@@ -18,14 +18,25 @@ class SettingSeeder extends Seeder
     {
         $setting = [
             [
-                'system_name' => 'CAIMS Name',
-                'school_name' => 'CAIM School Name',
-                'logo' => '/images/system-assets/logo/CAIMS_Logo_small.png',
-                'address' => 'School Address',
+                'institute_name' => 'International State College of the Philippines',
+                'institute_acronym' => 'ISCP AIMS',
+                'logo' => 'images\system-assets\default\logo\iscp_logo.png',
+                'address' => 'Biringan Philippines',
+                'academic_year_id' => '1',
                 
-                'mobile_1' => '1234567890',
-                'mobile_2' => '0987654321',
-                'telephone_1' => '1029384756',
+                'email' => 'iscp@gmail.com',
+                'mobile_1' => '0968-227-6795',
+                'mobile_2' => '0917-895-0544',
+
+                'profile_editing' => false,
+                'notify_grades' => false,
+                'notify_payments' => false,
+                'notification_type' => "none",
+                
+                'website_link' => 'google.com',
+                'facebook_link' => 'facebook.com',
+                'instagram_link' => 'instagram.com',
+                'twitter_link' => 'twitter.com',
                 
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),

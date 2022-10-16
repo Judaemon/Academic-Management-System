@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Role;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class UserTable extends DataTableComponent
 {
@@ -13,26 +16,47 @@ class UserTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+    }
 
-        // $this->setSearchDebounce(1000);
+    public function filters(): array
+    {
+        $option = Role::query()
+            ->pluck('name')
+            ->toArray();
+
+        $option = array_combine($option, $option);
+
+        return [
+            SelectFilter::make('Role')
+                ->options($option)
+                ->filter(function(Builder $builder, string $value) {
+                    $builder->role($value);
+                }),
+        ];
     }
 
     public function columns(): array
     {
-        return [
-            Column::make("Id", "id")
+        $columns = [
+            Column::make("ID", "id")
                 ->sortable()
                 ->searchable(),
-            Column::make("Firstname", "firstname")
+            Column::make("First Name", "firstname")
                 ->sortable()
                 ->searchable(),
-            Column::make("Lastname", "lastname")
+            Column::make("Last Name", "lastname")
                 ->sortable()
                 ->searchable(),
             Column::make("Email", "email")
                 ->sortable()
                 ->searchable(),
-            Column::make("Actions", "id")->view('livewire.user.actions-col'),
         ];
+
+        // Check if user has permission
+        if ('read_user') {
+            array_push($columns, Column::make("Actions", "id")->view('livewire.user.actions-col'));
+        }
+
+        return $columns;
     }
 }

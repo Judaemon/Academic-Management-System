@@ -1,0 +1,159 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Permission;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class PermissionSeeder extends Seeder
+{
+    
+    // potential permissions
+    // access_admin
+    // access_academic
+    // access_accounting
+
+    // assign_role
+    // 
+    
+    public function run()
+    {
+        $user_permissions = [
+            'view_users',
+            'create_user',
+            'read_user',
+            'update_user',
+            'delete_user',
+        ];
+
+        foreach ($user_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $role_permissions = [
+            'view_roles',
+            'create_role',
+            'read_role',
+            'update_role',
+            'delete_role',
+        ];
+        
+        foreach ($role_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $setting_permissions = [
+            'view_setting',
+            'update_setting',
+        ];
+        
+        foreach ($setting_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $fee_permissions = [
+            'view_fees',
+            'create_fee',
+            'read_fee',
+            'edit_fee',
+            'delete_fee',
+        ];
+
+        foreach ($fee_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $payment_permissions = [
+            'view_payments',
+            'create_payment',
+            'read_payment',
+            'delete_payment',
+        ];
+
+        foreach ($payment_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $academic_year_permissions = [
+            'view_academic_years',
+            'create_academic_year',
+            'read_academic_year',
+            'update_academic_year',
+            'delete_academic_year',
+        ];
+        
+        foreach ($academic_year_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $grade_level_permissions = [
+            'view_grade_levels',
+            'create_grade_level',
+            'read_grade_level',
+            'update_grade_level',
+            'delete_grade_level',
+        ];
+        
+        foreach ($grade_level_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $section_permissions = [
+            'view_sections',
+            'create_section',
+            'read_section',
+            'update_section',
+            'delete_section',
+        ];
+        
+        foreach ($section_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        $subject_permissions = [
+            'view_subjects',
+            'create_subject',
+            'read_subject',
+            'update_subject',
+            'delete_subject',
+        ];
+        
+        foreach ($subject_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // $teacher_permissions = [
+        //     'view_grades',
+        //     'create_grade',
+        //     'read_grade',
+        //     'update_grade',
+        //     'delete_grade',
+
+        //     'view_sections',
+        //     'read_section',
+
+        //     'view_users',
+        //     'read_user',
+        // ];
+        
+        // foreach ($teacher_permissions as $permission) {
+        //     Permission::firstOrCreate(['name' => $permission]);
+        // }
+
+        // $student_permissions = [
+        //     'view_grades',
+        //     'read_grade',
+
+        //     'view_sections',
+        //     'read_section',
+
+        //     'view_users',
+        //     'read_user',
+        // ];
+        
+        // foreach ($student_permissions as $permission) {
+        //     Permission::firstOrCreate(['name' => $permission]);
+        // }
+    }
+}

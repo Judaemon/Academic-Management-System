@@ -28,6 +28,7 @@ module.exports = {
         // https://github.com/wire-elements/modal
         './vendor/wire-elements/modal/resources/views/*.blade.php',
         './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
     ],
     // Livewire Modal
     // https://github.com/wire-elements/modal/issues/150
@@ -49,6 +50,8 @@ module.exports = {
             },
         }),
         colors: {
+            iscp_primary: '#012560',
+            iscp_secondary: '#4ad0ee',
             transparent: 'transparent',
             white: '#ffffff',
             black: '#000000',
@@ -190,8 +193,11 @@ module.exports = {
                 0: "0",
                 xl: "36rem",
             },
+            // fontFamily: {
+            //     sans: ["Inter", ...defaultTheme.fontFamily.sans],
+            // },
             fontFamily: {
-                sans: ["Inter", ...defaultTheme.fontFamily.sans],
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },
     },
@@ -211,8 +217,10 @@ module.exports = {
         placeholderColor: ["focus"],
         borderColor: ["focus", "hover"],
         boxShadow: ["focus"],
+        scrollbar: ['rounded'],
     },
     plugins: [
-        require("@tailwindcss/forms")
+        require("@tailwindcss/forms"),
+        require('tailwind-scrollbar'),
     ],
 };

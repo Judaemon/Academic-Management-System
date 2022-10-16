@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
@@ -24,14 +13,30 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::view('about', 'about')->name('about');
+    Route::get('roles', [\App\Http\Controllers\RolesController::class, 'index'])->name('roles.index');
+
+    // user
+    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-    
-    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-    Route::put('settings', [\App\Http\Controllers\SettingController::class, 'update'])->name('setting.update');
 
+    // accounting
+    Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
+
+    Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
+
+    // academic
+    Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academic_year.index');
+
+    Route::get('sections', [\App\Http\Controllers\SectionController::class, 'index'])->name('sections.index');
+    
+    Route::get('subjects', [\App\Http\Controllers\SubjectController::class, 'index'])->name('subjects.index');
+
+    Route::get('grade-level', [\App\Http\Controllers\GradeLevelController::class, 'index'])->name('grade_level.index');
+
+    // idk ¯\_(ツ)_/¯
+    Route::view('about', 'about')->name('about');
 });

@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ setting('system_name') }}</title>
+    <link rel="icon" href="{{url(setting('logo'))}}" type="image/x-icon">
+
+    <title>{{ setting('institute_name') }}</title>
+
+    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     @wireUiScripts
 
@@ -16,7 +20,7 @@
 
     @livewireStyles
 </head>
-<body>
+<body wire:ignore.self>
     <!-- WireUI Dialog -->
     <x-dialog />
 
@@ -35,7 +39,7 @@
             @include('layouts.top-menu')
 
             <main class="h-full overflow-y-auto">
-                <div class="container px-6 mx-auto grid">
+                <div class="container p-4 mx-auto grid">
                     {{ $slot }}
                 </div>
             </main>

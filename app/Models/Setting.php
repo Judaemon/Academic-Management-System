@@ -10,13 +10,25 @@ class Setting extends Model
     use HasFactory;
 
     public $fillable = [
-        'system_name',
-        'school_name',
+        'institute_name',
+        'institute_acronym',
         'logo',
-        'address'
-        ,
+        'address',
+        'academic_year',
+
+        'profile_editing',
+        'notification_type',
+        'notify_grades',
+        'notify_payments',
+
+        'email',
         'mobile_1',
         'mobile_2',
         'telephone_1',
+
+        'website_link',
+        'facebook_link',
+        'instagram_link',
+        'twitter_link',
     ];
 }
