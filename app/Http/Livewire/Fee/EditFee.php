@@ -15,7 +15,6 @@ class EditFee extends ModalComponent
 
     public $fee;
     public $grade_levels;
-    public $card_title;
 
     public $fee_name;
     public $amount;

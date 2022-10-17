@@ -30,7 +30,7 @@ class DeleteAcademicYear extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this academic year?',
+            'description' => 'Delete Academic Year?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
