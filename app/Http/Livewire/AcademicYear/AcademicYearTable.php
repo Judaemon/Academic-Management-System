@@ -17,23 +17,39 @@ class AcademicYearTable extends DataTableComponent
 
     public function columns(): array
     {
-        $columns = [
+        return [
             Column::make("Id", "id")
-            ->searchable()
-                ->sortable(),
-            Column::make("Year", "start_year")
                 ->searchable()
                 ->sortable(),
-            Column::make("Year", "end_year")
+
+            Column::make("Start Date", "start_date")
                 ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->format(function($value) {
+                    return date('j \\ F Y', strtotime($value));
+                }),
+
+            Column::make("Number of School Days", "school_days")
+                ->searchable()
+                ->sortable()
+                ->format(function($value) {
+                    return $value.' days';
+                }),
+
+            Column::make("End Date", "end_date")
+                ->searchable()
+                ->sortable()
+                ->format(function($value) {
+                    if($value != NULL) {
+                        return date('j \\ F Y', strtotime($value));
+                    } else {
+                        return " ";
+                    }
+                }),
+                
+            Column::make("Actions", "id")
+                ->view('livewire.academic-year.actions-col'),
         ];
-
-        if (auth()->user()->can('read_academic_years') || auth()->user()->can('update_academic_years') || auth()->user()->can('delete_academic_years')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.academic-year.actions-col'));
-        }
-
-        return $columns;
     }
 
 }

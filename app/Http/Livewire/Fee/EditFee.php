@@ -14,6 +14,7 @@ class EditFee extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $fee;
+    public $grade_levels;
     public $card_title;
 
     public $fee_name;
@@ -23,6 +24,7 @@ class EditFee extends ModalComponent
     public function mount(Fee $fee)
     {
         $this->fee = $fee;
+        $this->grade_levels = GradeLevel::all();
 
         $this->card_title = "Edit ".$fee->fee_name;
 
@@ -42,9 +44,7 @@ class EditFee extends ModalComponent
 
     public function render()
     {
-        return view('livewire.fee.edit-fee', [
-            'grade_levels' => GradeLevel::all(),
-        ]);
+        return view('livewire.fee.edit-fee');
     }
 
     public function save(): void

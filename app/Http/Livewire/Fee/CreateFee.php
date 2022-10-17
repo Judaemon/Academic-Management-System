@@ -17,6 +17,8 @@ class CreateFee extends ModalComponent
     public $amount;
     public $grade_level_id;
 
+    public $grade_levels;
+
     protected function rules()
     {
         return [
@@ -26,11 +28,14 @@ class CreateFee extends ModalComponent
         ];
     }
 
+    public function mount()
+    {
+        $this->grade_levels = GradeLevel::all();
+    }
+
     public function render()
     {
-        return view('livewire.fee.create-fee', [
-            'grade_levels' => GradeLevel::all(),
-        ]);
+        return view('livewire.fee.create-fee');
     }
 
     public function save(): void
@@ -70,7 +75,7 @@ class CreateFee extends ModalComponent
             $title = 'Successful!',
             $description = 'School Fee successfully Created.'
         );
-    }
+    } 
 
     public static function modalMaxWidth(): string
     {

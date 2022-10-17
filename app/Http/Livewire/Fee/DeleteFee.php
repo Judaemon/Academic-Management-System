@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Fee;
 
-use App\Models\Fee;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use App\Models\Fee;
 
 class DeleteFee extends ModalComponent
 {

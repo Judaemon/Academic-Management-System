@@ -1,56 +1,34 @@
 <div wire:ignore.self>
-  <x-card title="Create School Fee">
-      <form wire:submit.prevent="save" class=>
-          <div class="grid grid-cols-1 gap-4">
-              <div class="col-span-4">
-                  <x-input 
-                    wire:model.defer="fee.fee_name" 
-                    label="Fee Name" 
-                    corner-hint="e.g.Tuition Fee, Miscellaneous Fee" 
-                  />
-              </div>
+    <x-card title="Create School Fee">
+        <form wire:submit.prevent="save">
+            <div class="grid grid-cols-1 gap-4">
+                <div class="col-span-4">
+                    <x-input label="Fee Name" corner-hint="e.g.Tuition Fee, Miscellaneous Fee" wire:model.defer="fee_name" />
+                </div>
 
-              <div class="col-span-4">
-                  <x-inputs.currency 
-                    label="Fee Amount" 
-                    corner-hint="Ex: 20000" 
-                    wire:model.defer="fee.amount" 
-                  />
-              </div>
+                <div class="col-span-4">
+                    <x-inputs.currency label="Fee Amount" corner-hint="Ex: 20000" wire:model.defer="amount" />
+                </div>
 
-              <div class="col-span-4">
-                  <x-select 
-                    label="Grade Level" 
-                    wire:model.defer="fee.grade_level_id"
-                    placeholder="Select grade level"
-                  >
-                      @foreach ($grade_levels as $grade_level)
-                          <x-select.option 
-                            label="{{ $grade_level->name }}"
-                            value="{{ $grade_level->id }}" 
-                          />    
-                      @endforeach
-                  </x-select>
-              </div>
-          </div>
+                <div class="col-span-4">
+                    <x-select 
+                        label="Grade Level" 
+                        placeholder="Select grade level"
+                        wire:model.defer="grade_level_id"
+                    >
+                        @foreach ($grade_levels as $grade_level)
+                            <x-select.option label="{{ $grade_level->name }}" value="{{ $grade_level->id }}" />    
+                        @endforeach
+                    </x-select>
+                </div>
+            </div>
 
-          <x-slot name="footer">
-              <div class="flex justify-end gap-x-4">
-                  <x-button 
-                    flat 
-                    label="Cancel" 
-                    wire:click="closeModal" 
-                    type="button"
-                  />
-
-                  <x-button 
-                    wire:click="save" 
-                    type="button" 
-                    primary 
-                    label="Save" 
-                  />
-              </div>
-          </x-slot>
-      </form>
-  </x-card>
+            <x-slot name="footer">
+                <div class="flex justify-end gap-x-4">
+                    <x-button flat label="Cancel" wire:click="closeModal" />
+                    <x-button wire:click.prevent="save" type="submit" primary label="Save" />
+                </div>
+            </x-slot>
+        </form>
+    </x-card>
 </div>
