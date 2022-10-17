@@ -17,28 +17,19 @@
             </div>
 
             <div class="col-span-4">
-              <x-native-select 
-                label="Select Academic Year" 
-                wire:model.defer="academic_year_id"
-              >
-                  @foreach ($academic_years as $academic_year)
-                      <option value="{{ $academic_year->id }}">
-                        {{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}
-                      </option>
-                  @endforeach
-              </x-native-select>
+              <x-select 
+              label="Academic Year" 
+              wire:model.defer="academic_year_id"
+              placeholder="Select academic year"
+            >
+                @foreach ($academic_years as $academic_year)
+                    <x-select.option 
+                      label="{{ date('j \\ F Y', strtotime($academic_year->start_year)) }} - {{ date('j \\ F Y', strtotime($academic_year->end_year)) }}"
+                      value="{{ $academic_year->id }}" 
+                    />    
+                @endforeach
+            </x-select>
           </div>
-
-            {{-- <div class="col-span-4">
-                <x-native-select 
-                  label="Select Grade Level" 
-                  wire:model.defer="grade_level_id
-                >
-                    @foreach ($grade_levels as $grade_level)
-                        <option value="{{ $grade_level->id }}">{{ $grade_level->??? }}</option>
-                    @endforeach
-                </x-native-select>
-            </div> --}}
         </div>
 
         <x-slot name="footer">

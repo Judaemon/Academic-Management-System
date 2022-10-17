@@ -17,26 +17,22 @@ class FeesTable extends DataTableComponent
 
     public function columns(): array
     {
-        $columns = [
+        return [
             Column::make("Id", "id")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Fee Name", "fee_name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Amount")
                 ->sortable()
                 ->format(function($value) {
                     return 'Php '.number_format($value, 2);
                 }),
             Column::make("Academic Year", "academic_year.start_year")
-                ->sortable(),
-            // Column::make("Grade Level", "grade_level_id")
-            //     ->sortable(),
+                ->sortable()
+                ->searchable(),
+            Column::make("Actions", "id")->view('livewire.fee.actions-col'),
         ];
-
-        if (auth()->user()->can('read_fees')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.fee.actions-col'));
-        }
-
-        return $columns;
     }
 }

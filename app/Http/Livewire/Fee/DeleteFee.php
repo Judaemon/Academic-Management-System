@@ -5,15 +5,18 @@ namespace App\Http\Livewire\Fee;
 use App\Models\Fee;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeleteFee extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $fee;
 
     public function mount(Fee $fee)
     {
+        $this->authorize('delete_fee');
+
         $this->fee = $fee;
     }
 
@@ -37,28 +40,24 @@ class DeleteFee extends ModalComponent
                 'label'  => 'No, cancel',
                 'method' => 'closeModal',
             ],
+            'onDismiss' => [
+                'method' => 'closeModal',
+                'params' => 'closeModal',
+            ],
         ]);
-    }
+    } 
 
     public function submit()
     {
-        // Check if user has permission
-        if (!auth()->user()->can('delete_fee')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->fee->delete();
+        $this->fee->delete();
 
-            $this->closeModal();
+        $this->closeModal();
     
-            $this->emit('refreshDatatable');
+        $this->emit('refreshDatatable');
     
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Fee deleted successfully.'
-            );
-        }
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Fee deleted successfully.'
+        );
     }
 }

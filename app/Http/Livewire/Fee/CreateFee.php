@@ -2,22 +2,29 @@
 
 namespace App\Http\Livewire\Fee;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Fee;
 use App\Models\AcademicYear;
 
-class CreateFee extends Component
+class CreateFee extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
-    public $modalCreate;
-    public 
-      $fee_name, 
-      $amount,
-      $academic_year_id,
-      $grade_level_id;
+    public $fee_name;
+    public $amount;
+    public $academic_year_id;
+
+    protected function rules()
+    {
+        return [
+            'fee_name' => ['required', 'min:5', 'max:35'],
+            'amount' => ['required', 'numeric'],
+            'academic_year_id' => ['nullable', 'unique:academic_years,id,'.$this->academic_year_id],
+        ];
+    }
 
     public function render()
     {
@@ -26,24 +33,12 @@ class CreateFee extends Component
         ]);
     }
 
-    protected function rules()
-    {
-        return [
-            'fee_name' => 'required|min:5|max:35',
-            'amount' => 'required|numeric',
-            'academic_year_id' => 'nullable|unique:academic_years,id,'.$this->academic_year_id,
-            // 'grade_level_id' => 'required'
-        ];
-    }
-
     public function save(): void
     {
         $this->validate();
 
-        $this->modalCreate = false;
-
         $this->dialog()->confirm([
-            'title'       => 'Are you Sure?',
+             'title'       => 'Are you Sure?',
             'description' => 'Create School Fee?',
             'icon'        => 'question',
             'accept'      => [
@@ -59,32 +54,22 @@ class CreateFee extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_fee')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        } else {
-            Fee::create([
-                'fee_name' => $this->fee_name,
-                'amount' => $this->amount,
-                'academic_year_id' => $this->academic_year_id,
-                // 'grade_level_id' => $this->fee['grade_level_id'],
-            ]);
-    
-            $this->emit('refreshDatatable');
-    
-            $this->reset();
+        $this->authorize('create_fee');
             
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'School Fee successfully Created.'
-            );
-        }
+        Fee::create([
+            'fee_name' => $this->fee_name,
+            'amount' => $this->amount,
+            'academic_year_id' => $this->academic_year_id,
+        ]);
+    
+        $this->emit('refreshDatatable');
+    
+        $this->closeModal();
+            
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'School Fee successfully Created.'
+        );
     }
 
-    public function closeModal()
-    {
-        $this->modalCreate = false;
-    }
 }
