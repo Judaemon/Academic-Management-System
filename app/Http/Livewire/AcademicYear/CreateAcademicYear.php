@@ -27,7 +27,6 @@ class CreateAcademicYear extends Component
         return [
             'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
             'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
-            'academic_year.curriculum' => ['required'],
         ];
     }
 
@@ -68,7 +67,6 @@ class CreateAcademicYear extends Component
             AcademicYear::create([
                 'start_year' => $this->academic_year['start_year'],
                 'end_year' => $this->academic_year['end_year'],
-                'curriculum' => $this->academic_year['curriculum'],
             ]);
     
             $this->emit('refreshDatatable');

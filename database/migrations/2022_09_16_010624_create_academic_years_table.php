@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
             $table->date('start_year');
             $table->date('end_year');
-            $table->text('curriculum');
             
             $table->timestamps();
         });

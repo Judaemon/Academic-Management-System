@@ -27,9 +27,6 @@ class AcademicYearTable extends DataTableComponent
             Column::make("Year", "end_year")
                 ->searchable()
                 ->sortable(),
-            Column::make("Curriculum", "curriculum")
-                ->searchable()
-                ->sortable(),
         ];
 
         if (auth()->user()->can('read_academic_years') || auth()->user()->can('update_academic_years') || auth()->user()->can('delete_academic_years')) {
