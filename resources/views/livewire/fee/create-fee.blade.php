@@ -3,18 +3,18 @@
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-1 gap-4">
                 <div class="col-span-4">
-                    <x-input label="Fee Name" corner-hint="e.g.Tuition Fee, Miscellaneous Fee" wire:model.defer="fee_name" />
+                    <x-input label="School Fee Name" corner-hint="e.g.Tuition Fee, Miscellaneous Fee" wire:model.defer="name" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-inputs.currency label="Fee Amount" corner-hint="Ex: 20000" wire:model.defer="amount" />
+                    <x-inputs.currency label="Amount" corner-hint="Ex: 20000" wire:model.defer="amount" />
                 </div>
 
                 <div class="col-span-4">
                     <x-select 
                         label="Grade Level" 
                         placeholder="Select grade level"
-                        wire:model.defer="grade_level_id"
+                        wire:model.defer="grade_level"
                     >
                         @foreach ($grade_levels as $grade_level)
                             <x-select.option label="{{ $grade_level->name }}" value="{{ $grade_level->id }}" />    

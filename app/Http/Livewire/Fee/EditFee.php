@@ -14,11 +14,12 @@ class EditFee extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $fee;
-    public $grade_levels;
 
-    public $fee_name;
+    public $name;
     public $amount;
-    public $grade_level_id;
+
+    public $grade_level;
+    public $grade_levels;
 
     public function mount(Fee $fee)
     {
@@ -27,17 +28,17 @@ class EditFee extends ModalComponent
 
         $this->card_title = "Edit ".$fee->fee_name;
 
-        $this->fee_name = $fee->fee_name;
+        $this->name = $fee->fee_name;
         $this->amount = $fee->amount;
-        $this->grade_level_id = $fee->grade_level_id;
+        $this->grade_level = $fee->grade_level_id;
     }
 
     protected function rules()
     {
         return [
-            'fee_name' => ['required', 'min:5', 'max:35'],
+            'name' => ['required', 'min:5', 'max:35'],
             'amount' => ['required', 'numeric'],
-            'grade_level_id' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level_id],
+            'grade_level' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level],
         ];
     }
 
@@ -70,9 +71,9 @@ class EditFee extends ModalComponent
         $this->authorize('edit_fee');
 
         $this->fee->forceFill([
-            'fee_name' => $this->fee_name,
+            'fee_name' => $this->name,
             'amount' => $this->amount,
-            'grade_level_id' => $this->grade_level_id,
+            'grade_level_id' => $this->grade_level,
         ])->save();
     
         $this->emit('refreshDatatable');
@@ -81,7 +82,7 @@ class EditFee extends ModalComponent
             
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = $this->fee_name.' successfully Updated.'
+            $description = $this->fee->fee_name.' successfully Updated.'
         );
     }
 

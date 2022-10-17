@@ -13,18 +13,18 @@ class CreateFee extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $fee_name;
+    public $name;
     public $amount;
-    public $grade_level_id;
 
+    public $grade_level;
     public $grade_levels;
 
     protected function rules()
     {
         return [
-            'fee_name' => ['required', 'min:5', 'max:35'],
+            'name' => ['required', 'min:5', 'max:35'],
             'amount' => ['required', 'numeric'],
-            'grade_level_id' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level_id],
+            'grade_level' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level],
         ];
     }
 
@@ -62,9 +62,9 @@ class CreateFee extends ModalComponent
         $this->authorize('create_fee');
             
         Fee::create([
-            'fee_name' => $this->fee_name,
+            'fee_name' => $this->name,
             'amount' => $this->amount,
-            'grade_level_id' => $this->grade_level_id,
+            'grade_level_id' => $this->grade_level,
         ]);
     
         $this->emit('refreshDatatable');

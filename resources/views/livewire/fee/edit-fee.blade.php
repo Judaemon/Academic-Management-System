@@ -3,17 +3,17 @@
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-1 gap-4">
                 <div class="col-span-4">
-                    <x-input wire:model.defer="fee_name" label="Fee Name" />
+                    <x-input wire:model.defer="name" label="School Fee Name" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-inputs.currency label="Fee Amount" wire:model.defer="amount" />
+                    <x-inputs.currency label="Amount" wire:model.defer="amount" />
                 </div>
 
                 <div class="col-span-4">
                     <x-select 
                         label="Grade Level" 
-                        wire:model.defer="grade_level_id"
+                        wire:model.defer="grade_level"
                         placeholder="Select grade level"
                     >
                         @foreach ($grade_levels as $grade_level)
