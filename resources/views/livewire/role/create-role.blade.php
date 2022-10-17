@@ -25,8 +25,10 @@
                         <x-checkbox id="view_users" label="View User" value="1" wire:model="user_permissions" />
                     </div>
                     <div class="sub-checkbox pl-5 mt-0 space-y-2">
-                        {{-- create_users --}}
-                        <x-checkbox id="create_user" label="Create User" value="2" wire:model="user_permissions" />
+                        {{-- create_account --}}
+                        <x-checkbox id="create_account" label="Create Account" value="2" wire:model="user_permissions" />
+                        {{-- create_student --}}
+                        <x-checkbox id="create_student" label="Create Student" value="2" wire:model="user_permissions" />
                         {{-- read_users --}}
                         <x-checkbox id="read_user" label="Read User" value="3" wire:model="user_permissions" />
                         {{-- update_users --}}

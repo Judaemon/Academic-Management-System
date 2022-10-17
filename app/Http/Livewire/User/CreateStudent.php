@@ -8,11 +8,9 @@ use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateUser extends ModalComponent
+class CreateStudent extends ModalComponent
 {
     use AuthorizesRequests, Actions;
-
-    public $user;
     
     public $firstname;
     public $lastname;
@@ -61,8 +59,6 @@ class CreateUser extends ModalComponent
     public $fparent_number;
     public $fparent_occupation;
     public $fparent_address;
-
-    public $password;
     
     protected function rules()
     {
@@ -79,7 +75,7 @@ class CreateUser extends ModalComponent
             'gender' => ['required'],
             'mothertongue' => ['required'],
             'nationality' => ['required'],
-            'pwdid' => ['unique:users,pwdid'],
+            'pwdid' => ['nullable', 'unique:users,pwdid'],
 
             // physical info
             'height' => ['nullable'],
@@ -97,89 +93,37 @@ class CreateUser extends ModalComponent
             'school_juniorhigh' => ['nullable'],
 
             // academic info
-            'lrn' => ['unique:users,lrn'],
-            'esc' => ['unique:users,esc'],
-            'qvr' => ['unique:users,qvr'],
-            'public_id' => ['unique:users,public_id'],
+            'lrn' => ['nullable', 'unique:users,lrn'],
+            'esc' => ['nullable', 'unique:users,esc'],
+            'qvr' => ['nullable', 'unique:users,qvr'],
+            'public_id' => ['nullable', 'unique:users,public_id'],
 
             // beneficiary, guardian, and parents info
             'beneficiary' => ['nullable'],
 
-            'guardian_name' => ['nullable'],
-            'guardian_number' => ['unique:users,guardian_number'],
+            'guardian_name' => ['required'],
+            'guardian_number' => ['required','unique:users,guardian_number'],
             'guardian_occupation' => ['nullable'],
-            'guardian_address' => ['nullable'],
-            'guardian_relationship' => ['nullable'],
+            'guardian_address' => ['required'],
+            'guardian_relationship' => ['required'],
 
             'mparent_name' => ['nullable'],
-            'mparent_number' => ['unique:users,mparent_number'],
+            'mparent_number' => ['nullable', 'unique:users,mparent_number'],
             'mparent_occupation' => ['nullable'],
             'mparent_address' => ['nullable'],
 
             'fparent_name' => ['nullable'],
-            'fparent_number' => ['unique:users,fparent_number'],
+            'fparent_number' => ['nullable', 'unique:users,fparent_number'],
             'fparent_occupation' => ['nullable'],
             'fparent_address' => ['nullable'],
-            // 'password' => ['required', 'min:8'],
+
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
-    public function mount(User $user)
-    {
-        $this->firstname = $user->firstname;
-        $this->lastname = $user->lastname;
-        $this->email = $user->email;
-        $this->middlename = $user->middlename;
-        $this->suffix = $user->suffix;
-        $this->birthdate = $user->birthdate;
-        $this->birthplace = $user->birthplace;
-        $this->religion = $user->religion;
-        $this->gender = $user->gender;
-        $this->mothertongue = $user->mothertongue;
-        $this->nationality = $user->nationality;
-        $this->pwdid = $user->pwdid;
-
-        // physical info
-        $this->height = $user->height;
-        $this->weight = $user->weight;
-
-        // contact info
-        $this->mobilenumber = $user->mobilenumber;
-        $this->address = $user->address;
-
-        // educational background
-        $this->school_kinder = $user->school_kinder;
-        $this->school_kindergrad = $user->school_kindergrad;
-        $this->school_elementary = $user->school_elementary;
-        $this->school_elementarygrad = $user->school_elementarygrad;
-
-        // academic info
-        $this->lrn = $user->lrn;
-        $this->esc = $user->esc;
-        $this->qvr = $user->qvr;
-        $this->public_id = $user->public_id;
-
-        // beneficiary, guardian, and parents info
-        $this->beneficiary = $user->beneficiary;
-        $this->guardian_name = $user->guardian_name;
-        $this->guardian_number = $user->guardian_number;
-        $this->guardian_occupation = $user->guardian_occupation;
-        $this->guardian_address = $user->guardian_address;
-        $this->guardian_relationship = $user->guardian_relationship;
-        $this->mparent_name = $user->mparent_name;
-        $this->mparent_number = $user->mparent_number;
-        $this->mparent_occupation = $user->mparent_occupation;
-        $this->mparent_address = $user->mparent_address;
-        $this->fparent_name = $user->fparent_name;
-        $this->fparent_number = $user->fparent_number;
-        $this->fparent_occupation = $user->fparent_occupation;
-        $this->fparent_address = $user->fparent_address;
-    }
-
     public function render()
     {
-        return view('livewire.user.create-user');
+        return view('livewire.user.create-student');
     }
 
     public function save(): void
@@ -203,7 +147,7 @@ class CreateUser extends ModalComponent
 
     public function submit()
     {
-        $this->authorize('create_user');
+        $this->authorize('create_student');
 
         $user =User::create([
                 'firstname' => $this->firstname,
@@ -255,7 +199,6 @@ class CreateUser extends ModalComponent
                 'fparent_number' => $this->fparent_number,
                 'fparent_occupation' => $this->fparent_occupation,
                 'fparent_address' => $this->fparent_address,
-                // 'password' => $this->password,
         ]);
 
         $this->closeModal();

@@ -19,7 +19,7 @@ class CreateRole extends Component
     public function updatedUserPermissions($value)
     {
         $isViewEnabled = in_array("1", $this->user_permissions);
-        
+
         if (!$isViewEnabled && $value != null) {
             array_push($this->user_permissions, "1");
         }
@@ -30,7 +30,7 @@ class CreateRole extends Component
     public function updatedRolePermissions($value)
     {
         $isViewEnabled = in_array("6", $this->role_permissions);
-        
+
         if (!$isViewEnabled && $value != null) {
             array_push($this->role_permissions, "6");
         }
@@ -41,7 +41,7 @@ class CreateRole extends Component
     public function updatedSystemPermissions($value)
     {
         $isViewEnabled = in_array("11", $this->system_permissions);
-        
+
         if (!$isViewEnabled && $value != null) {
             array_push($this->system_permissions, "11");
         }
@@ -91,15 +91,15 @@ class CreateRole extends Component
             $role = Role::create([
                 'name' => $this->newRoleName,
             ]);
-    
+
             $permissions = array_merge($this->user_permissions, $this->role_permissions, $this->system_permissions);
-            
+
             $role->syncPermissions($permissions);
-    
+
             $this->emit('refreshDatatable');
-    
+
             $this->reset();
-            
+
             $this->dialog()->success(
                 $title = 'Successful!',
                 $description = 'Role successfully created.'

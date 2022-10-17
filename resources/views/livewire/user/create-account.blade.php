@@ -7,11 +7,11 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="firstname" label="First Name" placeholder="Juan" />
+                    <x-input wire:model.defer="firstname" label="First Name (*)" placeholder="Juan" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="lastname" label="Last Name" placeholder="Dela Cruz" />
+                    <x-input wire:model.defer="lastname" label="Last Name (*)" placeholder="Dela Cruz" />
                 </div>
 
                 <div class="col-span-4">
@@ -23,21 +23,21 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input type="date" wire:model.defer="birthdate" label="Birth Date" placeholder="" />
+                    <x-input type="date" wire:model.defer="birthdate" label="Birth Date (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="birthplace" label="Birth Place" placeholder="City/Municipality" />
+                    <x-input wire:model.defer="birthplace" label="Birth Place (*)" placeholder="City/Municipality" />
                 </div>
 
                 <!-- drop down sana ng mga religions -->
                 <div class="col-span-4">
-                    <x-input wire:model.defer="religion" label="Religion" placeholder="Catholic" />
+                    <x-input wire:model.defer="religion" label="Religion (*)" placeholder="Catholic" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-select
-                        label="Gender"
+                        label="Gender (*)"
                         wire:model.defer="gender"
                         placeholder="Select Gender"
                     >
@@ -48,11 +48,11 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="mothertongue" label="Mother Tongue" placeholder="English" />
+                    <x-input wire:model.defer="mothertongue" label="Mother Tongue (*)" placeholder="English" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="nationality" label="Nationality" placeholder="Filipino" />
+                    <x-input wire:model.defer="nationality" label="Nationality (*)" placeholder="Filipino" />
                 </div>
 
                 <div class="col-span-4">
@@ -78,16 +78,46 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="mobilenumber" label="Contact Number" placeholder="09*********" />
+                    <x-input wire:model.defer="mobilenumber" label="Contact Number (*)" placeholder="+639** *** ****" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="address" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
+                    <x-input wire:model.defer="address" label="Address (*)" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
                 {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="email" label="Email" placeholder="sample@email.com" />
+                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="email" label="Email (*)" placeholder="user@email.com" />
+                </div>
+
+                <!-- government beneficiary -->
+                <div class="col-span-12"> 
+                    <h1><strong>IV. GOVERNMENT BENEFICIARY</strong></h1>
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="beneficiary" label="Beneficiary" placeholder="" />
+                </div>
+
+                <!-- government id -->
+                <div class="col-span-12"> 
+                    <h1><strong>V. GOVERNMENT ID NO.</strong></h1>
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="philhealth" label="PhilHealth" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="sss" label="SSS" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="tin" label="TIN" placeholder="" />
                 </div>
 
                 <!-- user password -->
