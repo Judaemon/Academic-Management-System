@@ -18,14 +18,14 @@
 
             <div class="col-span-4">
               <x-select 
-              label="Academic Year" 
-              wire:model.defer="academic_year_id"
-              placeholder="Select academic year"
+              label="Grade Level" 
+              wire:model.defer="grade_level_id"
+              placeholder="Select grade level"
             >
-                @foreach ($academic_years as $academic_year)
+                @foreach ($grade_levels as $grade_level)
                     <x-select.option 
-                      label="{{ date('j \\ F Y', strtotime($academic_year->start_year)) }} - {{ date('j \\ F Y', strtotime($academic_year->end_year)) }}"
-                      value="{{ $academic_year->id }}" 
+                      label="{{ $grade_level->name }}"
+                      value="{{ $grade_level->id }}" 
                     />    
                 @endforeach
             </x-select>

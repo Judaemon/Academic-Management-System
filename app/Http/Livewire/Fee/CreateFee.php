@@ -7,7 +7,7 @@ use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Fee;
-use App\Models\AcademicYear;
+use App\Models\GradeLevel;
 
 class CreateFee extends ModalComponent
 {
@@ -15,21 +15,21 @@ class CreateFee extends ModalComponent
 
     public $fee_name;
     public $amount;
-    public $academic_year_id;
+    public $grade_level_id;
 
     protected function rules()
     {
         return [
             'fee_name' => ['required', 'min:5', 'max:35'],
             'amount' => ['required', 'numeric'],
-            'academic_year_id' => ['nullable', 'unique:academic_years,id,'.$this->academic_year_id],
+            'grade_level_id' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level_id],
         ];
     }
 
     public function render()
     {
         return view('livewire.fee.create-fee', [
-            'academic_years' => AcademicYear::all(),
+            'grade_levels' => GradeLevel::all(),
         ]);
     }
 
@@ -59,7 +59,7 @@ class CreateFee extends ModalComponent
         Fee::create([
             'fee_name' => $this->fee_name,
             'amount' => $this->amount,
-            'academic_year_id' => $this->academic_year_id,
+            'grade_level_id' => $this->grade_level_id,
         ]);
     
         $this->emit('refreshDatatable');

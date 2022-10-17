@@ -19,5 +19,9 @@ class GradeLevelSeeder extends Seeder
         GradeLevel::create([
             'name' => "Grade 1"
         ]);
+
+        GradeLevel::create([
+            'name' => "Grade 6"
+        ]);
     }
 }

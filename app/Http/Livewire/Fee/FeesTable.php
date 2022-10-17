@@ -29,7 +29,7 @@ class FeesTable extends DataTableComponent
                 ->format(function($value) {
                     return 'Php '.number_format($value, 2);
                 }),
-            Column::make("Academic Year", "academic_year.start_year")
+            Column::make("Grade Level", "grade_level.name")
                 ->sortable()
                 ->searchable(),
             Column::make("Actions", "id")->view('livewire.fee.actions-col'),

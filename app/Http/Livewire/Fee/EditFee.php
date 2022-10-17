@@ -7,25 +7,28 @@ use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Fee;
-use App\Models\AcademicYear;
+use App\Models\GradeLevel;
 
 class EditFee extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
     public $fee;
+    public $card_title;
 
     public $fee_name;
     public $amount;
-    public $academic_year_id;
+    public $grade_level_id;
 
     public function mount(Fee $fee)
     {
         $this->fee = $fee;
 
+        $this->card_title = "Edit ".$fee->fee_name;
+
         $this->fee_name = $fee->fee_name;
         $this->amount = $fee->amount;
-        $this->academic_year_id = $fee->academic_year_id;
+        $this->grade_level_id = $fee->grade_level_id;
     }
 
     protected function rules()
@@ -33,14 +36,14 @@ class EditFee extends ModalComponent
         return [
             'fee_name' => ['required', 'min:5', 'max:35'],
             'amount' => ['required', 'numeric'],
-            'academic_year_id' => ['nullable', 'unique:academic_years,id,'.$this->academic_year_id],
+            'grade_level_id' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level_id],
         ];
     }
 
     public function render()
     {
         return view('livewire.fee.edit-fee', [
-            'academic_years' => AcademicYear::all(),
+            'grade_levels' => GradeLevel::all(),
         ]);
     }
 
@@ -70,7 +73,7 @@ class EditFee extends ModalComponent
         $this->fee->forceFill([
             'fee_name' => $this->fee_name,
             'amount' => $this->amount,
-            'academic_year_id' => $this->academic_year_id,
+            'grade_level_id' => $this->grade_level_id,
         ])->save();
     
         $this->emit('refreshDatatable');
