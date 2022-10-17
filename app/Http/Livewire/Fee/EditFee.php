@@ -85,4 +85,9 @@ class EditFee extends ModalComponent
             $description = $this->fee_name.' successfully Updated.'
         );
     }
+
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
+    }
 }

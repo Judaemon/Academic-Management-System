@@ -4,7 +4,7 @@
           <div class="grid grid-cols-1 gap-4">
               <div class="col-span-4">
                   <x-input 
-                    wire:model.defer="fee_name" 
+                    wire:model.defer="fee.fee_name" 
                     label="Fee Name" 
                     corner-hint="e.g.Tuition Fee, Miscellaneous Fee" 
                   />
@@ -14,14 +14,14 @@
                   <x-inputs.currency 
                     label="Fee Amount" 
                     corner-hint="Ex: 20000" 
-                    wire:model.defer="amount" 
+                    wire:model.defer="fee.amount" 
                   />
               </div>
 
               <div class="col-span-4">
                   <x-select 
                     label="Grade Level" 
-                    wire:model.defer="grade_level_id"
+                    wire:model.defer="fee.grade_level_id"
                     placeholder="Select grade level"
                   >
                       @foreach ($grade_levels as $grade_level)

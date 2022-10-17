@@ -21,18 +21,23 @@ class FeesTable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable()
                 ->searchable(),
+
             Column::make("Fee Name", "fee_name")
                 ->sortable()
                 ->searchable(),
+
             Column::make("Amount")
                 ->sortable()
                 ->format(function($value) {
                     return 'Php '.number_format($value, 2);
                 }),
+
             Column::make("Grade Level", "grade_level.name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Actions", "id")->view('livewire.fee.actions-col'),
+
+            Column::make("Actions", "id")
+                ->view('livewire.fee.actions-col'),
         ];
     }
 }
