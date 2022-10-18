@@ -37,7 +37,7 @@
 
                 <!-- drop down din sana pero di ko pa gets -->
                 <div class="col-span-4">
-                    <x-input readonly value="{{ $user->gender }}" label="Gender" placeholder="Male/Female/Other" />
+                    <x-input readonly value="{{ $user->gender }}" label="Gender" placeholder="Male/Female" />
                 </div>
 
                 <div class="col-span-4">

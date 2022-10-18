@@ -43,7 +43,6 @@
                     >
                             <x-select.option label="Male" value="Male" />
                             <x-select.option label="Female" value="Female" />
-                            <x-select.option label="Rather not say" value="Rather not say" />
                     </x-select>
                 </div>
 

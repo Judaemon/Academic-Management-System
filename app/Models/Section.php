@@ -20,6 +20,11 @@ class Section extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
+    public function grade_level()
+    {
+        return $this->belongsTo(GradeLevel::class);
+    }
+
     protected $fillable = [
         'name',
         'capacity',

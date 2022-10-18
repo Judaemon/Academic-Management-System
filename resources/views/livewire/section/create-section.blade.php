@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="capacity" label="Capacity" placeholder="Type maximum capacity here" type="number" min="0"  />
+                    <x-input wire:model.defer="capacity" label="Capacity" placeholder="Type maximum capacity here" type="number" min="0" max="60" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
