@@ -24,8 +24,6 @@ class EditAcademicYear extends ModalComponent
     {
         $this->academic_year = $academic_year;
 
-        $this->card_title = "Editing Academic Year";
-
         $this->start_date = $academic_year->start_date;
         $this->school_days = $academic_year->school_days;
         $this->end_date = $academic_year->end_date;
@@ -43,6 +41,24 @@ class EditAcademicYear extends ModalComponent
     public function render()
     {
         return view('livewire.academic-year.edit-academic-year');
+    }
+
+    public function updatedEndDate()
+    {
+        if($this->end_date != NULL) {
+            $this->school_days = Carbon::parse($this->start_date)->diffInDays($this->end_date);
+        } else {
+            $this->school_days = 0;
+        }
+    }
+
+    public function updatedSchoolDays()
+    {
+        if($this->school_days > 0) {
+            $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
+        } else {
+            $this->end_date = NULL;
+        }
     }
 
     public function save(): void
@@ -67,18 +83,11 @@ class EditAcademicYear extends ModalComponent
     public function submit()
     {
         $this->authorize('update_academic_year');
-
-        // find ways to display during input
-        if($this->school_days > 0) {
-            $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
-        } else {
-            $this->end_date = NULL;
-        }
         
         $this->academic_year->forceFill([
-            'start_date' => $this->start_date,
+            'start_date' => Carbon::parse($this->start_date)->toDateString(),
             'school_days' => $this->school_days,
-            'end_date' => $this->end_date,
+            'end_date' => Carbon::parse($this->end_date)->toDateString(),
         ])->save();
 
         $this->emit('refreshDatatable');
