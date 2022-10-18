@@ -148,7 +148,7 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Teacher');
 
-        
+
         User::create([
             'firstname' => 'Alexander',
             'middlename' => 'Churro',
@@ -194,6 +194,11 @@ class UserSeeder extends Seeder
             'mobilenumber' => '09274294577',
             'email' => 'jacksoncayden@s.caims.edu',
             'address' => 'Pablo Ocampo Sr. Ext, Baguio City',
+            'guardian_name' => 'John Doe',
+            'guardian_number' => '09176820767',
+            'guardian_occupation' => 'Pastor',
+            'guardian_address' => 'Trancoville',
+            'guardian_relationship' => 'Uncle',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('student1'),
             'remember_token' => NULL,
@@ -217,6 +222,11 @@ class UserSeeder extends Seeder
             'mobilenumber' => '09983315305',
             'email' => 'balonfrederick@s.caims.edu',
             'address' => 'San Agustin, Baguio City',
+            'guardian_name' => 'John Doe',
+            'guardian_number' => '09176820768',
+            'guardian_occupation' => 'Pastor',
+            'guardian_address' => 'Trancoville',
+            'guardian_relationship' => 'Uncle',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('student2'),
             'remember_token' => NULL,
@@ -240,6 +250,11 @@ class UserSeeder extends Seeder
             'mobilenumber' => '09664861698',
             'email' => 'reyesjacqueline@s.caims.edu',
             'address' => 'Ben Harrison, Baguio City',
+            'guardian_name' => 'John Doe',
+            'guardian_number' => '09176820769',
+            'guardian_occupation' => 'Pastor',
+            'guardian_address' => 'Trancoville',
+            'guardian_relationship' => 'Uncle',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('student3'),
             'remember_token' => NULL,
