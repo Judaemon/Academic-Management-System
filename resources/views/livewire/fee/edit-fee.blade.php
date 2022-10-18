@@ -1,60 +1,34 @@
 <div wire:ignore.self class="form-container">  
     <x-card title="{{ $card_title }}">
-        <div class="grid grid-cols-1 gap-4">
+        <form wire:submit.prevent="save">
+            <div class="grid grid-cols-1 gap-4">
+                <div class="col-span-4">
+                    <x-input wire:model.defer="name" label="School Fee Name" />
+                </div>
 
-            <div class="col-span-4">
-                <x-input 
-                  wire:model.defer="fee_name" 
-                  label="Fee Name" 
-                />
+                <div class="col-span-4">
+                    <x-inputs.currency label="Amount" wire:model.defer="amount" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-select 
+                        label="Grade Level" 
+                        wire:model.defer="grade_level"
+                        placeholder="Select grade level"
+                    >
+                        @foreach ($grade_levels as $grade_level)
+                            <x-select.option label="{{ $grade_level->name }}" value="{{ $grade_level->id }}" />    
+                        @endforeach
+                    </x-select>
+                </div>
             </div>
 
-            <div class="col-span-4">
-                <x-inputs.currency 
-                  label="Fee Amount" 
-                  wire:model.defer="amount" 
-                />
-            </div>
-
-            <div class="col-span-4">
-              <x-native-select 
-                label="Select Academic Year" 
-                wire:model.defer="academic_year_id"
-              >
-                  @foreach ($academic_years as $academic_year)
-                      <option value="{{ $academic_year->id }}">
-                        {{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}
-                      </option>
-                  @endforeach
-              </x-native-select>
-          </div>
-
-            {{-- <div class="col-span-4">
-                <x-native-select 
-                  label="Select Grade Level" 
-                  wire:model.defer="grade_level_id
-                >
-                    @foreach ($grade_levels as $grade_level)
-                        <option value="{{ $grade_level->id }}">{{ $grade_level->??? }}</option>
-                    @endforeach
-                </x-native-select>
-            </div> --}}
-        </div>
-
-        <x-slot name="footer">
-            <div class="flex justify-end gap-x-4">
-                <x-button 
-                  flat 
-                  label="Cancel" 
-                  wire:click="closeModal" 
-                />
-                <x-button 
-                  wire:click="save" 
-                  type="button" 
-                  primary 
-                  label="Update" 
-                />
-            </div>
-        </x-slot>
+            <x-slot name="footer">
+                <div class="flex justify-end gap-x-4">
+                    <x-button flat label="Cancel" wire:click="closeModal" />
+                    <x-button wire:click.prevent="save" type="submit" primary label="Update" />
+                </div>
+            </x-slot>
+        </form>
     </x-card>
 </div>

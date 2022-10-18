@@ -10,9 +10,15 @@ return new class extends Migration
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->date('start_year');
-            $table->date('end_year');
-            $table->text('curriculum');
+
+            $table->date('start_date');
+
+            $table->integer('school_days')
+                  ->nullable()
+                  ->default('0');
+            
+            $table->date('end_date')
+                  ->nullable();
             
             $table->timestamps();
         });

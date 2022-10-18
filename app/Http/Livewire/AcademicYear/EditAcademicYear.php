@@ -2,28 +2,41 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use App\Models\AcademicYear;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use App\Models\AcademicYear;
+
+use Carbon\Carbon;
 
 class EditAcademicYear extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $academic_year;
+
+    public $start_date;
+    public $school_days = 0;
+    public $end_date;
 
     public function mount(AcademicYear $academic_year)
     {
         $this->academic_year = $academic_year;
+
         $this->card_title = "Editing Academic Year";
+
+        $this->start_date = $academic_year->start_date;
+        $this->school_days = $academic_year->school_days;
+        $this->end_date = $academic_year->end_date;
     }
 
     protected function rules()
     {
         return [
-            'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
-            'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
-            'academic_year.curriculum' => ['required'],
+            'start_date' => ['required', 'date'],
+            'school_days' => ['nullable', 'numeric'],
+            'end_date' => ['nullable', 'date', 'after:start_date'],
         ];
     }
 
@@ -53,22 +66,33 @@ class EditAcademicYear extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('edit_academic_year')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
+        $this->authorize('edit_academic_year');
+
+        // find ways to display during input
+        if($this->school_days > 0) {
+            $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
         } else {
-            $this->academic_year->save();
-
-            $this->emit('refreshDatatable');
-
-            $this->closeModal();
-
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Academic information successfully Updated.'
-            );
+            $this->end_date = NULL;
         }
+        
+        $this->academic_year->forceFill([
+            'start_date' => $this->start_date,
+            'school_days' => $this->school_days,
+            'end_date' => $this->end_date,
+        ])->save();
+
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Academic information successfully Updated.'
+        );
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
     }
 }

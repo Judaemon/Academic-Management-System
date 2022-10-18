@@ -16,21 +16,33 @@ class FeeSeeder extends Seeder
     public function run()
     {
         Fee::create([
-            'fee_name' => 'Tuition Fee',
-            'amount' => '25640.00',
-            'academic_year_id' => '1',
+            'fee_name' => 'Tuition',
+            'amount' => '25000.00',
+            'grade_level_id' => '2',
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Books',
+            'amount' => '10000.00',
+            'grade_level_id' => NULL,
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Laboratory Fee',
+            'amount' => '4000.00',
+            'grade_level_id' => NULL,
         ]);
 
         Fee::create([
             'fee_name' => 'School Uniform',
-            'amount' => '500.00',
-            'academic_year_id' => NULL,
+            'amount' => '5000.00',
+            'grade_level_id' => NULL,
         ]);
 
         Fee::create([
             'fee_name' => 'Miscellaneous Fee',
-            'amount' => '5453.75',
-            'academic_year_id' => NULL,
+            'amount' => '7000.00',
+            'grade_level_id' => '1',
         ]);
     }
 }

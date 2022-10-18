@@ -2,29 +2,27 @@
 
 namespace App\Http\Livewire\Payments;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
+use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 use App\Models\User;
 use App\Models\Payments;
 use App\Models\Fee;
-use WireUi\Traits\Actions;
 
-class CreatePayments extends Component
+class CreatePayments extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
-    public $modalCreate;
-    public 
-      $user_id,
-      $amount_paid,
-      $fee_id;
+    public $user;
+    public $users;
 
-    public function render()
-    {
-        return view('livewire.payment.create-payments', [
-            'fees' => Fee::all(),
-            'users' => User::all(),
-        ]);
-    }
+    public $amount_paid;
+
+    public $fee;
+    public $fees;
+
+    public $others;
 
     protected function rules()
     {
@@ -33,6 +31,17 @@ class CreatePayments extends Component
             'amount_paid' => 'required|numeric',
             'fee_id' => 'required|unique:fees,id,'.$this->fee_id
         ];
+    }
+
+    public function mount()
+    {
+        $this->users = GradeLevel::all();
+        $this->fees = Fee::all();
+    }
+
+    public function render()
+    {
+        return view('livewire.payment.create-payments');
     }
 
     public function save(): void

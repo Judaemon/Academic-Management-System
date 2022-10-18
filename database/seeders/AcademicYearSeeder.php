@@ -18,16 +18,22 @@ class AcademicYearSeeder extends Seeder
      */
     public function run()
     {
+        $start_1 = Carbon::create('2022', '01', '01');
+        $days_1 = '42';
+
+        $start_2 = Carbon::create('2022', '08', '01');
+        $days_2 = '126';
+
         AcademicYear::create([
-            'start_year' => Carbon::create('2021', '08', '01')->format('Y-m-d H:i:s'),
-            'end_year' => Carbon::create('2022', '04', '28')->format('Y-m-d H:i:s'),
-            'curriculum' => '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            'start_date' => $start_1->format('Y-m-d H:i:s'),
+            'school_days' => $days_1,
+            'end_date' => $start_1->addDays($days_1),
         ]);
 
         AcademicYear::create([
-            'start_year' => Carbon::create('2022', '08', '01')->format('Y-m-d H:i:s'),
-            'end_year' => Carbon::create('2023', '04', '28')->format('Y-m-d H:i:s'),
-            'curriculum' => '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            'start_date' => $start_2->format('Y-m-d H:i:s'),
+            'school_days' => $days_2,
+            'end_date' => $start_2->addDays($days_2),
         ]);
     }
 }

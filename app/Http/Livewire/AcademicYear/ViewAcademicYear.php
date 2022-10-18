@@ -3,28 +3,34 @@
 namespace App\Http\Livewire\AcademicYear;
 
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 use App\Models\AcademicYear;
 
 class ViewAcademicYear extends ModalComponent
 {
-    public $academic_year;
+    use AuthorizesRequests;
 
-    protected function rules()
-    {
-        return [
-            'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
-            'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
-            'academic_year.curriculum' => ['required'],
-        ];
-    }
-    
+    public $academic_year;
+   
     public function mount(AcademicYear $academic_year)
     {
+        $this->authorize('view_section');
+
         $this->academic_year = $academic_year;
+
+        $this->start_date = $academic_year->start_date;
+        $this->school_days = $academic_year->school_days;
+        $this->end_date = $academic_year->end_date;
     }
 
     public function render()
     {
         return view('livewire.academic-year.view-academic-year');
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
     }
 }

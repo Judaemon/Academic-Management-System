@@ -2,18 +2,22 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use App\Models\AcademicYear;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use App\Models\AcademicYear;
 
 class DeleteAcademicYear extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $academic_year;
 
     public function mount(AcademicYear $academic_year)
     {
+        $this->authorize('delete_academic_fee');
+
         $this->academic_year = $academic_year;
     }
 
@@ -26,7 +30,7 @@ class DeleteAcademicYear extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this academic year?',
+            'description' => 'Delete Academic Year?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
@@ -46,23 +50,15 @@ class DeleteAcademicYear extends ModalComponent
 
     public function submit()
     {
-        // Check if user has permission
-        if (!auth()->user()->can('delete_academic_fee')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->academic_year->delete();
+        $this->academic_year->delete();
 
-            $this->closeModal();
+        $this->closeModal();
     
-            $this->emit('refreshDatatable');
+        $this->emit('refreshDatatable');
     
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Academic year deleted successfully.'
-            );
-        }
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Academic year deleted successfully.'
+        );
     }
 }
