@@ -19,12 +19,10 @@ class EditFee extends ModalComponent
     public $amount;
 
     public $grade_level;
-    public $grade_levels;
-
+ 
     public function mount(Fee $fee)
     {
         $this->fee = $fee;
-        $this->grade_levels = GradeLevel::all();
 
         $this->card_title = "Edit ".$fee->fee_name;
 

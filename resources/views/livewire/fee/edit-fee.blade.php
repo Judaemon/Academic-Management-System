@@ -15,11 +15,10 @@
                         label="Grade Level" 
                         wire:model.defer="grade_level"
                         placeholder="Select grade level"
-                    >
-                        @foreach ($grade_levels as $grade_level)
-                            <x-select.option label="{{ $grade_level->name }}" value="{{ $grade_level->id }}" />    
-                        @endforeach
-                    </x-select>
+                        :async-data="route('grade_level.grade_level')"
+                        option-label="name"
+                        option-value="id"
+                    />
                 </div>
             </div>
 

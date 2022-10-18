@@ -15,9 +15,7 @@ class CreateFee extends ModalComponent
 
     public $name;
     public $amount;
-
     public $grade_level;
-    public $grade_levels;
 
     protected function rules()
     {
@@ -26,11 +24,6 @@ class CreateFee extends ModalComponent
             'amount' => ['required', 'numeric'],
             'grade_level' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level],
         ];
-    }
-
-    public function mount()
-    {
-        $this->grade_levels = GradeLevel::all();
     }
 
     public function render()
