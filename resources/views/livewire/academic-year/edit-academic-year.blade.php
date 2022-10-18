@@ -27,9 +27,10 @@
                 <div class="col-span-4">
                     <x-input
                         type="number"
-                        label="Number of School Days (In Days)" 
+                        label="Number of School Days" 
                         corner-hint="Ex: 128 days" 
                         wire:model="school_days" 
+                        suffix="days"
                     />
                 </div>
             </div>
