@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="mobilenumber" label="Contact Number (*)" placeholder="+639** *** ****" />
+                    <x-input wire:model.defer="mobilenumber" label="Contact Number (*)" placeholder="09** *** ****" />
                 </div>
 
                 <div class="col-span-4">

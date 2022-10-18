@@ -13,9 +13,9 @@ return new class extends Migration
 
             // personal information
             $table->string('firstname');
-            $table->string('middlename');
+            $table->string('middlename')->nullable();
             $table->string('lastname');
-            $table->string('suffix');
+            $table->string('suffix')->nullable();
 
             $table->date('birthdate');
             $table->string('birthplace');

@@ -104,11 +104,13 @@ class CreateAccount extends ModalComponent
     {
         $this->authorize('create_account');
 
+        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8').'.'.$this->lastname);
+
         $user =User::create([
                 'firstname' => $this->firstname,
                 'lastname' => $this->lastname,
                 'email' => $this->email,
-                'password' => Hash::make($this->password),
+                'password' => Hash::make($password),
                 'middlename' => $this->middlename,
                 'suffix' => $this->suffix,
                 'birthdate' => $this->birthdate,
