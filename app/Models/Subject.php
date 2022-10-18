@@ -13,18 +13,24 @@ class Subject extends Authenticatable
 
     public function section()
     {
-        return $this->belongsToMany(Section::class);
+        return $this->belongsTo(Section::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function grade_level()
     {
-        return $this->belongsToMany(GradeLevel::class);
+        return $this->belongsTo(GradeLevel::class);
     }
 
     protected $fillable = [
         'name',
-        'teacher_id',
         'subject_code',
+
+        'teacher_id',
         'grade_level_id',
     ];
 }
