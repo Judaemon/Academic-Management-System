@@ -15,8 +15,6 @@ class EditUser extends ModalComponent
 
     public $user;
 
-    public $gender;
-
     protected function rules()
     {
         return [
@@ -57,14 +55,14 @@ class EditUser extends ModalComponent
             'user.qvr' => ['nullable', 'unique:users,qvr'],
             'user.public_id' => ['nullable', 'unique:users,public_id'],
 
-            // beneficiary, guardian, and parents info
+            // beneficiary, emergency contact, and parents info
             'user.beneficiary' => ['nullable'],
 
-            'user.guardian_name' => ['required'],
-            'user.guardian_number' => ['required','unique:users,guardian_number'],
-            'user.guardian_occupation' => ['nullable'],
-            'user.guardian_address' => ['required'],
-            'user.guardian_relationship' => ['required'],
+            'user.emergency_contact_name' => ['required'],
+            'user.emergency_contact_number' => ['required','unique:users,emergency_contact_number'],
+            'user.emergency_contact_occupation' => ['nullable'],
+            'user.emergency_contact_address' => ['required'],
+            'user.emergency_contact_relationship' => ['required'],
 
             'user.mparent_name' => ['nullable'],
             'user.mparent_number' => ['nullable', 'unique:users,mparent_number'],

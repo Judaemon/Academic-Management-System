@@ -44,11 +44,11 @@ class CreateStudent extends ModalComponent
 
     public $beneficiary;
 
-    public $guardian_name;
-    public $guardian_number;
-    public $guardian_occupation;
-    public $guardian_address;
-    public $guardian_relationship;
+    public $emergency_contact_name;
+    public $emergency_contact_number;
+    public $emergency_contact_occupation;
+    public $emergency_contact_address;
+    public $emergency_contact_relationship;
 
     public $mparent_name;
     public $mparent_number;
@@ -98,14 +98,14 @@ class CreateStudent extends ModalComponent
             'qvr' => ['nullable', 'unique:users,qvr'],
             'public_id' => ['nullable', 'unique:users,public_id'],
 
-            // beneficiary, guardian, and parents info
+            // beneficiary, emergency contact, and parents info
             'beneficiary' => ['nullable'],
 
-            'guardian_name' => ['required'],
-            'guardian_number' => ['required','unique:users,guardian_number'],
-            'guardian_occupation' => ['nullable'],
-            'guardian_address' => ['required'],
-            'guardian_relationship' => ['required'],
+            'emergency_contact_name' => ['required'],
+            'emergency_contact_number' => ['required','unique:users,emergency_contact_number'],
+            'emergency_contact_occupation' => ['nullable'],
+            'emergency_contact_address' => ['required'],
+            'emergency_contact_relationship' => ['required'],
 
             'mparent_name' => ['nullable'],
             'mparent_number' => ['nullable', 'unique:users,mparent_number'],
@@ -149,6 +149,7 @@ class CreateStudent extends ModalComponent
     {
         $this->authorize('create_student');
 
+        // firstname.firstletteroflastname ex. firstname = Mark, lastname = Zuckerberg, password = mark.z
         $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8').'.'.$this->lastname);
 
         $user =User::create([
@@ -186,13 +187,13 @@ class CreateStudent extends ModalComponent
                 'qvr' => $this->qvr,
                 'public_id' => $this->public_id,
 
-                // beneficiary, guardian, and parents info
+                // beneficiary, emergency contact, and parents info
                 'beneficiary' => $this->beneficiary,
-                'guardian_name' => $this->guardian_name,
-                'guardian_number' => $this->guardian_number,
-                'guardian_occupation' => $this->guardian_occupation,
-                'guardian_address' => $this->guardian_address,
-                'guardian_relationship' => $this->guardian_relationship,
+                'emergency_contact_name' => $this->emergency_contact_name,
+                'emergency_contact_number' => $this->emergency_contact_number,
+                'emergency_contact_occupation' => $this->emergency_contact_occupation,
+                'emergency_contact_address' => $this->emergency_contact_address,
+                'emergency_contact_relationship' => $this->emergency_contact_relationship,
                 'mparent_name' => $this->mparent_name,
                 'mparent_number' => $this->mparent_number,
                 'mparent_occupation' => $this->mparent_occupation,

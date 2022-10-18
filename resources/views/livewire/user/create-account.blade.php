@@ -98,25 +98,50 @@
                     <x-input wire:model.defer="beneficiary" label="Beneficiary" placeholder="" />
                 </div>
 
+                <!-- emergency contact information -->
+                <div class="col-span-12"> 
+                    <h1><strong>V. EMERGENCY CONTACT PERSON</strong></h1>
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_name" label="Full Name (*)" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_number" label="Contact Number (*)" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_occupation" label="Occupation" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_address" label="Address (*)" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_relationship" label="Relationship (*)" placeholder="" />
+                </div>
+
                 <!-- government id -->
                 <div class="col-span-12"> 
-                    <h1><strong>V. GOVERNMENT ID NO.</strong></h1>
+                    <h1><strong>VI. GOVERNMENT ID NO.</strong></h1>
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG" placeholder="" />
+                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="philhealth" label="PhilHealth" placeholder="" />
+                    <x-input wire:model.defer="philhealth" label="PhilHealth (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="sss" label="SSS" placeholder="" />
+                    <x-input wire:model.defer="sss" label="SSS (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="tin" label="TIN" placeholder="" />
+                    <x-input wire:model.defer="tin" label="TIN (*)" placeholder="" />
                 </div>
 
                 <!-- user password -->

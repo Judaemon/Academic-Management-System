@@ -144,29 +144,29 @@
                     <x-input wire:model.defer="user.beneficiary" label="Beneficiary" placeholder="" />
                 </div>
 
-                <!-- guardian information -->
+                <!-- emergency contact information -->
                 <div class="col-span-12"> 
-                    <h1><strong>VII. GUARDIAN INFORMATION</strong></h1>
+                    <h1><strong>VII. EMERGENCY CONTACT PERSON</strong></h1>
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_name" label="Guardian Full Name" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_name" label="Full Name" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly value="{{$user->guardian_number}}" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->emergency_contact_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_occupation" label="Occupation" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_occupation" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_address" label="Address" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_address" label="Address" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_relationship" label="Relationship" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_relationship" label="Relationship" placeholder="" />
                 </div>
 
                 <!-- parents information -->
