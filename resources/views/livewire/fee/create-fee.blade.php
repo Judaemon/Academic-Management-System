@@ -1,7 +1,7 @@
 <div wire:ignore.self>
     <x-card title="Create School Fee">
         <form wire:submit.prevent="save">
-            <div class="grid grid-cols-1 gap-4">
+            <div class="grid grid-cols-1 gap-4 p-4">
                 <div class="col-span-4">
                     <x-input label="School Fee Name" corner-hint="e.g.Tuition Fee, Miscellaneous Fee" wire:model.defer="name" />
                 </div>

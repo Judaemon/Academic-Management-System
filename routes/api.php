@@ -24,10 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('users', [UserController::class, 'users'])->name('users.users');
 Route::get('teachers', [UserController::class, 'teachers'])->name('users.teachers');
-Route::get('students', [UserController::class, 'students'])->name('users.students');
 
 Route::get('roles', [RolesController::class, 'roles'])->name('roles.roles');
 
 Route::get('subjects', [SubjectController::class, 'subjects'])->name('subjects.subjects');
 
 Route::get('grade_level', [GradeLevelController::class, 'grade_level'])->name('grade_level.grade_level');
+
+Route::get('fees', [FeesController::class, 'fees'])->name('fees.fees');

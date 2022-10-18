@@ -21,7 +21,7 @@ class UserController extends Controller
     public function users(Request $request)
     {
         return User::query()
-            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS name"), 'id')
+            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS name"), 'id', 'email')
             ->orderBy('name')
             ->when(
                 $request->search,
@@ -54,29 +54,6 @@ class UserController extends Controller
             )
             ->orderBy('full_name')
             ->role('Teacher')
-            ->get();
-    }
-
-    public function students(Request $request)
-    {
-        if($request->has('selected')) {
-            return User::query()
-                ->role('Student')
-                ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS full_name"), 'id', 'email')
-                ->where('id', $request->selected)
-                ->get();
-        }
-
-        return User::query()
-            ->role('Student')
-            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS name"), 'id', 'email')
-            ->orderBy('name')
-            ->when(
-                $request->search,
-                fn (Builder $query) => $query
-                    ->where(DB::raw('CONCAT_WS(" ", firstname, lastname)'), 'like', "%{$request->search}%")
-                    ->orWhere('email', 'like', "%{$request->search}%")
-            )
             ->get();
     }
 }
