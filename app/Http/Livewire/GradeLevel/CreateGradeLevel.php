@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\GradeLevel;
 
 use App\Models\GradeLevel;
+use App\Models\Subject;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -55,7 +56,9 @@ class CreateGradeLevel extends ModalComponent
             'name' => $this->name,
         ]);
 
-        $grade_level->subjects()->attach($this->subjects);
+        Subject::query()
+            ->whereIn('id', $this->subjects)
+            ->update(['grade_level_id'=> $grade_level->id]);
 
         $this->emit('refreshDatatable');
 

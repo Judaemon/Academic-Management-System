@@ -61,6 +61,35 @@ class UserSeeder extends Seeder
         ])->assignRole('Super Admin');
 
         User::create([
+            'firstname' => 'Alexander',
+            'middlename' => 'Churro',
+            'lastname' => 'Am-uno',
+            'suffix' => 'Mr.',
+            'birthdate' => '2013-08-01',
+            'birthplace' => 'Baguio City',
+            'religion' => 'Catholic',
+            'gender' => 'Male',
+            'mothertongue' => 'English',
+            'nationality' => 'Filipino',
+            'height' => '124',
+            'weight' => '43',
+            'mobilenumber' => '09158390231',
+            'email' => 'alexanderamuno@s.caims.com',
+            'address' => 'Guisad Central, Baguio City',
+            'beneficiary' => 'Juan Dela Cruz',
+            'guardian_name' => 'John Doe',
+            'guardian_number' => '09176820766',
+            'guardian_occupation' => 'Pastor',
+            'guardian_address' => 'Trancoville',
+            'guardian_relationship' => 'Uncle',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Admin');
+
+        User::create([
             'firstname' => 'Leonardo',
             'middlename' => 'Haroon',
             'lastname' => 'Jamie',
@@ -148,35 +177,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Teacher');
 
-
-        User::create([
-            'firstname' => 'Alexander',
-            'middlename' => 'Churro',
-            'lastname' => 'Am-uno',
-            'suffix' => 'Mr.',
-            'birthdate' => '2013-08-01',
-            'birthplace' => 'Baguio City',
-            'religion' => 'Catholic',
-            'gender' => 'Male',
-            'mothertongue' => 'English',
-            'nationality' => 'Filipino',
-            'height' => '124',
-            'weight' => '43',
-            'mobilenumber' => '09158390231',
-            'email' => 'alexanderamuno@s.caims.com',
-            'address' => 'Guisad Central, Baguio City',
-            'beneficiary' => 'Juan Dela Cruz',
-            'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820766',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
-            'emergency_contact_relationship' => 'Uncle',
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'password' => Hash::make('student'),
-            'remember_token' => NULL,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ])->assignRole('Admin');
 
         User::create([
             'firstname' => 'Cayden',
