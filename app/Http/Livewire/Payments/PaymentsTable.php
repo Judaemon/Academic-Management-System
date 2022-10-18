@@ -36,7 +36,7 @@ class PaymentsTable extends DataTableComponent
                 }),
         ];
 
-        if (auth()->user()->can('read_payments')) {
+        if (auth()->user()->can('read_payment')) {
             array_push($columns, Column::make("Actions", "id")->view('livewire.payment.actions-col'));
         }
 

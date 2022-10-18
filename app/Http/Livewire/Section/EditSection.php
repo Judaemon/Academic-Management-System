@@ -17,26 +17,18 @@ class EditSection extends ModalComponent
 
     public $section;
 
-    public $teacher;
-    public $teachers;
-
     public $grade_level;
-    public $grade_levels;
 
-    public $section_subjects = [];
-    public $subjects;
+    public $grade_level_subjects = [];
 
     protected function rules()
     {
         return [
             'section.name' => ['required'],
             'section.capacity' => ['required'],
-            
-            'teacher' => ['required', new Teacher],
-            
+            'section.teacher_id' => ['required', new Teacher],
+
             'grade_level' => ['required'],
-            
-            'section_subjects' => ['required'],
         ];
     }
 
@@ -44,23 +36,10 @@ class EditSection extends ModalComponent
     {
         $this->section = $section;
 
-        $this->teachers = User::role('Teacher')->get();
-
-        $this->grade_levels = GradeLevel::all();
-        
-        $this->subjects = Subject::all();
-
-        // converted to string because option value are string
-        // if removed the teacher id is int and will not be selected 
-        $this->teacher = (string)$section->teacher_id;
-        
-        $this->grade_level = (string)$section->grade_level_id;
-
-        // subjects of section based on pivot table
-        $section_subjects = $section->subjects->pluck('id')->toArray();
-
-        // used as selected values
-        $this->section_subjects = array_map('strval', $section_subjects);
+        $this->grade_level = $section->grade_level_id;
+        $this->grade_level_subjects = GradeLevel::query()
+            ->find($section->grade_level_id)
+            ->subjects;
     }
 
     public function render()
@@ -70,11 +49,11 @@ class EditSection extends ModalComponent
 
     public function updatedGradeLevel($value)
     {
-        $this->section_subjects = [];
-
-        $this->subjects = Subject::query()
-            ->where('grade_level_id', $value)
-            ->get();
+        if (!empty($value)) {
+            $this->grade_level_subjects = GradeLevel::find($value)->subjects;
+        }else {
+            $this->grade_level_subjects = [];
+        }
     }
 
     public function save(): void
@@ -99,14 +78,11 @@ class EditSection extends ModalComponent
     public function submit()
     {
         $this->authorize('update_section');
-        
-        // passing the changes value to section if not the changes will not be saved 
-        $this->section->teacher_id = $this->teacher;
-        $this->section->grade_level_id = $this->grade_level;
-        
-        $this->section->save();
 
-        $this->section->subjects()->sync($this->section_subjects);
+        // passing the changes value to section if not the changes will not be saved
+        $this->section->grade_level_id = $this->grade_level;
+
+        $this->section->save();
 
         $this->emit('refreshDatatable');
 

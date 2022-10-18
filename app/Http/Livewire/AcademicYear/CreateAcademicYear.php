@@ -15,15 +15,17 @@ class CreateAcademicYear extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $start_date;
-    public $school_days = 0;
     public $end_date;
+
+    public $school_days = 0;
 
     protected function rules()
     {
         return [
             'start_date' => ['required', 'date'],
-            'school_days' => ['nullable', 'numeric'],
             'end_date' => ['nullable', 'date', 'after:start_date'],
+
+            'school_days' => ['nullable', 'numeric'],
         ];
     }
 
@@ -61,17 +63,17 @@ class CreateAcademicYear extends ModalComponent
         } else {
             $this->end_date = NULL;
         }
-            
+
         AcademicYear::create([
             'start_date' => $this->start_date,
             'school_days' => $this->school_days,
             'end_date' => $this->end_date,
         ]);
-    
+
         $this->emit('refreshDatatable');
-    
+
         $this->closeModal();
-            
+
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Academic Year successfully Created.'

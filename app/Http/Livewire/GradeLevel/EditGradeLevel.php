@@ -13,16 +13,20 @@ class EditGradeLevel extends ModalComponent
 
     public $grade_level;
 
+    public $grade_level_subjects = [];
+
     public function mount(GradeLevel $grade_level)
     {
         $this->grade_level = $grade_level;
-        $this->card_title = "Editing Grade Level";
+
+        $this->grade_level_subjects = $grade_level->subjects->pluck('id')->toArray();
     }
 
     protected function rules()
     {
         return [
             'grade_level.name' => ['required'],
+            'grade_level_subjects' => ['required'],
         ];
     }
 
@@ -54,23 +58,18 @@ class EditGradeLevel extends ModalComponent
     {
         $this->authorize('update_grade_level');
 
-        if (!auth()->user()->can('update_grade_level')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        } else {
-            $this->grade_level->save();
+        $this->grade_level->save();
 
-            $this->emit('refreshDatatable');
+        $this->grade_level->subjects()->sync($this->grade_level_subjects);
 
-            $this->closeModal();
+        $this->emit('refreshDatatable');
 
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Grade Level information successfully Updated.'
-            );
-        }
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Grade Level information successfully Updated.'
+        );
     }
 
     public static function modalMaxWidth(): string

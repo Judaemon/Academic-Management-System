@@ -29,6 +29,7 @@
             @method('PUT')
 
             <div class="mt-4">
+                <h1>Firstname</h1>
                 <x-label for="Firstname" :value="__('Firstname')"/>
                 <x-input type="text"
                          id="name"
@@ -44,6 +45,7 @@
             </div>
 
             <div class="mt-4">
+                <h1>E-Mail</h1>
                 <x-label for="email" :value="__('Email')"/>
                 <x-input name="email"
                          type="email"
