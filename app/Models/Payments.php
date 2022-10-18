@@ -13,6 +13,8 @@ class Payments extends Model
         'user_id',
         'amount_paid',
         'fee_id',
+        // 'payment_status',
+        'others_payment',
     ];
 
     public function user()

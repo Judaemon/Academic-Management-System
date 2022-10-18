@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')
                   ->constrained('users', 'id')
                   ->onDelete('cascade');
@@ -18,8 +19,17 @@ return new class extends Migration
                   ->default('0.00');
             
             $table->foreignId('fee_id')
+                  ->nullable()
                   ->constrained('fees', 'id')
                   ->onDelete('cascade');
+            
+            $table->string('others')
+                  ->nullable();
+
+            // $table->enum('payment_status', [
+            //     'refund',
+            //     ''
+            // ]);
 
             $table->timestamps();
         });

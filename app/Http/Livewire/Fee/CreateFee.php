@@ -43,7 +43,7 @@ class CreateFee extends ModalComponent
         $this->validate();
 
         $this->dialog()->confirm([
-             'title'       => 'Are you Sure?',
+            'title'       => 'Are you Sure?',
             'description' => 'Create School Fee?',
             'icon'        => 'question',
             'accept'      => [
