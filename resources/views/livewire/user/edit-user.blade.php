@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.pwdid" label="PWD ID" placeholder="XXXX0000" />
+                    <x-input readonly value="{{$user->pwdid}}" label="PWD ID" placeholder="XXXX0000" />
                 </div>
 
                 <!-- physical information -->
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.mobilenumber" label="Contact Number" placeholder="09*********" />
+                    <x-input readonly value="{{$user->mobilenumber}}" label="Contact Number" placeholder="09*********" />
                 </div>
 
                 <div class="col-span-4">
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly autocomplete="randomshitparadimagautocomplete" value="user->email" label="Email" placeholder="sample@email.com" />
+                    <x-input readonly autocomplete="randomshitparadimagautocomplete" value="{{$user->email}}" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
@@ -119,19 +119,19 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.lrn" label="Learner's Reference Number" placeholder="" />
+                    <x-input readonly value="{{$user->lrn}}" label="Learner's Reference Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.esc" label="Education Service Contracting (ESC) No." placeholder="" />
+                    <x-input readonly value="{{$user->esc}}" label="Education Service Contracting (ESC) No." placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.qvr" label="Qualified Vouchers Recipients (QVR)" placeholder="" />
+                    <x-input readonly value="{{$user->qvr}}" label="Qualified Vouchers Recipients (QVR)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.public_id" label="Public" placeholder="" />
+                    <x-input readonly value="{{$user->public_id}}" label="Public" placeholder="" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.emergency_contact_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->emergency_contact_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -182,7 +182,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.mparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->mparent_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -201,7 +201,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.fparent_number" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->fparent_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -218,7 +218,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-inputs.password  autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.password" label="" placeholder="" />
+                    <x-inputs.password  autocomplete="randominput" wire:model.defer="user.password" label="" placeholder="" />
                 </div>
 
         <x-slot name="footer">

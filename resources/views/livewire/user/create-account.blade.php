@@ -84,9 +84,8 @@
                     <x-input wire:model.defer="address" label="Address (*)" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="email" label="Email (*)" placeholder="user@email.com" />
+                    <x-input autocomplete="randominput" wire:model.defer="email" label="Email (*)" placeholder="user@email.com" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -149,9 +148,8 @@
                     <h1><strong>PASSWORD</strong></h1>
                 </div>
                 <div class="col-span-4">
-                    <x-inputs.password  autocomplete="randomshitparadimagautocomplete" wire:model.defer="password" label="" placeholder="" />
+                    <x-inputs.password  autocomplete="randominput" wire:model.defer="password" label="" placeholder="" />
                 </div>
-                {{-- read link security reason ignore nalang muna --}}
         </div>
 
         <x-slot name="footer">
