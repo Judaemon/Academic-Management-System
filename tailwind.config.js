@@ -23,7 +23,7 @@ module.exports = {
         './vendor/wireui/wireui/ts/**/*.ts',
         './vendor/wireui/wireui/src/View/**/*.php',
 
-        
+
         // livewire Modal
         // https://github.com/wire-elements/modal
         './vendor/wire-elements/modal/resources/views/*.blade.php',

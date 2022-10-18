@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('users', [UserController::class, 'users'])->name('users.users');
 Route::get('teachers', [UserController::class, 'teachers'])->name('users.teachers');
 Route::get('students', [UserController::class, 'students'])->name('users.students');
 
