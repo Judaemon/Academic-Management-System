@@ -32,7 +32,7 @@ class FeesTable extends DataTableComponent
                     return 'Php '.number_format($value, 2);
                 }),
 
-            Column::make("Grade Level", "grade_level.name")
+            Column::make("Grade Level (if applicable)", "grade_level.name")
                 ->sortable()
                 ->searchable(),
 
