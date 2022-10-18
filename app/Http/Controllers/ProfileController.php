@@ -19,7 +19,11 @@ class ProfileController extends Controller
         }
 
         auth()->user()->update([
-            'name' => $request->name,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'middlename' => $request->middlename,
+            'address' => $request->address,
+            'mobilenumber' => $request->mobilenumber,
             'email' => $request->email,
         ]);
 
