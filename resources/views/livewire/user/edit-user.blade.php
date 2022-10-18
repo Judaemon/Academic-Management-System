@@ -77,16 +77,15 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly value="{{$user->mobilenumber}}" label="Contact Number" placeholder="09*********" />
+                    <x-input wire:model.defer="user.mobilenumber" label="Contact Number" placeholder="09*********" />
                 </div>
 
                 <div class="col-span-4">
                     <x-input wire:model.defer="user.address" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input readonly autocomplete="randomshitparadimagautocomplete" value="{{$user->email}}" label="Email" placeholder="sample@email.com" />
+                    <x-input readonly autocomplete="randomshitparadimagautocomplete" value="user->email" label="Email" placeholder="sample@email.com" />
                 </div>
 
                 <!-- educational background -->
@@ -154,7 +153,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly value="{{$user->emergency_contact_number}}" label="Contact Number" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_number" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -183,7 +182,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly value="{{$user->mparent_number}}" label="Contact Number" placeholder="" />
+                    <x-input wire:model.defer="user.mparent_number" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -202,7 +201,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly value="{{$user->fparent_number}}" label="Contact Number" placeholder="" />
+                    <x-input wire:model.defer="user.fparent_number" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
@@ -221,7 +220,6 @@
                 <div class="col-span-4">
                     <x-inputs.password  autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.password" label="" placeholder="" />
                 </div>
-                {{-- read link security reason ignore nalang muna --}}
 
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
