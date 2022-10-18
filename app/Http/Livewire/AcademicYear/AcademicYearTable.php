@@ -18,25 +18,21 @@ class AcademicYearTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make("Id")
                 ->searchable()
                 ->sortable(),
 
-            Column::make("Start Date", "start_date")
+            Column::make("Start Date")
                 ->searchable()
                 ->sortable()
-                ->format(function($value) {
-                    return date('j \\ F Y', strtotime($value));
-                }),
+                ->format(fn($value) => date('j \\ F Y', strtotime($value))),
 
             Column::make("Number of School Days", "school_days")
                 ->searchable()
                 ->sortable()
-                ->format(function($value) {
-                    return $value.' days';
-                }),
+                ->format(fn($value) => $value.' days'),
 
-            Column::make("End Date", "end_date")
+            Column::make("End Date")
                 ->searchable()
                 ->sortable()
                 ->format(function($value) {
