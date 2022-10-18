@@ -21,7 +21,7 @@ class GradeLevelSeeder extends Seeder
         ]);
 
         GradeLevel::create([
-            'name' => "Grade 6"
+            'name' => "Grade 2"
         ]);
     }
 }
