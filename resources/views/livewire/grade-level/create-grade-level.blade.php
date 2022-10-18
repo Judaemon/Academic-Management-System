@@ -5,6 +5,18 @@
                 <div class="col-span-12">
                     <x-input wire:model.defer="name" label="Grade Level Name" placeholder="" />
                 </div>
+
+                <div class="col-span-12">
+                    <x-select
+                        label="Subjects"
+                        placeholder="Select subjects"
+                        wire:model.defer="subjects"
+                        :async-data="route('subjects.subjects')"
+                        option-label="name"
+                        option-value="id"
+                        multiselect
+                    />
+                </div>
             </div>
 
             <x-slot name="footer">

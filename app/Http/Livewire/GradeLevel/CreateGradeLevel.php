@@ -11,20 +11,16 @@ class CreateGradeLevel extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $grade_level;
-
     public $name;
+
+    public $subjects= [];
 
     protected function rules()
     {
         return [
             'name' => ['required'],
+            'subjects' => ['required'],
         ];
-    }
-
-    public function mount(GradeLevel $grade_level)
-    {
-        $this->grade_level = $grade_level;
     }
 
     public function render()
@@ -38,7 +34,7 @@ class CreateGradeLevel extends ModalComponent
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create Grade Level?',
+            'description' => 'Create this grade level?',
             'icon'        => 'question',
             'accept'      => [
                 'label'  => 'Yes, create it',
@@ -55,27 +51,22 @@ class CreateGradeLevel extends ModalComponent
     {
         $this->authorize('create_grade_level');
 
-        if (!auth()->user()->can('create_grade_level')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        } else {
-            GradeLevel::create([
-                'name' => $this->name,
-            ]);
-    
-            $this->emit('refreshDatatable');
-    
-            $this->closeModal();
+        $grade_level = GradeLevel::create([
+            'name' => $this->name,
+        ]);
 
-            $this->reset();
-            
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Grade Level successfully Created.'
-            );
-        }
+        $grade_level->subjects()->attach($this->subjects);
+
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->reset();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Grade Level successfully Created.'
+        );
     }
 
     public static function modalMaxWidth(): string
