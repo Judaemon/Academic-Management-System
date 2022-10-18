@@ -17,6 +17,8 @@ return new class extends Migration
         });
     }
 
+    // testing
+
     public function down()
     {
         Schema::dropIfExists('grade_levels');
