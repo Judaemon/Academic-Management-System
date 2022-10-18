@@ -66,7 +66,7 @@ class EditAcademicYear extends ModalComponent
 
     public function submit()
     {
-        $this->authorize('edit_academic_year');
+        $this->authorize('update_academic_year');
 
         // find ways to display during input
         if($this->school_days > 0) {

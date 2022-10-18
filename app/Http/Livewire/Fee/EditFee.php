@@ -68,7 +68,7 @@ class EditFee extends ModalComponent
 
     public function submit()
     {
-        $this->authorize('edit_fee');
+        $this->authorize('update_fee');
 
         $this->fee->forceFill([
             'fee_name' => $this->name,

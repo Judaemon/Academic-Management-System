@@ -16,7 +16,7 @@ class DeleteAcademicYear extends ModalComponent
 
     public function mount(AcademicYear $academic_year)
     {
-        $this->authorize('delete_academic_fee');
+        $this->authorize('delete_academic_year');
 
         $this->academic_year = $academic_year;
     }
