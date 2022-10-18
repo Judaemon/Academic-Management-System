@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('teachers', [UserController::class, 'teachers'])->name('users.teachers');
-Route::get('users', [UserController::class, 'users'])->name('users.users');
+Route::get('students', [UserController::class, 'students'])->name('users.students');
 
 Route::get('roles', [RolesController::class, 'roles'])->name('roles.roles');
 

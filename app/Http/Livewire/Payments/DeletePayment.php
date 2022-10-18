@@ -3,19 +3,22 @@
 namespace App\Http\Livewire\Payments;
 
 use LivewireUI\Modal\ModalComponent;
-use App\Models\Payments;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use App\Models\Payments;
 
 class DeletePayment extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $payment;
 
     public function mount(Payments $payment)
     {
+        $this->authorize('delete_payment');
+
         $this->payment = $payment;
-        $this->card_title = "Delete Payment Record";
     }
 
     public function render()
@@ -27,7 +30,7 @@ class DeletePayment extends ModalComponent
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => "This payment record will be Permanently Deleted",
+            'description' => "This record will be Permanently Deleted",
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
@@ -43,22 +46,15 @@ class DeletePayment extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('delete_payment')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->payment->delete();
+        $this->payment->delete();
 
-            $this->closeModal();
+        $this->closeModal();
     
-            $this->emit('refreshDatatable');
+        $this->emit('refreshDatatable');
     
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Payment Record deleted successfully.'
-            );
-        }
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Payment Record deleted successfully.'
+        );
     }
 }

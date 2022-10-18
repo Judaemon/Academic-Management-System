@@ -62,7 +62,7 @@ class PermissionSeeder extends Seeder
         }
 
         $payment_permissions = [
-            'view_payments',
+            'view_payment',
             'create_payment',
             'read_payment',
             'delete_payment',

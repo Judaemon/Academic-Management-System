@@ -38,21 +38,25 @@ class UserController extends Controller
             ->get();
     }
 
-    public function users(Request $request)
+    public function students(Request $request)
     {
+        if($request->has('selected')) {
+            return User::query()
+                ->role('Student')
+                ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS full_name"), 'id', 'email')
+                ->where('id', $request->selected)
+                ->get();
+        }
+
         return User::query()
-            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS name"), 'id')
+            ->role('Student')
+            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS name"), 'id', 'email')
             ->orderBy('name')
             ->when(
                 $request->search,
                 fn (Builder $query) => $query
                     ->where(DB::raw('CONCAT_WS(" ", firstname, lastname)'), 'like', "%{$request->search}%")
-                    ->orWhere('id', 'like', "%{$request->search}%")
-            )
-            ->when(
-                $request->exists('selected'),
-                fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
-                fn (Builder $query) => $query->limit(10)
+                    ->orWhere('email', 'like', "%{$request->search}%")
             )
             ->get();
     }

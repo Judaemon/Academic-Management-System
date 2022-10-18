@@ -27,15 +27,16 @@ class CreatePayments extends ModalComponent
     protected function rules()
     {
         return [
-            'user_id' => 'required|unique:users,id,'.$this->user_id,
-            'amount_paid' => 'required|numeric',
-            'fee_id' => 'required|unique:fees,id,'.$this->fee_id
+            'user' => ['required', 'unique:users,id,'.$this->user],
+            'amount_paid' => ['required', 'numeric'],
+            'fee' => ['nullable', 'unique:fees,id,'.$this->fee],
+            'others' => ['nullable', 'min:5', 'max:35'],
         ];
     }
 
     public function mount()
     {
-        $this->users = GradeLevel::all();
+        $this->users = User::all();
         $this->fees = Fee::all();
     }
 
@@ -47,8 +48,6 @@ class CreatePayments extends ModalComponent
     public function save(): void
     {
         $this->validate();
-
-        $this->modalCreate = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -67,31 +66,27 @@ class CreatePayments extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('create_payment')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            Payments::create([
-                'user_id' => $this->user_id,
-                'amount_paid' => $this->amount_paid,
-                'fee_id' => $this->fee_id,
-            ]);
+        $this->authorize('create_payment');
+
+        Payments::create([
+            'user_id' => $this->user,
+            'amount_paid' => $this->amount_paid,
+            'fee_id' => $this->fee,
+            'others' => $this->others,
+        ]);
     
-            $this->emit('refreshDatatable');
+        $this->emit('refreshDatatable');
     
-            $this->reset();
+        $this->closeModal();
             
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Payment has been Recorded.'
-            );
-        }
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Payment has been Recorded.'
+        );
     }
 
-    public function closeModal()
+    public static function modalMaxWidth(): string
     {
-        $this->modalCreate = false;
+        return '2xl';
     }
 }

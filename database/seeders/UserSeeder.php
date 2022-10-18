@@ -60,7 +60,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Super Admin');
 
-        //Accountant
         User::create([
             'firstname' => 'Leonardo',
             'middlename' => 'Haroon',
@@ -178,5 +177,74 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Admin');
+
+        User::create([
+            'firstname' => 'Cayden',
+            'middlename' => 'Zackary',
+            'lastname' => 'Jackson',
+            'suffix' => 'SA',
+            'birthdate' => '2012-01-12',
+            'birthplace' => 'Baguio City',
+            'religion' => 'Iglesia ni Cristo',
+            'gender' => 'Male',
+            'mothertongue' => 'English',
+            'nationality' => 'Filipino',
+            'height' => '165',
+            'weight' => '57.2',
+            'mobilenumber' => '09274294577',
+            'email' => 'jacksoncayden@s.caims.edu',
+            'address' => 'Pablo Ocampo Sr. Ext, Baguio City',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student1'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Student');
+
+        User::create([
+            'firstname' => 'Frederick',
+            'middlename' => 'Miguel',
+            'lastname' => 'Balon',
+            'suffix' => 'SA',
+            'birthdate' => '2011-06-20',
+            'birthplace' => 'Sarrat, Ilocos Norte',
+            'religion' => 'None',
+            'gender' => 'Male',
+            'mothertongue' => 'Ilokano',
+            'nationality' => 'Filipino',
+            'height' => '143.5',
+            'weight' => '41.6',
+            'mobilenumber' => '09983315305',
+            'email' => 'balonfrederick@s.caims.edu',
+            'address' => 'San Agustin, Baguio City',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student2'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Student');
+
+        User::create([
+            'firstname' => 'Jacqueline',
+            'middlename' => 'Audrina',
+            'lastname' => 'Reyes',
+            'suffix' => 'SA',
+            'birthdate' => '2006-09-13',
+            'birthplace' => 'Baguio City',
+            'religion' => 'Catholic',
+            'gender' => 'Female',
+            'mothertongue' => 'Ilokano',
+            'nationality' => 'Filipino',
+            'height' => '162.5',
+            'weight' => '63.9',
+            'mobilenumber' => '09664861698',
+            'email' => 'reyesjacqueline@s.caims.edu',
+            'address' => 'Ben Harrison, Baguio City',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student3'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Student');
     }
 }
