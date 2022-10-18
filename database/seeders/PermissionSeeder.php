@@ -8,15 +8,10 @@ use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
 {
-    
     // potential permissions
-    // access_admin
-    // access_academic
-    // access_accounting
+    // enroll_student | admit_student
+    // enroll_self
 
-    // assign_role
-    // 
-    
     public function run()
     {
         $user_permissions = [
@@ -38,8 +33,9 @@ class PermissionSeeder extends Seeder
             'read_role',
             'update_role',
             'delete_role',
+            'assign_role',
         ];
-        
+
         foreach ($role_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
@@ -48,7 +44,7 @@ class PermissionSeeder extends Seeder
             'view_setting',
             'update_setting',
         ];
-        
+
         foreach ($setting_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
@@ -83,7 +79,7 @@ class PermissionSeeder extends Seeder
             'update_academic_year',
             'delete_academic_year',
         ];
-        
+
         foreach ($academic_year_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
@@ -95,7 +91,7 @@ class PermissionSeeder extends Seeder
             'update_grade_level',
             'delete_grade_level',
         ];
-        
+
         foreach ($grade_level_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
@@ -107,7 +103,7 @@ class PermissionSeeder extends Seeder
             'update_section',
             'delete_section',
         ];
-        
+
         foreach ($section_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
@@ -119,7 +115,7 @@ class PermissionSeeder extends Seeder
             'update_subject',
             'delete_subject',
         ];
-        
+
         foreach ($subject_permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
@@ -137,7 +133,7 @@ class PermissionSeeder extends Seeder
         //     'view_users',
         //     'read_user',
         // ];
-        
+
         // foreach ($teacher_permissions as $permission) {
         //     Permission::firstOrCreate(['name' => $permission]);
         // }
@@ -152,7 +148,7 @@ class PermissionSeeder extends Seeder
         //     'view_users',
         //     'read_user',
         // ];
-        
+
         // foreach ($student_permissions as $permission) {
         //     Permission::firstOrCreate(['name' => $permission]);
         // }
