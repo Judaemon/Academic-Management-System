@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->hasRole('Teacher');
     }
 
+    public function subject()
+    {
+        return $this->hasMany(Subject::class);
+    }
+
     public function sections()
     {
         return $this->hasMany(Section::class);
