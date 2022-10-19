@@ -50,10 +50,8 @@ class PermissionSeeder extends Seeder
         }
 
         $fee_permissions = [
-            'view_fees',
             'create_fee',
-            'read_fee',
-            'edit_fee',
+            'update_fee',
             'delete_fee',
         ];
 
@@ -64,7 +62,6 @@ class PermissionSeeder extends Seeder
         $payment_permissions = [
             'view_payment',
             'create_payment',
-            'read_payment',
             'delete_payment',
         ];
 
@@ -73,9 +70,8 @@ class PermissionSeeder extends Seeder
         }
 
         $academic_year_permissions = [
-            'view_academic_years',
+            'view_academic_year',
             'create_academic_year',
-            'read_academic_year',
             'update_academic_year',
             'delete_academic_year',
         ];

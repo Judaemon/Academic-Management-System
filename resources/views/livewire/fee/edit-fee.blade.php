@@ -1,7 +1,7 @@
 <div wire:ignore.self class="form-container">  
     <x-card title="{{ $card_title }}">
         <form wire:submit.prevent="save">
-            <div class="grid grid-cols-1 gap-4">
+            <div class="grid grid-cols-1 gap-4 p-4">
                 <div class="col-span-4">
                     <x-input wire:model.defer="name" label="School Fee Name" />
                 </div>
@@ -15,11 +15,10 @@
                         label="Grade Level" 
                         wire:model.defer="grade_level"
                         placeholder="Select grade level"
-                    >
-                        @foreach ($grade_levels as $grade_level)
-                            <x-select.option label="{{ $grade_level->name }}" value="{{ $grade_level->id }}" />    
-                        @endforeach
-                    </x-select>
+                        :async-data="route('grade_level.grade_level')"
+                        option-label="name"
+                        option-value="id"
+                    />
                 </div>
             </div>
 

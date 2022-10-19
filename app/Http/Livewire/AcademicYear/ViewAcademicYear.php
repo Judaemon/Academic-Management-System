@@ -15,7 +15,7 @@ class ViewAcademicYear extends ModalComponent
    
     public function mount(AcademicYear $academic_year)
     {
-        $this->authorize('view_section');
+        $this->authorize('view_academic_year');
 
         $this->academic_year = $academic_year;
 

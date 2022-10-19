@@ -18,9 +18,8 @@ class FeesTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable()
-                ->searchable(),
+            Column::make("Id")
+                ->sortable(),
 
             Column::make("Fee Name", "fee_name")
                 ->sortable()
@@ -28,11 +27,9 @@ class FeesTable extends DataTableComponent
 
             Column::make("Amount")
                 ->sortable()
-                ->format(function($value) {
-                    return 'Php '.number_format($value, 2);
-                }),
+                ->format(fn($value) => 'Php '.number_format($value, 2)),
 
-            Column::make("Grade Level", "grade_level.name")
+            Column::make("Grade Level (if applicable)", "grade_level.name")
                 ->sortable()
                 ->searchable(),
 
