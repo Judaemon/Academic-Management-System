@@ -17,7 +17,6 @@ class EditFee extends ModalComponent
 
     public $name;
     public $amount;
-
     public $grade_level;
  
     public function mount(Fee $fee)
