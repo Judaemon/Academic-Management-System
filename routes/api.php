@@ -4,6 +4,7 @@ use App\Http\Controllers\GradeLevelController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FeesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,4 @@ Route::get('subjects', [SubjectController::class, 'subjects'])->name('subjects.s
 
 Route::get('grade_level', [GradeLevelController::class, 'grade_level'])->name('grade_level.grade_level');
 
-Route::get('fees', [FeesController::class, 'fees'])->name('fees.fees');
+Route::get('fees', [FeesController::class, 'fees'])->name('fees.all');

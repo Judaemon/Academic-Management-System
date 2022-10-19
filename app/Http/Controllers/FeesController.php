@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 use App\Models\Fee;
@@ -16,7 +17,8 @@ class FeesController extends Controller
     public function fees(Request $request)
     {
         return Fee::query()
-            ->select('id', 'fee_name')
+            ->select('id', 'fee_name', 'amount')
+            ->orderBy('fee_name')
             ->when(
                 $request->search,
                 fn (Builder $query) => $query
@@ -28,7 +30,6 @@ class FeesController extends Controller
                 fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
                 fn (Builder $query) => $query->limit(10)
             )
-            ->orderBy('fee_name')
             ->get();
     }
 }
