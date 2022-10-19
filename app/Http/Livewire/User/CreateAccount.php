@@ -73,10 +73,10 @@ class CreateAccount extends ModalComponent
             'address' => ['required'],
 
             // additional account info
-            'pag_ibig' => ['required', 'unique:users,pag_ibig'],
-            'philhealth' => ['required', 'unique:users,philhealth'],
-            'sss' => ['required', 'unique:users,sss'],
-            'tin' => ['required', 'unique:users,tin'],
+            'pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
+            'philhealth' => ['nullable', 'unique:users,philhealth'],
+            'sss' => ['nullable', 'unique:users,sss'],
+            'tin' => ['nullable', 'unique:users,tin'],
 
             // emergency contact
             'emergency_contact_name' => ['required'],
