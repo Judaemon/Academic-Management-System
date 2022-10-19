@@ -74,10 +74,10 @@ return new class extends Migration
             $table->string('fparent_address')->nullable();
 
             // for account information
-            $table->string('pag_ibig')->unique();
-            $table->string('philhealth')->unique();
-            $table->string('sss')->unique();
-            $table->string('tin')->unique();
+            $table->string('pag_ibig')->unique()->nullable();
+            $table->string('philhealth')->unique()->nullable();
+            $table->string('sss')->unique()->nullable();
+            $table->string('tin')->unique()->nullable();
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
