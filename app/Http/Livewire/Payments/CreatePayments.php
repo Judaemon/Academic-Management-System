@@ -15,14 +15,14 @@ class CreatePayments extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $user;
-    public $users;
-
     public $amount_paid;
-
     public $fee;
-    public $fees;
-
     public $others;
+
+    public $payment_type = [
+        'fees_option',
+        'others_option',
+    ];
 
     protected function rules()
     {
@@ -32,12 +32,6 @@ class CreatePayments extends ModalComponent
             'fee' => ['nullable', 'unique:fees,id,'.$this->fee],
             'others' => ['nullable', 'min:5', 'max:35'],
         ];
-    }
-
-    public function mount()
-    {
-        $this->users = User::all();
-        $this->fees = Fee::all();
     }
 
     public function render()

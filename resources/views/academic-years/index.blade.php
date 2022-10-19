@@ -2,7 +2,7 @@
 
     <div class="p-4 flex justify-between">
         <h2 class="text-2xl font-semibold text-gray-700">Academic Year</h2>
-        <x-button icon="plus-circle" primary  class="font-bold uppercase tracking-wide" label="Add Academic Year" 
+        <x-button icon="plus-circle" primary  class="uppercase" label="Add Academic Year" 
             onclick="Livewire.emit('openModal', 'academic-year.create-academic-year')" 
         />
     </div>
