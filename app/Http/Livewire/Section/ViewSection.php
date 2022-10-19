@@ -22,7 +22,7 @@ class ViewSection extends ModalComponent
     protected function rules()
     {
         return [
-            'section.name' => ['required'],
+            'section.name' => ['required', 'unique:sections,name'],
             'section.capacity' => ['required'],
 
             'section.teacher_id' => ['required'],

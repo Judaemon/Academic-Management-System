@@ -43,7 +43,6 @@
                     >
                             <x-select.option label="Male" value="Male" />
                             <x-select.option label="Female" value="Female" />
-                            <x-select.option label="Rather not say" value="Rather not say" />
                     </x-select>
                 </div>
 
@@ -56,7 +55,7 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.pwdid" label="PWD ID" placeholder="XXXX0000" />
+                    <x-input readonly value="{{$user->pwdid}}" label="PWD ID" placeholder="XXXX0000" />
                 </div>
 
                 <!-- physical information -->
@@ -85,7 +84,6 @@
                     <x-input wire:model.defer="user.address" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
                     <x-input readonly autocomplete="randomshitparadimagautocomplete" value="{{$user->email}}" label="Email" placeholder="sample@email.com" />
                 </div>
@@ -121,19 +119,19 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.lrn" label="Learner's Reference Number" placeholder="" />
+                    <x-input readonly value="{{$user->lrn}}" label="Learner's Reference Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.esc" label="Education Service Contracting (ESC) No." placeholder="" />
+                    <x-input readonly value="{{$user->esc}}" label="Education Service Contracting (ESC) No." placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.qvr" label="Qualified Vouchers Recipients (QVR)" placeholder="" />
+                    <x-input readonly value="{{$user->qvr}}" label="Qualified Vouchers Recipients (QVR)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.public_id" label="Public" placeholder="" />
+                    <x-input readonly value="{{$user->public_id}}" label="Public" placeholder="" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -145,29 +143,29 @@
                     <x-input wire:model.defer="user.beneficiary" label="Beneficiary" placeholder="" />
                 </div>
 
-                <!-- guardian information -->
+                <!-- emergency contact information -->
                 <div class="col-span-12"> 
-                    <h1><strong>VII. GUARDIAN INFORMATION</strong></h1>
+                    <h1><strong>VII. EMERGENCY CONTACT PERSON</strong></h1>
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_name" label="Guardian Full Name" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_name" label="Full Name" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input readonly value="{{$user->guardian_number}}" label="Contact Number" placeholder="" />
+                    <x-input readonly value="{{$user->emergency_contact_number}}" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_occupation" label="Occupation" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_occupation" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_address" label="Address" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_address" label="Address" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="user.guardian_relationship" label="Relationship" placeholder="" />
+                    <x-input wire:model.defer="user.emergency_contact_relationship" label="Relationship" placeholder="" />
                 </div>
 
                 <!-- parents information -->
@@ -220,9 +218,8 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-inputs.password  autocomplete="randomshitparadimagautocomplete" wire:model.defer="user.password" label="" placeholder="" />
+                    <x-inputs.password  autocomplete="randominput" wire:model.defer="user.password" label="" placeholder="" />
                 </div>
-                {{-- read link security reason ignore nalang muna --}}
 
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
