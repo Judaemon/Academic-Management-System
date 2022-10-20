@@ -43,7 +43,6 @@
                     >
                             <x-select.option label="Male" value="Male" />
                             <x-select.option label="Female" value="Female" />
-                            <x-select.option label="Rather not say" value="Rather not say" />
                     </x-select>
                 </div>
 
@@ -78,16 +77,15 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="mobilenumber" label="Contact Number (*)" placeholder="+639** *** ****" />
+                    <x-input wire:model.defer="mobilenumber" label="Contact Number (*)" placeholder="09** *** ****" />
                 </div>
 
                 <div class="col-span-4">
                     <x-input wire:model.defer="address" label="Address (*)" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="col-span-4">
-                    <x-input autocomplete="randomshitparadimagautocomplete" wire:model.defer="email" label="Email (*)" placeholder="user@email.com" />
+                    <x-input autocomplete="randominput" wire:model.defer="email" label="Email (*)" placeholder="user@email.com" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -99,25 +97,50 @@
                     <x-input wire:model.defer="beneficiary" label="Beneficiary" placeholder="" />
                 </div>
 
+                <!-- emergency contact information -->
+                <div class="col-span-12"> 
+                    <h1><strong>V. EMERGENCY CONTACT PERSON</strong></h1>
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_name" label="Full Name (*)" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_number" label="Contact Number (*)" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_occupation" label="Occupation" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_address" label="Address (*)" placeholder="" />
+                </div>
+
+                <div class="col-span-4">
+                    <x-input wire:model.defer="emergency_contact_relationship" label="Relationship (*)" placeholder="" />
+                </div>
+
                 <!-- government id -->
                 <div class="col-span-12"> 
-                    <h1><strong>V. GOVERNMENT ID NO.</strong></h1>
+                    <h1><strong>VI. GOVERNMENT ID NO.</strong></h1>
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG" placeholder="" />
+                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="philhealth" label="PhilHealth" placeholder="" />
+                    <x-input wire:model.defer="philhealth" label="PhilHealth (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="sss" label="SSS" placeholder="" />
+                    <x-input wire:model.defer="sss" label="SSS (*)" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="tin" label="TIN" placeholder="" />
+                    <x-input wire:model.defer="tin" label="TIN (*)" placeholder="" />
                 </div>
 
                 <!-- user password -->
@@ -125,9 +148,8 @@
                     <h1><strong>PASSWORD</strong></h1>
                 </div>
                 <div class="col-span-4">
-                    <x-inputs.password  autocomplete="randomshitparadimagautocomplete" wire:model.defer="password" label="" placeholder="" />
+                    <x-inputs.password  autocomplete="randominput" wire:model.defer="password" label="" placeholder="" />
                 </div>
-                {{-- read link security reason ignore nalang muna --}}
         </div>
 
         <x-slot name="footer">

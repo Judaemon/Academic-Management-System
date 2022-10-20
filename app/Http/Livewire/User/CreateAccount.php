@@ -37,6 +37,12 @@ class CreateAccount extends ModalComponent
 
     public $mobilenumber;
     public $address;
+
+    public $emergency_contact_name;
+    public $emergency_contact_number;
+    public $emergency_contact_occupation;
+    public $emergency_contact_address;
+    public $emergency_contact_relationship;
     
     protected function rules()
     {
@@ -67,10 +73,17 @@ class CreateAccount extends ModalComponent
             'address' => ['required'],
 
             // additional account info
-            'pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
-            'philhealth' => ['nullable', 'unique:users,philhealth'],
-            'sss' => ['nullable', 'unique:users,sss'],
-            'tin' => ['nullable', 'unique:users,tin'],
+            'pag_ibig' => ['required', 'unique:users,pag_ibig'],
+            'philhealth' => ['required', 'unique:users,philhealth'],
+            'sss' => ['required', 'unique:users,sss'],
+            'tin' => ['required', 'unique:users,tin'],
+
+            // emergency contact
+            'emergency_contact_name' => ['required'],
+            'emergency_contact_number' => ['required','unique:users,emergency_contact_number'],
+            'emergency_contact_occupation' => ['nullable'],
+            'emergency_contact_address' => ['required'],
+            'emergency_contact_relationship' => ['required'],
 
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
@@ -104,11 +117,14 @@ class CreateAccount extends ModalComponent
     {
         $this->authorize('create_account');
 
+        // firstname.firstletteroflastname ex. firstname = Mark, lastname = Zuckerberg, password = mark.z
+        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8').'.'.$this->lastname);
+
         $user =User::create([
                 'firstname' => $this->firstname,
                 'lastname' => $this->lastname,
                 'email' => $this->email,
-                'password' => Hash::make($this->password),
+                'password' => Hash::make($password),
                 'middlename' => $this->middlename,
                 'suffix' => $this->suffix,
                 'birthdate' => $this->birthdate,
@@ -135,6 +151,13 @@ class CreateAccount extends ModalComponent
                 'philhealth' => $this->philhealth,
                 'sss' => $this->sss,
                 'tin' => $this->tin,
+
+                // emergency contact person
+                'emergency_contact_name' => $this->emergency_contact_name,
+                'emergency_contact_number' => $this->emergency_contact_number,
+                'emergency_contact_occupation' => $this->emergency_contact_occupation,
+                'emergency_contact_address' => $this->emergency_contact_address,
+                'emergency_contact_relationship' => $this->emergency_contact_relationship,
         ]);
 
         $this->closeModal();

@@ -28,7 +28,7 @@
 
         <!-- Desktop sidebar -->
         @include('layouts.navigation')
-        
+
         <!-- Mobile sidebar -->
         <!-- Backdrop -->
         @include('layouts.navigation-mobile')

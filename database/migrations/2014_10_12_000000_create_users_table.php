@@ -13,9 +13,9 @@ return new class extends Migration
 
             // personal information
             $table->string('firstname');
-            $table->string('middlename');
+            $table->string('middlename')->nullable();
             $table->string('lastname');
-            $table->string('suffix');
+            $table->string('suffix')->nullable();
 
             $table->date('birthdate');
             $table->string('birthplace');
@@ -56,12 +56,12 @@ return new class extends Migration
             // government beneficiary
             $table->string('beneficiary')->nullable();
 
-            // guardian information
-            $table->string('guardian_name');
-            $table->string('guardian_number')->unique();
-            $table->string('guardian_occupation')->nullable();
-            $table->string('guardian_address');
-            $table->string('guardian_relationship');
+            // emergency contact information
+            $table->string('emergency_contact_name');
+            $table->string('emergency_contact_number')->unique();
+            $table->string('emergency_contact_occupation')->nullable();
+            $table->string('emergency_contact_address');
+            $table->string('emergency_contact_relationship');
 
             // parent information
             $table->string('mparent_name')->nullable();

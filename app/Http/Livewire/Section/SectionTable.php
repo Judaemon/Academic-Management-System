@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Section;
 
+use App\Models\GradeLevel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Section;
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class SectionTable extends DataTableComponent
 {
@@ -17,10 +20,28 @@ class SectionTable extends DataTableComponent
         // $this->setSearchDebounce(1000);
     }
 
+    // FILTER NEEDS FIXING/CHECKING
+    public function filters(): array
+    {
+        $option = GradeLevel::query()
+            ->pluck('name')
+            ->toArray();
+
+        $option = array_combine($option, $option);
+
+        return [
+            SelectFilter::make('Grade Level')
+                ->options($option)
+                ->filter(function(Builder $builder, string $value) {
+                    $builder->where('grade_levels.name', $value);
+                }),
+        ];
+    }
+
     public function columns(): array
     {
-        return [
-            Column::make("Grade Level ID", "grade_level_id")
+        $columns = [
+            Column::make("Grade Level ID", "grade_level.name")
                 ->sortable()
                 ->searchable(),
             Column::make("Name", "name")
@@ -29,10 +50,13 @@ class SectionTable extends DataTableComponent
             Column::make("Capacity", "capacity")
                 ->sortable()
                 ->searchable(),
-            Column::make("Teacher ID", "teacher_id")
-                ->sortable()
-                ->searchable(),
-            Column::make("Actions", "id")->view('livewire.section.actions-col'),
         ];
+
+        // Check if user has permission
+        if ('read_section') {
+            array_push($columns, Column::make("Actions", "id")->view('livewire.section.actions-col'));
+        }
+
+        return $columns;
     }
 }

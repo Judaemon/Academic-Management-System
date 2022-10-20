@@ -9,8 +9,6 @@ class ViewUser extends ModalComponent
 {
     public $user;
 
-    public $gender;
-
     protected function rules()
     {
         return [
@@ -49,13 +47,13 @@ class ViewUser extends ModalComponent
             'user.qvr' => ['nullable', 'qvr', 'unique:users,qvr, '.$this->user->id],
             'user.public_id' => ['nullable', 'public', 'unique:users,public_id, '.$this->user->id],
 
-            // beneficiary, guardian, and parents info
+            // beneficiary, emergency contact, and parents info
             'user.beneficiary' => ['nullable'],
-            'user.guardian_name' => ['required'],
-            'user.guardian_number' => ['required','guardian_number', 'unique:users,guardian_number'.$this->user->id],
-            'user.guardian_occupation' => ['nullable'],
-            'user.guardian_address' => ['required'],
-            'user.guardian_relationship' => ['required'],
+            'user.emergency_contact_name' => ['required'],
+            'user.emergency_contact_number' => ['required','emergency_contact_number', 'unique:users,emergency_contact_number'.$this->user->id],
+            'user.emergency_contact_occupation' => ['nullable'],
+            'user.emergency_contact_address' => ['required'],
+            'user.emergency_contact_relationship' => ['required'],
             'user.mparent_name' => ['nullable'],
             'user.mparent_number' => ['nullable', 'mparent_number', 'unique:users,mparent_number, '.$this->user->id],
             'user.mparent_occupation' => ['nullable'],
