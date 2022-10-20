@@ -6,7 +6,7 @@
                     <div class="w-1/2">
                         <x-datetime-picker
                             without-time
-                            wire:model.defer="start_date" 
+                            wire:model="start_date" 
                             label="Start Date" 
                         />
                     </div>
@@ -15,16 +15,19 @@
                         <x-icon name="arrow-right" class="w-5 h-5" solid />
                     </div>
 
-                    <div class="w-1/2">
-                        <x-datetime-picker
+                    <div class="w-1/2 {{ $isNull ? 'hidden' : ''}}">
+                        <x-datetime-picker 
                             without-time
                             wire:model="end_date" 
                             label="End Date" 
                         />
                     </div>
+                    <div class="w-1/2 {{ $isNull ? '' : 'hidden'}}">
+                        <x-input label="End Date" rightIcon="calendar" disabled />
+                    </div>
                 </div>
 
-                <div class="col-span-4">
+                <div class="col-span-4 {{ $isNull ? 'hidden' : ''}}">
                     <x-input
                         type="number"
                         label="Number of School Days" 
@@ -32,6 +35,9 @@
                         wire:model="school_days" 
                         suffix="days"
                     />
+                </div>
+                <div class="col-span-4 {{ $isNull ? '' : 'hidden'}}">
+                    <x-input label="Number of School Days" corner-hint="Ex: 128 days" suffix="days" disabled />
                 </div>
             </div>
   
