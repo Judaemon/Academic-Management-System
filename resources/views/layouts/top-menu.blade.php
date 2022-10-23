@@ -3,13 +3,14 @@
         <!-- Mobile hamburger for sidebar-->
         <x-button flat secondary md right-icon="menu-alt-2" @click="toggleSideMenu" aria-label="Menu" class="md:hidden"/>
 
+        {{-- Mobile sidebar content --}}
         <x-dropdown>
             <x-slot name="trigger">
                 <div >
                     <x-button label="{{ Auth::user()->firstname }}" flat secondary md right-icon="chevron-down" />
                 </div>
             </x-slot>
-         
+
             <x-dropdown.item href="{{ route('profile.show') }}">
                 <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="none" stroke-linecap="round"
                         stroke-linejoin="round"
@@ -21,7 +22,7 @@
 
                 <span>My profile</span>
             </x-dropdown.item>
-         
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <x-dropdown.item :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">

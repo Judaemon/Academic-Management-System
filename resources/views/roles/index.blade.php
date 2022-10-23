@@ -1,17 +1,19 @@
 <x-app-layout>
-    <div class="p-4 flex justify-between">
+    <div class="mb-4 p-4 flex justify-between">
         <h2 class="text-2xl font-semibold text-gray-700">Roles and Permissions</h2>
-        
-        <div class="flex flex-row space-x-2">
+
+        <div class="flex justify-end gap-x-2">
             @can('assign_role')
-            <x-button wire:ignore.self primary label="ASSIGN ROLE"  
+            <x-button primary label="ASSIGN ROLE"
                 onclick="livewire.emit('openModal', 'role.assign-role')"
             />
-        @endcan
+            @endcan
 
-        @can('create_role')
-            @livewire('role.create-role')
-        @endcan
+            @can('create_role')
+                <x-button primary label="CREATE ROLE"
+                    onclick="livewire.emit('openModal', 'role.create-role')"
+                />
+            @endcan
         </div>
     </div>
 
