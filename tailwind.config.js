@@ -1,6 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
-const Color = require("color");
 
 module.exports = {
     presets: [
@@ -8,29 +7,17 @@ module.exports = {
     ],
     darkMode: 'class',
     content: [
-        // Laravel
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
 
-        // Laravel Livewire Tables
-        // https://rappasoft.com/docs/laravel-livewire-tables/v2/start/configuration
-        './vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php',
-
-        // Wire UI
-        // https://livewire-wireui.com/docs/get-started
         './vendor/wireui/wireui/resources/**/*.blade.php',
         './vendor/wireui/wireui/ts/**/*.ts',
         './vendor/wireui/wireui/src/View/**/*.php',
 
-
-        // livewire Modal
-        // https://github.com/wire-elements/modal
-        './vendor/wire-elements/modal/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        "./vendor/wire-elements/modal/src/ModalComponent.php"
+        './vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php',
     ],
+
     theme: {
         themeVariants: ["dark"],
         Forms: (theme) => ({
@@ -186,9 +173,6 @@ module.exports = {
                 0: "0",
                 xl: "36rem",
             },
-            // fontFamily: {
-            //     sans: ["Inter", ...defaultTheme.fontFamily.sans],
-            // },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
