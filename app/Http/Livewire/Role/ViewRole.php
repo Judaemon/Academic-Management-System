@@ -10,49 +10,13 @@ class ViewRole extends ModalComponent
 {
     use Actions;
 
-    public $modalReadUpdateDelete;
-
     public $role;
-
-    public $permissions;
-
-    public $user_permissions = []; //View id is 1
-
-    public function updatedUserPermissions($value)
-    {
-        $isViewEnabled = in_array("1", $this->user_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->user_permissions, "1");
-        }
-    }
-
-    public $role_permissions = []; //View id is 6
-
-    public function updatedRolePermissions($value)
-    {
-        $isViewEnabled = in_array("6", $this->role_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->role_permissions, "6");
-        }
-    }
-
-    public $system_permissions = []; ////View id is 11
-
-    public function updatedSystemPermissions($value)
-    {
-        $isViewEnabled = in_array("11", $this->system_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->system_permissions, "11");
-        }
-    }
+    public $role_permissions = [];
 
     protected function rules()
     {
         return [
-            'role.name' => ['required'],
+            'role.name' => ['required', 'unique:roles,name,'.$this->role->id],
         ];
     }
 
@@ -60,33 +24,7 @@ class ViewRole extends ModalComponent
     {
         $this->role = $role;
 
-        if ($role->name == "Super Admin") {
-            $this->user_permissions = [1, 2, 3, 4, 5];
-            $this->role_permissions = [6, 7, 8, 9, 10];
-            $this->system_permissions = [11, 12, 13];
-        }else {
-            $permissions = $this->role->permissions->pluck('id')->toArray();
-
-            foreach ($permissions as $key => $permission) {
-                if (in_array($permission, [1, 2, 3, 4, 5])) {
-                    array_push($this->user_permissions, $permission);
-                }
-            }
-
-            foreach ($permissions as $key => $permission) {
-                if (in_array($permission, [6, 7, 8, 9, 10])) {
-                    array_push($this->role_permissions, $permission);
-                }
-            }
-
-            foreach ($permissions as $key => $permission) {
-                if (in_array($permission, [11, 12, 13])) {
-                    array_push($this->system_permissions, $permission);
-                }
-            }
-        }
-
-        $this->cardTitle = $role->name." Information";
+        $this->role_permissions = $this->role->permissions->pluck('name')->toArray();
     }
 
     public function render()

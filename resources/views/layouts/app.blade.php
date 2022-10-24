@@ -20,9 +20,25 @@
 
     @livewireStyles
 </head>
-<body wire:ignore.self>
+<body>
     <!-- WireUI Dialog -->
     <x-dialog />
+
+    {{-- Livewire Modal --}}
+    <div class="hidden">
+        {{-- Livewire Modal --}}
+        {{-- https://github.com/wire-elements/modal/issues/150 --}}
+        <span class="sm:max-w-sm"></span>
+        <span class="sm:max-w-md"></span>
+        <span class="md:max-w-lg"></span>
+        <span class="md:max-w-xl"></span>
+        <span class="lg:max-w-2xl"></span>
+        <span class="lg:max-w-3xl"></span>
+        <span class="xl:max-w-4xl"></span>
+        <span class="xl:max-w-5xl"></span>
+        <span class="2xl:max-w-6xl"></span>
+        <span class="2xl:max-w-7xl"></span>
+    </div>
 
     <div class="flex h-screen bg-gray-50" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
