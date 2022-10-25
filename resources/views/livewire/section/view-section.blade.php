@@ -1,5 +1,5 @@
 <div wire:ignore.self>
-    <x-card title="Edit Section">
+    <x-card title="View Section">
         <form wire:submit.prevent="save">
             <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="sm:col-span-1 md:col-span-4">

@@ -19,18 +19,15 @@ class AdmissionTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("ID", "id")
-                ->searchable()
-                ->sortable(),
-
-            Column::make("Status", "status")
-                ->searchable()
-                ->sortable(),
-
             Column::make("student_id", "student_id")
                 ->searchable()
                 ->sortable(),
-
+            Column::make("Status", "status")
+                ->searchable()
+                ->sortable(),
+            Column::make("Enrolled By", "enrolled_by")
+                ->searchable()
+                ->sortable(),
             Column::make("Date Enrolled", "date_enrolled")
                 ->searchable()
                 ->sortable()
