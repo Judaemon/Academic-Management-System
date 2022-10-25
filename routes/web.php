@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academic_year.index');
 
     Route::get('sections', [\App\Http\Controllers\SectionController::class, 'index'])->name('sections.index');
-    
+
     Route::get('subjects', [\App\Http\Controllers\SubjectController::class, 'index'])->name('subjects.index');
 
     Route::get('grade-level', [\App\Http\Controllers\GradeLevelController::class, 'index'])->name('grade_level.index');
