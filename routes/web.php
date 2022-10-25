@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('grade-level', [\App\Http\Controllers\GradeLevelController::class, 'index'])->name('grade_level.index');
 
+    Route::get('admissions', [\App\Http\Controllers\AdmissionController::class, 'index'])->name('admissions.index');
+
     // idk ¯\_(ツ)_/¯
     Route::view('about', 'about')->name('about');
 });
