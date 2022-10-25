@@ -7,37 +7,44 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="firstname" label="First Name (*)" placeholder="Juan" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="firstname" label="First Name" placeholder="Juan" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="lastname" label="Last Name (*)" placeholder="Dela Cruz" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="lastname" label="Last Name" placeholder="Dela Cruz" />
                 </div>
 
                 <div class="col-span-4">
+                    <br>
                     <x-input wire:model.defer="middlename" label="Middle Name" placeholder="Cardo" />
                 </div>
 
                 <div class="col-span-4">
+                    <br>
                     <x-input wire:model.defer="suffix" label="Suffix" placeholder="Jr./III/IV" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input type="date" wire:model.defer="birthdate" label="Birth Date (*)" placeholder="" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input type="date" wire:model.defer="birthdate" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="birthplace" label="Birth Place (*)" placeholder="City/Municipality" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="birthplace" label="Birth Place" placeholder="City/Municipality" />
                 </div>
 
-                <!-- drop down sana ng mga religions -->
                 <div class="col-span-4">
-                    <x-input wire:model.defer="religion" label="Religion (*)" placeholder="Catholic" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="religion" label="Religion" placeholder="Catholic" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
+                    <span style="color:#ff0000">*</span>
                     <x-select
-                        label="Gender (*)"
+                        label="Gender"
                         wire:model.defer="gender"
                         placeholder="Select Gender"
                     >
@@ -47,14 +54,17 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="mothertongue" label="Mother Tongue (*)" placeholder="English" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="mothertongue" label="Mother Tongue" placeholder="English" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="nationality" label="Nationality (*)" placeholder="Filipino" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="nationality" label="Nationality" placeholder="Filipino" />
                 </div>
 
                 <div class="col-span-4">
+                    <br>
                     <x-input wire:model.defer="pwdid" label="PWD ID" placeholder="XXXX0000" />
                 </div>
 
@@ -77,15 +87,18 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="mobilenumber" label="Contact Number (*)" placeholder="09** *** ****" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="mobilenumber" label="Contact Number" placeholder="09** *** ****" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="address" label="Address (*)" placeholder="Unit, Street, Barangay, City/Municipality" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="address" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input autocomplete="randominput" wire:model.defer="email" label="Email (*)" placeholder="user@email.com" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input autocomplete="randominput" wire:model.defer="email" label="Email" placeholder="user@email.com" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -103,23 +116,28 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="emergency_contact_name" label="Full Name (*)" placeholder="" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="emergency_contact_name" label="Full Name" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="emergency_contact_number" label="Contact Number (*)" placeholder="" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="emergency_contact_number" label="Contact Number" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
+                    <br>
                     <x-input wire:model.defer="emergency_contact_occupation" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="emergency_contact_address" label="Address (*)" placeholder="" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="emergency_contact_address" label="Address" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="emergency_contact_relationship" label="Relationship (*)" placeholder="" />
+                    <span style="color:#ff0000">*</span>
+                    <x-input wire:model.defer="emergency_contact_relationship" label="Relationship" placeholder="" />
                 </div>
 
                 <!-- government id -->
@@ -128,19 +146,19 @@
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG (*)" placeholder="" />
+                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="philhealth" label="PhilHealth (*)" placeholder="" />
+                    <x-input wire:model.defer="philhealth" label="PhilHealth" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="sss" label="SSS (*)" placeholder="" />
+                    <x-input wire:model.defer="sss" label="SSS" placeholder="" />
                 </div>
 
                 <div class="col-span-4">
-                    <x-input wire:model.defer="tin" label="TIN (*)" placeholder="" />
+                    <x-input wire:model.defer="tin" label="TIN" placeholder="" />
                 </div>
 
                 <!-- user password -->
