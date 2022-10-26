@@ -62,6 +62,13 @@ class ViewUser extends ModalComponent
             'user.fparent_number' => ['nullable', 'fparent_number', 'unique:users,fparent_number, '.$this->user->id],
             'user.fparent_occupation' => ['nullable'],
             'user.fparent_address' => ['nullable'],
+
+            // additional account info
+            'user.pag_ibig' => ['nullable', 'unique:users,pag_ibig, '.$this->user->id],
+            'user.philhealth' => ['nullable', 'unique:users,philhealth, '.$this->user->id],
+            'user.sss' => ['nullable', 'unique:users,sss, '.$this->user->id],
+            'user.tin' => ['nullable', 'unique:users,tin, '.$this->user->id],
+            
             // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
