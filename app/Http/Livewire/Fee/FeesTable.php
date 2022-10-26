@@ -2,14 +2,9 @@
 
 namespace App\Http\Livewire\Fee;
 
+use App\Models\Fee;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-
-use App\Models\Fee;
-use App\Models\GradeLevel;
-
-use Illuminate\Database\Eloquent\Builder;
-use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class FeesTable extends DataTableComponent
 {
@@ -34,7 +29,7 @@ class FeesTable extends DataTableComponent
 
             Column::make("Amount")
                 ->sortable()
-                ->format(fn($value) => 'Php '.number_format($value, 2))
+                ->format(fn ($value) => 'Php ' . number_format($value, 2))
                 ->collapseOnMobile(),
 
             Column::make("Grade Level", "grade_level.name")
