@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class CreateStudent extends ModalComponent
 {
     use AuthorizesRequests, Actions;
-    
+
     public $firstname;
     public $lastname;
     public $middlename;
@@ -59,7 +59,7 @@ class CreateStudent extends ModalComponent
     public $fparent_number;
     public $fparent_occupation;
     public $fparent_address;
-    
+
     protected function rules()
     {
         return [
@@ -102,7 +102,7 @@ class CreateStudent extends ModalComponent
             'beneficiary' => ['nullable'],
 
             'emergency_contact_name' => ['required'],
-            'emergency_contact_number' => ['required','unique:users,emergency_contact_number'],
+            'emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
             'emergency_contact_occupation' => ['nullable'],
             'emergency_contact_address' => ['required'],
             'emergency_contact_relationship' => ['required'],
@@ -116,8 +116,6 @@ class CreateStudent extends ModalComponent
             'fparent_number' => ['nullable', 'unique:users,fparent_number'],
             'fparent_occupation' => ['nullable'],
             'fparent_address' => ['nullable'],
-
-            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
@@ -150,70 +148,73 @@ class CreateStudent extends ModalComponent
         $this->authorize('create_student');
 
         // firstname.firstletteroflastname ex. firstname = Mark, lastname = Zuckerberg, password = mark.z
-        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8').'.'.$this->lastname);
+        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8') . '.' . $this->lastname);
 
-        $user =User::create([
-                'firstname' => $this->firstname,
-                'lastname' => $this->lastname,
-                'email' => $this->email,
-                'password' => Hash::make($password),
-                'middlename' => $this->middlename,
-                'suffix' => $this->suffix,
-                'birthdate' => $this->birthdate,
-                'birthplace' => $this->birthplace,
-                'religion' => $this->religion,
-                'gender' => $this->gender,
-                'mothertongue' => $this->mothertongue,
-                'nationality' => $this->nationality,
-                'pwdid' => $this->pwdid,
+        $user = User::create([
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'password' => Hash::make($password),
+            'middlename' => $this->middlename,
+            'suffix' => $this->suffix,
+            'birthdate' => $this->birthdate,
+            'birthplace' => $this->birthplace,
+            'religion' => $this->religion,
+            'gender' => $this->gender,
+            'mothertongue' => $this->mothertongue,
+            'nationality' => $this->nationality,
+            'pwdid' => $this->pwdid,
 
-                // physical info
-                'height' => $this->height,
-                'weight' => $this->weight,
+            // physical info
+            'height' => $this->height,
+            'weight' => $this->weight,
 
-                // contact info
-                'mobilenumber' => $this->mobilenumber,
-                'address' => $this->address,
+            // contact info
+            'mobilenumber' => $this->mobilenumber,
+            'address' => $this->address,
 
-                // educational background
-                'school_kinder' => $this->school_kinder,
-                'school_kindergrad' => $this->school_kindergrad,
-                'school_elementary' => $this->school_elementary,
-                'school_elementarygrad' => $this->school_elementarygrad,
+            // educational background
+            'school_kinder' => $this->school_kinder,
+            'school_kindergrad' => $this->school_kindergrad,
+            'school_elementary' => $this->school_elementary,
+            'school_elementarygrad' => $this->school_elementarygrad,
 
-                // academic info
-                'lrn' => $this->lrn,
-                'esc' => $this->esc,
-                'qvr' => $this->qvr,
-                'public_id' => $this->public_id,
+            // academic info
+            'lrn' => $this->lrn,
+            'esc' => $this->esc,
+            'qvr' => $this->qvr,
+            'public_id' => $this->public_id,
 
-                // beneficiary, emergency contact, and parents info
-                'beneficiary' => $this->beneficiary,
-                'emergency_contact_name' => $this->emergency_contact_name,
-                'emergency_contact_number' => $this->emergency_contact_number,
-                'emergency_contact_occupation' => $this->emergency_contact_occupation,
-                'emergency_contact_address' => $this->emergency_contact_address,
-                'emergency_contact_relationship' => $this->emergency_contact_relationship,
-                'mparent_name' => $this->mparent_name,
-                'mparent_number' => $this->mparent_number,
-                'mparent_occupation' => $this->mparent_occupation,
-                'mparent_address' => $this->mparent_address,
-                'fparent_name' => $this->fparent_name,
-                'fparent_number' => $this->fparent_number,
-                'fparent_occupation' => $this->fparent_occupation,
-                'fparent_address' => $this->fparent_address,
+            // beneficiary, emergency contact, and parents info
+            'beneficiary' => $this->beneficiary,
+            'emergency_contact_name' => $this->emergency_contact_name,
+            'emergency_contact_number' => $this->emergency_contact_number,
+            'emergency_contact_occupation' => $this->emergency_contact_occupation,
+            'emergency_contact_address' => $this->emergency_contact_address,
+            'emergency_contact_relationship' => $this->emergency_contact_relationship,
+            'mparent_name' => $this->mparent_name,
+            'mparent_number' => $this->mparent_number,
+            'mparent_occupation' => $this->mparent_occupation,
+            'mparent_address' => $this->mparent_address,
+            'fparent_name' => $this->fparent_name,
+            'fparent_number' => $this->fparent_number,
+            'fparent_occupation' => $this->fparent_occupation,
+            'fparent_address' => $this->fparent_address,
         ]);
+
+        // Granting the Student role to the newly created user 
+        $user->assignRole('Student');
 
         $this->closeModal();
 
         $this->emit('refreshDatatable');
-        
+
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'User successfully Created.'
         );
     }
-    
+
     public static function modalMaxWidth(): string
     {
         return '5xl';

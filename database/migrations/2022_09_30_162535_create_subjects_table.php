@@ -14,15 +14,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('subject_code');
 
-            $table->foreignId('teacher_id')
-                ->references('id')
-                ->on('users')
-                ->nullable();
+            $table->foreignId('teacher_id');
 
-            $table->foreignId('grade_level_id')
-                ->nullable()
-                ->constrained()
-                ->change();
+            $table->foreignId('grade_level_id')->onDelete('cascade');
 
             $table->timestamps();
         });

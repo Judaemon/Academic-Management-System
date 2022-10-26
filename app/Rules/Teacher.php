@@ -13,12 +13,12 @@ class Teacher implements Rule
     }
 
     public function passes($attribute, $value)
-    {   
-        return User::find($value)->isTeacher();; 
+    {
+        return User::find($value)->isTeacher();;
     }
 
     public function message()
     {
-        return 'The Selected user is not a teacher.';
+        return 'The selected user is not a teacher.';
     }
 }

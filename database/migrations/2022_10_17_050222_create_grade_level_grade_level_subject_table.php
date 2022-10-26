@@ -8,9 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
+        // Not used
+        // Grade levels has a "one to many" relationship to subjects
         Schema::create('grade_level_subject', function (Blueprint $table) {
-            $table->foreignId('grade_level_id')->references('id')->on('grade_levels');
-            $table->foreignId('subject_id')->references('id')->on('subjects');
+            $table->foreignId('grade_level_id')->onDelete('cascade');
+            $table->foreignId('subject_id')->onDelete('cascade');
         });
     }
 
