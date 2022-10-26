@@ -61,7 +61,7 @@ class UpdateSettings extends Component
             'description' => "you're updating system setting?",
             'icon'        => 'warning',
             'accept'      => [
-                'label'  => 'Yes, saved it',
+                'label'  => 'Yes, save it',
                 'method' => 'submit',
                 'params' => 'Saved',
             ],

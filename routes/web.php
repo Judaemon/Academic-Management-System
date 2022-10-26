@@ -10,7 +10,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('roles', [\App\Http\Controllers\RolesController::class, 'index'])->name('roles.index');
@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('subjects', [\App\Http\Controllers\SubjectController::class, 'index'])->name('subjects.index');
 
     Route::get('grade-level', [\App\Http\Controllers\GradeLevelController::class, 'index'])->name('grade_level.index');
+
+    Route::get('admissions', [\App\Http\Controllers\AdmissionController::class, 'index'])->name('admissions.index');
 
     // idk ¯\_(ツ)_/¯
     Route::view('about', 'about')->name('about');

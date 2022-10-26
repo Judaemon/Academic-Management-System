@@ -73,10 +73,10 @@ class CreateAccount extends ModalComponent
             'address' => ['required'],
 
             // additional account info
-            'pag_ibig' => ['required', 'unique:users,pag_ibig'],
-            'philhealth' => ['required', 'unique:users,philhealth'],
-            'sss' => ['required', 'unique:users,sss'],
-            'tin' => ['required', 'unique:users,tin'],
+            'pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
+            'philhealth' => ['nullable', 'unique:users,philhealth'],
+            'sss' => ['nullable', 'unique:users,sss'],
+            'tin' => ['nullable', 'unique:users,tin'],
 
             // emergency contact
             'emergency_contact_name' => ['required'],
@@ -117,8 +117,8 @@ class CreateAccount extends ModalComponent
     {
         $this->authorize('create_account');
 
-        // firstname.firstletteroflastname ex. firstname = Mark, lastname = Zuckerberg, password = mark.z
-        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8').'.'.$this->lastname);
+        // lastname.firstletteroffirstname ex. firstname = Mark, lastname = Zuckerberg, password = zuckerberg.m
+        $password = strtolower(mb_substr($this->lastname, 0, 1, 'utf-8').'.'.$this->firstname);
 
         $user =User::create([
                 'firstname' => $this->firstname,
@@ -172,6 +172,6 @@ class CreateAccount extends ModalComponent
     
     public static function modalMaxWidth(): string
     {
-        return '5xl';
+        return '7xl';
     }
 }
