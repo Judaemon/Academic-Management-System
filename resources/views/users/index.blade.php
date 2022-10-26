@@ -5,6 +5,8 @@
                 @can('create_student')
                 <x-button wire:ignore.self primary onclick="Livewire.emit('openModal', 'user.create-student')" label="CREATE STUDENT" />
                 @endcan
+                <br>
+                <br>
                 @can('create_account')
                 <x-button wire:ignore.self primary onclick="Livewire.emit('openModal', 'user.create-account')" label="CREATE ACCOUNT" />
                 @endcan

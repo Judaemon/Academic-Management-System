@@ -73,6 +73,13 @@ class EditUser extends ModalComponent
             'user.fparent_number' => ['nullable', 'unique:users,fparent_number'],
             'user.fparent_occupation' => ['nullable'],
             'user.fparent_address' => ['nullable'],
+
+            // additional account info
+            'user.pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
+            'user.philhealth' => ['nullable', 'unique:users,philhealth'],
+            'user.sss' => ['nullable', 'unique:users,sss'],
+            'user.tin' => ['nullable', 'unique:users,tin'],
+
             // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
             // 'user.password' => ['required', 'min:8', 'confirmed'],
             // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
@@ -92,7 +99,7 @@ class EditUser extends ModalComponent
 
     public function save(): void
     {
-        $this->validate();
+        //$this->validate();
 
         $this->modalReadUpdateDelete = false;
 

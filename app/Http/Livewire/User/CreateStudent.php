@@ -149,8 +149,8 @@ class CreateStudent extends ModalComponent
     {
         $this->authorize('create_student');
 
-        // firstname.firstletteroflastname ex. firstname = Mark, lastname = Zuckerberg, password = mark.z
-        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8').'.'.$this->lastname);
+        // lastname.firstletteroffirstname ex. firstname = Mark, lastname = Zuckerberg, password = zuckerberg.m
+        $password = strtolower(mb_substr($this->lastname, 0, 1, 'utf-8').'.'.$this->firstname);
 
         $user =User::create([
                 'firstname' => $this->firstname,
@@ -216,6 +216,6 @@ class CreateStudent extends ModalComponent
     
     public static function modalMaxWidth(): string
     {
-        return '5xl';
+        return '7xl';
     }
 }
