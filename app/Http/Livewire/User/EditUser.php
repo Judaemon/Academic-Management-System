@@ -11,8 +11,6 @@ class EditUser extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $modalReadUpdateDelete;
-
     public $user;
 
     protected function rules()
@@ -59,7 +57,7 @@ class EditUser extends ModalComponent
             'user.beneficiary' => ['nullable'],
 
             'user.emergency_contact_name' => ['required'],
-            'user.emergency_contact_number' => ['required','unique:users,emergency_contact_number'],
+            'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
             'user.emergency_contact_occupation' => ['nullable'],
             'user.emergency_contact_address' => ['required'],
             'user.emergency_contact_relationship' => ['required'],
@@ -73,16 +71,13 @@ class EditUser extends ModalComponent
             'user.fparent_number' => ['nullable', 'unique:users,fparent_number'],
             'user.fparent_occupation' => ['nullable'],
             'user.fparent_address' => ['nullable'],
-            // 'role.name' => ['required', "unique:roles,name,".$this->role['id']]
-            // 'user.password' => ['required', 'min:8', 'confirmed'],
-            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
     public function mount(User $user)
     {
         $this->user = $user;
-        $this->cardTitle = $user->firstname." Information";
+        $this->cardTitle = $user->firstname . " Information";
     }
 
     public function render()
@@ -93,8 +88,6 @@ class EditUser extends ModalComponent
     public function save(): void
     {
         $this->validate();
-
-        $this->modalReadUpdateDelete = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -113,66 +106,18 @@ class EditUser extends ModalComponent
 
     public function submit()
     {
-
         $this->authorize('update_user');
 
-        // Check if user has permission
-        if (!auth()->user()->can('update_user')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->user->save();
+        $this->user->save();
 
-            $this->emit('refreshDatatable');
+        $this->emit('refreshDatatable');
 
-            $this->closeModal();
+        $this->closeModal();
 
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'User information successfully saved.'
-            );
-        }
-    }
-
-    public function deleteDialog()
-    {
-        $this->dialog()->confirm([
-            'title'       => 'Are you Sure?',
-            'description' => 'Delete this user?',
-            'icon'        => 'warning',
-            'accept'      => [
-                'label'  => 'Yes, delete it',
-                'method' => 'delete',
-                'params' => 'Deleted',
-            ],
-            'reject' => [
-                'label'  => 'No, cancel',
-            ],
-        ]);
-    }
-
-    public function delete()
-    {
-        // Check if user has permission
-        if (!auth()->user()->can('delete_user')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->user->delete();
-
-            $this->closeModal();
-    
-            $this->emit('refreshDatatable');
-    
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'User deleted successfully.'
-            );
-        }
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'User information successfully saved.'
+        );
     }
 
     public static function modalMaxWidth(): string

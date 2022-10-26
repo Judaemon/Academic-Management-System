@@ -196,7 +196,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Teacher');
 
-
         User::create([
             'firstname' => 'Cayden',
             'middlename' => 'Zackary',

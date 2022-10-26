@@ -21,7 +21,6 @@ class CreateSection extends ModalComponent
     public $teacher;
 
     public $grade_level;
-    public $grade_levels;
     public $grade_level_subjects = [];
 
     protected function rules()
@@ -32,7 +31,7 @@ class CreateSection extends ModalComponent
 
             'teacher' => ['required', new Teacher],
 
-            'grade_level' => ['nullable', 'unique:grade_levels,id,'.$this->grade_level],
+            'grade_level' => ['required'],
         ];
     }
 
@@ -43,8 +42,9 @@ class CreateSection extends ModalComponent
 
     public function updatedGradeLevel($value)
     {
-        $this->grade_levels = GradeLevel::all();
-        $this->grade_level_subjects = GradeLevel::find($value)->subjects;
+        if (!empty($value)) {
+            $this->grade_level_subjects = GradeLevel::find($value)->subjects;
+        }
     }
 
     public function save(): void
@@ -76,8 +76,6 @@ class CreateSection extends ModalComponent
             'teacher_id' => $this->teacher,
             'grade_level_id' => $this->grade_level,
         ]);
-
-        // $section->subjects()->attach($this->grade_level_subjects);
 
         $this->emit('refreshDatatable');
 
