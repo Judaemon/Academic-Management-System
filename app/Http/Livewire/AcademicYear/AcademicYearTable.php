@@ -25,22 +25,22 @@ class AcademicYearTable extends DataTableComponent
 
             Column::make("Start Date")
                 ->searchable()
-                ->format(fn($value) => date('j \\ F Y', strtotime($value))),
-
-            Column::make("Number of School Days", "school_days")
-                ->searchable()
-                ->format(fn($value) => $value.' days')
-                ->collapseOnMobile(),
+                ->format(fn($value) => date('F j, Y', strtotime($value))),
 
             Column::make("End Date")
                 ->searchable()
                 ->format(function($value) {
                     if($value != NULL) {
-                        return date('j \\ F Y', strtotime($value));
+                        return date('F j, Y', strtotime($value));
                     } else {
                         return " ";
                     }
                 }),
+
+            Column::make("Number of School Days", "school_days")
+                ->searchable()
+                ->format(fn($value) => $value.' days')
+                ->collapseOnMobile(),
                 
             Column::make("Actions", "id")
                 ->view('livewire.academic-year.actions-col')
