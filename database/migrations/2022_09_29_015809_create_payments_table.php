@@ -15,6 +15,8 @@ return new class extends Migration
                   ->constrained('users', 'id')
                   ->onDelete('cascade');
 
+            $table->integer('accountant_id');
+
             $table->decimal('amount_paid')
                   ->default('0.00');
             

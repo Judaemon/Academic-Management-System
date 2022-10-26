@@ -17,6 +17,30 @@ class FeeSeeder extends Seeder
     {
         Fee::create([
             'fee_name' => 'Tuition',
+            'amount' => '19631.18',
+            'grade_level_id' => '1',
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Books',
+            'amount' => '9000.00',
+            'grade_level_id' => '1',
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Laboratory Fee',
+            'amount' => '2500.00',
+            'grade_level_id' => '1',
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Miscellaneous Fee',
+            'amount' => '2500.00',
+            'grade_level_id' => '1',
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Tuition',
             'amount' => '25000.00',
             'grade_level_id' => '2',
         ]);
@@ -24,25 +48,25 @@ class FeeSeeder extends Seeder
         Fee::create([
             'fee_name' => 'Books',
             'amount' => '10000.00',
-            'grade_level_id' => NULL,
+            'grade_level_id' => '2',
         ]);
 
         Fee::create([
             'fee_name' => 'Laboratory Fee',
             'amount' => '4000.00',
-            'grade_level_id' => NULL,
+            'grade_level_id' => '2',
+        ]);
+
+        Fee::create([
+            'fee_name' => 'Miscellaneous Fee',
+            'amount' => '7000.00',
+            'grade_level_id' => '2',
         ]);
 
         Fee::create([
             'fee_name' => 'School Uniform',
             'amount' => '5000.00',
             'grade_level_id' => NULL,
-        ]);
-
-        Fee::create([
-            'fee_name' => 'Miscellaneous Fee',
-            'amount' => '7000.00',
-            'grade_level_id' => '1',
         ]);
     }
 }

@@ -4,7 +4,12 @@ namespace App\Http\Livewire\Fee;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+
 use App\Models\Fee;
+use App\Models\GradeLevel;
+
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class FeesTable extends DataTableComponent
 {
@@ -14,6 +19,8 @@ class FeesTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
     }
+
+    //add grade_level_filter multi (use checkbox)
 
     public function columns(): array
     {
@@ -27,14 +34,16 @@ class FeesTable extends DataTableComponent
 
             Column::make("Amount")
                 ->sortable()
-                ->format(fn($value) => 'Php '.number_format($value, 2)),
+                ->format(fn($value) => 'Php '.number_format($value, 2))
+                ->collapseOnMobile(),
 
-            Column::make("Grade Level (if applicable)", "grade_level.name")
+            Column::make("Grade Level", "grade_level.name")
                 ->sortable()
-                ->searchable(),
+                ->collapseOnMobile(),
 
             Column::make("Actions", "id")
-                ->view('livewire.fee.actions-col'),
+                ->view('livewire.fee.actions-col')
+                ->collapseOnMobile(),
         ];
     }
 }

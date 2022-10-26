@@ -29,7 +29,10 @@ class PaymentsTable extends DataTableComponent
                 ->sortable()
                 ->format(fn($value) => 'Php '.number_format($value, 2)),
 
-            Column::make("Fee Type", "fee.fee_name")
+            Column::make("Payment Type", "fee.fee_name")
+                ->sortable(),
+
+            Column::make("Others")
                 ->sortable(),
 
             Column::make("Actions", "id")
