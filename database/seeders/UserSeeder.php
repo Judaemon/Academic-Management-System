@@ -399,7 +399,7 @@ class UserSeeder extends Seeder
             'nationality' => 'Filipino',
             'height' => '156.8',
             'weight' => '65.2',
-            'mobilenumber' => '09664861698',
+            'mobilenumber' => '09334861423',
             'email' => 'bautistastacey@s.caims.edu',
             'address' => 'Crystal Cave, Baguio City',
             'emergency_contact_name' => 'John Doe',

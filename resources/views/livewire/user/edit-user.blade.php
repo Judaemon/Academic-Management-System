@@ -1,7 +1,7 @@
 <div wire:ignore.self class="form-container">
     <x-card title="{{ $cardTitle }}">
     <form wire:submit.prevent="save">
-        <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- personal information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>I. PERSONAL INFORMATION</strong></h1>
@@ -31,7 +31,6 @@
                     <x-input wire:model.defer="user.birthplace" label="Birth Place" placeholder="Baguio" />
                 </div>
 
-                <!-- drop down sana ng mga religions -->
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.religion" label="Religion" placeholder="Catholic" />
                 </div>
@@ -58,7 +57,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{$user->pwdid}}" label="PWD ID" placeholder="XXXX0000" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- physical information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>II. PHYSICAL INFORMATION</strong></h1>
@@ -71,7 +72,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.weight" label="Weight (in kg)" placeholder="70 kg" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- contact information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>III. CONTACT INFORMATION</strong></h1>
@@ -88,7 +91,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{$user->email}}" label="Email" placeholder="sample@email.com" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- educational background -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>IV. EDUCATIONAL BACKGROUND</strong></h1>
@@ -113,7 +118,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.school_juniorhigh" label="Junior High School" placeholder="School Name" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- academic information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>V. ACADEMIC INFORMATION</strong></h1>
@@ -134,7 +141,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{$user->public_id}}" label="Public" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- government beneficiary -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VI. GOVERNMENT BENEFICIARY</strong></h1>
@@ -143,7 +152,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.beneficiary" label="Beneficiary" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- emergency contact information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VII. EMERGENCY CONTACT PERSON</strong></h1>
@@ -168,7 +179,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.emergency_contact_relationship" label="Relationship" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- parents information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VIII. PARENTS INFORMATION</strong></h1>
@@ -212,7 +225,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.fparent_address" label="Address" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- government id -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>IX. GOVERNMENT ID NO.</strong></h1>
@@ -233,7 +248,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{$user->tin}}" label="TIN" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- user password -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>PASSWORD</strong></h1>
@@ -242,23 +259,15 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-inputs.password  readonly autocomplete="randominput" value="{{$user->password}}" label="" placeholder="" />
                 </div>
+            </div>
 
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
-                <!-- @can('delete_users')
-                    <x-button flat negative label="Delete" wire:click="deleteDialog" />
-                @else
-                    <div></div>
-                @endcan -->
-        
                 <div class="flex space-x-2">
                     <x-button flat label="Cancel" wire:click="closeModal" />
                     <x-button wire:click="save" type="button" primary label="Save" />
                 </div>
             </div>
-
-
-        </div>
         </x-slot>
     </form>
     </x-card>
