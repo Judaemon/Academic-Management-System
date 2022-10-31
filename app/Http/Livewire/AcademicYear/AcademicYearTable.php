@@ -30,7 +30,7 @@ class AcademicYearTable extends DataTableComponent
             Column::make("End Date")
                 ->searchable()
                 ->format(function($value) {
-                    if($value != NULL) {
+                    if(!empty($value)) {
                         return date('F j, Y', strtotime($value));
                     } else {
                         return " ";

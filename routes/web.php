@@ -41,4 +41,6 @@ Route::middleware('auth')->group(function () {
 
     // idk ¯\_(ツ)_/¯
     Route::view('about', 'about')->name('about');
+    
+    Route::get('announcement', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcement.index');
 });
