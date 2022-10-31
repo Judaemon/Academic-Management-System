@@ -14,60 +14,35 @@ class SectionSeeder extends Seeder
 {
     public function run()
     {
+        // 2 Sections per Grade Level
+
+        // Grade 1 Sections
         Section::create([
             'name' => 'Red',
-            'capacity' => '15',
-            'teacher_id' => '3',
+            'capacity' => '20',
+            'teacher_id' => '5',
             'grade_level_id' => 1
         ]);
-
         Section::create([
             'name' => 'Orange',
-            'capacity' => '15',
-            'teacher_id' => '3',
+            'capacity' => '20',
+            'teacher_id' => '5',
             'grade_level_id' => 1
         ]);
 
+        // Grade 2 Sections
         Section::create([
             'name' => 'Yellow',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'capacity' => '20',
+            'teacher_id' => '6',
+            'grade_level_id' => 2
         ]);
 
         Section::create([
             'name' => 'Green',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
-        ]);
-
-        Section::create([
-            'name' => 'Blue',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
-        ]);
-
-        Section::create([
-            'name' => 'Indigo',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
-        ]);
-
-        Section::create([
-            'name' => 'Violet',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
-        ]);
-
-        Section::create([
-            'name' => 'Gray',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'capacity' => '20',
+            'teacher_id' => '6',
+            'grade_level_id' => 2
         ]);
     }
 }
