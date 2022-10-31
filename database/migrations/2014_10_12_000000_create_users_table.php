@@ -41,6 +41,14 @@ return new class extends Migration
             $table->string('school_elementary')->nullable();
             $table->string('school_elementarygrad')->nullable();
             $table->string('school_juniorhigh')->nullable();
+            $table->string('school_juniorhighgrad')->nullable();
+
+            // For admission
+            // If there is no data on the admission table, that means a transferee or a new student.
+            // If theres no record on the admission table this will be displayed
+            $table->string('grade_level')->nullable();
+            $table->string('latest_average_grade')->nullable();
+            $table->string('status')->nullable();
 
             // academic information
             $table->string('lrn')->unique()->nullable();

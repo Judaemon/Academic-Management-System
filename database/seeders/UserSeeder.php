@@ -212,6 +212,12 @@ class UserSeeder extends Seeder
             'mobilenumber' => '09274294577',
             'email' => 'jacksoncayden@s.caims.edu',
             'address' => 'Pablo Ocampo Sr. Ext, Baguio City',
+
+            // For admission
+            'grade_level' => 'Kinder',
+            'latest_average_grade' => 'Passed',
+            'status' => 'Able to Enroll',
+
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09176820767',
             'emergency_contact_occupation' => 'Pastor',
@@ -240,6 +246,12 @@ class UserSeeder extends Seeder
             'mobilenumber' => '09983315305',
             'email' => 'balonfrederick@s.caims.edu',
             'address' => 'San Agustin, Baguio City',
+
+            // For admission
+            'grade_level' => 'Kinder',
+            'latest_average_grade' => 'Passed',
+            'status' => 'Able to Enroll',
+
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09176820768',
             'emergency_contact_occupation' => 'Pastor',
@@ -268,6 +280,12 @@ class UserSeeder extends Seeder
             'mobilenumber' => '09664861698',
             'email' => 'reyesjacqueline@s.caims.edu',
             'address' => 'Ben Harrison, Baguio City',
+
+            // For admission
+            'grade_level' => 'Kinder',
+            'latest_average_grade' => 'Passed',
+            'status' => 'Able to Enroll',
+
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09176820769',
             'emergency_contact_occupation' => 'Pastor',

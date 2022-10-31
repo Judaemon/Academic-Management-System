@@ -7,35 +7,57 @@ use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Admission;
+use App\Models\Section;
+use App\Models\User;
+use App\Rules\NotAdmittedForCurrentAcademicYear;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CreateAdmission extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $status;
-    public $enrolled_by;
-    public $date_enrolled;
-    public $section_id;
     public $student_id;
+    public $student;
+
+    public $grade_level_id;
+
+    public $section_id;
+    public $section;
 
     protected function rules()
     {
         return [
-            'status' => ['required'],
-            'enrolled_by' => ['required'],
-            'date_enrolled' => ['required', 'date'],
+            'grade_level_id' => ['required'],
+            'student_id' => ['required', new NotAdmittedForCurrentAcademicYear],
             'section_id' => ['required'],
-            'student_id' => ['required'],
         ];
     }
-
     public function render()
     {
         return view('livewire.admission.create-admission');
     }
 
+    public function updatedStudentId()
+    {
+        $this->student = User::query()
+            ->find($this->student_id);
+    }
+
+    public function updatedGradeLevelId($value)
+    {
+        $this->grade_level_sections = Section::query()
+            ->where('grade_level_id', $value)
+            ->get()
+            ->toArray();
+
+        $this->section_id = null;
+    }
+
     public function save(): void
     {
+        // dd($this->section_id);
+
         $this->validate();
 
         $this->dialog()->confirm([
@@ -55,14 +77,16 @@ class CreateAdmission extends ModalComponent
 
     public function submit()
     {
-        //$this->authorize('create_admission');
+        $this->authorize('create_admission');
 
         Admission::create([
-            'status' => $this->status,
-            'enrolled_by' => $this->enrolled_by,
-            'date_enrolled' => Carbon::parse($this->date_enrolled)->toDateString(),
-            'section_id' => $this->section_id,
+            'status' => 'Pending',
+            'academic_year_id' => setting('academic_year_id'),
+
             'student_id' => $this->student_id,
+            'enrolled_by' => auth()->id(),
+            'admit_to_grade_level' => $this->grade_level_id,
+            'section_id' => $this->section_id,
         ]);
 
         $this->emit('refreshDatatable');
@@ -77,6 +101,6 @@ class CreateAdmission extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '2xl';
+        return '3xl';
     }
 }

@@ -78,4 +78,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Section::class);
     }
+
+    public function admission()
+    {
+        return $this->hasMany(Admission::class, 'student_id', 'id');
+    }
 }
