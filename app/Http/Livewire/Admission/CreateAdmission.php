@@ -56,8 +56,6 @@ class CreateAdmission extends ModalComponent
 
     public function save(): void
     {
-        // dd($this->section_id);
-
         $this->validate();
 
         $this->dialog()->confirm([

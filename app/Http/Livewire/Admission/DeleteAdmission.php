@@ -16,7 +16,7 @@ class DeleteAdmission extends ModalComponent
 
     public function mount(Admission $admission)
     {
-        //$this->authorize('delete_admission');
+        $this->authorize('delete_admission');
 
         $this->admission = $admission;
     }
@@ -53,9 +53,9 @@ class DeleteAdmission extends ModalComponent
         $this->admission->delete();
 
         $this->closeModal();
-    
+
         $this->emit('refreshDatatable');
-    
+
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Admission deleted successfully.'

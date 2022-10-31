@@ -54,7 +54,6 @@ class EditAdmission extends ModalComponent
 
     public function save(): void
     {
-        dd($this->admission->enrolled_by_user);
         $this->validate();
 
         $this->dialog()->confirm([

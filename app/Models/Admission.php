@@ -21,7 +21,7 @@ class Admission extends Model
 
     public function section()
     {
-        return $this->hasOne(Section::class);
+        return $this->belongsTo(Section::class);
     }
 
     public function grade_level()
