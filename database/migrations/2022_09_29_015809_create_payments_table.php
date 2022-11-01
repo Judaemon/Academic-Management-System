@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('others')
                   ->nullable();
 
+            $table->string('payment_method');
+
             // $table->enum('payment_status', [
             //     'refund',
             //     ''

@@ -18,7 +18,8 @@ class CreatePayments extends Component
 
     public $name;
     public $amount_paid;
-    public $fee;
+    public $school_fee;
+    public $payment_method;
     public $others;
 
     public $isNull = true;
@@ -32,7 +33,8 @@ class CreatePayments extends Component
         return [
             'name' => ['required', 'unique:users,id,'.$this->name],
             'amount_paid' => ['required', 'numeric'],
-            'fee' => ['nullable', 'unique:fees,id,'.$this->fee],
+            'school_fee' => ['nullable', 'unique:fees,id,'.$this->school_fee],
+            'payment_method' => ['required'],
             'others' => ['nullable'],
         ];
     }
@@ -63,7 +65,7 @@ class CreatePayments extends Component
     {
         if($this->isOthers === false) {
             $this->isOthers = true;
-            $this->fee = NULL;
+            $this->school_fee = NULL;
         } else {
             $this->isOthers = false;
         }
@@ -74,7 +76,7 @@ class CreatePayments extends Component
     {
         $this->name = '';
         $this->amount_paid = '';
-        $this->fee = '';
+        $this->school_fee = '';
         $this->others = '';
     }
 
@@ -103,7 +105,8 @@ class CreatePayments extends Component
             'user_id' => $this->name,
             'accountant_id' => Auth::user()->id,
             'amount_paid' => $this->amount_paid,
-            'fee_id' => $this->fee,
+            'fee_id' => $this->school_fee,
+            'payment_method' => $this->payment_method,
             'others' => $this->others,
         ]);
     
