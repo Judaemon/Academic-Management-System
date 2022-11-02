@@ -7,7 +7,7 @@
         <x-dropdown>
             <x-slot name="trigger">
                 <div>
-                    <x-button label="{{ Auth::user()->firstname }}" flat secondary md right-icon="chevron-down" />
+                    <x-button label="{{ Auth::user()->first_name }}" flat secondary md right-icon="chevron-down" />
                 </div>
             </x-slot>
 

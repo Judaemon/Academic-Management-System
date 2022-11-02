@@ -35,6 +35,9 @@ return new class extends Migration
             $table->string('address');
 
             // educational background
+            $table->string('kinder_name')->nullable();
+            $table->string('kinder_grad_date')->nullable();
+
             $table->string('elementary_name')->nullable();
             $table->string('elementary_grad_date')->nullable();
 

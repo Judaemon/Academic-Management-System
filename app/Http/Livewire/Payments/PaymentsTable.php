@@ -21,13 +21,13 @@ class PaymentsTable extends DataTableComponent
             Column::make("Id")
                 ->sortable(),
 
-            Column::make("Name", "user.firstname")
+            Column::make("Name", "user.first_name")
                 ->sortable()
                 ->searchable(),
 
             Column::make("Amount Paid")
                 ->sortable()
-                ->format(fn($value) => 'Php '.number_format($value, 2)),
+                ->format(fn ($value) => 'Php ' . number_format($value, 2)),
 
             Column::make("Payment Type", "fee.fee_name")
                 ->sortable(),

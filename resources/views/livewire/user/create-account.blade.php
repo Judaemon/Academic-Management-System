@@ -1,22 +1,22 @@
 <div wire:ignore.self>
     <x-card title="Create Account">
-    <form wire:submit.prevent="save">
-        <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-            <!-- personal information -->
+        <form wire:submit.prevent="save">
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
+                <!-- personal information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>I. PERSONAL INFORMATION</strong></h1>
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="firstname" label="First Name" placeholder="Juan" />
+                    <x-input wire:model.defer="first_name" label="First Name" placeholder="Juan" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="lastname" label="Last Name" placeholder="Dela Cruz" />
+                    <x-input wire:model.defer="last_name" label="Last Name" placeholder="Dela Cruz" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="middlename" label="Middle Name" placeholder="Cardo" />
+                    <x-input wire:model.defer="middle_name" label="Middle Name" placeholder="Cardo" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input type="date" wire:model.defer="birthdate" label="Birth Date" placeholder="" />
+                    <x-input type="date" wire:model.defer="birth_date" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -36,18 +36,14 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-select
-                        label="Gender"
-                        wire:model.defer="gender"
-                        placeholder="Select Gender"
-                    >
-                            <x-select.option label="Male" value="Male" />
-                            <x-select.option label="Female" value="Female" />
+                    <x-select label="Gender" wire:model.defer="gender" placeholder="Select Gender">
+                        <x-select.option label="Male" value="Male" />
+                        <x-select.option label="Female" value="Female" />
                     </x-select>
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="mothertongue" label="Mother Tongue" placeholder="English" />
+                    <x-input wire:model.defer="mother_tongue" label="Mother Tongue" placeholder="English" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -55,7 +51,7 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="pwdid" label="PWD ID" placeholder="XXXX0000" />
+                    <x-input wire:model.defer="pwd_id" label="PWD ID" placeholder="XXXX0000" />
                 </div>
 
                 <!-- physical information -->
@@ -77,15 +73,17 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="mobilenumber" label="Contact Number" placeholder="09** *** ****" />
+                    <x-input wire:model.defer="mobile_number" label="Contact Number" placeholder="09** *** ****" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="address" label="Address" placeholder="Unit, Street, Barangay, City/Municipality" />
+                    <x-input wire:model.defer="address" label="Address"
+                        placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input autocomplete="randominput" wire:model.defer="email" label="Email" placeholder="user@email.com" />
+                    <x-input autocomplete="randominput" wire:model.defer="email" label="Email"
+                        placeholder="user@email.com" />
                 </div>
 
                 <!-- government beneficiary -->
@@ -148,18 +146,19 @@
                     <h1><strong>PASSWORD</strong></h1>
                 </div>
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-inputs.password  autocomplete="randominput" wire:model.defer="password" label="" placeholder="" />
+                    <x-inputs.password autocomplete="randominput" wire:model.defer="password" label=""
+                        placeholder="" />
                 </div>
 
-        </div>
-
-        <x-slot name="footer">
-            <div class="flex justify-between gap-x-4">
-                <x-button flat label="Cancel" wire:click="closeModal" />
-                
-                <x-button wire:click="save" type="button" primary label="Save" />
             </div>
-        </x-slot>
-    </form>
+
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <x-button flat label="Cancel" wire:click="closeModal" />
+
+                    <x-button wire:click="save" type="button" primary label="Save" />
+                </div>
+            </x-slot>
+        </form>
     </x-card>
 </div>

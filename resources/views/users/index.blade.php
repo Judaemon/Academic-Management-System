@@ -3,8 +3,8 @@
         <h1 class="text-2xl font-semibold text-gray-700">Users</h1>
 
         <div class="flex justify-end gap-x-2">
-            @can('create_student')
-                <x-button primary onclick="Livewire.emit('openModal', 'user.create-student')" label="CREATE STUDENT" />
+            @can('enroll_student')
+                <x-button primary onclick="Livewire.emit('openModal', 'user.enroll-student')" label="ENROLL STUDENT" />
             @endcan
 
             @can('create_account')

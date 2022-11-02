@@ -8,34 +8,32 @@ use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateStudent extends ModalComponent
+class EnrollStudent extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $firstname;
-    public $lastname;
-    public $middlename;
+    public $first_name;
+    public $last_name;
+    public $middle_name;
     public $email;
     public $suffix;
-    public $birthdate;
+    public $birth_date;
     public $birthplace;
     public $religion;
     public $gender;
-    public $mothertongue;
+    public $mother_tongue;
     public $nationality;
-    public $pwdid;
+    public $pwd_id;
 
     public $height;
     public $weight;
 
-    public $mobilenumber;
+    public $mobile_number;
     public $address;
 
-    public $school_kinder;
-    public $school_kindergrad;
-    public $school_elementary;
-    public $school_elementarygrad;
-    public $school_juniorhigh;
+    public $elementary_name;
+    public $elementary_grad_date;
+    public $junior_high_name;
 
     public $lrn;
     public $esc;
@@ -50,47 +48,45 @@ class CreateStudent extends ModalComponent
     public $emergency_contact_address;
     public $emergency_contact_relationship;
 
-    public $mparent_name;
-    public $mparent_number;
-    public $mparent_occupation;
-    public $mparent_address;
+    public $mother_name;
+    public $mother_number;
+    public $mother_email;
+    public $mother_address;
 
-    public $fparent_name;
-    public $fparent_number;
-    public $fparent_occupation;
-    public $fparent_address;
+    public $father_name;
+    public $father_number;
+    public $father_email;
+    public $father_address;
 
     protected function rules()
     {
         return [
             // personal info
             'email' => ['required', 'unique:users,email'],
-            'firstname' => ['required'],
-            'lastname' => ['required'],
-            'middlename' => ['nullable'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'middle_name' => ['nullable'],
             'suffix' => ['nullable'],
-            'birthdate' => ['required'],
+            'birth_date' => ['required'],
             'birthplace' => ['required'],
             'religion' => ['required'],
             'gender' => ['required'],
-            'mothertongue' => ['required'],
+            'mother_tongue' => ['required'],
             'nationality' => ['required'],
-            'pwdid' => ['nullable', 'unique:users,pwdid'],
+            'pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
             // physical info
             'height' => ['nullable'],
             'weight' => ['nullable'],
 
             // contact info
-            'mobilenumber' => ['required', 'unique:users,mobilenumber'],
+            'mobile_number' => ['required', 'unique:users,mobile_number'],
             'address' => ['required'],
 
             // educational background
-            'school_kinder' => ['nullable'],
-            'school_kindergrad' => ['nullable'],
-            'school_elementary' => ['nullable'],
-            'school_elementarygrad' => ['nullable'],
-            'school_juniorhigh' => ['nullable'],
+            'elementary_name' => ['nullable'],
+            'elementary_grad_date' => ['nullable'],
+            'junior_high_name' => ['nullable'],
 
             // academic info
             'lrn' => ['nullable', 'unique:users,lrn'],
@@ -121,7 +117,7 @@ class CreateStudent extends ModalComponent
 
     public function render()
     {
-        return view('livewire.user.create-student');
+        return view('livewire.user.enroll-student');
     }
 
     public function save(): void
@@ -147,37 +143,35 @@ class CreateStudent extends ModalComponent
     {
         $this->authorize('create_student');
 
-        // firstname.first_letter_of_lastname ex. firstname = Sample, lastname = Sample, password = sample.s
-        $password = strtolower(mb_substr($this->firstname, 0, 1, 'utf-8') . '.' . $this->lastname);
+        // first_name.first_letter_of_last_name ex. first_name = Sample, last_name = Sample, password = sample.s
+        $password = strtolower(mb_substr($this->first_name, 0, 1, 'utf-8') . '.' . $this->last_name);
 
         $user = User::create([
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
             'email' => $this->email,
             'password' => Hash::make($password),
-            'middlename' => $this->middlename,
+            'middle_name' => $this->middle_name,
             'suffix' => $this->suffix,
-            'birthdate' => $this->birthdate,
+            'birth_date' => $this->birth_date,
             'birthplace' => $this->birthplace,
             'religion' => $this->religion,
             'gender' => $this->gender,
-            'mothertongue' => $this->mothertongue,
+            'mother_tongue' => $this->mother_tongue,
             'nationality' => $this->nationality,
-            'pwdid' => $this->pwdid,
+            'pwd_id' => $this->pwd_id,
 
             // physical info
             'height' => $this->height,
             'weight' => $this->weight,
 
             // contact info
-            'mobilenumber' => $this->mobilenumber,
+            'mobile_number' => $this->mobile_number,
             'address' => $this->address,
 
             // educational background
-            'school_kinder' => $this->school_kinder,
-            'school_kindergrad' => $this->school_kindergrad,
-            'school_elementary' => $this->school_elementary,
-            'school_elementarygrad' => $this->school_elementarygrad,
+            'elementary_name' => $this->elementary_name,
+            'elementary_grad_date' => $this->elementary_grad_date,
 
             // academic info
             'lrn' => $this->lrn,

@@ -13,33 +13,31 @@ class ViewUser extends ModalComponent
     {
         return [
             // personal info
-            'user.firstname' => ['required'],
-            'user.lastname' => ['required'],
-            'user.middlename' => ['nullable'],
+            'user.first_name' => ['required'],
+            'user.last_name' => ['required'],
+            'user.middle_name' => ['nullable'],
             'user.email' => ['required', 'email', 'unique:users,email, ' . $this->user->id],
             'user.suffix' => ['nullable'],
-            'user.birthdate' => ['required'],
+            'user.birth_date' => ['required'],
             'user.birthplace' => ['required'],
             'user.religion' => ['required'],
             'user.gender' => ['required'],
-            'user.mothertongue' => ['required'],
+            'user.mother_tongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwdid' => ['nullable', 'pwdid', 'unique:users,pwdid, ' . $this->user->id],
+            'user.pwd_id' => ['nullable', 'pwd_id', 'unique:users,pwd_id, ' . $this->user->id],
 
             // physical info
             'user.height' => ['nullable'],
             'user.weight' => ['nullable'],
 
             // contact info
-            'user.mobilenumber' => ['required', 'mobilenumber', 'unique:users,mobilenumber, ' . $this->user->id],
+            'user.mobile_number' => ['required', 'mobile_number', 'unique:users,mobile_number, ' . $this->user->id],
             'user.address' => ['required'],
 
             // educational background
-            'user.school_kinder' => ['nullable'],
-            'user.school_kindergrad' => ['nullable'],
-            'user.school_elementary' => ['nullable'],
-            'user.school_elementarygrad' => ['nullable'],
-            'user.school_juniorhigh' => ['nullable'],
+            'user.elementary_name' => ['nullable'],
+            'user.elementary_grad_date' => ['nullable'],
+            'user.junior_high_name' => ['nullable'],
 
             // academic information
             'user.lrn' => ['nullable', 'lrn', 'unique:users,lrn, ' . $this->user->id],
@@ -48,20 +46,21 @@ class ViewUser extends ModalComponent
             'user.public_id' => ['nullable', 'public', 'unique:users,public_id, ' . $this->user->id],
 
             // beneficiary, emergency contact, and parents info
-            'user.beneficiary' => ['nullable'],
             'user.emergency_contact_name' => ['required'],
             'user.emergency_contact_number' => ['required', 'emergency_contact_number', 'unique:users,emergency_contact_number' . $this->user->id],
             'user.emergency_contact_occupation' => ['nullable'],
             'user.emergency_contact_address' => ['required'],
             'user.emergency_contact_relationship' => ['required'],
-            'user.mparent_name' => ['nullable'],
-            'user.mparent_number' => ['nullable', 'mparent_number', 'unique:users,mparent_number, ' . $this->user->id],
-            'user.mparent_occupation' => ['nullable'],
-            'user.mparent_address' => ['nullable'],
-            'user.fparent_name' => ['nullable'],
-            'user.fparent_number' => ['nullable', 'fparent_number', 'unique:users,fparent_number, ' . $this->user->id],
-            'user.fparent_occupation' => ['nullable'],
-            'user.fparent_address' => ['nullable'],
+
+            'user.mother_name' => ['nullable'],
+            'user.mother_number' => ['nullable', 'mother_number', 'unique:users,mother_number, ' . $this->user->id],
+            'user.mother_email' => ['nullable'],
+            'user.mother_address' => ['nullable'],
+
+            'user.father_name' => ['nullable'],
+            'user.father_number' => ['nullable', 'father_number', 'unique:users,father_number, ' . $this->user->id],
+            'user.father_email' => ['nullable'],
+            'user.father_address' => ['nullable'],
 
             // additional account info
             'user.pag_ibig' => ['nullable', 'unique:users,pag_ibig, ' . $this->user->id],
