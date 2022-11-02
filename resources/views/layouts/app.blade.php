@@ -44,7 +44,7 @@
         <span class="2xl:max-w-7xl"></span>
     </div>
 
-    <div class="flex h-screen bg-gray-50 w-14" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex h-screen bg-gray-50" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
         <!-- Desktop sidebar -->
         @include('layouts.navigation')
