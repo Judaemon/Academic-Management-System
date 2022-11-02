@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('birthplace');
             $table->string('nationality');
             $table->string('gender');
-            $table->string('religion');
             $table->string('mother_tongue');
+            $table->string('religion');
 
             // physical information
             $table->string('weight')->nullable();
@@ -71,8 +71,6 @@ return new class extends Migration
             $table->string('philhealth')->unique()->nullable();
             $table->string('sss')->unique()->nullable();
             $table->string('tin')->unique()->nullable();
-
-            $table->string('beneficiary')->nullable();
 
             $table->timestamp('email_verified_at')->nullable();
 
