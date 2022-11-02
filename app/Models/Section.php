@@ -28,7 +28,24 @@ class Section extends Authenticatable
     protected $fillable = [
         'name',
         'capacity',
+
         'teacher_id',
         'grade_level_id',
     ];
+
+    protected $appends = ['has_slot'];
+
+    public function getHasSlotAttribute()
+    {
+        $taken_slots = Admission::query()
+            ->where("academic_year_id", setting("academic_year_id"))
+            ->where('section_id', $this->id)
+            ->count();
+
+        if ($taken_slots < $this->capacity) {
+            return true;
+        }
+
+        return false;
+    }
 }

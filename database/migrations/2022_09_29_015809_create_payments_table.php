@@ -12,21 +12,21 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')
-                  ->constrained('users', 'id')
-                  ->onDelete('cascade');
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
 
             $table->integer('accountant_id');
 
             $table->decimal('amount_paid')
-                  ->default('0.00');
-            
+                ->default('0.00');
+
             $table->foreignId('fee_id')
-                  ->nullable()
-                  ->constrained('fees', 'id')
-                  ->onDelete('cascade');
-            
+                ->nullable()
+                ->constrained('fees', 'id')
+                ->onDelete('cascade');
+
             $table->string('others')
-                  ->nullable();
+                ->nullable();
 
             $table->string('payment_method');
 

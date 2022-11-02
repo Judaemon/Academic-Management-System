@@ -61,9 +61,6 @@ class EditGradeLevel extends ModalComponent
 
     public function submit()
     {
-
-        // dd($removed_subjects, $this->grade_level_subjects);
-
         $this->authorize('update_grade_level');
 
         $this->grade_level->save();

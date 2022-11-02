@@ -56,4 +56,24 @@ class UserController extends Controller
             ->role('Teacher')
             ->get();
     }
+
+    public function students(Request $request)
+    {
+        return User::query()
+            ->select(DB::raw("CONCAT(firstname, ' ', lastname) AS full_name"), 'id')
+            ->when(
+                $request->search,
+                fn (Builder $query) => $query
+                    ->where(DB::raw('CONCAT_WS(" ", firstname, lastname)'), 'like', "%{$request->search}%")
+                    ->orWhere('id', 'like', "%{$request->search}%")
+            )
+            ->when(
+                $request->exists('selected'),
+                fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
+                fn (Builder $query) => $query->limit(10)
+            )
+            ->orderBy('full_name')
+            ->role('Student')
+            ->get();
+    }
 }

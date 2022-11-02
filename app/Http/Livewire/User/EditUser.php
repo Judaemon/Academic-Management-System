@@ -87,7 +87,7 @@ class EditUser extends ModalComponent
 
     public function save(): void
     {
-        $this->validate();
+        //$this->validate();
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
