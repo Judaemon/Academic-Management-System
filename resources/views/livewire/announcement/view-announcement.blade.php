@@ -27,7 +27,7 @@
 
         @if(!empty($announcement->main_image))
             <div class="w-full h-auto items-center my-4">
-                <img src="" alt="{{ $announcement->title }}">
+                <img src="{{ asset('storage/'.$announcement->main_image) }}" alt="{{ $announcement->title }}">
             </div>
         @endif
 
@@ -35,7 +35,7 @@
 
     <div class="w-full bg-iscp_primary rounded-b-lg h-20 px-10">
         <div class="flex justify-end items-center gap-x-4 h-full w-full">
-            <x-button negative icon="x-circle" label="Cancel" wire:click="closeModal" />
+            <x-button negative icon="x-circle" label="Close" wire:click="closeModal" />
         </div>
     </div>
 </div>

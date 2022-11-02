@@ -18,7 +18,7 @@ class CreateAnnouncement extends ModalComponent
     public $title;
     public $description;
     public $date;
-    public $main_image = [];
+    public $main_image;
     // public $category;
 
     protected function rules()
@@ -27,7 +27,7 @@ class CreateAnnouncement extends ModalComponent
             'title' => ['required'],
             'description' => ['required'],
             'date' => ['required', 'date'],
-            'main_image.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'main_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
         ];
     }
 
@@ -35,6 +35,7 @@ class CreateAnnouncement extends ModalComponent
     {
         return view('livewire.announcement.create-announcement');
     }
+
     public function save(): void
     {
         $this->validate();
@@ -58,8 +59,10 @@ class CreateAnnouncement extends ModalComponent
     {
         $this->authorize('create_announcement');
 
-        foreach($this->main_image as $img) {
-            $img = store('public');
+        if(!empty($this->main_image)) {
+            $this->main_image = $this->main_image->store('announcement', 'public');
+        } else {
+            $this->main_image = NULL;
         }
 
         Announcement::create([
@@ -68,6 +71,12 @@ class CreateAnnouncement extends ModalComponent
             'date' => Carbon::parse($this->date)->toDateString(),
             'main_image' => $this->main_image,
         ]);
+
+        if(!empty($this->main_image)) {
+
+        } else {
+            
+        }
 
         $this->emit('refreshDatatable');
 

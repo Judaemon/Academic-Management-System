@@ -29,6 +29,19 @@
                         type="file"
                     />
                 </div>
+
+                {{-- problem with image previews but can save --}}
+                {{-- @if (!empty($main_image))
+                    <div class="col-span-4">
+                        <div class="w-full text-sm mb-2">Photo Preview</div>
+                        <div class="w-full h-60 flex items-center justify-center">
+                            <img 
+                                src="{{ $main_image->temporaryUrl() }}" 
+                                class="h-full w-full object-none rounded-lg"
+                            />
+                        </div>
+                    </div>
+                @endif --}}
             </div>
 
             <x-slot name="footer">
