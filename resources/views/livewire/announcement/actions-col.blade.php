@@ -5,6 +5,12 @@
         />
     @endcan
 
+    @can ('view_announcement')
+        <x-button wire:ignore.self icon="eye" green label="View" 
+            onclick="livewire.emit('openModal', 'announcement.view-announcement', {{ json_encode(['announcement' => $value]) }})"  
+        />
+    @endcan
+
     @can ('delete_announcement')
         <x-button wire:ignore.self icon="trash" negative label="Delete"
             onclick="livewire.emit('openModal', 'announcement.delete-announcement', {{ json_encode(['announcement' => $value]) }})" 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Announcement;
 
 use LivewireUI\Modal\ModalComponent;
+use Livewire\WithFileUploads;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -12,12 +13,12 @@ use Carbon\Carbon;
 
 class CreateAnnouncement extends ModalComponent
 {
-    use AuthorizesRequests, Actions;
+    use AuthorizesRequests, Actions, WithFileUploads;
 
     public $title;
     public $description;
     public $date;
-    public $main_image;
+    public $main_image = [];
     // public $category;
 
     protected function rules()
@@ -26,7 +27,7 @@ class CreateAnnouncement extends ModalComponent
             'title' => ['required'],
             'description' => ['required'],
             'date' => ['required', 'date'],
-            'main_image' => ['nullable'],
+            'main_image.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
         ];
     }
 
@@ -56,6 +57,10 @@ class CreateAnnouncement extends ModalComponent
     public function submit()
     {
         $this->authorize('create_announcement');
+
+        foreach($this->main_image as $img) {
+            $img = store('public');
+        }
 
         Announcement::create([
             'title' => $this->title,

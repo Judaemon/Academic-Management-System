@@ -1,5 +1,5 @@
 <div wire:ignore.self>
-    <x-card title="Create Announcement">
+    <x-card title="Edit Announcement">
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-1 gap-4 p-4">
                 <div class="col-span-4">
@@ -34,7 +34,7 @@
             <x-slot name="footer">
                 <div class="flex justify-end gap-x-4">
                     <x-button flat label="Cancel" wire:click="closeModal" />
-                    <x-button wire:click.prevent="save" type="submit" primary label="Save" />
+                    <x-button wire:click.prevent="save" type="submit" primary label="Update" />
                 </div>
             </x-slot>
         </form>

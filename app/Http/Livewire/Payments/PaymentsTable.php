@@ -19,6 +19,14 @@ class PaymentsTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
+    public function exportSelected()
+    {
+        foreach($this->getSelected() as $item)
+        {
+            // These are strings since they came from an HTML element
+        }
+    }
+
     public function columns(): array
     {
         return [

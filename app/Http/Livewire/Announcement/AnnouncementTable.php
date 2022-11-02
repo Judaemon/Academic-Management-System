@@ -27,7 +27,7 @@ class AnnouncementTable extends DataTableComponent
                 ->format(fn($value) => date('F j, Y', strtotime($value)))
                 ->collapseOnMobile(),
             Column::make("Actions", "id")
-                ->view('livewire.academic-year.actions-col')
+                ->view('livewire.announcement.actions-col')
                 ->collapseOnMobile(),
 
         ];
