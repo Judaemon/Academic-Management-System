@@ -8,10 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('grade_levels', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
-            $table->foreignId('program_id')->constrained('programs', 'id');
+            $table->string('starting_grade_level_id');
 
             $table->timestamps();
         });
@@ -19,6 +20,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('grade_levels');
+        Schema::dropIfExists('programs');
     }
 };

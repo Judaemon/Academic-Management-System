@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\GradeLevel;
+use App\Models\Program;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class EnrollStudent extends ModalComponent
+class AdmitStudent extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
@@ -30,6 +33,18 @@ class EnrollStudent extends ModalComponent
 
     public $mobile_number;
     public $address;
+
+    // Admission
+    public $programs;
+    public $program;
+    public $isTransferee;
+
+    public $grade_levels;
+    public $grade_level;
+
+    public $sections;
+    public $section;
+    // Admission
 
     public $elementary_name;
     public $elementary_grad_date;
@@ -61,67 +76,130 @@ class EnrollStudent extends ModalComponent
     protected function rules()
     {
         return [
-            // personal info
-            'email' => ['required', 'unique:users,email'],
             'first_name' => ['required'],
-            'last_name' => ['required'],
             'middle_name' => ['nullable'],
+            'last_name' => ['required'],
             'suffix' => ['nullable'],
+
             'birth_date' => ['required'],
             'birthplace' => ['required'],
-            'religion' => ['required'],
-            'gender' => ['required'],
-            'mother_tongue' => ['required'],
             'nationality' => ['required'],
-            'pwd_id' => ['nullable', 'unique:users,pwd_id'],
+            'gender' => ['required', 'in:Male,Female'],
+            'religion' => ['required'],
+            'mother_tongue' => ['required'],
 
-            // physical info
             'height' => ['nullable'],
             'weight' => ['nullable'],
+            'pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
-            // contact info
+            'email' => ['required', 'unique:users,email'],
             'mobile_number' => ['required', 'unique:users,mobile_number'],
             'address' => ['required'],
 
-            // educational background
-            'elementary_name' => ['nullable'],
-            'elementary_grad_date' => ['nullable'],
-            'junior_high_name' => ['nullable'],
+            // Admission
+            'programs' => ['nullable'],
+            'program' => ['nullable'],
+            'isTransferee' => ['nullable'],
 
-            // academic info
+            'grade_levels' => ['nullable'],
+            'grade_level' => ['nullable'],
+
+            'sections' => ['nullable'],
+            'section' => ['nullable'],
+            // Admission
+
+            // 'elementary_name' => ['nullable'],
+            // 'elementary_grad_date' => ['nullable'],
+            // 'junior_high_name' => ['nullable'],
+
             'lrn' => ['nullable', 'unique:users,lrn'],
             'esc' => ['nullable', 'unique:users,esc'],
             'qvr' => ['nullable', 'unique:users,qvr'],
-            'public_id' => ['nullable', 'unique:users,public_id'],
 
-            // beneficiary, emergency contact, and parents info
-            'beneficiary' => ['nullable'],
+            'mother_name' => ['nullable'],
+            'mother_number' => ['nullable', 'unique:users,mother_number'],
+            'mother_email' => ['nullable'],
+            'mother_address' => ['nullable'],
+
+            'father_name' => ['nullable'],
+            'father_number' => ['nullable', 'unique:users,father_number'],
+            'father_email' => ['nullable'],
+            'father_address' => ['nullable'],
 
             'emergency_contact_name' => ['required'],
-            'emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
-            'emergency_contact_occupation' => ['nullable'],
-            'emergency_contact_address' => ['required'],
             'emergency_contact_relationship' => ['required'],
-
-            'mparent_name' => ['nullable'],
-            'mparent_number' => ['nullable', 'unique:users,mparent_number'],
-            'mparent_occupation' => ['nullable'],
-            'mparent_address' => ['nullable'],
-
-            'fparent_name' => ['nullable'],
-            'fparent_number' => ['nullable', 'unique:users,fparent_number'],
-            'fparent_occupation' => ['nullable'],
-            'fparent_address' => ['nullable'],
+            'emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
+            'emergency_contact_address' => ['required'],
         ];
+    }
+
+    public function mount()
+    {
+        $this->programs = Program::all();
     }
 
     public function render()
     {
-        return view('livewire.user.enroll-student');
+        return view('livewire.user.admit-student');
+    }
+
+    public function updatedProgram($value)
+    {
+        $this->isTransferee = false;
+        $this->grade_level = null;
+        $this->section = null;
+
+        if (empty($value)) {
+            return;
+        }
+
+        $this->program = Program::find($this->program);
+
+        $this->grade_levels = GradeLevel::query()
+            ->where('program_id', $this->program->id)
+            ->get();
+
+        $this->sections = Section::query()
+            ->whereHas('grade_level', function ($query) {
+                $query->where('program_id', $this->program->id);
+                $query->where('id', $this->program->starting_grade_level_id);
+            })
+            ->get();
+    }
+
+    public function updatedIsTransferee()
+    {
+        $this->section = null;
+        $this->grade_level = null;
+
+        $this->grade_levels = GradeLevel::query()
+            ->where('program_id', $this->program->id)
+            ->get();
+
+        $this->sections = Section::query()
+            ->whereHas('grade_level', function ($query) {
+                $query->where('program_id', $this->program->id);
+                $query->where('id', $this->program->starting_grade_level_id);
+            })
+            ->get();
+    }
+
+    public function updatedGradeLevel($value)
+    {
+        $this->section = null;
+
+        $this->sections = Section::query()
+            ->whereHas('grade_level', function ($query) use ($value) {
+                $query->where('program_id', $this->program->id);
+                $query->where('id', $value);
+            })
+            ->get();
     }
 
     public function save(): void
     {
+        dd($this->grade_levels);
+
         $this->validate();
 
         $this->dialog()->confirm([
@@ -196,7 +274,7 @@ class EnrollStudent extends ModalComponent
             'fparent_address' => $this->fparent_address,
         ]);
 
-        // Granting the Student role to the newly created user 
+        // Granting the Student role to the newly created user
         $user->assignRole('Student');
 
         $this->closeModal();

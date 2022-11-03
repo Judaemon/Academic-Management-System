@@ -4,11 +4,11 @@
 
         <div class="flex justify-end gap-x-2">
             @can('enroll_student')
-                <x-button primary onclick="Livewire.emit('openModal', 'user.enroll-student')" label="ENROLL STUDENT" />
+                <x-button primary onclick="Livewire.emit('openModal', 'user.admit-student')" label="ADMIT NEW STUDENT" />
             @endcan
 
             @can('create_account')
-                <x-button primary onclick="Livewire.emit('openModal', 'user.create-account')" label="CREATE ACCOUNT" />
+                <x-button primary onclick="Livewire.emit('openModal', 'user.create-account')" label="CREATE NEW ACCOUNT" />
             @endcan
         </div>
     </div>

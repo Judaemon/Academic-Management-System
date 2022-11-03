@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Section extends Authenticatable
+class Section extends Model
 {
-    use HasApiTokens, Notifiable;
+    use HasFactory;
 
     public function subjects()
     {
