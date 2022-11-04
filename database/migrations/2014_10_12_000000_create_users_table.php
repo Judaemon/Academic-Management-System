@@ -12,36 +12,67 @@ return new class extends Migration
             $table->id();
 
             // personal information
-            $table->string('firstname');
-            $table->string('middlename')->nullable();
-            $table->string('lastname');
+            $table->string('first_name');
+            $table->string('middle_name')->nullable();
+            $table->string('last_name');
             $table->string('suffix')->nullable();
 
-            $table->date('birthdate');
+            $table->date('birth_date');
             $table->string('birthplace');
-
-            $table->string('religion');
-            $table->string('gender');
-            $table->string('mothertongue');
             $table->string('nationality');
-            $table->string('pwdid')->unique()->nullable();
+            $table->string('gender');
+            $table->string('mother_tongue');
+            $table->string('religion');
 
             // physical information
-            $table->string('height')->nullable();
             $table->string('weight')->nullable();
+            $table->string('height')->nullable();
+            $table->string('pwd_id')->unique()->nullable();
 
             // contact information
-            $table->string('mobilenumber')->unique();
+            $table->string('mobile_number')->unique();
             $table->string('email')->unique();
             $table->string('address');
 
             // educational background
-            $table->string('school_kinder')->nullable();
-            $table->string('school_kindergrad')->nullable();
-            $table->string('school_elementary')->nullable();
-            $table->string('school_elementarygrad')->nullable();
-            $table->string('school_juniorhigh')->nullable();
-            $table->string('school_juniorhighgrad')->nullable();
+            $table->string('elementary_name')->nullable();
+            $table->string('elementary_grad_date')->nullable();
+
+            $table->string('junior_high_name')->nullable();
+            $table->string('junior_high_grad_date')->nullable();
+
+            // academic information
+            $table->string('lrn')->unique()->nullable();
+            $table->string('esc')->unique()->nullable();
+            $table->string('qvr')->unique()->nullable();
+
+            // parent information
+            $table->string('mother_name')->nullable();
+            $table->string('mother_number')->unique()->nullable();
+            $table->string('mother_email')->unique()->nullable();
+            $table->string('mother_address')->nullable();
+
+            $table->string('father_name')->nullable();
+            $table->string('father_number')->unique()->nullable();
+            $table->string('father_email')->unique()->nullable();
+            $table->string('father_address')->nullable();
+
+            // emergency contact information
+            $table->string('emergency_contact_name');
+            $table->string('emergency_contact_relationship');
+            $table->string('emergency_contact_number')->unique();
+            $table->string('emergency_contact_address');
+
+            // account
+            $table->string('password');
+
+            // For non student accounts
+            $table->string('pag_ibig')->unique()->nullable();
+            $table->string('philhealth')->unique()->nullable();
+            $table->string('sss')->unique()->nullable();
+            $table->string('tin')->unique()->nullable();
+
+            $table->timestamp('email_verified_at')->nullable();
 
             // For admission
             // If there is no data on the admission table, that means a transferee or a new student.
@@ -50,45 +81,10 @@ return new class extends Migration
             $table->string('latest_average_grade')->nullable();
             $table->string('status')->nullable();
 
-            // academic information
-            $table->string('lrn')->unique()->nullable();
-            $table->string('esc')->unique()->nullable();
-            $table->string('qvr')->unique()->nullable();
-            $table->string('public_id')->unique()->nullable();
-
             $table->string('grade_level_id')->nullable();
 
             // this means the user is enrolled on the current academic year
             $table->boolean('currently_enrolled')->nullable();
-
-            // government beneficiary
-            $table->string('beneficiary')->nullable();
-
-            // emergency contact information
-            $table->string('emergency_contact_name');
-            $table->string('emergency_contact_number')->unique();
-            $table->string('emergency_contact_occupation')->nullable();
-            $table->string('emergency_contact_address');
-            $table->string('emergency_contact_relationship');
-
-            // parent information
-            $table->string('mparent_name')->nullable();
-            $table->string('mparent_number')->unique()->nullable();
-            $table->string('mparent_occupation')->nullable();
-            $table->string('mparent_address')->nullable();
-            $table->string('fparent_name')->nullable();
-            $table->string('fparent_number')->unique()->nullable();
-            $table->string('fparent_occupation')->nullable();
-            $table->string('fparent_address')->nullable();
-
-            // for account information
-            $table->string('pag_ibig')->unique()->nullable();
-            $table->string('philhealth')->unique()->nullable();
-            $table->string('sss')->unique()->nullable();
-            $table->string('tin')->unique()->nullable();
-
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
 
             $table->rememberToken();
             $table->timestamps();

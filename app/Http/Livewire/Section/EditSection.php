@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Section;
 
 use App\Models\Section;
-use App\Models\Subject;
-use App\Models\User;
 use App\Models\GradeLevel;
 use App\Rules\Teacher;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

@@ -1,189 +1,305 @@
 <x-app-layout>
-    <x-slot name="header">
-        {{ __('My profile') }}
-    </x-slot>
-
-    @if ($message = Session::get('success'))
-        <div class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
-            <div class="flex items-center justify-center w-12 bg-green-500">
-                <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                            d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z">
-                    </path>
-                </svg>
+    <!-- Profile Card -->
+    <div class="p-4 bg-white rounded-lg shadow-md mb-4">
+        <div class="flex flex-col rounded-lg  shadow-xs md:flex-row">
+            <div class="md:w-52 flex justify-center">
+                <x-avatar size="w-52 h-52" squared
+                    src="https://ui-avatars.com/api/?name={{ auth()->user()->first_name }}+{{ auth()->user()->last_name }}&format=svg" />
             </div>
 
-            <div class="px-4 py-2 -mx-3">
-                <div class="mx-3">
-                    <span class="font-semibold text-green-500">Success</span>
-                    <p class="text-sm text-gray-600">{{ $message }}</p>
+            <div class="flex flex-col space-y-2 mt-4 md:grow md:pl-4 md:m-0 md:justify-between">
+                <div>
+                    <div class="flex justify-between">
+                        <h2 class="font-semibold">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }} </h2>
+                        <x-badge dark rounded md label="20192151" />
+                    </div>
+                    <p class="text-sm">Elementary - Grade level</p>
                 </div>
+
+                @hasrole('Student')
+                    <div class="space-y-2 md:flex md:justify-end md:space-x-2 md:space-y-0">
+                        <div class="w-full lg:w-4/12">
+                            <x-button class="w-full" href="https://google.com" label="Grades Record" />
+                        </div>
+
+                        <div class="w-full lg:w-4/12">
+                            <x-button class="w-full" href="https://google.com" label="Assessment of Fees" />
+                        </div>
+                    </div>
+                @endhasrole
             </div>
         </div>
-    @endif
+    </div>
 
-    <div class="p-4 bg-white rounded-lg shadow-md">
-    <h2 class="text-2xl font-semibold text-gray-700">My Profile</h2>
-        <form action="{{ route('profile.update') }}" method="POST">
-            @csrf
-            @method('PUT')
+    <div class="grid grid-cols-12 gap-4">
+        <!-- Personal and Physical Information -->
+        <section class="container col-span-12 md:col-span-8 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="w-full mb-2" dark md label="Personal and Physical Information" />
 
-            <div class="mt-4">
-                <h1>First Name</h1>
-                <x-label for="Firstname" :value="__('First Name')"/>
-                <x-input readonly type="text"
-                         id="firstname"
-                         name="firstname"
-                         class="block w-full"
-                         value="{{ old('firstname', auth()->user()->firstname) }}"
-                         required/>
-                @error('firstname')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+            {{-- <div class="flex flex-col space-y-2 px-2"> --}}
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm"> {{ auth()->user()->first_name }}</p>
+                    <p class="text-xs italic text-gray-600">First name</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm"> {{ auth()->user()->middle_name }}</p>
+                    <p class="text-xs italic text-gray-600">Middle name</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm"> {{ auth()->user()->last_name }}</p>
+                    <p class="text-xs italic text-gray-600">Last name</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm"> {{ auth()->user()->suffix }}</p>
+                    <p class="text-xs italic text-gray-600">Suffix</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->birth_date }}</p>
+                    <p class="text-xs italic text-gray-600">Birth date</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->birthplace }}</p>
+                    <p class="text-xs italic text-gray-600">Birthplace</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->nationality }}</p>
+                    <p class="text-xs italic text-gray-600">Nationality</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->gender }}</p>
+                    <p class="text-xs italic text-gray-600">Gender</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->religion }}</p>
+                    <p class="text-xs italic text-gray-600">Religion</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->mother_tongue }}</p>
+                    <p class="text-xs italic text-gray-600">Mother tongue</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->weight }}</p>
+                    <p class="text-xs italic text-gray-600">Weight</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->height }}</p>
+                    <p class="text-xs italic text-gray-600">Height</p>
+                </div>
+
+                <div class="col-span-4 md:col-span-3">
+                    <p class="font-semibold text-sm">{{ auth()->user()->pwd_id }}</p>
+                    <p class="text-xs italic text-gray-600">PWD ID</p>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-4">
-                <h1>Middle Name</h1>
-                <x-label for="Lastname" :value="__('Middle Name')"/>
-                <x-input readonly type="text"
-                         id="middlename"
-                         name="middlename"
-                         class="block w-full"
-                         value="{{ old('middlename', auth()->user()->middlename) }}"
-                         required/>
-                @error('middlename')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+        <!-- Contact Information-->
+        <section class="container col-span-12 md:col-span-4 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="w-full mb-2" dark md label="Contact Information" />
+
+            <div class="flex flex-col space-y-2">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->mobile_number }}</p>
+                        <p class="text-xs italic text-gray-600">Mobile number</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->email }}</p>
+                        <p class="text-xs italic text-gray-600">Email</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->address }}</p>
+                        <p class="text-xs italic text-gray-600">Address</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-4">
-                <h1>Last Name</h1>
-                <x-label for="Lastname" :value="__('Last Name')"/>
-                <x-input readonly type="text"
-                         id="lastname"
-                         name="lastname"
-                         class="block w-full"
-                         value="{{ old('lastname', auth()->user()->lastname) }}"
-                         required/>
-                @error('lastname')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+        <!-- Educational Background -->
+        <section class="container col-span-12 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="w-full mb-2" dark md label="Educational Background" />
+
+            <div class="flex flex-col space-y-2">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-6">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->elementary_name }}</p>
+                        <p class="text-xs italic text-gray-600">Elementary School</p>
+                    </div>
+
+                    <div class="col-span-6">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->elementary_grad_date }}</p>
+                        <p class="text-xs italic text-gray-600">Year Graduated</p>
+                    </div>
+
+                    <div class="col-span-6">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->junior_high_name }}</p>
+                        <p class="text-xs italic text-gray-600">Junior High School</p>
+                    </div>
+
+                    <div class="col-span-6">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->junior_high_grad_date }}</p>
+                        <p class="text-xs italic text-gray-600">Year Graduated</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-4">
-                <h1>E-Mail</h1>
-                <x-label for="email" :value="__('Email')"/>
-                <x-input readonly name="email"
-                         type="email"
-                         class="block w-full"
-                         value="{{ old('email', auth()->user()->email) }}"
-                         required/>
-                @error('email')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+        <!-- Academic Information -->
+        <section class="container col-span-12 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="w-full mb-2" dark md label="Academic Information" />
+
+            <div class="flex flex-col space-y-2">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->lrn }}</p>
+                        <p class="text-xs italic text-gray-600">Learner's Reference Number (LRN)</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->esc }}</p>
+                        <p class="text-xs italic text-gray-600">Education Service Contracting (ESC)</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->qvr }}</p>
+                        <p class="text-xs italic text-gray-600">Qualified Voucher Recipient (QVR)</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-4">
-                <h1>Address</h1>
-                <x-label for="address" :value="__('Address')"/>
-                <x-input readonly name="address"
-                         type="address"
-                         class="block w-full"
-                         value="{{ old('address', auth()->user()->address) }}"
-                         required/>
-                @error('address')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+        <!-- Parent Information -->
+        <section class="container col-span-12 md:col-span-8 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="w-full mb-2" dark md label="Parents Information" />
+
+            <div class="flex flex-row space-y-2">
+                <div class="w-1/2 grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->mother_name }}</p>
+                        <p class="text-xs italic text-gray-600">Mothers' Full Name</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->mother_number }}</p>
+                        <p class="text-xs italic text-gray-600">Contact Number</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->mother_email }}</p>
+                        <p class="text-xs italic text-gray-600">Email</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->mother_address }}</p>
+                        <p class="text-xs italic text-gray-600">Address</p>
+                    </div>
+                </div>
+
+                <div class="w-1/2 grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->father_name }}</p>
+                        <p class="text-xs italic text-gray-600">Fathers' Full Name</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->father_number }}</p>
+                        <p class="text-xs italic text-gray-600">Contact Number</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->father_email }}</p>
+                        <p class="text-xs italic text-gray-600">Email</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->father_address }}</p>
+                        <p class="text-xs italic text-gray-600">Address</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-4">
-                <h1>Mobile Number</h1>
-                <x-label for="address" :value="__('Mobile Number')"/>
-                <x-input readonly name="mobilenumber"
-                         type="mobilenumber"
-                         class="block w-full"
-                         value="{{ old('mobilenumber', auth()->user()->mobilenumber) }}"
-                         required/>
-                @error('mobilenumber')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+        <!-- Emergency Contact Information -->
+        <section class="container col-span-12 md:col-span-4 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="w-full mb-2" dark md label="Emergency Contact Information" />
+
+            <div class="flex flex-col space-y-2">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->emergency_contact_name }}</p>
+                        <p class="text-xs italic text-gray-600">Full Name</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->emergency_contact_number }}</p>
+                        <p class="text-xs italic text-gray-600">Contact Number</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->emergency_contact_relationship }}</p>
+                        <p class="text-xs italic text-gray-600">Relationship</p>
+                    </div>
+
+                    <div class="col-span-12">
+                        <p class="font-semibold text-sm"> {{ auth()->user()->emergency_contact_address }}</p>
+                        <p class="text-xs italic text-gray-600">Address</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <br>
-            <h2 class="text-base font-semibold text-gray-700">Edit Details:</h2>
+        @unlessrole('Student')
+            <!-- Government IDs -->
+            <section class="container col-span-12 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
+                <x-badge class="w-full mb-2" dark md label="Government IDs" />
 
-            <div class="mt-4">
-                <h1>Address</h1>
-                <x-label for="address" :value="__('Address')"/>
-                <x-input name="address"
-                         type="address"
-                         class="block w-full"
-                         placeholder="Unit, Street, Barangay, City/Municipality"
-                         required/>
-                @error('address')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+                <div class="flex flex-col space-y-2">
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12">
+                            <p class="font-semibold text-sm"> {{ auth()->user()->pag_ibig }}</p>
+                            <p class="text-xs italic text-gray-600">Pag-IBIG ID</p>
+                        </div>
 
-            <div class="mt-4">
-                <h1>Mobile Number</h1>
-                <x-label for="address" :value="__('Mobile Number')"/>
-                <x-input name="mobilenumber"
-                         type="mobilenumber"
-                         class="block w-full"
-                         placeholder="New mobile number"
-                         required/>
-                @error('mobilenumber')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+                        <div class="col-span-12">
+                            <p class="font-semibold text-sm"> {{ auth()->user()->philhealth }}</p>
+                            <p class="text-xs italic text-gray-600">PhilHealth ID</p>
+                        </div>
 
-            <div class="mt-4">
-                <h1>Password</h1>
-                <x-label for="password" :value="__('New password')"/>
-                <x-input type="password"
-                         name="password"
-                         class="block w-full"
-                         placeholder="Enter your password"
-                         required/>
-                @error('password')
-                    <span class="text-xs text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+                        <div class="col-span-12">
+                            <p class="font-semibold text-sm"> {{ auth()->user()->sss }}</p>
+                            <p class="text-xs italic text-gray-600">Social Security System (SSS) ID</p>
+                        </div>
 
-            <div class="mt-4">
-                <h1>Confirm Password</h1>
-                <x-label id="password_confirmation" :value="__('New password confirmation')"/>
-                <x-input type="password"
-                         name="password_confirmation"
-                         class="block w-full"
-                         placeholder="Re-type Password"
-                         required/>
-            </div>
+                        <div class="col-span-12">
+                            <p class="font-semibold text-sm"> {{ auth()->user()->tin }}</p>
+                            <p class="text-xs italic text-gray-600">Taxpayer Identification Number (TIN) ID</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endunlessrole
 
-            <div class="mt-4">
-                <x-button class="block w-32" type="submit">
-                    {{ __('Submit') }}
-                </x-button>
-            </div>
-        </form>
+        <section class="container col-span-12 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
+            <x-button icon="pencil" info label="Edit Contact Information"
+                onclick="livewire.emit('openModal', 'profile.update-contact-information')" />
+
+            {{-- To update guardian information, click HERE --}}
+            {{-- To update parents information, click HERE --}}
+        </section>
+
     </div>
 </x-app-layout>
