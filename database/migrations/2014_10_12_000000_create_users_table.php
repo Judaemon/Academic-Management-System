@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('gender');
             $table->string('mother_tongue');
-            $table->string('religion');
+            $table->string('religion')->nullable();
 
             // physical information
             $table->string('weight')->nullable();

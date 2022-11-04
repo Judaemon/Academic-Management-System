@@ -34,6 +34,9 @@ class User extends Authenticatable
         'email',
         'address',
 
+        'kinder_name',
+        'kinder_grad_date',
+
         'elementary_name',
         'elementary_grad_date',
 

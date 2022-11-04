@@ -11,7 +11,6 @@
                             <div class="w-6/12">
                                 <x-select label="Program" wire:model="program"
                                     placeholder="Choose the program that the student intends to get.">
-                                    {{-- {{ $programs }} --}}
                                     @foreach ($programs as $program_option)
                                         <x-select.option label="{{ $program_option->name }}"
                                             value="{{ $program_option->id }}" />
@@ -45,35 +44,6 @@
                                 </div>
                             @endif
                         @endif
-
-                        {{-- <div class="col-span-12 lg:col-span-6">
-                            <x-input wire:model.defer="address"
-                                label="Address (Unit, Street, Barangay, City/Municipality)"
-                                placeholder="Your address" />
-                        </div> --}}
-                    </div>
-                </section>
-
-                <!-- Educational Background -->
-                <section class="container col-span-12">
-                    <x-badge class="w-full mb-2" dark md label="Educational Background" />
-
-                    <div class="grid grid-cols-12 gap-4">
-                        SKIP MUNA
-                        {{-- <div class="col-span-12 md:col-span-6 lg:col-span-3">
-                            <x-input wire:model.defer="mobile_number" label="Mobile number"
-                                placeholder="Your mobile number" />
-                        </div>
-
-                        <div class="col-span-12 md:col-span-6 lg:col-span-3">
-                            <x-input wire:model.defer="email" label="Email" placeholder="Your email" />
-                        </div>
-
-                        <div class="col-span-12 lg:col-span-6">
-                            <x-input wire:model.defer="address"
-                                label="Address (Unit, Street, Barangay, City/Municipality)"
-                                placeholder="Your address" />
-                        </div> --}}
                     </div>
                 </section>
 
@@ -150,6 +120,66 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- Educational Background -->
+                @if (!empty($program))
+                    <section
+                        class="container col-span-12 {{ $program->name == 'Kinder' && !$isTransferee ? 'hidden' : '' }}">
+                        <x-badge class="w-full mb-2" dark md label="Educational Background" />
+
+                        {{-- Kindergarten --}}
+                        <div class="grid grid-cols-12 gap-2 mb-2">
+                            <div class="col-span-12">
+                                <x-badge secondary label="Kindergarten" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="kinder_name" label="Name of school"
+                                    placeholder="The student's kindergarten school's name" />
+                            </div>
+
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="kinder_grad_date" label="Year graduated"
+                                    placeholder="Year the student completed kindergarten" />
+                            </div>
+                        </div>
+
+                        {{-- Elementary --}}
+                        {{-- shows if Elementary and is transferee --}}
+                        {{-- shows if Junior High --}}
+                        <div
+                            class="grid grid-cols-12 gap-2 mb-2 {{ ($program->name == 'Elementary' && $isTransferee) || $program->name == 'Junior High' ? '' : 'hidden' }}">
+                            <div class="col-span-12">
+                                <x-badge class="" secondary label="Elementary" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="elementary_name" label="Name of school"
+                                    placeholder="The student's elementary school's name" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="elementary_grad_date" label="Year graduated"
+                                    placeholder="Year the student completed elementary" />
+                            </div>
+                        </div>
+
+                        {{-- Junior High --}}
+                        {{-- show if Junior High and is transferee --}}
+                        <div
+                            class="grid grid-cols-12 gap-2 {{ $program->name == 'Junior High' && $isTransferee ? '' : 'hidden' }}">
+                            <div class="col-span-12">
+                                <x-badge class="flex px-2" secondary label="Junior High" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="junior_high_name" label="Name of school"
+                                    placeholder="The student's junior high school's name" />
+                            </div>
+                        </div>
+                    </section>
+                @endif
 
                 <!-- Contact Information -->
                 <section class="container col-span-12">
@@ -234,17 +264,17 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <x-input wire:model.defer="mother_name" label="Full name"
+                            <x-input wire:model.defer="father_name" label="Full name"
                                 placeholder="Full name of student's father" />
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <x-input wire:model.defer="mother_number" label="Contact number"
+                            <x-input wire:model.defer="father_number" label="Contact number"
                                 placeholder="Contact number of student's father" />
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <x-input wire:model.defer="mother_email" label="Email"
+                            <x-input wire:model.defer="father_email" label="Email"
                                 placeholder="Email of student's father" />
                         </div>
 
@@ -303,52 +333,13 @@
                 </section>
             </div>
 
-            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <x-button flat label="Cancel" wire:click="closeModal" />
 
-                {{-- <!-- educational background -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>IV. EDUCATIONAL BACKGROUND</strong></h1>
+                    <x-button wire:click="save" type="button" primary label="Save" />
                 </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="school_kinder" label="Kinder" placeholder="School Name" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="school_kindergrad" label="Year Graduated (Kinder)" placeholder="Year" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="elementary_name" label="Elementary" placeholder="School Name" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="elementary_grad_date" label="Year Graduated (Elementary)"
-                        placeholder="Year" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="junior_high_name" label="Junior High School"
-                        placeholder="School Name" />
-                </div> --}}
-
-                <!-- user password -->
-                {{-- <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>PASSWORD</strong></h1>
-                </div>
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-inputs.password autocomplete="randominput" wire:model.defer="password" label=""
-                        placeholder="" />
-                </div> --}}
-
-                <x-slot name="footer">
-                    <div class="flex justify-between gap-x-4">
-                        <x-button flat label="Cancel" wire:click="closeModal" />
-
-                        <x-button wire:click="save" type="button" primary label="Save" />
-                    </div>
-                </x-slot>
-            </div>
+            </x-slot>
         </form>
     </x-card>
 </div>
