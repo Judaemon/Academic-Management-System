@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Grade;
 
+use App\Models\Grade;
 use App\Models\User;
 use App\Models\Subject;
 use LivewireUI\Modal\ModalComponent;

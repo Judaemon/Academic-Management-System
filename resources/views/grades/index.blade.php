@@ -4,7 +4,7 @@
 
         <div>
             @can('create_grade')
-                <x-button wire:ignore.self primary onclick="Livewire.emit('openModal', 'grade.create-grade')" label="CREATE GRADE" />
+                <x-button primary label="ASSIGN GRADES" onclick="livewire.emit('openModal', 'grade.create-grade')" />
             @endcan
         </div>
     </div>
