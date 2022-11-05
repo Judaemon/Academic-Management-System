@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="container">
+    <div class="container p-4 bg-white rounded-lg shadow-md mb-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header mb-4 lg:mb-0 font-semibold text-2xl text-gray-800 leading-tight py-4">{{ __('Change Password') }}</div>
+                    <div class="card-header mb-2 lg:mb-0 font-semibold text-2xl text-gray-800 leading-tight py-2">{{ __('Change Password') }}</div>
                     <form action="{{ route('update-password')}}" method="POST">
                         @csrf
                         @method('PUT')
