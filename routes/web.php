@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
+    Route::get('change-password', [\App\Http\Controllers\PasswordController::class, 'changePassword'])->name('change-password');
+    Route::put('change-password', [\App\Http\Controllers\PasswordController::class, 'updatePassword'])->name('update-password');
+
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
 
     // accounting
@@ -34,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('sections', [\App\Http\Controllers\SectionController::class, 'index'])->name('sections.index');
 
     Route::get('subjects', [\App\Http\Controllers\SubjectController::class, 'index'])->name('subjects.index');
+
+    Route::get('grades', [\App\Http\Controllers\GradeController::class, 'index'])->name('grades.index');
 
     Route::get('grade-level', [\App\Http\Controllers\GradeLevelController::class, 'index'])->name('grade_level.index');
 

@@ -14,9 +14,10 @@ return new class extends Migration
             $table->string('first_quarter')->nullable();
             $table->string('second_quarter')->nullable();
             $table->string('third_quarter')->nullable();
+            $table->string('fourth_quarter')->nullable();
 
-            $table->foreignId('subject_id')->references('id')->on('subjects');
-            $table->foreignId('student_id')->references('id')->on('users');
+            $table->foreignId('subject_id')->references('id')->on('subjects')->nullable();
+            $table->foreignId('student_id')->references('id')->on('users')->nullable();
 
             $table->timestamps();
         });
