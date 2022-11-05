@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Section;
 
 use App\Models\Section;
-use App\Models\Subject;
-use App\Models\User;
 use App\Models\GradeLevel;
 use App\Rules\Teacher;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -24,11 +22,18 @@ class EditSection extends ModalComponent
     protected function rules()
     {
         return [
-            'section.name' => ['required', 'unique:sections,name'],
+            'section.name' => ['required', 'unique:sections,name,' . $this->section->id],
             'section.capacity' => ['required'],
-            'section.teacher_id' => ['required', new Teacher],
+            'section.teacher_id' => ['required', new Teacher, 'unique:sections,teacher_id,' . $this->section->id],
 
             'grade_level' => ['required'],
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'section.teacher_id.unique' => "The selected teacher is already assigned to a class."
         ];
     }
 
@@ -51,7 +56,7 @@ class EditSection extends ModalComponent
     {
         if (!empty($value)) {
             $this->grade_level_subjects = GradeLevel::find($value)->subjects;
-        }else {
+        } else {
             $this->grade_level_subjects = [];
         }
     }

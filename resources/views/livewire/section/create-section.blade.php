@@ -7,46 +7,37 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="capacity" label="Capacity" placeholder="Type maximum capacity here" type="number" min="0" max="60" />
+                    <x-input wire:model.defer="capacity" label="Capacity" placeholder="Type maximum capacity here"
+                        type="number" min="0" max="60" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-select
-                        label="Teacher"
-                        wire:model.defer="teacher"
-                        placeholder="Select teacher"
-                        :async-data="route('users.teachers')"
-                        option-label="full_name"
-                        option-value="id"
-                    />
+                    <x-select label="Teacher" wire:model.defer="teacher" placeholder="Select teacher" :async-data="route('users.teachers')"
+                        option-label="full_name" option-value="id" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-select
-                        label="Grade level"
-                        wire:model="grade_level"
-                        placeholder="Select grade level"
-                        :async-data="route('grade_level.grade_level')"
-                        option-label="name"
-                        option-value="id"
-                    />
+                    <x-select label="Grade level" wire:model="grade_level" placeholder="Select grade level"
+                        :async-data="route('grade_level.grade_level')" option-label="name" option-value="id" />
                 </div>
 
-                <div class="sm:col-span-2 md:col-span-12">
-                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="py-3 px-6">
-                                        Subjects
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                @if (!empty($grade_level))
+                    <div class="sm:col-span-2 md:col-span-12">
+                        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead
+                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="py-3 px-6">
+                                            Subjects
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @forelse($grade_level_subjects as $subject)
                                         <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="py-4 px-6">
-                                                {{ $subject->name}}
+                                                {{ $subject->name }}
                                             </td>
                                         </tr>
                                     @empty
@@ -56,10 +47,12 @@
                                             </td>
                                         </tr>
                                     @endforelse
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                @endif
+
             </div>
 
             <x-slot name="footer">

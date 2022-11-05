@@ -30,7 +30,7 @@ class EditGradeLevel extends ModalComponent
     protected function rules()
     {
         return [
-            'grade_level.name' => ['required'],
+            'grade_level.name' => ['required', 'unique:grade_levels,name,' . $this->grade_level->id],
             'grade_level_subjects' => ['required'],
         ];
     }
@@ -61,9 +61,6 @@ class EditGradeLevel extends ModalComponent
 
     public function submit()
     {
-
-        // dd($removed_subjects, $this->grade_level_subjects);
-
         $this->authorize('update_grade_level');
 
         $this->grade_level->save();
@@ -73,12 +70,12 @@ class EditGradeLevel extends ModalComponent
 
         Subject::query()
             ->whereIn('id', $removed_subjects)
-            ->update(['grade_level_id'=> null]);
+            ->update(['grade_level_id' => null]);
 
         // update selected subjects
         Subject::query()
             ->whereIn('id', $this->grade_level_subjects)
-            ->update(['grade_level_id'=> $this->grade_level->id]);
+            ->update(['grade_level_id' => $this->grade_level->id]);
 
         $this->emit('refreshDatatable');
 

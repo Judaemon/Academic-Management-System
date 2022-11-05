@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Payments;
 
-use LivewireUI\Modal\ModalComponent;
+use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -10,33 +10,72 @@ use App\Models\User;
 use App\Models\Payments;
 use App\Models\Fee;
 
-class CreatePayments extends ModalComponent
+use Auth;
+
+class CreatePayments extends Component
 {
     use AuthorizesRequests, Actions;
 
-    public $user;
+    public $name;
     public $amount_paid;
     public $fee;
     public $others;
 
-    public $payment_type = [
-        'fees_option',
-        'others_option',
-    ];
+    public $isNull = true;
+    public $isOthers = false;
+
+    public $grade_level_fees;
+    public $user_payments;
 
     protected function rules()
     {
         return [
-            'user' => ['required', 'unique:users,id,'.$this->user],
+            'name' => ['required', 'unique:users,id,'.$this->name],
             'amount_paid' => ['required', 'numeric'],
             'fee' => ['nullable', 'unique:fees,id,'.$this->fee],
-            'others' => ['nullable', 'min:5', 'max:35'],
+            'others' => ['nullable'],
         ];
+    }
+
+    public function mount()
+    {
+        $this->authorize('create_payment');
     }
 
     public function render()
     {
         return view('livewire.payment.create-payments');
+    }
+
+    public function updatedName()
+    {
+        if(!empty($this->name)) {
+            $this->isNull = false;
+            $this->user_payments = Payments::where('user_id', $this->name)->get();
+        } else {
+            $this->isNull = true;
+            $this->grade_level_fees = NULL;
+            $this->user_payments = NULL;
+        }
+    }
+
+    public function toggleOthers()
+    {
+        if($this->isOthers === false) {
+            $this->isOthers = true;
+            $this->fee = NULL;
+        } else {
+            $this->isOthers = false;
+        }
+
+    }
+
+    public function resetForm()
+    {
+        $this->name = '';
+        $this->amount_paid = '';
+        $this->fee = '';
+        $this->others = '';
     }
 
     public function save(): void
@@ -60,27 +99,21 @@ class CreatePayments extends ModalComponent
 
     public function submit()
     {
-        $this->authorize('create_payment');
-
         Payments::create([
-            'user_id' => $this->user,
+            'user_id' => $this->name,
+            'accountant_id' => Auth::user()->id,
             'amount_paid' => $this->amount_paid,
             'fee_id' => $this->fee,
             'others' => $this->others,
         ]);
     
         $this->emit('refreshDatatable');
-    
-        $this->closeModal();
             
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Payment has been Recorded.'
         );
-    }
 
-    public static function modalMaxWidth(): string
-    {
-        return '2xl';
+        return redirect()->route('payments.index');
     }
 }

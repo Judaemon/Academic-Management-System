@@ -15,9 +15,10 @@ class CreateAcademicYear extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $start_date;
-    public $end_date;
-
+    public $end_date = NULL;
     public $school_days = 0;
+
+    public $isNull = true;
 
     protected function rules()
     {
@@ -33,12 +34,19 @@ class CreateAcademicYear extends ModalComponent
         return view('livewire.academic-year.create-academic-year');
     }
 
+    public function updatedStartDate()
+    {
+        if(!empty($this->start_date)) {
+            $this->isNull = false;
+        } else {
+            $this->isNull = true;
+        }
+    }
+
     public function updatedEndDate()
     {
-        if($this->end_date != NULL) {
+        if(!empty($this->end_date)) {
             $this->school_days = Carbon::parse($this->start_date)->diffInDays($this->end_date);
-        } else {
-            $this->school_days = 0;
         }
     }
 
@@ -46,9 +54,7 @@ class CreateAcademicYear extends ModalComponent
     {
         if($this->school_days > 0) {
             $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
-        } else {
-            $this->end_date = NULL;
-        }
+        } 
     }
 
     public function save(): void

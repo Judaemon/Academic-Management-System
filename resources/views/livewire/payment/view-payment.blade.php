@@ -2,7 +2,8 @@
     <x-card title="Create Payment Record">
         <div class="grid grid-cols-1 gap-4 p-4">
             <div class="col-span-4">
-                <x-input label="Name" value="{{ $payment->user->firstname }} {{ $payment->user->lastname }}" read-only/>
+                <x-input label="Name" value="{{ $payment->user->first_name }} {{ $payment->user->last_name }}"
+                    read-only />
             </div>
 
             <div class="col-span-4">
@@ -12,7 +13,7 @@
             <div class="col-span-4">
                 <div class="text-sm mb-3">Payment Type</div>
                 {{-- <div class="flex col-span-4">
-                    <x-select  
+                    <x-select
                         label="Options"
                         placeholder="Select payment"
                         wire:model.defer="fee_id"

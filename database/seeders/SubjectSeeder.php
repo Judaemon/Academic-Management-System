@@ -19,28 +19,28 @@ class SubjectSeeder extends Seeder
         // Grade 1
         Subject::create([
             'name' => 'Mathematics 1',
-            'teacher_id' => 4,
+            'teacher_id' => 1,
             'subject_code' => 'MATH',
             'grade_level_id' => 1
         ]);
 
         Subject::create([
             'name' => 'Filipino 1',
-            'teacher_id' => 4,
+            'teacher_id' => 1,
             'subject_code' => 'FIL',
             'grade_level_id' => 1
         ]);
 
         Subject::create([
             'name' => 'Heograpiya, Kasaysayan & Sibika 1',
-            'teacher_id' => 4,
+            'teacher_id' => 1,
             'subject_code' => 'HEKASI',
             'grade_level_id' => 1
         ]);
 
         Subject::create([
             'name' => 'Science 1',
-            'teacher_id' => 4,
+            'teacher_id' => 1,
             'subject_code' => 'SCI',
             'grade_level_id' => 1
         ]);
@@ -48,28 +48,28 @@ class SubjectSeeder extends Seeder
         // Grade 2
         Subject::create([
             'name' => 'Mathematics 2',
-            'teacher_id' => 5,
+            'teacher_id' => 1,
             'subject_code' => 'MATH',
             'grade_level_id' => 2
         ]);
 
         Subject::create([
             'name' => 'Filipino 2',
-            'teacher_id' => 5,
+            'teacher_id' => 1,
             'subject_code' => 'FIL',
             'grade_level_id' => 2
         ]);
 
         Subject::create([
             'name' => 'Heograpiya, Kasaysayan & Sibika 2',
-            'teacher_id' => 5,
+            'teacher_id' => 1,
             'subject_code' => 'HEKASI',
             'grade_level_id' => 2
         ]);
 
         Subject::create([
             'name' => 'Science 2',
-            'teacher_id' => 5,
+            'teacher_id' => 1,
             'subject_code' => 'SCI',
             'grade_level_id' => 2
         ]);

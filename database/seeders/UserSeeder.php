@@ -13,85 +13,100 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        // 1 Super Admin
+        // Super Admin
         User::create([
-            'firstname' => 'Super Admin',
-            'middlename' => 'Super Admin',
-            'lastname' => 'Super Admin',
+            'first_name' => 'Super Admin',
+            'middle_name' => 'Super Admin',
+            'last_name' => 'Super Admin',
             'suffix' => 'SA',
-            'birthdate' => '2000-10-21',
+
+            'birth_date' => '2000-10-21',
             'birthplace' => 'Baguio City',
-            'religion' => 'Catholic',
-            'gender' => 'Male',
-            'mothertongue' => 'English',
             'nationality' => 'Filipino',
-            'pwdid' => 'ASDF1234',
-            'height' => '168',
+            'gender' => 'Male',
+            'mother_tongue' => 'English',
+            'religion' => 'Catholic',
+
             'weight' => '70',
-            'mobilenumber' => '09176820721',
+            'height' => '168',
+            'pwd_id' => 'ASDF1234',
+
+            'mobile_number' => '09176820721',
             'email' => 'sadmin@sadmin.com',
             'address' => 'Guisad Central, Baguio City',
-            'school_kinder' => 'SLU-LES',
-            'school_kindergrad' => '2007',
-            'school_elementary' => 'Calvary Baptist Elementary School',
-            'school_elementarygrad' => '2010',
-            'school_juniorhigh' => 'University of Baguio',
+
+            'elementary_name' => 'Calvary Baptist Elementary School',
+            'elementary_grad_date' => '2010',
+
+            'junior_high_name' => 'University of Baguio',
+            'junior_high_grad_date' => '2010',
+
             'lrn' => 'QWER1234',
             'esc' => 'ZXCV1234',
             'qvr' => 'HJKL1234',
-            'public_id' => 'UIOP1234',
-            'beneficiary' => 'Juan Dela Cruz',
+
+
+            'mother_name' => 'Jane Doe',
+            'mother_number' => '09176820723',
+            'mother_email' => '09176820723',
+            'mother_address' => 'General Luna',
+
+            'father_name' => 'Jonathan Doe',
+            'father_number' => '09176820724',
+            'father_email' => '09176820724',
+            'father_address' => 'General Luna',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820722',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
-            'mparent_name' => 'Jane Doe',
-            'mparent_number' => '09176820723',
-            'mparent_occupation' => 'Teacher',
-            'mparent_address' => 'General Luna',
-            'fparent_name' => 'Jonathan Doe',
-            'fparent_number' => '09176820724',
-            'fparent_occupation' => 'Police',
-            'fparent_address' => 'General Luna',
+            'emergency_contact_number' => '09176820722',
+            'emergency_contact_address' => 'Trancoville',
+
+            'password' => Hash::make('sadmin123'),
+
             'pag_ibig' => 'FSAD4235',
             'philhealth' => 'FADS4251',
             'sss' => 'DAFS2534',
             'tin' => 'SADF5234',
+
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'password' => Hash::make('sadmin123'),
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Super Admin');
 
-        // 1 Admin | Staff
+        // Admin | Staff
         User::create([
-            'firstname' => 'Alexander',
-            'middlename' => 'Churro',
-            'lastname' => 'Am-uno',
+            'first_name' => 'Alexander',
+            'middle_name' => 'Churro',
+            'last_name' => 'Am-uno',
             'suffix' => 'Jr.',
-            'birthdate' => '2013-08-01',
+
+            'birth_date' => '2013-08-01',
             'birthplace' => 'Baguio City',
-            'religion' => 'Catholic',
-            'gender' => 'Male',
-            'mothertongue' => 'English',
             'nationality' => 'Filipino',
+            'gender' => 'Male',
+            'mother_tongue' => 'English',
+            'religion' => 'Catholic',
+
             'height' => '124',
             'weight' => '43',
-            'mobilenumber' => '09158390231',
+
+            'mobile_number' => '09158390231',
             'email' => 'alexanderamuno@s.caims.com',
             'address' => 'Guisad Central, Baguio City',
-            'beneficiary' => 'Juan Dela Cruz',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820766',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
+            'emergency_contact_number' => '09176820766',
+            'emergency_contact_address' => 'Trancoville',
+
+            'password' => Hash::make('student'),
+
             'pag_ibig' => 'FSAD4239',
             'philhealth' => 'FADS4281',
             'sss' => 'DAFS2034',
             'tin' => 'SADF1434',
+
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('staff123'),
             'remember_token' => NULL,
@@ -99,30 +114,32 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Admin');
 
-        // 2 Accountants
-
-        // Accountant 1
+        // Accountants
         User::create([
-            'firstname' => 'Leonardo',
-            'middlename' => 'Haroon',
-            'lastname' => 'Jamie',
-            'birthdate' => '1995-12-01',
+            'first_name' => 'Leonardo',
+            'middle_name' => 'Haroon',
+            'last_name' => 'Jamie',
+            'suffix' => 'II',
+
+            'birth_date' => '1995-12-01',
             'birthplace' => 'Baguio City',
-            'religion' => 'Catholic',
-            'gender' => 'Male',
-            'mothertongue' => 'English',
             'nationality' => 'Filipino',
+            'gender' => 'Male',
+            'mother_tongue' => 'English',
+            'religion' => 'Catholic',
+
             'height' => '170',
             'weight' => '70',
-            'mobilenumber' => '09164739198',
+
+            'mobile_number' => '09164739198',
             'email' => 'leonardJamie@a.caims.com',
             'address' => 'Guisad Central, Baguio City',
-            'beneficiary' => 'Juan Dela Cruz',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820733',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
+            'emergency_contact_number' => '09176820733',
+            'emergency_contact_address' => 'Trancoville',
+
             'pag_ibig' => 'FSDD4331',
             'philhealth' => 'FADS4431',
             'sss' => 'DAFS2154',
@@ -134,27 +151,31 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Accountant');
 
-        // Accountant 2
         User::create([
-            'firstname' => 'Mary',
-            'middlename' => 'Grace',
-            'lastname' => 'Dela Cruz',
-            'birthdate' => '1993-10-21',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Mary',
+            'middle_name' => 'Grace',
+            'last_name' => 'Dela Cruz',
+
+            'birth_date' => '1993-10-21',
+            'birth_place' => 'Baguio City',
             'religion' => 'Anglican',
             'gender' => 'Female',
-            'mothertongue' => 'Tagalog',
+            'mother_tongue' => 'Tagalog',
             'nationality' => 'Filipino',
+
             'height' => '143',
             'weight' => '56',
-            'mobilenumber' => '09178492301',
+
+            'mobile_number' => '09178492301',
             'email' => 'marygrace@a.caims.com',
             'address' => 'Trancoville, Baguio City',
+
             'emergency_contact_name' => 'Carding Dalisay',
             'emergency_contact_number' => '09152735932',
             'emergency_contact_occupation' => 'Teacher',
             'emergency_contact_address' => 'Bakakeng',
             'emergency_contact_relationship' => 'Uncle',
+
             'pag_ibig' => 'UIOP4213',
             'philhealth' => 'FSDA5231',
             'sss' => 'HJKL4213',
@@ -166,30 +187,33 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Accountant');
 
-        // 3 Teachers
-
-        // Teacher 1
+        // Teachers
         User::create([
-            'firstname' => 'Julie',
-            'middlename' => 'Bondad',
-            'lastname' => 'Abalos',
-            'birthdate' => '1998-11-01',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Julie',
+            'middl_ename' => 'Bondad',
+            'last_name' => 'Abalos',
+            
+            'birth_date' => '1998-11-01',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Female',
-            'mothertongue' => 'Ilokano',
             'nationality' => 'Filipino',
+            'gender' => 'Female',
+            'mother_tongue' => 'English',
+            'religion' => 'Catholic',
+
             'height' => '150',
             'weight' => '58',
-            'mobilenumber' => '09165438293',
+            
+            'mobil_enumber' => '09165438293',
             'email' => 'julsabalos@t.caims.com',
             'address' => 'Guisad Central, Baguio City',
-            'beneficiary' => 'Juan Dela Cruz',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820744',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
+            'emergency_contact_number' => '09176820744',
+            'emergency_contact_address' => 'Trancoville',
+
             'pag_ibig' => '4231FSAD',
             'philhealth' => 'FADS4221',
             'sss' => 'DAFS3134',
@@ -203,21 +227,24 @@ class UserSeeder extends Seeder
 
         // Teacher 2
         User::create([
-            'firstname' => 'Russel',
-            'middlename' => 'Liclic',
-            'lastname' => 'Fernandez',
-            'birthdate' => '1990-05-14',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Russel',
+            'middle_name' => 'Liclic',
+            'last_name' => 'Fernandez',
+
+            'birth_date' => '1990-05-14',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '175',
             'weight' => '76',
-            'mobilenumber' => '09215438295',
+
+            'mobile_number' => '09215438295',
             'email' => 'russfernandez@t.caims.com',
             'address' => 'Leonila Hill, Baguio City',
-            'beneficiary' => 'John Dela Torre',
+
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09216821021',
             'emergency_contact_occupation' => 'Teacher',
@@ -236,21 +263,26 @@ class UserSeeder extends Seeder
 
         // Teacher 3
         User::create([
-            'firstname' => 'Heidi',
-            'middlename' => 'Jukutan',
-            'lastname' => 'Tabanda',
-            'suffix' => 'Ms.',
-            'birthdate' => '1997-07-02',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Heidi',
+            'middle_name' => 'Jukutan',
+            'last_name' => 'Tabanda',
+
+            'birth_date' => '1997-07-02',
+            'birth_place' => 'Baguio City',
             'religion' => 'Iglesia ni Cristo',
             'gender' => 'Female',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+            'gender' => 'Female',
+            'religion' => 'Catholic',
+
             'height' => '155',
             'weight' => '63',
-            'mobilenumber' => '09165438295',
+
+            'mobile_number' => '09165438295',
             'email' => 'heiditabanda@t.caims.com',
             'address' => 'Badihoy, Baguio City',
+            
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09166825342',
             'emergency_contact_occupation' => 'Police',
@@ -267,32 +299,40 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Teacher');
 
-        // 20 Students
-
-        // Student 1
+        // Students
         User::create([
-            'firstname' => 'Cayden',
-            'middlename' => 'Zackary',
-            'lastname' => 'Jackson',
+            'first_name' => 'Cayden',
+            'middle_name' => 'Zackary',
+            'last_name' => 'Jackson',
             'suffix' => 'SA',
-            'birthdate' => '2012-01-12',
+
+            'birth_date' => '2012-01-12',
             'birthplace' => 'Baguio City',
-            'religion' => 'Iglesia ni Cristo',
-            'gender' => 'Male',
-            'mothertongue' => 'English',
             'nationality' => 'Filipino',
+            'gender' => 'Male',
+            'mother_tongue' => 'English',
+            'religion' => 'Iglesia ni Cristo',
+
             'height' => '165',
             'weight' => '57.2',
-            'mobilenumber' => '09274294577',
+
+            'mobile_number' => '09274294577',
             'email' => 'jacksoncayden@s.caims.edu',
             'address' => 'Pablo Ocampo Sr. Ext, Baguio City',
+
+            // For admission
+            'grade_level' => 'Kinder',
+            'latest_average_grade' => 'Passed',
+            'status' => 'Able to Enroll',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820767',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'emergency_contact_number' => '09176820767',
+            'emergency_contact_address' => 'Trancoville',
+
             'password' => Hash::make('student1'),
+
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -300,28 +340,38 @@ class UserSeeder extends Seeder
 
         // Student 2
         User::create([
-            'firstname' => 'Frederick',
-            'middlename' => 'Miguel',
-            'lastname' => 'Balon',
+            'first_name' => 'Frederick',
+            'middle_name' => 'Miguel',
+            'last_name' => 'Balon',
             'suffix' => 'SA',
-            'birthdate' => '2011-06-20',
+
+            'birth_date' => '2011-06-20',
             'birthplace' => 'Sarrat, Ilocos Norte',
-            'religion' => 'None',
-            'gender' => 'Male',
-            'mothertongue' => 'Ilokano',
             'nationality' => 'Filipino',
+            'gender' => 'Male',
+            'mother_tongue' => 'Ilokano',
+            'religion' => 'None',
+
             'height' => '143.5',
             'weight' => '41.6',
-            'mobilenumber' => '09983315305',
+
+            'mobile_number' => '09983315305',
             'email' => 'balonfrederick@s.caims.edu',
             'address' => 'San Agustin, Baguio City',
+
+            // For admission
+            'grade_level' => 'Kinder',
+            'latest_average_grade' => 'Passed',
+            'status' => 'Able to Enroll',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820768',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'emergency_contact_number' => '09176820768',
+            'emergency_contact_address' => 'Trancoville',
+
             'password' => Hash::make('student2'),
+
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -329,28 +379,38 @@ class UserSeeder extends Seeder
 
         // Student 3
         User::create([
-            'firstname' => 'Jacqueline',
-            'middlename' => 'Audrina',
-            'lastname' => 'Reyes',
+            'first_name' => 'Jacqueline',
+            'middle_name' => 'Audrina',
+            'last_name' => 'Reyes',
             'suffix' => 'SA',
-            'birthdate' => '2006-09-13',
+
+            'birth_date' => '2006-09-13',
             'birthplace' => 'Baguio City',
-            'religion' => 'Catholic',
-            'gender' => 'Female',
-            'mothertongue' => 'Ilokano',
             'nationality' => 'Filipino',
+            'gender' => 'Female',
+            'mother_tongue' => 'Ilokano',
+            'religion' => 'Catholic',
+
             'height' => '162.5',
             'weight' => '63.9',
-            'mobilenumber' => '09664861698',
+
+            'mobile_number' => '09664861698',
             'email' => 'reyesjacqueline@s.caims.edu',
             'address' => 'Ben Harrison, Baguio City',
+
+            // For admission
+            'grade_level' => 'Kinder',
+            'latest_average_grade' => 'Passed',
+            'status' => 'Able to Enroll',
+
             'emergency_contact_name' => 'John Doe',
-            'emergency_contact_number' => '09176820769',
-            'emergency_contact_occupation' => 'Pastor',
-            'emergency_contact_address' => 'Trancoville',
             'emergency_contact_relationship' => 'Uncle',
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'emergency_contact_number' => '09176820769',
+            'emergency_contact_address' => 'Trancoville',
+
             'password' => Hash::make('student3'),
+
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -358,21 +418,24 @@ class UserSeeder extends Seeder
 
         // Student 4
         User::create([
-            'firstname' => 'Jose',
-            'middlename' => 'Go',
-            'lastname' => 'Chan',
-            'suffix' => 'SA',
-            'birthdate' => '2004-10-02',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Jose',
+            'middle_name' => 'Go',
+            'last_name' => 'Chan',
+
+            'birth_date' => '2004-10-02',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '170.2',
             'weight' => '70.4',
-            'mobilenumber' => '09224661698',
+
+            'mobile_number' => '09224661698',
             'email' => 'chanjose@s.caims.edu',
             'address' => 'Legarda, Baguio City',
+
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09176885662',
             'emergency_contact_occupation' => 'Pastor',
@@ -387,19 +450,21 @@ class UserSeeder extends Seeder
 
         // Student 5
         User::create([
-            'firstname' => 'Stacey',
-            'middlename' => 'Balicha',
-            'lastname' => 'Bautista',
-            'suffix' => 'SA',
-            'birthdate' => '2005-04-04',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Stacey',
+            'middle_name' => 'Balicha',
+            'last_name' => 'Bautista',
+
+            'birth_date' => '2005-04-04',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Female',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '156.8',
             'weight' => '65.2',
-            'mobilenumber' => '09334861423',
+
+            'mobile_number' => '09334861423',
             'email' => 'bautistastacey@s.caims.edu',
             'address' => 'Crystal Cave, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -416,19 +481,21 @@ class UserSeeder extends Seeder
 
         // Student 6
         User::create([
-            'firstname' => 'Beatrice',
-            'middlename' => 'Tan',
-            'lastname' => 'Choy',
-            'suffix' => 'SA',
-            'birthdate' => '2007-11-11',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Beatrice',
+            'middle_name' => 'Tan',
+            'last_name' => 'Choy',
+
+            'birth_date' => '2007-11-11',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Female',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '165',
             'weight' => '65',
-            'mobilenumber' => '09174861699',
+
+            'mobile_number' => '09174861699',
             'email' => 'choybeatrice@s.caims.edu',
             'address' => 'Easter Hills, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -445,19 +512,21 @@ class UserSeeder extends Seeder
 
         // Student 7
         User::create([
-            'firstname' => 'Ivan',
-            'middlename' => 'Carpio',
-            'lastname' => 'Aquino',
-            'suffix' => 'SA',
-            'birthdate' => '2006-01-04',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Ivan',
+            'middle_name' => 'Carpio',
+            'last_name' => 'Aquino',
+
+            'birth_date' => '2006-01-04',
+            'birth_place' => 'Baguio City',
             'religion' => 'None',
             'gender' => 'Male',
-            'mothertongue' => 'Ilokano',
+            'mother_tongue' => 'Ilokano',
             'nationality' => 'Filipino',
+
             'height' => '166.5',
             'weight' => '76.3',
-            'mobilenumber' => '09124861694',
+
+            'mobile_number' => '09124861694',
             'email' => 'aquinoivan@s.caims.edu',
             'address' => 'San Luis, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -474,19 +543,21 @@ class UserSeeder extends Seeder
 
         // Student 8
         User::create([
-            'firstname' => 'Eric',
-            'middlename' => 'Bondad',
-            'lastname' => 'Labos',
-            'suffix' => 'SA',
-            'birthdate' => '2005-12-25',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Eric',
+            'middle_name' => 'Bondad',
+            'last_name' => 'Labos',
+
+            'birth_date' => '2005-12-25',
+            'birth_place' => 'Baguio City',
             'religion' => 'Anglican',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '164.3',
             'weight' => '62.4',
-            'mobilenumber' => '09334861532',
+
+            'mobil_enumber' => '09334861532',
             'email' => 'laboseric@s.caims.edu',
             'address' => 'Brookside, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -503,19 +574,21 @@ class UserSeeder extends Seeder
 
         // Student 9
         User::create([
-            'firstname' => 'Charles',
-            'middlename' => 'Lim',
-            'lastname' => 'Choi',
-            'suffix' => 'SA',
-            'birthdate' => '2003-11-13',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Charles',
+            'middle_name' => 'Lim',
+            'last_name' => 'Choi',
+
+            'birth_date' => '2003-11-13',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '169.4',
             'weight' => '72.6',
-            'mobilenumber' => '09094861321',
+
+            'mobile_number' => '09094861321',
             'email' => 'choicharles@s.caims.edu',
             'address' => 'Malvar, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -532,19 +605,21 @@ class UserSeeder extends Seeder
 
         // Student 10
         User::create([
-            'firstname' => 'Jin',
-            'middlename' => 'Daewo',
-            'lastname' => 'Mori',
-            'suffix' => 'SA',
-            'birthdate' => '2012-10-21',
-            'birthplace' => 'Seoul',
+            'first_name' => 'Jin',
+            'middle_name' => 'Daewo',
+            'last_name' => 'Mori',
+
+            'birth_date' => '2012-10-21',
+            'birth_place' => 'Seoul',
             'religion' => 'None',
             'gender' => 'Male',
-            'mothertongue' => 'Hangugeo',
+            'mother_tongue' => 'Hangugeo',
             'nationality' => 'Korean',
+
             'height' => '147.2',
             'weight' => '43.4',
-            'mobilenumber' => '09334864215',
+
+            'mobile_number' => '09334864215',
             'email' => 'morijin@s.caims.edu',
             'address' => 'Goshen Land, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -561,19 +636,21 @@ class UserSeeder extends Seeder
 
         // Student 11
         User::create([
-            'firstname' => 'Inori',
-            'middlename' => 'Bijin',
-            'lastname' => 'Minase',
-            'suffix' => 'SA',
-            'birthdate' => '2010-11-21',
-            'birthplace' => 'Tokyo',
+            'first_name' => 'Inori',
+            'middle_name' => 'Bijin',
+            'last_name' => 'Minase',
+
+            'birth_date' => '2010-11-21',
+            'birth_place' => 'Tokyo',
             'religion' => 'None',
             'gender' => 'Female',
-            'mothertongue' => 'Hiragana',
+            'mother_tongue' => 'Hiragana',
             'nationality' => 'Japanese',
+
             'height' => '154.4',
             'weight' => '54.5',
-            'mobilenumber' => '09224423215',
+
+            'mobile_number' => '09224423215',
             'email' => 'minaseinori@s.caims.edu',
             'address' => 'Megatower Residences, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -590,19 +667,21 @@ class UserSeeder extends Seeder
 
         // Student 12
         User::create([
-            'firstname' => 'Kyla',
-            'middlename' => 'Garcia',
-            'lastname' => 'Lao',
-            'suffix' => 'SA',
-            'birthdate' => '2007-04-03',
-            'birthplace' => 'La Union',
+            'first_name' => 'Kyla',
+            'middle_name' => 'Garcia',
+            'last_name' => 'Lao',
+
+            'birth_date' => '2007-04-03',
+            'birth_place' => 'La Union',
             'religion' => 'Catholic',
             'gender' => 'Female',
-            'mothertongue' => 'Tagalog',
+            'mother_tongue' => 'Tagalog',
             'nationality' => 'Filipino',
+
             'height' => '157.8',
             'weight' => '77.5',
-            'mobilenumber' => '09125331215',
+
+            'mobile_number' => '09125331215',
             'email' => 'laokyla@s.caims.edu',
             'address' => 'Loakan, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -619,19 +698,21 @@ class UserSeeder extends Seeder
 
         // Student 13
         User::create([
-            'firstname' => 'Philip',
-            'middlename' => 'Algones',
-            'lastname' => 'Sy',
-            'suffix' => 'SA',
-            'birthdate' => '2004-05-15',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Philip',
+            'middle_name' => 'Algones',
+            'last_name' => 'Sy',
+
+            'birth_date' => '2004-05-15',
+            'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '173',
             'weight' => '72.4',
-            'mobilenumber' => '09234864530',
+
+            'mobile_number' => '09234864530',
             'email' => 'syphilip@s.caims.edu',
             'address' => 'Camp 7, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -648,19 +729,21 @@ class UserSeeder extends Seeder
 
         // Student 14
         User::create([
-            'firstname' => 'Derek',
-            'middlename' => 'Arboleda',
-            'lastname' => 'Sanchez',
-            'suffix' => 'SA',
-            'birthdate' => '2006-04-26',
-            'birthplace' => 'Pangasinan',
+            'first_name' => 'Derek',
+            'middle_name' => 'Arboleda',
+            'last_name' => 'Sanchez',
+
+            'birth_date' => '2006-04-26',
+            'birth_place' => 'Pangasinan',
             'religion' => 'Catholic',
             'gender' => 'Male',
-            'mothertongue' => 'Tagalog',
+            'mother_tongue' => 'Tagalog',
             'nationality' => 'Filipino',
+
             'height' => '164',
             'weight' => '78.3',
-            'mobilenumber' => '09114324234',
+
+            'mobile_number' => '09114324234',
             'email' => 'sanchezderek@s.caims.edu',
             'address' => 'Quezon Hill, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -677,19 +760,21 @@ class UserSeeder extends Seeder
 
         // Student 15
         User::create([
-            'firstname' => 'Jenevy',
-            'middlename' => 'Rabina',
-            'lastname' => 'Paran',
-            'suffix' => 'SA',
-            'birthdate' => '2012-08-09',
-            'birthplace' => 'Cagayan',
+            'first_name' => 'Jenevy',
+            'middle_name' => 'Rabina',
+            'last_name' => 'Paran',
+
+            'birth_date' => '2012-08-09',
+            'birth_place' => 'Cagayan',
             'religion' => 'Catholic',
             'gender' => 'Female',
-            'mothertongue' => 'Tagalog',
+            'mother_tongue' => 'Tagalog',
             'nationality' => 'Filipino',
+
             'height' => '147.3',
             'weight' => '54.3',
-            'mobilenumber' => '09116544790',
+
+            'mobile_number' => '09116544790',
             'email' => 'paranjenevy@s.caims.edu',
             'address' => 'Camdas, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -706,19 +791,21 @@ class UserSeeder extends Seeder
 
         // Student 16
         User::create([
-            'firstname' => 'Aaron',
-            'middlename' => 'Co',
-            'lastname' => 'Aoyong',
-            'suffix' => 'SA',
-            'birthdate' => '2006-02-28',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Aaron',
+            'middle_name' => 'Co',
+            'last_name' => 'Aoyong',
+
+            'birth_date' => '2006-02-28',
+            'birth_place' => 'Baguio City',
             'religion' => 'None',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '181.3',
             'weight' => '75.7',
-            'mobilenumber' => '09224866520',
+
+            'mobile_number' => '09224866520',
             'email' => 'aoyongaaron@s.caims.edu',
             'address' => 'Legarda, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -735,19 +822,21 @@ class UserSeeder extends Seeder
 
         // Student 17
         User::create([
-            'firstname' => 'Cedrix',
-            'middlename' => 'Lourdes',
-            'lastname' => 'Orendain',
-            'suffix' => 'SA',
-            'birthdate' => '2008-06-01',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Cedrix',
+            'middle_name' => 'Lourdes',
+            'last_name' => 'Orendain',
+
+            'birth_date' => '2008-06-01',
+            'birth_place' => 'Baguio City',
             'religion' => 'Iglesia ni Cristo',
             'gender' => 'Male',
-            'mothertongue' => 'Tagalog',
+            'mother_tongue' => 'Tagalog',
             'nationality' => 'Filipino',
+
             'height' => '160.2',
             'weight' => '63.6',
-            'mobilenumber' => '09444862213',
+
+            'mobile_number' => '09444862213',
             'email' => 'orendaincedrix@s.caims.edu',
             'address' => 'San Carlos, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -764,19 +853,21 @@ class UserSeeder extends Seeder
 
         // Student 18
         User::create([
-            'firstname' => 'Dahren',
-            'middlename' => 'Bautista',
-            'lastname' => 'Aquino',
-            'suffix' => 'SA',
-            'birthdate' => '2004-10-30',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Dahren',
+            'middle_name' => 'Bautista',
+            'last_name' => 'Aquino',
+
+            'birth_date' => '2004-10-30',
+            'birth_place' => 'Baguio City',
             'religion' => 'None',
             'gender' => 'Male',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '168.4',
             'weight' => '70.4',
-            'mobilenumber' => '09554863421',
+
+            'mobile_number' => '09554863421',
             'email' => 'aquinodahren@s.caims.edu',
             'address' => 'Suello, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -793,19 +884,21 @@ class UserSeeder extends Seeder
 
         // Student 19
         User::create([
-            'firstname' => 'Joni',
-            'middlename' => 'Algones',
-            'lastname' => 'Aglipay',
-            'suffix' => 'SA',
-            'birthdate' => '2006-07-23',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Joni',
+            'middle_name' => 'Algones',
+            'last_name' => 'Aglipay',
+
+            'birth_date' => '2006-07-23',
+            'birth_place' => 'Baguio City',
             'religion' => 'Jehovah',
             'gender' => 'Female',
-            'mothertongue' => 'English',
+            'mother_tongue' => 'English',
             'nationality' => 'Filipino',
+
             'height' => '154.4',
             'weight' => '68.2',
-            'mobilenumber' => '09333862009',
+
+            'mobile_number' => '09333862009',
             'email' => 'aglipayjoni@s.caims.edu',
             'address' => 'Tip Top, Baguio City',
             'emergency_contact_name' => 'John Doe',
@@ -822,19 +915,21 @@ class UserSeeder extends Seeder
 
         // Student 20
         User::create([
-            'firstname' => 'Johnrev',
-            'middlename' => 'Sayan',
-            'lastname' => 'Gat-eb',
-            'suffix' => 'SA',
-            'birthdate' => '2007-04-26',
-            'birthplace' => 'Baguio City',
+            'first_name' => 'Johnrev',
+            'middle_name' => 'Sayan',
+            'last_name' => 'Gat-eb',
+
+            'birth_date' => '2007-04-26',
+            'birth_place' => 'Baguio City',
             'religion' => 'Born Again',
             'gender' => 'Male',
-            'mothertongue' => 'Tagalog',
+            'mother_tongue' => 'Tagalog',
             'nationality' => 'Filipino',
+
             'height' => '164.3',
             'weight' => '80.4',
-            'mobilenumber' => '09333235321',
+            
+            'mobile_number' => '09333235321',
             'email' => 'gatebjohnrev@s.caims.edu',
             'address' => 'Fairview, Baguio City',
             'emergency_contact_name' => 'John Doe',

@@ -13,46 +13,71 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'password',
-        'middlename',
+        'first_name',
+        'middle_name',
+        'last_name',
         'suffix',
-        'birthdate',
+
+
+        'birth_date',
         'birthplace',
-        'religion',
-        'gender',
-        'mothertongue',
         'nationality',
-        'pwdid',
-        'height',
+        'gender',
+        'mother_tongue',
+        'religion',
+
         'weight',
-        'mobilenumber',
+        'height',
+        'pwd_id',
+
+        'mobile_number',
+        'email',
         'address',
-        'school_kinder',
-        'school_kindergrad',
-        'school_elementary',
-        'school_elementarygrad',
-        'school_juniorhigh',
+
+        'kinder_name',
+        'kinder_grad_date',
+
+        'elementary_name',
+        'elementary_grad_date',
+
+        'junior_high_name',
+        'junior_high_grad_date',
+
         'lrn',
         'esc',
         'qvr',
-        'public_id',
-        'beneficiary',
+
+        'mother_name',
+        'mother_number',
+        'mother_email',
+        'mother_address',
+
+        'father_name',
+        'father_number',
+        'father_email',
+        'father_address',
+
         'emergency_contact_name',
-        'emergency_contact_number',
-        'emergency_contact_occupation',
-        'emergency_contact_address',
         'emergency_contact_relationship',
-        'mparent_name',
-        'mparent_number',
-        'mparent_occupation',
-        'mparent_address',
-        'fparent_name',
-        'fparent_number',
-        'fparent_occupation',
-        'fparent_address',
+        'emergency_contact_number',
+        'emergency_contact_address',
+
+        'password',
+
+        'pag_ibig',
+        'philhealth',
+        'sss',
+        'tin',
+
+        'email_verified_at',
+
+        'grade_level',
+        'latest_average_grade',
+        'status',
+
+        'grade_level_id',
+
+        'currently_enrolled',
     ];
 
     protected $hidden = [
@@ -77,5 +102,10 @@ class User extends Authenticatable
     public function sections()
     {
         return $this->hasMany(Section::class);
+    }
+
+    public function admission()
+    {
+        return $this->hasMany(Admission::class, 'student_id', 'id');
     }
 }

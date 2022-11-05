@@ -10,7 +10,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('roles', [\App\Http\Controllers\RolesController::class, 'index'])->name('roles.index');
@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
 
     Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
+
+    Route::get('payments/create-payments', \App\Http\Livewire\Payments\CreatePayments::class)->name('payments.create');
 
     // academic
     Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academic_year.index');

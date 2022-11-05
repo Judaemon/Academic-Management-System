@@ -14,7 +14,7 @@ class UpdateSettings extends Component
 
     public Setting $setting;
     public $academic_years;
-    
+
     protected $rules = [
         'setting.institute_name' => ['required'],
         'setting.institute_acronym' => ['required'],
@@ -41,7 +41,7 @@ class UpdateSettings extends Component
     public function mount()
     {
         $this->setting = Setting::firstOrFail();
-        
+
         $this->setting->academic_year_id = (string)$this->setting->academic_year_id;
         $this->academic_years = AcademicYear::orderBy('id', 'desc')->take(5)->get();
     }
@@ -54,7 +54,6 @@ class UpdateSettings extends Component
     public function save(): void
     {
         $this->validate();
-        // dd($this->);
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',

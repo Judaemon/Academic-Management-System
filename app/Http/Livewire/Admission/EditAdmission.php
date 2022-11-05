@@ -7,8 +7,8 @@ use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Admission;
-
-use Carbon\Carbon;
+use App\Models\Section;
+use App\Models\User;
 
 class EditAdmission extends ModalComponent
 {
@@ -16,31 +16,34 @@ class EditAdmission extends ModalComponent
 
     public $admission;
 
-    public $status;
-    public $enrolled_by;
-    public $date_enrolled;
-    public $section_id;
-    public $student_id;
+    public $grade_level_sections;
+
+    public $badge_design = 'default';
 
     public function mount(Admission $admission)
     {
         $this->admission = $admission;
 
-        $this->status = $admission->status;
-        $this->enrolled_by = $admission->enrolled_by;
-        $this->date_enrolled = $admission->date_enrolled;
-        $this->section_id = $admission->section_id;
-        $this->student_id = $admission->student_id;
+        // section id is converted to string because select value are strings
+        // if not there will be no selected value
+        $this->admission->section_id = (string)$admission->section_id;
+
+        $this->grade_level_sections = Section::query()
+            ->where('grade_level_id', $admission->admit_to_grade_level)
+            ->get()
+            ->toArray();
     }
 
     protected function rules()
     {
         return [
-            'status' => ['required'],
-            'enrolled_by' => ['required'],
-            'date_enrolled' => ['required', 'date'],
-            'section_id' => ['required'],
-            'student_id' => ['required'],
+            'admission.status' => ['required'],
+            'admission.academic_year_id' => ['required'],
+
+            'admission.student_id' => ['required'],
+            'admission.enrolled_by' => ['required'],
+            'admission.admit_to_grade_level' => ['required'],
+            'admission.section_id' => ['required'],
         ];
     }
 
@@ -70,15 +73,9 @@ class EditAdmission extends ModalComponent
 
     public function submit()
     {
-        //$this->authorize('update_admission');
-        
-        $this->admission->forceFill([
-            'status' => $this->status,
-            'enrolled_by' => $this->enrolled_by,
-            'date_enrolled' => Carbon::parse($this->date_enrolled)->toDateString(),
-            'section_id' => $this->section_id,
-            'student_id' => $this->student_id,
-        ])->save();
+        $this->authorize('update_admission');
+
+        $this->admission->save();
 
         $this->emit('refreshDatatable');
 
@@ -92,6 +89,6 @@ class EditAdmission extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '2xl';
+        return '3xl';
     }
 }

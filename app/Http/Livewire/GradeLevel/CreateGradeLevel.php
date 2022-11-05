@@ -14,12 +14,12 @@ class CreateGradeLevel extends ModalComponent
 
     public $name;
 
-    public $subjects= [];
+    public $subjects = [];
 
     protected function rules()
     {
         return [
-            'name' => ['required'],
+            'name' => ['required', 'unique:grade_levels,name'],
             'subjects' => ['required'],
         ];
     }
@@ -56,9 +56,10 @@ class CreateGradeLevel extends ModalComponent
             'name' => $this->name,
         ]);
 
+        // Updates the grade_level_id of selected subjects to the new grade level
         Subject::query()
             ->whereIn('id', $this->subjects)
-            ->update(['grade_level_id'=> $grade_level->id]);
+            ->update(['grade_level_id' => $grade_level->id]);
 
         $this->emit('refreshDatatable');
 

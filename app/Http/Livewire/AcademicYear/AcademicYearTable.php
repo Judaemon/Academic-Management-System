@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AcademicYear;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+
 use App\Models\AcademicYear;
 
 class AcademicYearTable extends DataTableComponent
@@ -24,17 +25,15 @@ class AcademicYearTable extends DataTableComponent
 
             Column::make("Start Date")
                 ->searchable()
-                ->sortable()
                 ->format(fn($value) => date('j \\ F Y', strtotime($value))),
 
             Column::make("Number of School Days", "school_days")
                 ->searchable()
-                ->sortable()
-                ->format(fn($value) => $value.' days'),
+                ->format(fn($value) => $value.' days')
+                ->collapseOnMobile(),
 
             Column::make("End Date")
                 ->searchable()
-                ->sortable()
                 ->format(function($value) {
                     if($value != NULL) {
                         return date('j \\ F Y', strtotime($value));
@@ -44,7 +43,8 @@ class AcademicYearTable extends DataTableComponent
                 }),
                 
             Column::make("Actions", "id")
-                ->view('livewire.academic-year.actions-col'),
+                ->view('livewire.academic-year.actions-col')
+                ->collapseOnMobile(),
         ];
     }
 

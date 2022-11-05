@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Section extends Authenticatable
+class Section extends Model
 {
-    use HasApiTokens, Notifiable;
+    use HasFactory;
 
     public function subjects()
     {
@@ -28,7 +27,24 @@ class Section extends Authenticatable
     protected $fillable = [
         'name',
         'capacity',
+
         'teacher_id',
         'grade_level_id',
     ];
+
+    protected $appends = ['has_slot'];
+
+    public function getHasSlotAttribute()
+    {
+        $taken_slots = Admission::query()
+            ->where("academic_year_id", setting("academic_year_id"))
+            ->where('section_id', $this->id)
+            ->count();
+
+        if ($taken_slots < $this->capacity) {
+            return true;
+        }
+
+        return false;
+    }
 }

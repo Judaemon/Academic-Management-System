@@ -8,15 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('grade_levels', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
-            $table->string('subject_code');
-
-            $table->foreignId('teacher_id')->nullable();
-
-            $table->foreignId('grade_level_id')->nullable()->onDelete('cascade');
+            $table->foreignId('program_id')->constrained('programs', 'id');
 
             $table->timestamps();
         });
@@ -24,6 +19,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('grade_levels');
     }
 };

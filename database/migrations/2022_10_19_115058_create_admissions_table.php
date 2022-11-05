@@ -11,12 +11,29 @@ return new class extends Migration
         Schema::create('admissions', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->string('enrolled_by');
-            $table->date('date_enrolled');
 
-            $table->foreignId('section_id')->references('id')->on('sections');
+            $table->foreignId('academic_year_id')
+                ->constrained('academic_years', 'id')
+                ->onDelete('cascade');
 
-            $table->foreignId('student_id')->references('id')->on('users');
+            $table->foreignId('student_id')
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
+
+            $table->foreignId('enrolled_by')
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
+
+            $table->foreignId('admit_to_grade_level')
+                ->constrained('grade_levels', 'id')
+                ->onDelete('cascade');
+
+            $table->foreignId('section_id')
+                ->nullable()
+                ->constrained('sections', 'id')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

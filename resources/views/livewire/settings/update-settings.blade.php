@@ -5,7 +5,8 @@
             <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, nobis ea?</p>
         </div>
 
-        <ul class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
+        <ul
+            class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
             <li>
                 <x-input wire:model.defer="setting.institute_name" label="Institute Name" placeholder="School Name" />
             </li>
@@ -23,15 +24,11 @@
             </li>
 
             <li>
-                <x-select
-                    label="Academic Year"
-                    wire:model.defer="setting.academic_year_id"
-                    placeholder="Select academic year"
-                >
+                <x-select label="Academic Year" wire:model.defer="setting.academic_year_id"
+                    placeholder="Select academic year">
                     @foreach ($academic_years as $academic_year)
-                        <x-select.option 
-                        value="{{ $academic_year->id }}" 
-                        label="{{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}" />
+                        <x-select.option value="{{ $academic_year->id }}"
+                            label="{{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}" />
                     @endforeach
                 </x-select>
             </li>
@@ -50,7 +47,8 @@
             <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, nobis ea?</p>
         </div>
 
-        <ul class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
+        <ul
+            class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
             <li>
                 <x-input wire:model.defer="setting.email" label="Email" placeholder="caims@gmail.com" />
             </li>
@@ -64,7 +62,8 @@
             </li>
 
             <li>
-                <x-input wire:model.defer="setting.telephone_1" label="School telephone" placeholder="School telephone" />
+                <x-input wire:model.defer="setting.telephone_1" label="School telephone"
+                    placeholder="School telephone" />
             </li>
         </ul>
     </div>
@@ -78,7 +77,8 @@
     <div class="lg:grid lg:grid-cols-3 lg:gap-6">
         <div class="px-4 sm:px-0">
             <h2 class="text-lg font-medium text-gray-900">Features </h2>
-            <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, ea?</p>
+            <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, ea?
+            </p>
         </div>
 
         <div class="mt-5 lg:mt-0 lg:col-span-2">
@@ -87,41 +87,48 @@
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 md:col-span-4">
                             <div class="">
-                                <x-checkbox id="profile_editing" label="Profile Editing" wire:model.defer="setting.profile_editing" />
-                            </div>                    
-                            
+                                <x-checkbox id="profile_editing" label="Profile Editing"
+                                    wire:model.defer="setting.profile_editing" />
+                            </div>
+
                             <div class="pl-6 mt-3 max-w-xl text-sm text-gray-600">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
+                                vero vel pariatur recusandae doloribus, et optio blanditiis autem.
                             </div>
                         </div>
-                
+
                         <div class="col-span-6 md:col-span-4">
                             <div>
-                                <x-checkbox id="notify_grades" label="Notify Grades" wire:model.defer="setting.notify_grades" />
+                                <x-checkbox id="notify_grades" label="Notify Grades"
+                                    wire:model.defer="setting.notify_grades" />
                             </div>
-            
+
                             <div class="pl-6 mt-3 max-w-xl text-sm text-gray-600">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
+                                vero vel pariatur recusandae doloribus, et optio blanditiis autem.
                             </div>
                         </div>
-                
+
                         <div class="col-span-6 md:col-span-4">
                             <div>
                                 <x-checkbox label="Notify Payments" wire:model.defer="setting.notify_payments" />
                             </div>
-            
+
                             <div class="pl-6 mt-3 max-w-xl text-sm text-gray-600">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
+                                vero vel pariatur recusandae doloribus, et optio blanditiis autem.
                             </div>
                         </div>
 
                         <div class="col-span-6 md:col-span-4">
                             <div class="pl-6">
-                                <x-input wire:model.defer="setting.notification_type" label="Notification Type" placeholder="School address" />
+                                <x-input wire:model.defer="setting.notification_type" label="Notification Type"
+                                    placeholder="School address" />
                             </div>
-            
+
                             <div class="pl-6 mt-3 max-w-xl text-sm text-gray-600">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
+                                vero vel pariatur recusandae doloribus, et optio blanditiis autem.
                             </div>
                         </div>
                     </div>
@@ -141,8 +148,9 @@
             <h2 class="text-lg font-medium text-gray-900">Social Medias</h2>
             <p class="mt-1 text-sm text-gray-600">Lorem ipsum dolor sit, nobis, ea?</p>
         </div>
-        
-        <ul class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
+
+        <ul
+            class="mt-5 lg:flex lg:flex-col lg:w-8/12 p-4 space-y-6 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md ">
             <li>
                 <x-input wire:model.defer="setting.website_link" label="Website" placeholder="website.com" />
             </li>

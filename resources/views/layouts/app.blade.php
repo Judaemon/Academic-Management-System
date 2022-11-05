@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html x-data="data" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{url(setting('logo'))}}" type="image/x-icon">
+    <link rel="icon" href="{{ url(setting('logo')) }}" type="image/x-icon">
 
     <title>{{ setting('institute_name') }}</title>
 
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link href="https://fonts.bunny.net/css?family=nunito:400,400i,600,600i,700,700i" rel="stylesheet" />
+
+    {{-- <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
 
     @wireUiScripts
 
@@ -20,6 +23,7 @@
 
     @livewireStyles
 </head>
+
 <body>
     <!-- WireUI Dialog -->
     <x-dialog />
@@ -66,4 +70,5 @@
     @livewire('livewire-ui-modal')
     @livewireScripts
 </body>
+
 </html>

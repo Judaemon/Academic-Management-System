@@ -14,15 +14,13 @@ class SectionSeeder extends Seeder
 {
     public function run()
     {
-        // 2 Sections per Grade Level
-
-        // Grade 1 Sections
         Section::create([
             'name' => 'Red',
             'capacity' => '20',
             'teacher_id' => '5',
             'grade_level_id' => 1
         ]);
+        
         Section::create([
             'name' => 'Orange',
             'capacity' => '20',
@@ -30,19 +28,32 @@ class SectionSeeder extends Seeder
             'grade_level_id' => 1
         ]);
 
-        // Grade 2 Sections
         Section::create([
             'name' => 'Yellow',
-            'capacity' => '20',
-            'teacher_id' => '6',
-            'grade_level_id' => 2
+            'capacity' => '15',
+            'teacher_id' => 1,
+            'grade_level_id' => 3,
         ]);
 
         Section::create([
             'name' => 'Green',
-            'capacity' => '20',
-            'teacher_id' => '6',
-            'grade_level_id' => 2
+            'capacity' => '15',
+            'teacher_id' => 1,
+            'grade_level_id' => 4,
+        ]);
+
+        Section::create([
+            'name' => 'Violet',
+            'capacity' => '15',
+            'teacher_id' => 1,
+            'grade_level_id' => 5,
+        ]);
+
+        Section::create([
+            'name' => 'Black',
+            'capacity' => '15',
+            'teacher_id' => 1,
+            'grade_level_id' => 6,
         ]);
     }
 }
