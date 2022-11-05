@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('suffix')->nullable();
 
             $table->date('birth_date');
-            $table->string('birthplace');
+            $table->string('birth_place');
             $table->string('nationality');
             $table->string('gender');
             $table->string('mother_tongue');
@@ -76,7 +76,7 @@ return new class extends Migration
             $table->string('tin')->unique()->nullable();
 
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+
             $table->string('old_password')->nullable();
             $table->string('new_password')->nullable();
             $table->string('password_changed_at')->nullable();

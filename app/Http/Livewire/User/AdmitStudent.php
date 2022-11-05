@@ -22,7 +22,7 @@ class AdmitStudent extends ModalComponent
     public $suffix;
 
     public $birth_date;
-    public $birthplace;
+    public $birth_place;
     public $nationality;
     public $gender;
     public $religion;
@@ -86,7 +86,7 @@ class AdmitStudent extends ModalComponent
             'suffix' => ['nullable'],
 
             'birth_date' => ['required'],
-            'birthplace' => ['required'],
+            'birth_place' => ['required'],
             'nationality' => ['required'],
             'gender' => ['required', 'in:Male,Female'],
             'religion' => ['nullable'],
@@ -293,7 +293,7 @@ class AdmitStudent extends ModalComponent
         //     $this->suffix,
 
         //     $this->birth_date,
-        //     $this->birthplace,
+        //     $this->birth_place,
         //     $this->nationality,
         //     $this->gender,
         //     $this->mother_tongue,
@@ -305,7 +305,7 @@ class AdmitStudent extends ModalComponent
 
         //     $this->suffix,
         //     $this->birth_date,
-        //     $this->birthplace,
+        //     $this->birth_place,
         //     $this->religion,
         //     $this->gender,
         //     $this->mother_tongue,
@@ -362,7 +362,7 @@ class AdmitStudent extends ModalComponent
             'suffix' => $this->suffix,
 
             'birth_date' => $this->birth_date,
-            'birthplace' => $this->birthplace,
+            'birth_place' => $this->birth_place,
             'nationality' => $this->nationality,
             'gender' => $this->gender,
             'mother_tongue' => $this->mother_tongue,
@@ -374,7 +374,7 @@ class AdmitStudent extends ModalComponent
 
             'suffix' => $this->suffix,
             'birth_date' => $this->birth_date,
-            'birthplace' => $this->birthplace,
+            'birth_place' => $this->birth_place,
             'religion' => $this->religion,
             'gender' => $this->gender,
             'mother_tongue' => $this->mother_tongue,

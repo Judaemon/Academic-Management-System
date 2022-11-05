@@ -78,8 +78,8 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="birthplace" label="Birthplace"
-                                placeholder="Birthplace of student" />
+                            <x-input wire:model.defer="birth_place" label="Birth place"
+                                placeholder="Birth place of student" />
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">

@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="birthplace" label="Birth Place" placeholder="City/Municipality" />
+                    <x-input wire:model.defer="birth_place" label="Birth Place" placeholder="City/Municipality" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -166,10 +166,6 @@
 
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="emergency_contact_number" label="Contact Number" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="emergency_contact_occupation" label="Occupation" placeholder="" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">

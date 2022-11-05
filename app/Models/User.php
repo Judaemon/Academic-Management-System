@@ -20,7 +20,7 @@ class User extends Authenticatable
 
 
         'birth_date',
-        'birthplace',
+        'birth_place',
         'nationality',
         'gender',
         'mother_tongue',

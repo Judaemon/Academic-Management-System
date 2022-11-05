@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->birthplace }}" label="Birth Place" placeholder="Baguio" />
+                    <x-input readonly value="{{ $user->birth_place }}" label="Birth Place" placeholder="Baguio" />
                 </div>
 
                 <!-- drop down sana ng mga religions -->
@@ -171,11 +171,6 @@
 
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{ $user->emergency_contact_number }}" label="Contact Number"
-                        placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->emergency_contact_occupation }}" label="Occupation"
                         placeholder="" />
                 </div>
 

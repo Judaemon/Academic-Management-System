@@ -18,7 +18,7 @@ class CreateAccount extends ModalComponent
     public $email;
     public $suffix;
     public $birth_date;
-    public $birthplace;
+    public $birth_place;
     public $religion;
     public $gender;
     public $mother_tongue;
@@ -40,7 +40,6 @@ class CreateAccount extends ModalComponent
 
     public $emergency_contact_name;
     public $emergency_contact_number;
-    public $emergency_contact_occupation;
     public $emergency_contact_address;
     public $emergency_contact_relationship;
 
@@ -54,7 +53,7 @@ class CreateAccount extends ModalComponent
             'middle_name' => ['nullable'],
             'suffix' => ['nullable'],
             'birth_date' => ['required'],
-            'birthplace' => ['required'],
+            'birth_place' => ['required'],
             'religion' => ['required'],
             'gender' => ['required'],
             'mother_tongue' => ['required'],
@@ -81,7 +80,6 @@ class CreateAccount extends ModalComponent
             // emergency contact
             'emergency_contact_name' => ['required'],
             'emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
-            'emergency_contact_occupation' => ['nullable'],
             'emergency_contact_address' => ['required'],
             'emergency_contact_relationship' => ['required'],
 
@@ -128,7 +126,7 @@ class CreateAccount extends ModalComponent
             'middle_name' => $this->middle_name,
             'suffix' => $this->suffix,
             'birth_date' => $this->birth_date,
-            'birthplace' => $this->birthplace,
+            'birth_place' => $this->birth_place,
             'religion' => $this->religion,
             'gender' => $this->gender,
             'mother_tongue' => $this->mother_tongue,
@@ -155,7 +153,6 @@ class CreateAccount extends ModalComponent
             // emergency contact person
             'emergency_contact_name' => $this->emergency_contact_name,
             'emergency_contact_number' => $this->emergency_contact_number,
-            'emergency_contact_occupation' => $this->emergency_contact_occupation,
             'emergency_contact_address' => $this->emergency_contact_address,
             'emergency_contact_relationship' => $this->emergency_contact_relationship,
         ]);
