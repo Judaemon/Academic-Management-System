@@ -1,25 +1,17 @@
 <?php
 
-namespace App\Http\Livewire\TeacherGrades;
+namespace App\Http\Livewire\StudentGrades;
 
 use App\Models\Grade;
-use App\Models\User;
-use App\Models\Subject;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class TeacherCreateGrade extends ModalComponent
+class StudentEditGrade extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $first_quarter;
-    public $second_quarter;
-    public $third_quarter;
-    public $fourth_quarter;
-
-    //public $subject_grade_level;
-    public $student_id;
+    public $grade;
 
     protected function rules()
     {
@@ -30,13 +22,18 @@ class TeacherCreateGrade extends ModalComponent
             'fourth_quarter' => ['nullable'],
 
             //'subject_grade_level' => ['nullable'],
-            'student_id' => ['nullable'],
+            'student_id' => ['nullable'],  
         ];
+    }
+
+    public function mount(Grade $grade)
+    {
+        $this->grade = $grade;
     }
 
     public function render()
     {
-        return view('livewire.teacher-grade.teacher-create-grade');
+        return view('livewire.student-grade.student-edit-grade');
     }
 
     public function save(): void
@@ -45,12 +42,12 @@ class TeacherCreateGrade extends ModalComponent
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create the grade?',
+            'description' => 'Save the information?',
             'icon'        => 'question',
             'accept'      => [
-                'label'  => 'Yes, create it',
+                'label'  => 'Yes, save it',
                 'method' => 'submit',
-                'params' => 'Created',
+                'params' => 'Saved',
             ],
             'reject' => [
                 'label'  => 'No, cancel',
@@ -60,23 +57,17 @@ class TeacherCreateGrade extends ModalComponent
 
     public function submit()
     {
-        $grade = Grade::create([
-            'first_quarter' => $this->first_quarter,
-            'second_quarter' => $this->second_quarter,
-            'third_quarter' => $this->third_quarter,
-            'fourth_quarter' => $this->fourth_quarter,
+        $this->authorize('update_grade');
 
-            //'subject_grade_level' => $this->subject,
-            'student_id' => $this->student,
-        ]);
-
-        $this->closeModal();
+        $this->grade->save();
 
         $this->emit('refreshDatatable');
 
+        $this->closeModal();
+
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'Grade successfully Created.'
+            $description = 'Grade information successfully saved.'
         );
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\TeacherGrades;
+namespace App\Http\Livewire\StudentGrades;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\Grade;
@@ -8,7 +8,7 @@ use App\Models\GradeLevel;
 use App\Models\Subject;
 use App\Models\User;
 
-class TeacherViewGrade extends ModalComponent
+class StudentViewGrade extends ModalComponent
 {
     public $grade;
 
@@ -43,7 +43,7 @@ class TeacherViewGrade extends ModalComponent
 
     public function render()
     {
-        return view('livewire.teacher-grade.teacher-view-grade');
+        return view('livewire.student-grade.student-view-grade');
     }
 
     public static function modalMaxWidth(): string

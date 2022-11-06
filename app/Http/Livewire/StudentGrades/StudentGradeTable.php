@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\TeacherGrades;
+namespace App\Http\Livewire\StudentGrades;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Grade;
 
-class TeacherGradeTable extends DataTableComponent
+class StudentGradeTable extends DataTableComponent
 {
     protected $model = Grade::class;
 
@@ -35,7 +35,7 @@ class TeacherGradeTable extends DataTableComponent
             Column::make("Fourth Quarter", "fourth_quarter")
                 ->sortable()
                 ->searchable(),
-            Column::make("Actions", "id")->view('livewire.teacher-grade.actions-col'),
+            Column::make("Actions", "id")->view('livewire.student-grade.actions-col'),
         ];
     }
 }

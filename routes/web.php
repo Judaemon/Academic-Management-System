@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('subjects', [\App\Http\Controllers\SubjectController::class, 'index'])->name('subjects.index');
 
-    Route::get('teacher-grades', [\App\Http\Controllers\GradeController::class, 'index'])->name('teacher_grades.index');
+    Route::get('student-grades', [\App\Http\Controllers\GradeController::class, 'index'])->name('student_grades.index');
 
     Route::get('grade-level', [\App\Http\Controllers\GradeLevelController::class, 'index'])->name('grade_level.index');
 

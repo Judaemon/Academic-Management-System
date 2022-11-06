@@ -6,6 +6,6 @@ class GradeController extends Controller
 {
     public function index()
     {
-        return view('teacher-grades.index');
+        return view('student-grades.index');
     }
 }
