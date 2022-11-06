@@ -25,12 +25,18 @@ class AcademicYearSeeder extends Seeder
         $days_2 = '126';
 
         AcademicYear::create([
+            'title' => 'Academic Year 2021 - 2022',
+            'is_open_for_admission' => '0',
+            'status' => 'Ongoing',
             'start_date' => $start_1->format('Y-m-d H:i:s'),
             'school_days' => $days_1,
             'end_date' => $start_1->addDays($days_1),
         ]);
 
         AcademicYear::create([
+            'title' => 'Academic Year 2021 - 2022',
+            'is_open_for_admission' => '0',
+            'status' => 'Ongoing',
             'start_date' => $start_2->format('Y-m-d H:i:s'),
             'school_days' => $days_2,
             'end_date' => $start_2->addDays($days_2),

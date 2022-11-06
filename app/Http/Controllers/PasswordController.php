@@ -19,7 +19,6 @@ class PasswordController extends Controller
             return redirect(route('change-password'));
          }
          else{
-            
              return view('/dashboard');
          }
     }
