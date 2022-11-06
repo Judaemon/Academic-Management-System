@@ -28,6 +28,6 @@ class Grade extends Authenticatable
         'fourth_quarter',
 
         'student_id',
-        'subject_id',
+        //'subject_id',
     ];
 }

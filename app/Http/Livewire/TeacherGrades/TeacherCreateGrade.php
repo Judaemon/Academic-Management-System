@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Grade;
+namespace App\Http\Livewire\TeacherGrades;
 
 use App\Models\Grade;
 use App\Models\User;
@@ -9,7 +9,7 @@ use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateGrade extends ModalComponent
+class TeacherCreateGrade extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
@@ -18,7 +18,7 @@ class CreateGrade extends ModalComponent
     public $third_quarter;
     public $fourth_quarter;
 
-    public $subject_id;
+    //public $subject_grade_level;
     public $student_id;
 
     protected function rules()
@@ -29,14 +29,14 @@ class CreateGrade extends ModalComponent
             'third_quarter' => ['nullable'],
             'fourth_quarter' => ['nullable'],
 
-            'subject_id' => ['nullable'],
+            //'subject_grade_level' => ['nullable'],
             'student_id' => ['nullable'],
         ];
     }
 
     public function render()
     {
-        return view('livewire.grade.create-grade');
+        return view('livewire.teacher-grade.teacher-create-grade');
     }
 
     public function save(): void
@@ -66,7 +66,7 @@ class CreateGrade extends ModalComponent
             'third_quarter' => $this->third_quarter,
             'fourth_quarter' => $this->fourth_quarter,
 
-            'subject_id' => $this->subject,
+            //'subject_grade_level' => $this->subject,
             'student_id' => $this->student,
         ]);
 

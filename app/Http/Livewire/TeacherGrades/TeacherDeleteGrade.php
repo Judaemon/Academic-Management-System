@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Grade;
+namespace App\Http\Livewire\TeacherGrades;
 
 use App\Models\Grade;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class DeleteGrade extends ModalComponent
+class TeacherDeleteGrade extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
@@ -20,7 +20,7 @@ class DeleteGrade extends ModalComponent
 
     public function render()
     {
-        return view('livewire.grade.delete-grade');
+        return view('livewire.teacher-grade.teacher-delete-grade');
     }
 
     public function deleteDialog()

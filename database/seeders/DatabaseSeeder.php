@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             GradeLevelSeeder::class,
             SubjectSeeder::class,
             SectionSeeder::class,
+            GradeSeeder::class,
 
             AdmissionSeeder::class,
 

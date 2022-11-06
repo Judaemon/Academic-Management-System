@@ -4,12 +4,12 @@
 
         <div>
             @can('create_grade')
-                <x-button primary label="ASSIGN GRADES" onclick="livewire.emit('openModal', 'grade.create-grade')" />
+                <x-button primary label="ASSIGN GRADES" onclick="livewire.emit('openModal', 'teacher-grades.teacher-create-grade')" />
             @endcan
         </div>
     </div>
 
     <div class="datatable-container bg-white p-4 rounded-lg border shadow-xs overflow-hidden">
-        @livewire('grade.grade-table')
+        @livewire('teacher-grades.teacher-grade-table')
     </div>
 </x-app-layout>

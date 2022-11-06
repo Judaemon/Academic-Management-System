@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Grade;
+namespace App\Http\Livewire\TeacherGrades;
 
 use App\Models\Grade;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class EditGrade extends ModalComponent
+class TeacherEditGrade extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
@@ -21,7 +21,7 @@ class EditGrade extends ModalComponent
             'third_quarter' => ['nullable'],
             'fourth_quarter' => ['nullable'],
 
-            'subject_id' => ['nullable'],
+            //'subject_grade_level' => ['nullable'],
             'student_id' => ['nullable'],  
         ];
     }
@@ -33,7 +33,7 @@ class EditGrade extends ModalComponent
 
     public function render()
     {
-        return view('livewire.grade.edit-grade');
+        return view('livewire.teacher-grade.teacher-edit-grade');
     }
 
     public function save(): void
