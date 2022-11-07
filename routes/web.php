@@ -24,6 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::get('change-password', [\App\Http\Controllers\PasswordController::class, 'changePassword'])->name('change-password');
     Route::put('change-password', [\App\Http\Controllers\PasswordController::class, 'updatePassword'])->name('update-password');
 
+    // teacher grades export/import
+    Route::get('teacher-grades', [\App\Http\Controllers\TeacherGradeController::class, 'index'])->name('teacher_grades.index');
+    Route::get('export', [\App\Http\Controllers\TeacherGradeController::class, 'export'])->name('export');
+    Route::put('import', [\App\Http\Controllers\TeacherGradeController::class, 'import'])->name('import');
+
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
 
     // accounting

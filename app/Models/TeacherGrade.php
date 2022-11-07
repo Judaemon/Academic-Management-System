@@ -7,25 +7,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Grade extends Authenticatable
+class TeacherGrade extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    public function student()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class);
-    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
+    
     protected $fillable = [
         'first_quarter',
         'second_quarter',
