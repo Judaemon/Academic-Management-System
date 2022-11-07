@@ -20,12 +20,15 @@ return new class extends Migration
 
             $table->text('description');
 
-            $table->date('date');
+            $table->date('start_date');
+
+            $table->date('end_date')
+                  ->nullable();
 
             $table->string('main_image')
                   ->nullable();
 
-            // $table->string('category');
+            $table->string('category');
             
             $table->timestamps();
         });

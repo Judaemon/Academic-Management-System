@@ -20,26 +20,29 @@ class AnnouncementSeeder extends Seeder
     {
         Announcement::create([
             'title' => 'All Saints Day',
-            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
-            'date' => Carbon::create('2022', '11', '01'),
+            'description' => "In observance of the All Saints' Day on November 1, 2022, and All Souls' Day on November 2, 2022, all online and limited face-to-face classes in all levels and office operations are suspended.",
+            'start_date' => Carbon::create('2022', '10', '30'),
+            'end_date' => Carbon::create('2022', '11', '02'),
             'main_image' => NULL,
-            // 'category'
-        ]);
-
-        Announcement::create([
-            'title' => 'All Souls Day',
-            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
-            'date' => Carbon::create('2022', '11', '02'),
-            'main_image' => NULL,
-            // 'category'
+            'category' => 'Holiday'
         ]);
 
         Announcement::create([
             'title' => 'Academic Break',
             'description' => 'No classes and work for all gradde levels. From October 28, 2022 to November 3, 2022',
-            'date' => Carbon::now(),
+            'start_date' => Carbon::create('2022', '10', '27'),
+            'end_date' => Carbon::create('2022', '11', '03'),
             'main_image' => NULL,
-            // 'category'
+            'category' => 'Event'
+        ]);
+
+        Announcement::create([
+            'title' => 'Bonifacio Day',
+            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
+            'start_date' => Carbon::create('2022', '11', '29'),
+            'end_date' => Carbon::create('2022', '11', '30'),
+            'main_image' => NULL,
+            'category' => 'Holiday'
         ]);
     }
 }

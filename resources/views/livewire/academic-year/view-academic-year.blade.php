@@ -3,11 +3,11 @@
         <div class="grid grid-cols-1 p-4">
             <div class="col-span-4 flex flex-row space-x-6 mb-5">
                 <div class="w-1/2">
-                    <x-datetime-picker
-                        without-time
-                        wire:model.defer="start_date" 
+                    <x-input
+                        rightIcon="calendar"
+                        value="{{ date('F j, Y', strtotime($academic_year->start_date)) }}" 
                         label="Start Date" 
-                        read-only
+                        readonly
                     />
                 </div>
   
@@ -16,11 +16,11 @@
                 </div>
 
                 <div class="w-1/2">
-                    <x-datetime-picker
-                        without-time
-                        wire:model="end_date" 
+                    <x-input
+                        rightIcon="calendar"
+                        value="{{ date('F j, Y', strtotime($academic_year->end_date)) }}" 
                         label="End Date" 
-                        read-only
+                        readonly
                     />
                 </div>
             </div>
@@ -30,8 +30,8 @@
                     type="number"
                     label="Number of School Days (In Days)" 
                     corner-hint="Ex: 128 days" 
-                    wire:model="school_days" 
-                    read-only
+                    wire:model.defer="school_days" 
+                    readonly
                 />
             </div>
         </div>

@@ -14,11 +14,38 @@
                     />
                 </div>
 
+                <div class="col-span-4 flex flex-row space-x-6 mb-1">
+                    <div class="w-1/2">
+                        <x-datetime-picker
+                            without-time
+                            wire:model="start_date" 
+                            label="Start Date" 
+                        />
+                    </div>
+      
+                    <div class="flex justify-center items-center pt-5 uppercase text-sm">
+                        TO
+                    </div>
+
+                    <div class="w-1/2 {{ $isNull ? 'hidden' : ''}}">
+                        <x-datetime-picker 
+                            without-time
+                            wire:model="end_date" 
+                            label="End Date" 
+                        />
+                    </div>
+                    <div class="w-1/2 {{ $isNull ? '' : 'hidden'}}">
+                        <x-input label="End Date" rightIcon="calendar" disabled />
+                    </div>
+                </div>
+
                 <div class="col-span-4">
-                    <x-datetime-picker 
-                        without-time
-                        wire:model.defer="date" 
-                        label="Date" 
+                    <x-select
+                        wire:ignore 
+                        label="Category"  
+                        placeholder="Select Category"
+                        :options="['Emergency', 'Holiday', 'Events']"
+                        wire:model.defer="category" 
                     />
                 </div>
 

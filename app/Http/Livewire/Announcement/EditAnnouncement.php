@@ -19,7 +19,9 @@ class EditAnnouncement extends ModalComponent
 
     public $title;
     public $description;
-    public $date;
+    public $start_date;
+    public $end_date;
+    public $category;
     public $main_image;
 
     public function mount(Announcement $announcement)
@@ -28,7 +30,9 @@ class EditAnnouncement extends ModalComponent
 
         $this->title = $announcement->title;
         $this->description = $announcement->description;
-        $this->date = $announcement->date;
+        $this->start_date = $announcement->start_date;
+        $this->end_date = $announcement->end_date;
+        $this->category = $announcement->category;
         $this->main_image = $announcement->main_image;
     }
 
@@ -37,7 +41,9 @@ class EditAnnouncement extends ModalComponent
         return [
             'title' => ['required'],
             'description' => ['required'],
-            'date' => ['required', 'date'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
+            'category' => ['required'],
             'main_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
         ];
     }
@@ -86,7 +92,9 @@ class EditAnnouncement extends ModalComponent
         $this->announcement->forceFill([
             'title' => $this->title,
             'description' => $this->description,
-            'date' => Carbon::parse($this->date)->toDateString(),
+            'start_date' => Carbon::parse($this->start_date)->toDateString(),
+            'end_date' => Carbon::parse($this->end_date)->toDateString(),
+            'category' => $this->category,
             'main_image' => $this->main_image,
         ])->save();
 

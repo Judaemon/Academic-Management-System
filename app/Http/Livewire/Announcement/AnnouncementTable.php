@@ -22,10 +22,6 @@ class AnnouncementTable extends DataTableComponent
                 ->sortable(),
             Column::make("Title", "title")
                 ->sortable(),
-            Column::make("Date", "date")
-                ->sortable()
-                ->format(fn($value) => date('F j, Y', strtotime($value)))
-                ->collapseOnMobile(),
             Column::make("Actions", "id")
                 ->view('livewire.announcement.actions-col')
                 ->collapseOnMobile(),

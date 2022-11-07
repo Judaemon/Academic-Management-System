@@ -17,16 +17,21 @@ class CreateAnnouncement extends ModalComponent
 
     public $title;
     public $description;
-    public $date;
+    public $start_date;
+    public $end_date;
     public $main_image;
-    // public $category;
+    public $category;
+    
+    public $isNull = true;
 
     protected function rules()
     {
         return [
             'title' => ['required'],
             'description' => ['required'],
-            'date' => ['required', 'date'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
+            'category' => ['required'],
             'main_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
         ];
     }
@@ -34,6 +39,15 @@ class CreateAnnouncement extends ModalComponent
     public function render()
     {
         return view('livewire.announcement.create-announcement');
+    }
+
+    public function updatedStartDate()
+    {
+        if(!empty($this->start_date)) {
+            $this->isNull = false;
+        } else {
+            $this->isNull = true;
+        }
     }
 
     public function save(): void
@@ -68,7 +82,9 @@ class CreateAnnouncement extends ModalComponent
         Announcement::create([
             'title' => $this->title,
             'description' => $this->description,
-            'date' => Carbon::parse($this->date)->toDateString(),
+            'start_date' => Carbon::parse($this->start_date)->toDateString(),
+            'end_date' => Carbon::parse($this->end_date)->toDateString(),
+            'category' => $this->category,
             'main_image' => $this->main_image,
         ]);
 

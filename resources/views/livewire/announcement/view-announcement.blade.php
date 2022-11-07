@@ -14,8 +14,18 @@
 
         
     <div class="w-full text-sm px-10 py-1">
-        <div class="w-full font-bold h-auto items-center my-4 flex justify-end items-align">
-            {{ date('F j, Y', strtotime($announcement->date)) }}
+        <div class="w-full h-auto my-4 flex justify-end">
+            Starting from 
+            <b class="px-1.5">{{ date('F j, Y', strtotime($announcement->start_date)) }}</b> 
+            to 
+            <b class="pl-1.5">{{ date('F j, Y', strtotime($announcement->end_date)) }}</b>
+        </div>
+
+        <div class="flex w-full h-auto items-center my-4">
+            <div class="font-bold text-base uppercase w-1/4">Category</div>
+            <div class="w-3/4">
+                <x-input rightIcon="star" value="{{ $announcement->category }}" readonly />
+            </div>
         </div>
 
         <div class="w-full h-auto items-center my-4">

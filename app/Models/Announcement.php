@@ -12,8 +12,9 @@ class Announcement extends Model
     protected $fillable = [
         'title',
         'description',
-        'date',
+        'start_date',
+        'end_date',
         'main_image',
-        // 'category'
+        'category'
     ];
 }
