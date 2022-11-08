@@ -2,7 +2,7 @@
     <div class="flex overflow-y-auto flex-col md:flex-row">
         <div class="h-32 md:h-auto md:w-1/2">
             <img aria-hidden="true" class="object-cover w-full h-full"
-                src="{{ asset('images/system-assets/auth/forgot-password-office.jpeg') }}" alt="Office"/>
+                src="{{ asset('images/system/bg/forgot-password-office.jpeg') }}" alt="Office" />
         </div>
         <div class="flex justify-center items-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
@@ -11,20 +11,15 @@
                 </h1>
 
                 <!-- Session Status -->
-                <x-auth-session-status class="mb-4" :status="session('status')"/>
+                <x-auth-session-status class="mb-4" :status="session('status')" />
 
 
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
 
                     <div class="mt-4">
-                        <x-input-label for="email" :value="__('Email')"/>
-                        <x-text-input type="email"
-                                 class="block w-full"
-                                 name="email"
-                                 id="email"
-                                 required
-                        />
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input type="email" class="block w-full" name="email" id="email" required />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 

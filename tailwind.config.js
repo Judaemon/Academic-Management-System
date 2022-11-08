@@ -176,6 +176,15 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                bg:         "var(--bg-color)",
+                main:       "var(--main-color)",
+                secondary:        "var(--sub-color)",
+
+                caret:      "var(--caret-color)",
+                sub_alt:    "var(--sub-alt-color)",
+                text:       "var(--text-color)",
+            }
         },
     },
     variants: {

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("address")->default('Sample CAIMS Address');
 
             $table->foreignId('academic_year_id')->constrained('academic_years', 'id')->onDelete('cascade');
-            
+
             // settings
             $table->boolean("profile_editing")->default(false);
             $table->boolean("notify_grades")->default(false);
@@ -29,14 +29,18 @@ return new class extends Migration
             // notification type: none | email | sms | both (email and sms)
             // notify grades: bool
             // notify payments: bool
-            // skins: [presets names] //tailwind class
+
+            // theme
+            $table->string("theme_color");
+            $table->string("theme_background");
+
 
             // contacts
             $table->string("email")->default('caims@gmail.com');
             $table->string("mobile_1")->default('0968-227-6795');
             $table->string("mobile_2")->default('0917-895-0544');
             $table->string("telephone_1")->default('(074) 620 0585');
-            
+
             // social links
             $table->string("website_link")->default('google.com');
             $table->string("facebook_link")->default('google.com');

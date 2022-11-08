@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 flex justify-between">
-        <h2 class="text-2xl font-semibold text-gray-700">Admission</h2>
+        <h2 class="text-2xl font-semibold text-text">Admission</h2>
         <x-button icon="plus-circle" primary class="uppercase" label="Create Admission"
             onclick="Livewire.emit('openModal', 'admission.create-admission')" />
     </div>

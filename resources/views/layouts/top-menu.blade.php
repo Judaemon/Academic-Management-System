@@ -1,4 +1,4 @@
-<header class="z-10 py-4 bg-white shadow-md">
+<header class="z-10 py-4 bg-bg shadow-md">
     <div class="container flex justify-between items-center px-6 mx-auto h-full text-purple-600 md:justify-end">
         <!-- Mobile hamburger for sidebar-->
         <x-button flat secondary md right-icon="menu-alt-2" @click="toggleSideMenu" aria-label="Menu" class="md:hidden" />
@@ -7,7 +7,12 @@
         <x-dropdown>
             <x-slot name="trigger">
                 <div>
-                    <x-button label="{{ Auth::user()->first_name }}" flat secondary md right-icon="chevron-down" />
+                    {{-- <x-button label="{{ Auth::user()->first_name }}" flat secondary md right-icon="chevron-down" /> --}}
+                </div>
+                <div
+                    class="flex justify-end space-x-4 w-44 px-4 py-2 text-sm font-medium leading-5 text-center text-text">
+                    <span class="float-right">{{ Auth::user()->first_name }}</span>
+                    <x-icon name="chevron-down" class="w-4 h-4" />
                 </div>
             </x-slot>
 
