@@ -6,9 +6,10 @@ use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Models\Admission;
 use App\Models\User;
-use App\Models\Payments;
 use App\Models\Fee;
+
 
 use Auth;
 
@@ -25,8 +26,7 @@ class CreatePayments extends Component
     public $isNull = true;
     public $isOthers = false;
 
-    public $grade_level_fees;
-    public $user_payments;
+    public $school_fees;
 
     protected function rules()
     {
@@ -53,11 +53,14 @@ class CreatePayments extends Component
     {
         if(!empty($this->name)) {
             $this->isNull = false;
-            $this->user_payments = Payments::where('user_id', $this->name)->get();
+
+            // if($user->role('student')) {
+                $grade_level = Admission::where('student_id', $this->name)->first();
+                $this->school_fees = Fee::where('grade_level_id', $grade_level->admit_to_grade_level)->get();
+            // }
+
         } else {
             $this->isNull = true;
-            $this->grade_level_fees = NULL;
-            $this->user_payments = NULL;
         }
     }
 

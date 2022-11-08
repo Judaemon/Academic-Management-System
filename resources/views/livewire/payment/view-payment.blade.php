@@ -3,7 +3,7 @@
         <div class="flex justify-start items-center">
             <img src="{{ asset('images/avatar-svgrepo-com.svg') }}" class="w-20 h-20" />
             <div class="ml-10 text-white">
-                <div class="text-xl uppercase font-bold tracking-wide">{{ $payment->user->firstname }} {{ $payment->user->lastname }}</div>
+                <div class="text-xl uppercase font-bold tracking-wide">{{ $payment->user->first_name }} {{ $payment->user->last_name }}</div>
                 <div class="text-sm text-gray-300 ml-4">
                     <div class="flex mt-px items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5 mr-3">
@@ -13,7 +13,7 @@
                     </div>
                     <div class="flex mt-px items-center">
                         <x-icon name="phone" class="w-3.5 h-3.5 mr-3" />
-                        {{ $payment->user->mobilenumber }}
+                        {{ $payment->user->mobile_number }}
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
         <div class="flex w-full h-auto items-center my-4">
             <div class="font-bold w-1/4">Amount Paid</div>
             <div class="w-3/4">
-                <x-input value="Php {{ $payment->amount_paid }}" readonly />
+                <x-input value="Php {{ number_format($payment->amount_paid, 2) }}" readonly />
             </div>
         </div>
 
@@ -55,7 +55,7 @@
     <div class="w-full bg-iscp_primary rounded-b-lg h-20 px-10">
         <div class="flex justify-between items-center gap-x-4 h-full w-full">
             <x-button green icon="receipt-refund" label="Refund" wire:click="closeModal" />
-            <x-button negative icon="x-circle" label="Cancel" wire:click="closeModal" />
+            <x-button negative icon="x-circle" label="Close" wire:click="closeModal" />
         </div>
     </div>
 </div>
