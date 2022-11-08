@@ -2,7 +2,7 @@
     <x-card title="Create Academic Year">
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-1 p-4">
-                <div class="col-span-4 flex flex-row space-x-4 mb-5">
+                <div class="col-span-4 flex flex-row space-x-6 mb-5">
                     <div class="w-1/2">
                         <x-datetime-picker
                             without-time
@@ -11,8 +11,8 @@
                         />
                     </div>
       
-                    <div class="flex justify-center items-center pt-5">
-                        <x-icon name="arrow-right" class="w-5 h-5" solid />
+                    <div class="flex justify-center items-center pt-5 uppercase text-sm text-gray-400">
+                        TO
                     </div>
 
                     <div class="w-1/2 {{ $isNull ? 'hidden' : ''}}">

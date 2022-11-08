@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
 
             ProgramSeeder::class,
             GradeLevelSeeder::class,
+            AnnouncementSeeder::class,
+
+            SectionSeeder::class,
             SubjectSeeder::class,
             SectionSeeder::class,
 

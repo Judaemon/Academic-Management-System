@@ -10,9 +10,21 @@ class PaymentsTable extends DataTableComponent
 {
     protected $model = Payments::class;
 
+    public array $bulkActions = [
+        'exportSelected' => 'Export',
+    ];
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+    }
+
+    public function exportSelected()
+    {
+        foreach($this->getSelected() as $item)
+        {
+            // These are strings since they came from an HTML element
+        }
     }
 
     public function columns(): array
@@ -29,11 +41,9 @@ class PaymentsTable extends DataTableComponent
                 ->sortable()
                 ->format(fn ($value) => 'Php ' . number_format($value, 2)),
 
-            Column::make("Payment Type", "fee.fee_name")
-                ->sortable(),
-
-            Column::make("Others")
-                ->sortable(),
+            Column::make("Payment Date", "created_at")
+                ->sortable()
+                ->format(fn($value) => date('F j, Y', strtotime($value))),
 
             Column::make("Actions", "id")
                 ->view('livewire.payment.actions-col'),

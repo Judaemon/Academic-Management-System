@@ -25,7 +25,7 @@
         />
       </div>
 
-      <div class="grid grid-cols-1 gap-4 w-full px-10 pb-4 pt-8">
+      <div class="grid grid-cols-1 gap-4 w-full px-12 pb-4 pt-8">
         <div class="{{ $isNull ? 'hidden' : 'block' }} w-full">
           <h1 class="uppercase font-bold">Available Payments by Grade Level</h1>
           <div class="w-full min-h-56 flex justify-center items-center rounded-md">
@@ -75,12 +75,23 @@
             @endif
           </div>
 
-          <div class="w-full">
-            <x-inputs.currency 
-              label="Amount Paid" 
-              placeholder="0.00" 
-              wire:model.defer="amount_paid" 
-            />
+          <div class="w-full flex flex-row space-x-10">
+            <div class="w-1/2">
+              <x-inputs.currency 
+                label="Amount Paid" 
+                placeholder="0.00" 
+                wire:model.defer="amount_paid" 
+              />
+            </div>
+            <div class="w-1/2">
+              <x-select
+                wire:ignore 
+                label="Method of Payment"  
+                placeholder="Select Method"
+                :options="['Cash', 'GCash', 'Paypal']"
+                wire:model.defer="payment_method" 
+              />
+            </div>
           </div>
 
           <div class="w-full">
@@ -89,7 +100,7 @@
               <x-select  
                 wire:ignore
                 placeholder="Select Payment Options"
-                wire:model="fee"
+                wire:model="school_fee"
                 :async-data="route('fees.all')"
                 option-label="fee_name"
                 option-value="id"

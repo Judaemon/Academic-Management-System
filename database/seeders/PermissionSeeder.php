@@ -80,6 +80,17 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
+        $announcement_permissions = [
+            'view_announcement',
+            'create_announcement',
+            'update_announcement',
+            'delete_announcement',
+        ];
+
+        foreach ($announcement_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
         $grade_level_permissions = [
             'view_grade_levels',
             'create_grade_level',

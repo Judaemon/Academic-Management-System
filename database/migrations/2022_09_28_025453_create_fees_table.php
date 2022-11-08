@@ -10,7 +10,9 @@ return new class extends Migration
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
+            
             $table->string('fee_name');
+
             $table->decimal('amount')
                   ->default('0.00');
 
