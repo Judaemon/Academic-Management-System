@@ -6,21 +6,28 @@ use App\Models\AcademicYear;
 use App\Models\Setting;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use WireUi\Traits\Actions;
 
 class UpdateSettings extends Component
 {
-    use AuthorizesRequests, Actions;
+    use AuthorizesRequests, Actions, WithFileUploads;
 
-    public Setting $setting;
+    public $setting;
     public $academic_years;
+    public $logo;
 
     protected $rules = [
+        'logo' => 'image|max:1024', // 1MB Max
+
         'setting.institute_name' => ['required'],
         'setting.institute_acronym' => ['required'],
         'setting.logo' => ['required'],
         'setting.address' => ['required'],
         'setting.academic_year_id' => ['required'],
+
+        'setting.theme_color' => ['nullable'],
+        'setting.theme_background' => ['nullable'],
 
         'setting.profile_editing' => ['nullable'],
         'setting.notify_grades' => ['nullable'],
@@ -41,7 +48,7 @@ class UpdateSettings extends Component
     public function mount()
     {
         $this->setting = Setting::firstOrFail();
-
+        $this->logo = $this->setting->logo;
         $this->setting->academic_year_id = (string)$this->setting->academic_year_id;
         $this->academic_years = AcademicYear::orderBy('id', 'desc')->take(5)->get();
     }
@@ -53,7 +60,10 @@ class UpdateSettings extends Component
 
     public function save(): void
     {
-        $this->validate();
+        // $this->logo->store('images/system');
+
+        // dd($this->setting->logo, $this->logo);
+        // $this->validate();
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
