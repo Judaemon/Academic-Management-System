@@ -17,6 +17,24 @@ class StudentGradeTable extends DataTableComponent
         // $this->setSearchDebounce(1000);
     }
 
+    // FILTER FOR STUDENTS - SECTION OR PARANG YUNG ADIMISSION LEVEL SOMETHING(?)
+    // public function filters(): array
+    // {
+    //     $option = Section::query()
+    //         ->pluck('section_id')
+    //         ->toArray();
+
+    //     $option = array_combine($option, $option);
+
+    //     return [
+    //         SelectFilter::make('Section')
+    //             ->options($option)
+    //             ->filter(function (Builder $builder, string $value) {
+    //                 $builder->section($value);
+    //             }),
+    //     ];
+    // }
+    
     public function columns(): array
     {
         return [

@@ -4,7 +4,8 @@
 
         <div>
             @can('create_grade')
-                <x-button primary label="ASSIGN GRADES" onclick="livewire.emit('openModal', 'student-grades.student-create-grade')" />
+                {{-- dapat dito is export grades, working on it as of now --}}
+                <x-button primary label="DOWNLOAD GRADES" onclick="livewire.emit('openModal', 'student-grades.student-create-grade')" />
             @endcan
         </div>
     </div>

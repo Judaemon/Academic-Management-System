@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="overflow-hidden w-full py-2">
+                    <div class="overflow-hidden w-full py-2 px-4">
                         <div class="card-header overflow-hidden flex justify-between w-full font-semibold text-2xl text-gray-800 leading-tight py-2">
                             {{ __('Grades') }}
                         </div>
