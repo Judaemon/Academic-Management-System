@@ -26,9 +26,10 @@ Route::middleware('auth')->group(function () {
 
     // teacher grades export/import
     Route::get('teacher-grades', [\App\Http\Controllers\TeacherGradeController::class, 'index'])->name('teacher_grades.index');
-    Route::get('export', [\App\Http\Controllers\TeacherGradeController::class, 'export'])->name('export');
-    Route::put('import', [\App\Http\Controllers\TeacherGradeController::class, 'import'])->name('import');
+    Route::get('teacher-grades/export', \App\Http\Livewire\TeacherGrades\Export::class)->name('teacher_grades.export');
+    Route::put('teacher-grades/import', \App\Http\Livewire\TeacherGrades\Import::class)->name('teacher_grades.import');
 
+    // settings
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
 
     // accounting

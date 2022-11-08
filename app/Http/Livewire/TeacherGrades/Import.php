@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\TeacherGrades;
 
 use App\Jobs\ImportJob;
 use Livewire\Component;
