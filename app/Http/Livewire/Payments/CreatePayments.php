@@ -52,14 +52,15 @@ class CreatePayments extends ModalComponent
     public function updatedName()
     {
         if(!empty($this->name)) {
-            $this->isNull = false;
-            $user = User::where('id', $this->name)->first();
+            $user = Admission::where('student_id', $this->name)->first();
             
-            if($user->hasRole('Student')) {
-                $grade_level = Admission::where('student_id', $this->name)->first();
-                $this->school_fees = Fee::where('grade_level_id', $grade_level->admit_to_grade_level)->get();
+            if($user != NULL) {
+                $this->isNull = false;
+                $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
+            } else {
+                $this->isNull = true;
+                $this->school_fees = NULL;
             }
-
         } else {
             $this->isNull = true;
         }

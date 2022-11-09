@@ -33,7 +33,11 @@ class PaymentsTable extends DataTableComponent
             Column::make("Id")
                 ->sortable(),
 
-            Column::make("Name", "user.first_name")
+            Column::make("First Name", "user.first_name")
+                ->sortable()
+                ->searchable(),
+
+            Column::make("Last Name", "user.last_name")
                 ->sortable()
                 ->searchable(),
 
@@ -47,8 +51,10 @@ class PaymentsTable extends DataTableComponent
                 ->format(fn($value) => date('F j, Y', strtotime($value)))
                 ->collapseOnMobile(),
 
-            Column::make("Actions", "id")
-                ->view('livewire.payment.actions-col')
+            Column::make("Actions")
+                ->label(
+                    fn($row, Column $column) => view('livewire.payment.actions-col')->withRow($row)
+                  )
                 ->collapseOnMobile(),
         ];
     }
