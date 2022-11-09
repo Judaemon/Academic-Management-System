@@ -32,7 +32,11 @@
         <div class="flex w-full h-auto items-center my-4">
             <div class="font-bold w-1/4">Payment Type</div>
             <div class="w-3/4">
-                <x-input value="@if(!empty($payment->fee_id)) {{ $payment->others }} @else {{ $payment->fee->fee_name }} ( Php {{ $payment->fee->amount }} ) @endif" readonly />
+                @if(!empty($payment->fee_id)) 
+                    <x-input value="{{ $payment->fee->fee_name }} ( Php {{ $payment->fee->amount }} )" readonly />
+                @else
+                    <x-input value="{{$payment->others }}" readonly />
+                @endif
             </div>
         </div>
 

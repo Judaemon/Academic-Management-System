@@ -5,7 +5,7 @@
             Payments
         </h2>
         <x-button icon="plus-circle" primary class="uppercase w-full md:w-auto" label="Add Payment Record" 
-            onclick="location.href='{{ url('payments/create-payments') }}'" 
+            onclick="Livewire.emit('openModal', 'payments.create-payments')" 
         />
     </div>
 

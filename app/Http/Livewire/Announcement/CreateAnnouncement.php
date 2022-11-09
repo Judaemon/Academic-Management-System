@@ -88,12 +88,6 @@ class CreateAnnouncement extends ModalComponent
             'main_image' => $this->main_image,
         ]);
 
-        if(!empty($this->main_image)) {
-
-        } else {
-            
-        }
-
         $this->emit('refreshDatatable');
 
         $this->closeModal();

@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire\Payments;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Admission;
+use App\Models\Payments;
 use App\Models\User;
 use App\Models\Fee;
 
-
 use Auth;
 
-class CreatePayments extends Component
+class CreatePayments extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
@@ -53,11 +53,12 @@ class CreatePayments extends Component
     {
         if(!empty($this->name)) {
             $this->isNull = false;
-
-            // if($user->role('student')) {
+            $user = User::where('id', $this->name)->first();
+            
+            if($user->hasRole('Student')) {
                 $grade_level = Admission::where('student_id', $this->name)->first();
                 $this->school_fees = Fee::where('grade_level_id', $grade_level->admit_to_grade_level)->get();
-            // }
+            }
 
         } else {
             $this->isNull = true;
@@ -114,12 +115,17 @@ class CreatePayments extends Component
         ]);
     
         $this->emit('refreshDatatable');
+
+        $this->closeModal();
             
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Payment has been Recorded.'
         );
+    }
 
-        return redirect()->route('payments.index');
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
     }
 }
