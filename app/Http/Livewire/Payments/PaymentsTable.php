@@ -21,8 +21,7 @@ class PaymentsTable extends DataTableComponent
 
     public function exportSelected()
     {
-        foreach($this->getSelected() as $item)
-        {
+        foreach ($this->getSelected() as $item) {
             // These are strings since they came from an HTML element
         }
     }
@@ -33,20 +32,29 @@ class PaymentsTable extends DataTableComponent
             Column::make("Id")
                 ->sortable(),
 
-            Column::make("Name", "user.first_name")
+            Column::make("First Name", "user.first_name")
+                ->sortable()
+                ->searchable(),
+
+            Column::make("Last Name", "user.last_name")
                 ->sortable()
                 ->searchable(),
 
             Column::make("Amount Paid")
                 ->sortable()
-                ->format(fn ($value) => 'Php ' . number_format($value, 2)),
+                ->format(fn ($value) => 'Php ' . number_format($value, 2))
+                ->collapseOnMobile(),
 
             Column::make("Payment Date", "created_at")
                 ->sortable()
-                ->format(fn($value) => date('F j, Y', strtotime($value))),
+                ->format(fn ($value) => date('F j, Y', strtotime($value)))
+                ->collapseOnMobile(),
 
-            Column::make("Actions", "id")
-                ->view('livewire.payment.actions-col'),
+            Column::make("Actions")
+                ->label(
+                    fn ($row, Column $column) => view('livewire.payment.actions-col')->withRow($row)
+                )
+                ->collapseOnMobile(),
         ];
     }
 }

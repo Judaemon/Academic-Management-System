@@ -22,4 +22,4 @@ Route::get('subjects', [SubjectController::class, 'subjects'])->name('subjects.s
 
 Route::get('grade_level', [GradeLevelController::class, 'grade_level'])->name('grade_level.grade_level');
 
-Route::get('fees', [FeesController::class, 'fees'])->name('fees.all');
+Route::get('fees/{id}', [FeesController::class, 'fees'])->name('fees.all');

@@ -53,6 +53,7 @@ class PermissionSeeder extends Seeder
             'create_fee',
             'update_fee',
             'delete_fee',
+            'view_fees',
         ];
 
         foreach ($fee_permissions as $permission) {
@@ -60,9 +61,10 @@ class PermissionSeeder extends Seeder
         }
 
         $payment_permissions = [
-            'view_payment',
+            'read_payment',
             'create_payment',
             'delete_payment',
+            'view_payments',
         ];
 
         foreach ($payment_permissions as $permission) {

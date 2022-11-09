@@ -51,9 +51,12 @@ class RoleSeeder extends Seeder
             'update_fee',
             'delete_fee',
 
-            'view_payment',
+            'read_payment',
             'create_payment',
             'delete_payment',
+
+            'view_fees',
+            'view_payments',
         ]);;
 
         Role::create(['name' => 'Student']);
