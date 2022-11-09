@@ -1,5 +1,5 @@
 <div class="flex flex-row space-x-2">
-    @can('view_payment')
+    @can('read_payment')
         <x-button wire:ignore.self icon="eye" green label="View"  
             onclick="livewire.emit('openModal', 'payments.view-payment', {{ json_encode(['payment' => $row->id]) }})" 
         />
