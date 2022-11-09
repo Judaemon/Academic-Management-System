@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('announcement', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcement.index');
+    Route::get('announcement/send-mail', [\App\Http\Controllers\AnnouncementController::class, 'sendMail'])->name('announcement.mail');
 
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
 
@@ -31,8 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
 
     Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
-
-    Route::get('payments/create-payments', \App\Http\Livewire\Payments\CreatePayments::class)->name('payments.create');
 
     // academic
     Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academic_year.index');
