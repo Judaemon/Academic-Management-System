@@ -16,9 +16,20 @@ return new class extends Migration
             $table->string('third_quarter')->nullable();
             $table->string('fourth_quarter')->nullable();
 
-            //$table->foreignId('subject_grade_level')->references('id')->on('grade_level_subject')->nullable();
-            //$table->foreignId('subject_id')->references('id')->on('subjects')->nullable();
-            $table->foreignId('student_id')->references('id')->on('users')->nullable();
+            $table->foreignId('student_id')
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
+
+            $table->foreignId('section_id')
+                ->nullable()
+                ->constrained('sections', 'id')
+                ->onDelete('cascade');
+
+            $table->foreignId('subject_id')
+                ->nullable()
+                ->constrained('subjects', 'id')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

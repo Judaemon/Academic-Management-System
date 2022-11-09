@@ -23,6 +23,7 @@ class TeacherGrade extends Authenticatable
         'fourth_quarter',
 
         'student_id',
-        //'subject_id',
+        'section_id',
+        'subject_id',
     ];
 }

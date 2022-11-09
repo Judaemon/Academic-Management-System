@@ -22,7 +22,8 @@
                             <table class="table mb-6 pt-4 w-full">
                                 <thead>
                                     <tr>
-                                        {{-- Subject and User column missing as of now --}}
+                                        <th><x-badge class="w-full mb-2" dark md label="Student"/></th>
+                                        <th><x-badge class="w-full mb-2" dark md label="Subject"/></th>
                                         <th><x-badge class="w-full mb-2" dark md label="First Quarter"/></th>
                                         <th><x-badge class="w-full mb-2" dark md label="Second Quarter"/></th>
                                         <th><x-badge class="w-full mb-2" dark md label="Third Quarter"/></th>
@@ -32,15 +33,18 @@
                                 <tbody class="mb-6 pt-4 w-full">
                                     @foreach ($grades as $grade)
                                         <tr>
-                                            {{-- Subject and User row missing as of now --}}
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                dark md label="{{ $grade->first_quarter }}"/></td>
+                                                md label="{{ $grade->student_id }}"/></td>
+                                                <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    md label="{{ $grade->subject_id }}"/></td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                dark md label="{{ $grade->second_quarter }}"/></td>
+                                                md label="{{ $grade->first_quarter }}"/></td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                dark md label="{{ $grade->third_quarter }}"/></td>
+                                                md label="{{ $grade->second_quarter }}"/></td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                dark md label="{{ $grade->fourth_quarter }}"/></td>
+                                                md label="{{ $grade->third_quarter }}"/></td>
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                md label="{{ $grade->fourth_quarter }}"/></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

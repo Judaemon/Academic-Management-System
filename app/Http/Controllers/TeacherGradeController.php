@@ -13,7 +13,7 @@ class TeacherGradeController extends Controller
 {
     public function index()
     {
-        $grades = Grade::with('user')->simplePaginate(30);
+        $grades = Grade::with('user')->simplePaginate(10);
 
         return view('teacher-grades.index', compact('grades'));
     }
