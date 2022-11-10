@@ -15,7 +15,7 @@ class Payments extends Model
         'amount_paid',
         'payment_method',
         'fee_id',
-        'remaining_total',
+        'balance',
         'others',
     ];
 

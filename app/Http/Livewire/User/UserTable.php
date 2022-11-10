@@ -41,10 +41,10 @@ class UserTable extends DataTableComponent
             Column::make("ID", "id")
                 ->sortable()
                 ->searchable(),
-            Column::make("First Name", "firstname")
+            Column::make("First Name", "first_name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Last Name", "lastname")
+            Column::make("Last Name", "last_name")
                 ->sortable()
                 ->searchable(),
             Column::make("Email", "email")

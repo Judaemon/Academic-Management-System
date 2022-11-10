@@ -19,8 +19,8 @@ return new class extends Migration
                   ->constrained('users', 'id')
                   ->onDelete('cascade');;
 
-            $table->decimal('amount_paid')
-                  ->default('0.00');
+            $table->decimal('amount_paid', 10, 2)
+                  ->default('0');
 
             $table->foreignId('fee_id')
                   ->nullable()
@@ -30,8 +30,8 @@ return new class extends Migration
             $table->string('others')
                   ->nullable();
 
-            $table->decimal('remaining_total')
-                  ->default('0.00');
+            $table->decimal('balance', 10, 2)
+                  ->default('0');
 
             $table->string('payment_method');
 

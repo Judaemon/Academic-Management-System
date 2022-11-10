@@ -19,8 +19,9 @@ class CreatePayments extends ModalComponent
 
     public $name;
     public $amount_paid;
-    public $school_fee;
     public $payment_method;
+    public $balance;
+    public $school_fee;
     public $others;
 
     public $total;
@@ -31,9 +32,7 @@ class CreatePayments extends ModalComponent
 
     public $grade_level;
     public $school_fees;
-    public $past_total_payments;
-
-    public $value = "default";
+    public $past_payments;
 
     protected function rules()
     {
@@ -98,10 +97,17 @@ class CreatePayments extends ModalComponent
     {
         if($this->total_options === 'Full Payment') {
             $this->school_fee = NULL;
-            $this->others = "Total (Php ".$this->total.")";
+            $this->others = "Grade Level Total Payment (Php ".$this->total.")";
         } else if($this->total_options === 'Partial Payment') {
             $this->others = "Remaining Total (Php ".$this->total.")";
             $this->school_fee = NULL;
+            
+            if(!empty($amount_paid)) {
+                $this->balance = number_format($this->total - $this->amount_paid, 2);
+                // $this->balance = round($this->balance, 2);
+            } else {
+                $this->balance = $this->total;
+            }
         }
     }
 
