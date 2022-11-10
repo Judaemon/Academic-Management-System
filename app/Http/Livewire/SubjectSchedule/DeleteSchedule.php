@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Http\Livewire\StudentGrades;
+namespace App\Http\Livewire\SubjectSchedule;
 
-use App\Models\Grade;
+use App\Models\SubjectSchedule;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class StudentDeleteGrade extends ModalComponent
+class DeleteSchedule extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $grade;
+    public $schedule;
 
-    public function mount(Grade $grade)
+    public function mount(SubjectSchedule $schedule)
     {
-        $this->grade = $grade;
+        $this->schedule = $schedule;
     }
 
     public function render()
     {
-        return view('livewire.student-grade.student-delete-grade');
+        return view('livewire.subject-schedule.delete-schedule');
     }
 
     public function deleteDialog()
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this grade?',
+            'description' => 'Delete this schedule?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
@@ -47,16 +47,16 @@ class StudentDeleteGrade extends ModalComponent
 
     public function submit()
     {
-        //$this->authorize('delete_grade');
+        //$this->authorize('delete_schedule');
 
         // Check if user has permission
-        if (!auth()->user()->can('delete_grade')) {
+        if (!auth()->user()->can('delete_schedule')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
         }else{
-            $this->grade->delete();
+            $this->schedule->delete();
 
             $this->closeModal();
     
@@ -64,7 +64,7 @@ class StudentDeleteGrade extends ModalComponent
     
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'Grade deleted successfully.'
+                $description = 'Schedule deleted successfully!'
             );
         }
     }

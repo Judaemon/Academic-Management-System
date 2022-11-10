@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             GradeSeeder::class,
 
+            ScheduleSeeder::class,
+
             AdmissionSeeder::class,
 
             FeeSeeder::class,

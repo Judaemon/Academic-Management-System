@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admissions', [\App\Http\Controllers\AdmissionController::class, 'index'])->name('admissions.index');
 
+    Route::get('subject-schedules', [\App\Http\Controllers\SubjectScheduleController::class, 'index'])->name('subject_schedules.index');
+
     // idk ¯\_(ツ)_/¯
     Route::view('about', 'about')->name('about');
 });
