@@ -12,18 +12,18 @@ class CreateAccount extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $firstname;
-    public $lastname;
-    public $middlename;
+    public $first_name;
+    public $last_name;
+    public $middle_name;
     public $email;
     public $suffix;
-    public $birthdate;
-    public $birthplace;
+    public $birth_date;
+    public $birth_place;
     public $religion;
     public $gender;
-    public $mothertongue;
+    public $mother_tongue;
     public $nationality;
-    public $pwdid;
+    public $pwd_id;
 
     public $height;
     public $weight;
@@ -35,31 +35,30 @@ class CreateAccount extends ModalComponent
     public $sss;
     public $tin;
 
-    public $mobilenumber;
+    public $mobile_number;
     public $address;
 
     public $emergency_contact_name;
     public $emergency_contact_number;
-    public $emergency_contact_occupation;
     public $emergency_contact_address;
     public $emergency_contact_relationship;
-    
+
     protected function rules()
     {
         return [
             // personal info
             'email' => ['required', 'unique:users,email'],
-            'firstname' => ['required'],
-            'lastname' => ['required'],
-            'middlename' => ['nullable'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'middle_name' => ['nullable'],
             'suffix' => ['nullable'],
-            'birthdate' => ['required'],
-            'birthplace' => ['required'],
+            'birth_date' => ['required'],
+            'birth_place' => ['required'],
             'religion' => ['required'],
             'gender' => ['required'],
-            'mothertongue' => ['required'],
+            'mother_tongue' => ['required'],
             'nationality' => ['required'],
-            'pwdid' => ['nullable', 'unique:users,pwdid'],
+            'pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
             // physical info
             'height' => ['nullable'],
@@ -69,7 +68,7 @@ class CreateAccount extends ModalComponent
             'beneficiary' => ['nullable'],
 
             // contact info
-            'mobilenumber' => ['required', 'unique:users,mobilenumber'],
+            'mobile_number' => ['required', 'unique:users,mobile_number'],
             'address' => ['required'],
 
             // additional account info
@@ -80,8 +79,7 @@ class CreateAccount extends ModalComponent
 
             // emergency contact
             'emergency_contact_name' => ['required'],
-            'emergency_contact_number' => ['required','unique:users,emergency_contact_number'],
-            'emergency_contact_occupation' => ['nullable'],
+            'emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
             'emergency_contact_address' => ['required'],
             'emergency_contact_relationship' => ['required'],
 
@@ -117,59 +115,58 @@ class CreateAccount extends ModalComponent
     {
         $this->authorize('create_account');
 
-        // lastname.firstletteroffirstname ex. firstname = Mark, lastname = Zuckerberg, password = zuckerberg.m
-        $password = strtolower(mb_substr($this->lastname, 0, 1, 'utf-8').'.'.$this->firstname);
+        // last_name.first_letter_of_first_name ex. first_name = Mark, last_name = Zuckerberg, password = zuckerberg.m
+        $password = strtolower(mb_substr($this->last_name, 0, 1, 'utf-8') . '.' . $this->first_name);
 
-        $user =User::create([
-                'firstname' => $this->firstname,
-                'lastname' => $this->lastname,
-                'email' => $this->email,
-                'password' => Hash::make($password),
-                'middlename' => $this->middlename,
-                'suffix' => $this->suffix,
-                'birthdate' => $this->birthdate,
-                'birthplace' => $this->birthplace,
-                'religion' => $this->religion,
-                'gender' => $this->gender,
-                'mothertongue' => $this->mothertongue,
-                'nationality' => $this->nationality,
-                'pwdid' => $this->pwdid,
+        $user = User::create([
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+            'password' => Hash::make($password),
+            'middle_name' => $this->middle_name,
+            'suffix' => $this->suffix,
+            'birth_date' => $this->birth_date,
+            'birth_place' => $this->birth_place,
+            'religion' => $this->religion,
+            'gender' => $this->gender,
+            'mother_tongue' => $this->mother_tongue,
+            'nationality' => $this->nationality,
+            'pwd_id' => $this->pwd_id,
 
-                // physical info
-                'height' => $this->height,
-                'weight' => $this->weight,
+            // physical info
+            'height' => $this->height,
+            'weight' => $this->weight,
 
-                // beneficiary
-                'beneficiary' => $this->beneficiary,
+            // beneficiary
+            'beneficiary' => $this->beneficiary,
 
-                // contact info
-                'mobilenumber' => $this->mobilenumber,
-                'address' => $this->address,
+            // contact info
+            'mobile_number' => $this->mobile_number,
+            'address' => $this->address,
 
-                // additional account info
-                'pag_ibig' => $this->pag_ibig,
-                'philhealth' => $this->philhealth,
-                'sss' => $this->sss,
-                'tin' => $this->tin,
+            // additional account info
+            'pag_ibig' => $this->pag_ibig,
+            'philhealth' => $this->philhealth,
+            'sss' => $this->sss,
+            'tin' => $this->tin,
 
-                // emergency contact person
-                'emergency_contact_name' => $this->emergency_contact_name,
-                'emergency_contact_number' => $this->emergency_contact_number,
-                'emergency_contact_occupation' => $this->emergency_contact_occupation,
-                'emergency_contact_address' => $this->emergency_contact_address,
-                'emergency_contact_relationship' => $this->emergency_contact_relationship,
+            // emergency contact person
+            'emergency_contact_name' => $this->emergency_contact_name,
+            'emergency_contact_number' => $this->emergency_contact_number,
+            'emergency_contact_address' => $this->emergency_contact_address,
+            'emergency_contact_relationship' => $this->emergency_contact_relationship,
         ]);
 
         $this->closeModal();
 
         $this->emit('refreshDatatable');
-        
+
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'User successfully Created.'
         );
     }
-    
+
     public static function modalMaxWidth(): string
     {
         return '7xl';

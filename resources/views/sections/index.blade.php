@@ -1,10 +1,11 @@
 <x-app-layout>
     <div class="p-4 flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-gray-700">Sections</h2>
+        <h2 class="text-2xl font-semibold text-text">Sections</h2>
 
         <div>
             @can('create_section')
-                <x-button wire:ignore.self primary onclick="Livewire.emit('openModal', 'section.create-section')" label="CREATE SECTION" />
+                <x-button wire:ignore.self primary onclick="Livewire.emit('openModal', 'section.create-section')"
+                    label="CREATE SECTION" />
             @endcan
         </div>
     </div>

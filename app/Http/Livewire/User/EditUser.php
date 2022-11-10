@@ -17,35 +17,32 @@ class EditUser extends ModalComponent
     {
         return [
             // personal info
-            'user.firstname' => ['required'],
-            'user.lastname' => ['required'],
+            'user.first_name' => ['required'],
+            'user.last_name' => ['required'],
             'user.email' => ['required', 'unique:users,email'],
-            'user.firstname' => ['required'],
-            'user.lastname' => ['required'],
-            'user.middlename' => ['nullable'],
+            'user.last_name' => ['required'],
+            'user.middle_name' => ['nullable'],
             'user.suffix' => ['nullable'],
-            'user.birthdate' => ['required'],
-            'user.birthplace' => ['required'],
+            'user.birth_date' => ['required'],
+            'user.birth_place' => ['required'],
             'user.religion' => ['required'],
             'user.gender' => ['required'],
-            'user.mothertongue' => ['required'],
+            'user.mother_tongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwdid' => ['nullable', 'unique:users,pwdid'],
+            'user.pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
             // physical info
             'user.height' => ['nullable'],
             'user.weight' => ['nullable'],
 
             // contact info
-            'user.mobilenumber' => ['required', 'unique:users,mobilenumber'],
+            'user.mobile_number' => ['required', 'unique:users,mobile_number'],
             'user.address' => ['required'],
 
             // educational background
-            'user.school_kinder' => ['nullable'],
-            'user.school_kindergrad' => ['nullable'],
-            'user.school_elementary' => ['nullable'],
-            'user.school_elementarygrad' => ['nullable'],
-            'user.school_juniorhigh' => ['nullable'],
+            'user.elementary_name' => ['nullable'],
+            'user.elementary_grad_date' => ['nullable'],
+            'user.junior_high_name' => ['nullable'],
 
             // academic info
             'user.lrn' => ['nullable', 'unique:users,lrn'],
@@ -58,26 +55,24 @@ class EditUser extends ModalComponent
 
             'user.emergency_contact_name' => ['required'],
             'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
-            'user.emergency_contact_occupation' => ['nullable'],
             'user.emergency_contact_address' => ['required'],
             'user.emergency_contact_relationship' => ['required'],
 
-            'user.mparent_name' => ['nullable'],
-            'user.mparent_number' => ['nullable', 'unique:users,mparent_number'],
-            'user.mparent_occupation' => ['nullable'],
-            'user.mparent_address' => ['nullable'],
+            'user.mother_name' => ['nullable'],
+            'user.mother_number' => ['nullable', 'unique:users,mother_number'],
+            'user.mother_email' => ['nullable'],
+            'user.mother_address' => ['nullable'],
 
-            'user.fparent_name' => ['nullable'],
-            'user.fparent_number' => ['nullable', 'unique:users,fparent_number'],
-            'user.fparent_occupation' => ['nullable'],
-            'user.fparent_address' => ['nullable'],
+            'user.father_name' => ['nullable'],
+            'user.father_number' => ['nullable', 'unique:users,father_number'],
+            'user.father_email' => ['nullable'],
+            'user.father_address' => ['nullable'],
         ];
     }
 
     public function mount(User $user)
     {
         $this->user = $user;
-        $this->cardTitle = $user->firstname . " Information";
     }
 
     public function render()
@@ -87,8 +82,6 @@ class EditUser extends ModalComponent
 
     public function save(): void
     {
-        //$this->validate();
-
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
             'description' => 'Save the information?',

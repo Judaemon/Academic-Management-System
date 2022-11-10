@@ -3,7 +3,7 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
     presets: [
-        require('./vendor/wireui/wireui/tailwind.config.js')
+        require('./vendor/wireui/wireui/tailwind.config.js'),
     ],
     darkMode: 'class',
     content: [
@@ -176,6 +176,15 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                bg:         "var(--bg-color)",
+                main:       "var(--main-color)",
+                sec:        "var(--sub-color)",
+
+                caret:      "var(--caret-color)",
+                sub_alt:    "var(--sub-alt-color)",
+                text:       "var(--text-color)",
+            }
         },
     },
     variants: {

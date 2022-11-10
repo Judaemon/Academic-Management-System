@@ -14,6 +14,8 @@ class SubjectSeeder extends Seeder
 {
     public function run()
     {
+        // 4 Subjects per Grade Level
+        
         // Grade 1
         Subject::create([
             'name' => 'Mathematics 1',

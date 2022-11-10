@@ -8,15 +8,15 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->firstname }}" label="First Name" placeholder="Juan" />
+                    <x-input readonly value="{{ $user->first_name }}" label="First Name" placeholder="Juan" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->lastname }}" label="Last Name" placeholder="Dela Cruz" />
+                    <x-input readonly value="{{ $user->last_name }}" label="Last Name" placeholder="Dela Cruz" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->middlename }}" label="Middle Name" placeholder="Cardo" />
+                    <x-input readonly value="{{ $user->middle_name }}" label="Middle Name" placeholder="Cardo" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -24,11 +24,11 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->birthdate }}" label="Birth Date" placeholder="" />
+                    <x-input readonly value="{{ $user->birth_date }}" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->birthplace }}" label="Birth Place" placeholder="Baguio" />
+                    <x-input readonly value="{{ $user->birth_place }}" label="Birth Place" placeholder="Baguio" />
                 </div>
 
                 <!-- drop down sana ng mga religions -->
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mothertongue }}" label="Mother Tongue" placeholder="English" />
+                    <x-input readonly value="{{ $user->mother_tongue }}" label="Mother Tongue" placeholder="English" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -50,9 +50,11 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->pwdid }}" label="PWD ID" placeholder="XXXX0000" />
+                    <x-input readonly value="{{ $user->pwd_id }}" label="PWD ID" placeholder="XXXX0000" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- physical information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>II. PHYSICAL INFORMATION</strong></h1>
@@ -65,14 +67,16 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{ $user->weight }}" label="Weight (in kg)" placeholder="70 kg" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- contact information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>III. CONTACT INFORMATION</strong></h1>
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mobilenumber }}" label="Contact Number"
+                    <x-input readonly value="{{ $user->mobile_number }}" label="Contact Number"
                         placeholder="09*********" />
                 </div>
 
@@ -81,12 +85,13 @@
                         placeholder="Unit, Street, Barangay, City/Municipality" />
                 </div>
 
-                {{-- https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags --}}
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input autocomplete="randominput" readonly value="{{ $user->email }}" label="Email"
                         placeholder="sample@email.com" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- educational background -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>IV. EDUCATIONAL BACKGROUND</strong></h1>
@@ -102,12 +107,12 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->school_elementary }}" label="Elementary"
+                    <x-input readonly value="{{ $user->elementary_name }}" label="Elementary"
                         placeholder="School Name" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->school_elementarygrad }}" label="Year Graduated (Elementary)"
+                    <x-input readonly value="{{ $user->elementary_grad_date }}" label="Year Graduated (Elementary)"
                         placeholder="Year" />
                 </div>
 
@@ -115,7 +120,9 @@
                     <x-input readonly value="{{ $user->school_juniorhigh }}" label="Junior High School"
                         placeholder="School Name" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- academic information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>V. ACADEMIC INFORMATION</strong></h1>
@@ -138,7 +145,9 @@
                 <div class="col-span-6">
                     <x-input readonly value="{{ $user->public_id }}" label="Public" placeholder="" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- government beneficiary -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VI. GOVERNMENT BENEFICIARY</strong></h1>
@@ -147,7 +156,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{ $user->beneficiary }}" label="Beneficiary" placeholder="" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- emergency contact information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VII. EMERGENCY CONTACT PERSON</strong></h1>
@@ -164,11 +175,6 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->emergency_contact_occupation }}" label="Occupation"
-                        placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{ $user->emergency_contact_address }}" label="Address"
                         placeholder="" />
                 </div>
@@ -177,7 +183,9 @@
                     <x-input readonly value="{{ $user->emergency_contact_relationship }}" label="Relationship"
                         placeholder="" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- parents information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VIII. PARENTS INFORMATION</strong></h1>
@@ -221,7 +229,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{ $user->fparent_address }}" label="Address" placeholder="" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- government id -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>IX. GOVERNMENT ID NO.</strong></h1>
@@ -242,7 +252,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input readonly value="{{ $user->tin }}" label="TIN" placeholder="" />
                 </div>
+            </div>
 
+            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- user password -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>PASSWORD</strong></h1>
@@ -252,6 +264,7 @@
                     <x-inputs.password autocomplete="randominput" readonly value="{{ $user->password }}"
                         label="Password" placeholder="" />
                 </div>
+            </div>
 
                 <x-slot name="footer">
                     <div class="flex justify-end gap-x-4">

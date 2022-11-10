@@ -27,7 +27,7 @@ class ViewSubject extends ModalComponent
     {
         $this->subject = $subject;
 
-        $this->teacher = $subject->teacher->firstname.' '.$subject->teacher->lastname;
+        $this->teacher = $subject->teacher->first_name . ' ' . $subject->teacher->last_name;
         $this->grade_level = $subject->grade_level->name;
     }
 

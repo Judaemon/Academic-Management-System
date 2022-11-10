@@ -8,15 +8,15 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="user.firstname" label="First Name" placeholder="Juan" />
+                    <x-input wire:model.defer="user.first_name" label="First Name" placeholder="Juan" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="user.lastname" label="Last Name" placeholder="Dela Cruz" />
+                    <x-input wire:model.defer="user.last_name" label="Last Name" placeholder="Dela Cruz" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="user.middlename" label="Middle Name" placeholder="Cardo" />
+                    <x-input wire:model.defer="user.middle_name" label="Middle Name" placeholder="Cardo" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
@@ -24,14 +24,13 @@
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input type="date" wire:model.defer="user.birthdate" label="Birth Date" placeholder="" />
+                    <x-input type="date" wire:model.defer="user.birth_date" label="Birth Date" placeholder="" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="user.birthplace" label="Birth Place" placeholder="Baguio" />
+                    <x-input wire:model.defer="user.birth_place" label="Birth Place" placeholder="Baguio" />
                 </div>
 
-                <!-- drop down sana ng mga religions -->
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="user.religion" label="Religion" placeholder="Catholic" />
                 </div>
@@ -44,7 +43,7 @@
                 </div>
 
                 <<<<<<< HEAD <div class="col-span-4">
-                    <x-input wire:model.defer="user.mothertongue" label="Mother Tongue" placeholder="English" />
+                    <x-input wire:model.defer="user.mother_tongue" label="Mother Tongue" placeholder="English" />
             </div>
 
             <div class="col-span-4">
@@ -52,7 +51,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-input readonly value="{{ $user->pwdid }}" label="PWD ID" placeholder="XXXX0000" />
+                <x-input readonly value="{{ $user->pwd_id }}" label="PWD ID" placeholder="XXXX0000" />
             </div>
 
             <!-- physical information -->
@@ -74,7 +73,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-input readonly value="{{ $user->mobilenumber }}" label="Contact Number" placeholder="09*********" />
+                <x-input readonly value="{{ $user->mobile_number }}" label="Contact Number" placeholder="09*********" />
             </div>
 
             <div class="col-span-4">
@@ -101,16 +100,16 @@
             </div>
 
             <div class="col-span-4">
-                <x-input wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                <x-input wire:model.defer="user.elementary_name" label="Elementary" placeholder="School Name" />
             </div>
 
             <div class="col-span-4">
-                <x-input wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)"
+                <x-input wire:model.defer="user.elementary_grad_date" label="Year Graduated (Elementary)"
                     placeholder="Year" />
             </div>
 
             <div class="col-span-4">
-                <x-input wire:model.defer="user.school_juniorhigh" label="Junior High School"
+                <x-input wire:model.defer="user.junior_high_name" label="Junior High School"
                     placeholder="School Name" />
             </div>
 
@@ -158,10 +157,6 @@
             <div class="col-span-4">
                 <x-input readonly value="{{ $user->emergency_contact_number }}" label="Contact Number"
                     placeholder="" />
-            </div>
-
-            <div class="col-span-4">
-                <x-input wire:model.defer="user.emergency_contact_occupation" label="Occupation" placeholder="" />
             </div>
 
             <div class="col-span-4">
@@ -223,7 +218,7 @@
             </div>
             =======
             <div class="sm:col-span-1 md:col-span-4">
-                <x-input wire:model.defer="user.mothertongue" label="Mother Tongue" placeholder="English" />
+                <x-input wire:model.defer="user.mother_tongue" label="Mother Tongue" placeholder="English" />
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">
@@ -231,7 +226,7 @@
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">
-                <x-input readonly value="{{ $user->pwdid }}" label="PWD ID" placeholder="XXXX0000" />
+                <x-input readonly value="{{ $user->pwd_id }}" label="PWD ID" placeholder="XXXX0000" />
             </div>
 
             <!-- physical information -->
@@ -253,7 +248,7 @@
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">
-                <x-input readonly value="{{ $user->mobilenumber }}" label="Contact Number"
+                <x-input readonly value="{{ $user->mobile_number }}" label="Contact Number"
                     placeholder="09*********" />
             </div>
 
@@ -281,16 +276,16 @@
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">
-                <x-input wire:model.defer="user.school_elementary" label="Elementary" placeholder="School Name" />
+                <x-input wire:model.defer="user.elementary_name" label="Elementary" placeholder="School Name" />
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">
-                <x-input wire:model.defer="user.school_elementarygrad" label="Year Graduated (Elementary)"
+                <x-input wire:model.defer="user.elementary_grad_date" label="Year Graduated (Elementary)"
                     placeholder="Year" />
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">
-                <x-input wire:model.defer="user.school_juniorhigh" label="Junior High School"
+                <x-input wire:model.defer="user.junior_high_name" label="Junior High School"
                     placeholder="School Name" />
             </div>
 
@@ -338,10 +333,6 @@
             <div class="sm:col-span-1 md:col-span-4">
                 <x-input readonly value="{{ $user->emergency_contact_number }}" label="Contact Number"
                     placeholder="" />
-            </div>
-
-            <div class="sm:col-span-1 md:col-span-4">
-                <x-input wire:model.defer="user.emergency_contact_occupation" label="Occupation" placeholder="" />
             </div>
 
             <div class="sm:col-span-1 md:col-span-4">

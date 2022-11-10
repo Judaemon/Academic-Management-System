@@ -11,6 +11,10 @@ return new class extends Migration
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
 
+            $table->string('title');
+            $table->boolean('is_open_for_admission')->default('0');
+            $table->string('status');
+
             $table->date('start_date');
 
             $table->integer('school_days')

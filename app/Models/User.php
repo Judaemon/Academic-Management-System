@@ -20,7 +20,7 @@ class User extends Authenticatable
 
 
         'birth_date',
-        'birthplace',
+        'birth_place',
         'nationality',
         'gender',
         'mother_tongue',
@@ -33,6 +33,9 @@ class User extends Authenticatable
         'mobile_number',
         'email',
         'address',
+
+        'kinder_name',
+        'kinder_grad_date',
 
         'elementary_name',
         'elementary_grad_date',

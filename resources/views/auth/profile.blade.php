@@ -64,8 +64,8 @@
                 </div>
 
                 <div class="col-span-4 md:col-span-3">
-                    <p class="font-semibold text-sm">{{ auth()->user()->birthplace }}</p>
-                    <p class="text-xs italic text-gray-600">Birthplace</p>
+                    <p class="font-semibold text-sm">{{ auth()->user()->birth_place }}</p>
+                    <p class="text-xs italic text-gray-600">Birth place</p>
                 </div>
 
                 <div class="col-span-4 md:col-span-3">

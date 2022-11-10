@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('grade_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('program_id')->constrained('programs', 'id');
 
             $table->timestamps();
         });

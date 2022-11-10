@@ -1,3 +1,92 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer base {
+    .light-bg{
+        --bg-color: #fff;
+        --text-color: #272727;
+        --sub-color: #272727;
+        --sub-alt-color: #fff;
+    }
+
+    .dim-bg{
+        --bg-color: #15202b;
+        --text-color: #fff;
+        --sub-color: #fff;
+        --sub-alt-color: #15202b;
+    }
+
+    .dark-bg{
+        --bg-color: #111111;
+        --text-color: #fff;
+        --sub-color: #fff;
+        --sub-alt-color: #111111;
+    }
+
+    .color1{
+        --main-color: #1d9bf0;
+        --caret-color: #1d9bf0;
+    }
+
+    .color2{
+        --main-color: #ffd400;
+        --caret-color: #ffd400;
+    }
+
+    .color3{
+        --main-color: #f91880;
+        --caret-color: #f91880;
+    }
+
+    .color4{
+        --main-color: #7856ff;
+        --caret-color: #7856ff;
+    }
+
+    .color5{
+        --main-color: #ff7a00;
+        --caret-color: #ff7a00;
+    }
+
+    .color6{
+        --main-color: #00ba7c;
+        --caret-color: #00ba7c;
+    }
+
+    .green{
+        --bg-color: #415e31;
+        --main-color: #6a994e;
+        --caret-color: #f2efbb;
+        --sub-color: #ede5b4;
+        --sub-alt-color: #38502a;
+        --text-color: #f7f1d6;
+    }
+
+    .blue{
+        --bg-color: #1b1d36;
+        --main-color: #fca6d1;
+        --caret-color: #99d6ea;
+        --sub-color: #99d6ea;
+        --sub-alt-color: #17182c;
+        --text-color: #e1e7ec;
+    }
+
+    .pink {
+        --bg-color: #fdf0d5;
+        --main-color: #8e2949;
+        --caret-color: #892948;
+        --sub-color: #d91c81;
+        --sub-alt-color: #f3e2bf;
+        --text-color: #3a3335;
+    }
+
+    .yellow {
+        --bg-color: #323437;
+        --main-color: #e2b714;
+        --caret-color: #e2b714;
+        --sub-color: #9a9da1;
+        --sub-alt-color: #2c2e31;
+        --text-color: #d1d0c5;
+    }
+}
