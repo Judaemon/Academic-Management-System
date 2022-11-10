@@ -38,7 +38,7 @@ class ScheduleSeeder extends Seeder
 
             'student_id' => "10",
             'subject_id' => "1",
-            'teacher_id' => "6",
+            'teacher_id' => "7",
         ]);
     }
 }

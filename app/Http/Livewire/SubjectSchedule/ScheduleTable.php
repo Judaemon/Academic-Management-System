@@ -5,6 +5,7 @@ namespace App\Http\Livewire\SubjectSchedule;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\SubjectSchedule;
+use App\Models\User;
 
 class ScheduleTable extends DataTableComponent
 {
@@ -25,7 +26,7 @@ class ScheduleTable extends DataTableComponent
             Column::make("Day", "day")
                 ->sortable()
                 ->searchable(),
-            Column::make("Teacher", "teacher_id")
+            Column::make("Teacher", "teacher.last_name")
                 ->sortable()
                 ->searchable(),
             Column::make("Actions", "id")->view('livewire.subject-schedule.actions-col'),

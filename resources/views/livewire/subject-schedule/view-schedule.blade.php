@@ -10,7 +10,8 @@
                 </div>
 
                 <div class="col-span-6">
-                    <x-input readonly value="{{ $schedule->teacher_id}}" label="Teacher" />
+                    <x-select label="Teacher" wire:model.defer="schedule.teacher_id" placeholder="Select teacher"
+                    :async-data="route('users.teachers')" option-label="full_name" option-value="id" readonly />
                 </div>
         </div>
 

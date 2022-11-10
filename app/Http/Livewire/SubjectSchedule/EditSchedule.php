@@ -16,11 +16,11 @@ class EditSchedule extends ModalComponent
     protected function rules()
     {
         return [
-            'time' => ['nullable'],
-            'day' => ['nullable'],
-            'teacher_id' => ['nullable'],
-            'subject_id' => ['nullable'],
-            'student_id' => ['nullable'],
+            'schedule.time' => ['nullable'],
+            'schedule.day' => ['nullable'],
+            'schedule.teacher_id' => ['nullable'],
+            'schedule.subject_id' => ['nullable'],
+            'schedule.student_id' => ['nullable'],
         ];
     }
 
