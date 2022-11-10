@@ -7,37 +7,39 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
-class UpdateTheme extends Component
+class UpdateSettingContact extends Component
 {
     use AuthorizesRequests, Actions;
 
-    public $color;
-    public $background;
+    public $email;
+    public $mobile_1;
+    public $mobile_2;
+    public $telephone_1;
 
     protected $rules = [
-        'color' => 'required',
-        'background' => 'required',
-    ];
-
-    protected $messages = [
-        'color.required' => 'The color field is required.',
-        'background.required' => 'The background field is required.',
+        'email' => 'email|required',
+        'mobile_1' => 'required',
+        'mobile_2' => 'required',
+        'telephone_1' => 'required',
     ];
 
     public function mount()
     {
-        $this->color = setting('theme_color');
-        $this->background = setting('theme_background');
+        $this->email = setting('email');
+        $this->mobile_1 = setting('mobile_1');
+        $this->mobile_2 = setting('mobile_2');
+        $this->telephone_1 = setting('telephone_1');
     }
 
     public function render()
     {
-        return view('livewire.setting.update-theme');
+        return view('livewire.setting.update-setting-contact');
     }
 
     public function save(): void
     {
         $this->validate();
+        // dd("qwe");
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -65,8 +67,10 @@ class UpdateTheme extends Component
         Setting::query()
             ->where('id', 1)
             ->update([
-                'theme_color' => $this->color,
-                'theme_background' => $this->background,
+                'email' => $this->email,
+                'mobile_1' => $this->mobile_1,
+                'mobile_2' => $this->mobile_2,
+                'telephone_1' => $this->telephone_1,
             ]);
 
         $this->dialog()->success(

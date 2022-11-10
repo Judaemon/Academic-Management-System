@@ -7,32 +7,33 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
-class UpdateTheme extends Component
+class UpdateSettingSocial extends Component
 {
     use AuthorizesRequests, Actions;
 
-    public $color;
-    public $background;
+    public $website_link;
+    public $facebook_link;
+    public $instagram_link;
+    public $twitter_link;
 
     protected $rules = [
-        'color' => 'required',
-        'background' => 'required',
-    ];
-
-    protected $messages = [
-        'color.required' => 'The color field is required.',
-        'background.required' => 'The background field is required.',
+        'website_link' => ['nullable'],
+        'facebook_link' => ['nullable'],
+        'instagram_link' => ['nullable'],
+        'twitter_link' => ['nullable'],
     ];
 
     public function mount()
     {
-        $this->color = setting('theme_color');
-        $this->background = setting('theme_background');
+        $this->website_link = setting('website_link');
+        $this->facebook_link = setting('facebook_link');
+        $this->instagram_link = setting('instagram_link');
+        $this->twitter_link = setting('twitter_link');
     }
 
     public function render()
     {
-        return view('livewire.setting.update-theme');
+        return view('livewire.setting.update-setting-social');
     }
 
     public function save(): void
@@ -65,8 +66,10 @@ class UpdateTheme extends Component
         Setting::query()
             ->where('id', 1)
             ->update([
-                'theme_color' => $this->color,
-                'theme_background' => $this->background,
+                'website_link' => $this->website_link,
+                'facebook_link' => $this->facebook_link,
+                'instagram_link' => $this->instagram_link,
+                'twitter_link' => $this->twitter_link,
             ]);
 
         $this->dialog()->success(

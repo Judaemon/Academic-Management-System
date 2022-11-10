@@ -6,30 +6,37 @@ use App\Models\AcademicYear;
 use App\Models\Setting;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use WireUi\Traits\Actions;
 
 class UpdateInstituteProfile extends Component
 {
-    use AuthorizesRequests, Actions;
+    use AuthorizesRequests, Actions, WithFileUploads;
 
-    public $color;
-    public $background;
+    public $institute_name;
+    public $institute_acronym;
+    public $logo;
+    public $address;
+    public $academic_year;
+
     public $academic_years;
 
     protected $rules = [
-        'color' => 'required',
-        'background' => 'required',
-    ];
-
-    protected $messages = [
-        'color.required' => 'The color field is required.',
-        'background.required' => 'The background field is required.',
+        'institute_name' => 'required',
+        'institute_acronym' => 'required',
+        'logo' => 'sometimes|nullable|image|max:2048', // 2MB Max
+        'address' => 'required',
+        'academic_year' => 'required',
     ];
 
     public function mount()
     {
-        $this->color = setting('theme_color');
-        $this->background = setting('theme_background');
+        $this->institute_name = setting('institute_name');
+        $this->institute_acronym = setting('institute_acronym');
+        // $this->logo = setting('logo'); // because it will only get the path for the image not the actual image
+        $this->address = setting('address');
+        $this->academic_year = (string) setting('academic_year_id');
+
         $this->academic_years = AcademicYear::orderBy('id', 'desc')->take(5)->get();
     }
 
@@ -40,13 +47,11 @@ class UpdateInstituteProfile extends Component
 
     public function save(): void
     {
-        // $test = ;
-        dd();
         $this->validate();
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => "you're updating system setting?",
+            'description' => "You are changing the institute profile.",
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, save it',
@@ -70,9 +75,21 @@ class UpdateInstituteProfile extends Component
         Setting::query()
             ->where('id', 1)
             ->update([
-                'theme_color' => $this->color,
-                'theme_background' => $this->background,
+                'institute_name' => $this->institute_name,
+                'institute_acronym' => $this->institute_acronym,
+                'address' => $this->address,
+                'academic_year_id' => $this->academic_year,
             ]);
+
+        if (!empty($this->logo)) {
+            $logo_name = $this->logo->store('images/system');
+
+            Setting::query()
+                ->where('id', 1)
+                ->update([
+                    'logo' => $logo_name,
+                ]);
+        }
 
         $this->dialog()->success(
             $title = 'Successful!',

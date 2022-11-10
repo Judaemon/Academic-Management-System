@@ -24,6 +24,8 @@
     <div class="lg:p-4 ">
         @livewire('setting.update-institute-profile')
         @livewire('setting.update-theme')
-        @livewire('settings.update-settings')
+        @livewire('setting.update-feature')
+        @livewire('setting.update-setting-contact')
+        @livewire('setting.update-setting-social')
     </div>
 </x-app-layout>

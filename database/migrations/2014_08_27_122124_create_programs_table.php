@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('isEnabled');
             $table->string('starting_grade_level_id');
 
             $table->timestamps();

@@ -12,16 +12,19 @@ class ProgramSeeder extends Seeder
     {
         Program::create([
             'name' => 'Kinder',
+            'isEnabled' => true,
             'starting_grade_level_id' => 1,
         ]);
 
         Program::create([
             'name' => 'Elementary',
+            'isEnabled' => true,
             'starting_grade_level_id' => 3,
         ]);
 
         Program::create([
             'name' => 'Junior High',
+            'isEnabled' => true,
             'starting_grade_level_id' => 5,
         ]);
     }

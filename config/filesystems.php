@@ -81,5 +81,3 @@ return [
     ],
 
 ];
-
-// storage\app\logo\test.jpg

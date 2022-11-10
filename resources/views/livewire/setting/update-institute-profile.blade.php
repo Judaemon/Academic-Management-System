@@ -12,7 +12,7 @@
                         <label class="text-text block text-sm font-medium mb-1">Institute name</label>
                         <div>
                             <div class="w-full">
-                                <x-input wire:model.defer="setting.institute_name" placeholder="Name of institute" />
+                                <x-input wire:model.defer="institute_name" placeholder="Name of institute" />
                             </div>
 
                         </div>
@@ -21,7 +21,7 @@
                     <div class="mt-3 max-w-xl text-sm mb-4">
                         <label class="text-text block text-sm font-medium mb-1">Institute acronym</label>
                         <div>
-                            <x-input wire:model.defer="setting.institute_acronym" placeholder="Acronym of institute" />
+                            <x-input wire:model.defer="institute_acronym" placeholder="Acronym of institute" />
                         </div>
                     </div>
 
@@ -30,10 +30,17 @@
                         <div>
                             <x-label>
                                 <div>
-                                    <input type="file" wire:model="logo">
+                                    @if ($logo)
+                                        Photo Preview:
+                                        <img src="{{ $logo->temporaryUrl() }}">
+                                    @endif
+
+                                    <div class="w-full mb-2">
+                                        <input type="file" class="text-text" wire:model="logo">
+                                    </div>
 
                                     @error('logo')
-                                        <span class="error">{{ $message }}</span>
+                                        <span class="text-red-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </x-label>
@@ -43,7 +50,7 @@
                     <div class="mt-3 max-w-xl text-sm mb-4">
                         <label class="text-text block text-sm font-medium mb-1">School address</label>
                         <div>
-                            <x-input wire:model.defer="setting.address" placeholder="Address of school" />
+                            <x-input wire:model.defer="address" placeholder="Address of school" />
                         </div>
                     </div>
 
@@ -52,11 +59,8 @@
                         <div>
                             <x-select wire:model.defer="academic_year" placeholder="Select academic year">
                                 @foreach ($academic_years as $academic_year)
-                                    {{ $academic_year->id }}
-                                    {{-- <x-select.option value="{{ $academic_year->id }}" --}}
-                                    {{-- label="{{ $academic_year->start_year->format('Y') }} - {{ $academic_year->end_year }}" /> --}}
-                                    label="{{ date('Y', strtotime($academic_year->start_year)) }} - {{ date('Y', strtotime($academic_year->end_year)) }}"
-                                    />
+                                    <x-select.option value="{{ $academic_year->id }}"
+                                        label="{{ date('Y', strtotime($academic_year->start_date)) }} - {{ date('Y', strtotime($academic_year->end_date)) }}" />
                                 @endforeach
                             </x-select>
                         </div>

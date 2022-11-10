@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Setting;
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class SettingSeeder extends Seeder
 {
@@ -24,10 +24,11 @@ class SettingSeeder extends Seeder
                 'address' => 'Biringan Philippines',
                 'academic_year_id' => '2',
 
-                'profile_editing' => false,
                 'notify_grades' => false,
                 'notify_payments' => false,
-                'notification_type' => "none",
+                'notification_channel' => 'Email',
+                'current_quarter' => "First quarter",
+                'isAbleToUploadGrade' => false,
 
                 'theme_color' => 'color1',
                 'theme_background' => 'light-bg',
