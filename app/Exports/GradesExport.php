@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
-class GradessExport implements FromQuery, WithHeadings, WithMapping
+class GradesExport implements FromQuery, WithHeadings, WithMapping
 {
     use Exportable;
 
