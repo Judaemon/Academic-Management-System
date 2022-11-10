@@ -16,7 +16,7 @@ class ViewPayment extends ModalComponent
 
     public function mount(Payments $payment)
     {
-        $this->authorize('view_payment');
+        $this->authorize('read_payment');
 
         $this->payment = $payment;
     }

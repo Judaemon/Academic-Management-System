@@ -23,10 +23,17 @@ class CreatePayments extends ModalComponent
     public $payment_method;
     public $others;
 
-    public $isNull = true;
-    public $isOthers = false;
+    public $total;
+    public $total_options;
+    public $payment_options;
 
+    public $isNull = true;
+
+    public $grade_level;
     public $school_fees;
+    public $past_total_payments;
+
+    public $value = "default";
 
     protected function rules()
     {
@@ -56,33 +63,46 @@ class CreatePayments extends ModalComponent
             
             if($user != NULL) {
                 $this->isNull = false;
+                $this->grade_level = $user->admit_to_grade_level;
                 $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
+                $this->total = $this->school_fees->sum('amount');
             } else {
                 $this->isNull = true;
-                $this->school_fees = NULL;
+                $this->grade_level = NULL;
+                $this->total = NULL;
+                $this->school_fees = Fee::where('grade_level_id', '=', NULL)->get();
             }
         } else {
             $this->isNull = true;
+            $this->total = NULL;
         }
     }
 
-    public function toggleOthers()
+    public function updatedPaymentOptions()
     {
-        if($this->isOthers === false) {
-            $this->isOthers = true;
+        if($this->payment_options === 'by total') {
+            $this->school_fee = NULL;
+            $this->others = "Grand Total (Php ".$this->total.")";
+        } else if($this->payment_options === 'per fee') {
+            $this->value = "School Fees";
+            $this->others = NULL;
+        } else if($this->payment_options === 'others') {
             $this->school_fee = NULL;
         } else {
-            $this->isOthers = false;
+            $this->school_fee = NULL;
+            $this->others = NULL;
         }
-
     }
 
-    public function resetForm()
+    public function updatedTotalOptions()
     {
-        $this->name = '';
-        $this->amount_paid = '';
-        $this->school_fee = '';
-        $this->others = '';
+        if($this->total_options === 'Full Payment') {
+            $this->school_fee = NULL;
+            $this->others = "Total (Php ".$this->total.")";
+        } else if($this->total_options === 'Partial Payment') {
+            $this->others = "Remaining Total (Php ".$this->total.")";
+            $this->school_fee = NULL;
+        }
     }
 
     public function save(): void

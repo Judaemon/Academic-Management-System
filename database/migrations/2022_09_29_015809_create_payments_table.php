@@ -28,7 +28,10 @@ return new class extends Migration
                   ->onDelete('cascade');
 
             $table->string('others')
-                ->nullable();
+                  ->nullable();
+
+            $table->decimal('remaining_total')
+                  ->default('0.00');
 
             $table->string('payment_method');
 
