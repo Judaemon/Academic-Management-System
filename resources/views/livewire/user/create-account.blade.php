@@ -53,7 +53,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="pwd_id" label="PWD ID" placeholder="XXXX0000" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- physical information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>II. PHYSICAL INFORMATION</strong></h1>
@@ -66,7 +68,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input type="number" wire:model.defer="weight" label="Weight (in kg)" placeholder="70 kg" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- contact information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>III. CONTACT INFORMATION</strong></h1>
@@ -85,7 +89,9 @@
                     <x-input autocomplete="randominput" wire:model.defer="email" label="Email"
                         placeholder="user@email.com" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- government beneficiary -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>IV. GOVERNMENT BENEFICIARY</strong></h1>
@@ -94,7 +100,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="beneficiary" label="Beneficiary" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- emergency contact information -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>V. EMERGENCY CONTACT PERSON</strong></h1>
@@ -119,7 +127,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="emergency_contact_relationship" label="Relationship" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- government id -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>VI. GOVERNMENT ID NO.</strong></h1>
@@ -140,7 +150,9 @@
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="tin" label="TIN" placeholder="" />
                 </div>
+            </div>
 
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <!-- user password -->
                 <div class="sm:col-span-1 md:col-span-12">
                     <h1><strong>PASSWORD</strong></h1>
@@ -149,7 +161,6 @@
                     <x-inputs.password autocomplete="randominput" wire:model.defer="password" label=""
                         placeholder="" />
                 </div>
-
             </div>
 
             <x-slot name="footer">

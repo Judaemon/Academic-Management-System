@@ -11,16 +11,16 @@ class SectionSeeder extends Seeder
     {
         Section::create([
             'name' => 'Red',
-            'capacity' => '15',
-            'teacher_id' => 1,
-            'grade_level_id' => 1,
+            'capacity' => '20',
+            'teacher_id' => '5',
+            'grade_level_id' => 1
         ]);
-
+        
         Section::create([
             'name' => 'Orange',
-            'capacity' => '15',
-            'teacher_id' => 1,
-            'grade_level_id' => 2,
+            'capacity' => '20',
+            'teacher_id' => '5',
+            'grade_level_id' => 1
         ]);
 
         Section::create([

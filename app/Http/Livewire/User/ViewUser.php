@@ -19,7 +19,7 @@ class ViewUser extends ModalComponent
             'user.email' => ['required', 'email', 'unique:users,email, ' . $this->user->id],
             'user.suffix' => ['nullable'],
             'user.birth_date' => ['required'],
-            'user.birthplace' => ['required'],
+            'user.birth_place' => ['required'],
             'user.religion' => ['required'],
             'user.gender' => ['required'],
             'user.mother_tongue' => ['required'],
@@ -48,7 +48,6 @@ class ViewUser extends ModalComponent
             // beneficiary, emergency contact, and parents info
             'user.emergency_contact_name' => ['required'],
             'user.emergency_contact_number' => ['required', 'emergency_contact_number', 'unique:users,emergency_contact_number' . $this->user->id],
-            'user.emergency_contact_occupation' => ['nullable'],
             'user.emergency_contact_address' => ['required'],
             'user.emergency_contact_relationship' => ['required'],
 

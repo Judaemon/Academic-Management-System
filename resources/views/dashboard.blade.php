@@ -1,4 +1,8 @@
 <x-app-layout>
+    @if (empty(Auth::user()->password_changed_at == route('change-password')))
+    @else route('/dashboard')
+    @endif
+
     <div class="mb-4 p-4 flex justify-between">
         <h1 class="text-2xl font-semibold text-main">Dashboard</h1>
 

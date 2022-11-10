@@ -129,37 +129,41 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // $teacher_permissions = [
-        //     'view_grades',
-        //     'create_grade',
-        //     'read_grade',
-        //     'update_grade',
-        //     'delete_grade',
+        $teacher_permissions = [
+            'view_grades',
+            'create_grade',
+            'read_grade',
+            'update_grade',
+            'delete_grade',
 
-        //     'view_sections',
-        //     'read_section',
+            'view_sections',
+            'read_section',
 
-        //     'view_users',
-        //     'read_user',
-        // ];
+            'view_users',
+            'read_user',
 
-        // foreach ($teacher_permissions as $permission) {
-        //     Permission::firstOrCreate(['name' => $permission]);
-        // }
+            'change_password',
+        ];
 
-        // $student_permissions = [
-        //     'view_grades',
-        //     'read_grade',
+        foreach ($teacher_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
 
-        //     'view_sections',
-        //     'read_section',
+        $student_permissions = [
+            'view_grades',
+            'read_grade',
 
-        //     'view_users',
-        //     'read_user',
-        // ];
+            'view_sections',
+            'read_section',
 
-        // foreach ($student_permissions as $permission) {
-        //     Permission::firstOrCreate(['name' => $permission]);
-        // }
+            'view_users',
+            'read_user',
+
+            'change_password',
+        ];
+
+        foreach ($student_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
     }
 }

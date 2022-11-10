@@ -24,7 +24,7 @@ class EditUser extends ModalComponent
             'user.middle_name' => ['nullable'],
             'user.suffix' => ['nullable'],
             'user.birth_date' => ['required'],
-            'user.birthplace' => ['required'],
+            'user.birth_place' => ['required'],
             'user.religion' => ['required'],
             'user.gender' => ['required'],
             'user.mother_tongue' => ['required'],
@@ -55,7 +55,6 @@ class EditUser extends ModalComponent
 
             'user.emergency_contact_name' => ['required'],
             'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
-            'user.emergency_contact_occupation' => ['nullable'],
             'user.emergency_contact_address' => ['required'],
             'user.emergency_contact_relationship' => ['required'],
 

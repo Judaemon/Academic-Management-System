@@ -10,11 +10,11 @@ class GradeLevelSeeder extends Seeder
 {
     public function run()
     {
+        // 2 Grade Levels
         GradeLevel::create([
             'name' => "Kinder 1",
             'program_id' => '1',
         ]);
-
         GradeLevel::create([
             'name' => "Kinder 2",
             'program_id' => '1',
