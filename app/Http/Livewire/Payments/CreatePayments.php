@@ -2,37 +2,39 @@
 
 namespace App\Http\Livewire\Payments;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-use App\Models\User;
+use App\Models\Admission;
 use App\Models\Payments;
+use App\Models\User;
 use App\Models\Fee;
 
 use Auth;
 
-class CreatePayments extends Component
+class CreatePayments extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
     public $name;
     public $amount_paid;
-    public $fee;
+    public $school_fee;
+    public $payment_method;
     public $others;
 
     public $isNull = true;
     public $isOthers = false;
 
-    public $grade_level_fees;
-    public $user_payments;
+    public $school_fees;
 
     protected function rules()
     {
         return [
             'name' => ['required', 'unique:users,id,'.$this->name],
             'amount_paid' => ['required', 'numeric'],
-            'fee' => ['nullable', 'unique:fees,id,'.$this->fee],
+            'school_fee' => ['nullable', 'unique:fees,id,'.$this->school_fee],
+            'payment_method' => ['required'],
             'others' => ['nullable'],
         ];
     }
@@ -50,12 +52,17 @@ class CreatePayments extends Component
     public function updatedName()
     {
         if(!empty($this->name)) {
-            $this->isNull = false;
-            $this->user_payments = Payments::where('user_id', $this->name)->get();
+            $user = Admission::where('student_id', $this->name)->first();
+            
+            if($user != NULL) {
+                $this->isNull = false;
+                $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
+            } else {
+                $this->isNull = true;
+                $this->school_fees = NULL;
+            }
         } else {
             $this->isNull = true;
-            $this->grade_level_fees = NULL;
-            $this->user_payments = NULL;
         }
     }
 
@@ -63,7 +70,7 @@ class CreatePayments extends Component
     {
         if($this->isOthers === false) {
             $this->isOthers = true;
-            $this->fee = NULL;
+            $this->school_fee = NULL;
         } else {
             $this->isOthers = false;
         }
@@ -74,7 +81,7 @@ class CreatePayments extends Component
     {
         $this->name = '';
         $this->amount_paid = '';
-        $this->fee = '';
+        $this->school_fee = '';
         $this->others = '';
     }
 
@@ -103,17 +110,23 @@ class CreatePayments extends Component
             'user_id' => $this->name,
             'accountant_id' => Auth::user()->id,
             'amount_paid' => $this->amount_paid,
-            'fee_id' => $this->fee,
+            'fee_id' => $this->school_fee,
+            'payment_method' => $this->payment_method,
             'others' => $this->others,
         ]);
     
         $this->emit('refreshDatatable');
+
+        $this->closeModal();
             
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Payment has been Recorded.'
         );
+    }
 
-        return redirect()->route('payments.index');
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
     }
 }

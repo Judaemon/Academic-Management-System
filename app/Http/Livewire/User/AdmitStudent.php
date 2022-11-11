@@ -147,7 +147,9 @@ class AdmitStudent extends ModalComponent
 
     public function mount()
     {
-        $this->programs = Program::all();
+        $this->programs = Program::query()
+            ->where('isEnabled', true)
+            ->get();
     }
 
     public function render()
@@ -218,7 +220,7 @@ class AdmitStudent extends ModalComponent
             if ($this->isTransferee) {
                 $this->validate([
                     'kinder_name' => 'required',
-                    'kinder_grad_date' => 'required',
+                    'kinder_grad_date' => 'nullable',
                 ]);
             }
         }
@@ -228,13 +230,13 @@ class AdmitStudent extends ModalComponent
             // if transferee
             $this->validate([
                 'kinder_name' => 'required',
-                'kinder_grad_date' => 'required',
+                'kinder_grad_date' => 'nullable',
             ]);
 
             if ($this->isTransferee) {
                 $this->validate([
                     'elementary_name' => 'required',
-                    'elementary_grad_date' => 'required',
+                    'elementary_grad_date' => 'nullable',
                 ]);
             }
         }
@@ -243,14 +245,14 @@ class AdmitStudent extends ModalComponent
             // required kinder
             $this->validate([
                 'kinder_name' => 'required',
-                'kinder_grad_date' => 'required',
+                'kinder_grad_date' => 'nullable',
             ]);
 
 
             // required elementary
             $this->validate([
                 'elementary_name' => 'required',
-                'elementary_grad_date' => 'required',
+                'elementary_grad_date' => 'nullable',
             ]);
 
             // if transferee

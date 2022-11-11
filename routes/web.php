@@ -6,13 +6,15 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('roles', [\App\Http\Controllers\RolesController::class, 'index'])->name('roles.index');
 
     // user
@@ -20,6 +22,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
+    // announcement
+    Route::get('announcement', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcement.index');
+    Route::get('announcement/send-mail', [\App\Http\Controllers\AnnouncementController::class, 'sendMail'])->name('announcement.mail');
 
     Route::get('change-password', [\App\Http\Controllers\PasswordController::class, 'changePassword'])->name('change-password');
     Route::put('change-password', [\App\Http\Controllers\PasswordController::class, 'updatePassword'])->name('update-password');
@@ -36,8 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
 
     Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
-
-    Route::get('payments/create-payments', \App\Http\Livewire\Payments\CreatePayments::class)->name('payments.create');
 
     // academic
     Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academic_year.index');

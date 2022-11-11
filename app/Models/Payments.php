@@ -14,8 +14,9 @@ class Payments extends Model
         'accountant_id',
         'amount_paid',
         'fee_id',
+        'payment_method',
         // 'payment_status',
-        'others_payment',
+        'others',
     ];
 
     public function user()
@@ -23,7 +24,7 @@ class Payments extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function school_fee()
+    public function fee()
     {
         return $this->belongsTo(Fee::class);
     }

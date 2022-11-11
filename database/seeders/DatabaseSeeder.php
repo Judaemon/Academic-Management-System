@@ -16,10 +16,13 @@ class DatabaseSeeder extends Seeder
             AcademicYearSeeder::class,
             SettingSeeder::class,
 
+            AnnouncementSeeder::class,
+
             ProgramSeeder::class,
             GradeLevelSeeder::class,
-            SubjectSeeder::class,
+
             SectionSeeder::class,
+            SubjectSeeder::class,
             GradeSeeder::class,
 
             ScheduleSeeder::class,

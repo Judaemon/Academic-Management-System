@@ -20,7 +20,7 @@ class UserTable extends DataTableComponent
 
     public function filters(): array
     {
-        $option = Role::query()
+        $option = Role::all()
             ->pluck('name')
             ->toArray();
 

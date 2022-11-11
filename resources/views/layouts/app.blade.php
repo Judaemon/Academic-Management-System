@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html x-data="data" lang="en">
+<html x-data="data" lang="en" class="{{ setting('theme_background') }} {{ setting('theme_color') }}">
 
 <head>
     <meta charset="utf-8">
@@ -44,7 +44,7 @@
         <span class="2xl:max-w-7xl"></span>
     </div>
 
-    <div class="flex h-screen bg-gray-50" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex h-screen bg-bg" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
         <!-- Desktop sidebar -->
         @include('layouts.navigation')
@@ -58,7 +58,7 @@
             <!-- Top Menu(Logout and My profile) -->
             @include('layouts.top-menu')
 
-            <main class="h-full overflow-y-auto">
+            <main class="h-full overflow-y-auto bg-white/10 scrollbar-thin scrollbar-thumb-caret">
                 <div class="container p-4 mx-auto grid">
                     {{ $slot }}
                 </div>
@@ -69,6 +69,15 @@
 
     @livewire('livewire-ui-modal')
     @livewireScripts
+
+    <div>
+        <span
+            class="
+                light-bg dim-bg dark-bg
+                color1 color2 color3 color4 color5 color6
+            ">
+        </span>
+    </div>
 </body>
 
 </html>

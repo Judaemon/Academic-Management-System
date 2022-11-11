@@ -19,5 +19,4 @@ class Fee extends Model
     {
         return $this->belongsTo(GradeLevel::class);
     }
-
 }

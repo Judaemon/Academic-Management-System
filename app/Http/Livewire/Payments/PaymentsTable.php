@@ -10,9 +10,20 @@ class PaymentsTable extends DataTableComponent
 {
     protected $model = Payments::class;
 
+    public array $bulkActions = [
+        'exportSelected' => 'Export',
+    ];
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+    }
+
+    public function exportSelected()
+    {
+        foreach ($this->getSelected() as $item) {
+            // These are strings since they came from an HTML element
+        }
     }
 
     public function columns(): array
@@ -21,22 +32,29 @@ class PaymentsTable extends DataTableComponent
             Column::make("Id")
                 ->sortable(),
 
-            Column::make("Name", "user.first_name")
+            Column::make("First Name", "user.first_name")
+                ->sortable()
+                ->searchable(),
+
+            Column::make("Last Name", "user.last_name")
                 ->sortable()
                 ->searchable(),
 
             Column::make("Amount Paid")
                 ->sortable()
-                ->format(fn ($value) => 'Php ' . number_format($value, 2)),
+                ->format(fn ($value) => 'Php ' . number_format($value, 2))
+                ->collapseOnMobile(),
 
-            Column::make("Payment Type", "fee.fee_name")
-                ->sortable(),
+            Column::make("Payment Date", "created_at")
+                ->sortable()
+                ->format(fn ($value) => date('F j, Y', strtotime($value)))
+                ->collapseOnMobile(),
 
-            Column::make("Others")
-                ->sortable(),
-
-            Column::make("Actions", "id")
-                ->view('livewire.payment.actions-col'),
+            Column::make("Actions")
+                ->label(
+                    fn ($row, Column $column) => view('livewire.payment.actions-col')->withRow($row)
+                )
+                ->collapseOnMobile(),
         ];
     }
 }

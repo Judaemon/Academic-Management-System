@@ -12,63 +12,71 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'Super Admin']);
 
         Role::create(['name' => 'Admin'])
-        ->syncPermissions([
-            'view_users',
-            'create_student',
-            'create_account',
-            'read_user',
-            'update_user',
+            ->syncPermissions([
+                'view_users',
+                'create_student',
+                'create_account',
+                'read_user',
+                'update_user',
 
-            'view_roles',
-            'create_role',
-            'read_role',
-            'update_role',
+                'view_roles',
+                'create_role',
+                'read_role',
+                'update_role',
 
-            'view_setting',
-        ]);
+                'view_announcement',
+                'create_announcement',
+                'update_announcement',
+                'delete_announcement',
+
+                'view_setting',
+            ]);
 
         Role::create(['name' => 'Teacher'])
-        ->syncPermissions([
-            // for viewing students (?)
-            'view_users',
-            'read_user',
+            ->syncPermissions([
+                // for viewing students (?)
+                'view_users',
+                'read_user',
 
-            // can CRUD grades
-            'view_grades',
-            'create_grade',
-            'read_grade',
-            'update_grade',
-            'delete_grade',
+                // can CRUD grades
+                'view_grades',
+                'create_grade',
+                'read_grade',
+                'update_grade',
+                'delete_grade',
 
-            'change_password',
-        ]);
+                'change_password',
+            ]);
 
         Role::create(['name' => 'Accountant'])
-        ->syncPermissions([
-            'create_fee',
-            'update_fee',
-            'delete_fee',
+            ->syncPermissions([
+                'create_fee',
+                'update_fee',
+                'delete_fee',
 
-            'view_payment',
-            'create_payment',
-            'delete_payment',
+                'read_payment',
+                'create_payment',
+                'delete_payment',
 
-            'change_password',
-        ]);;
+                'view_fees',
+                'view_payments',
+
+                'change_password',
+            ]);;
 
         Role::create(['name' => 'Student'])
-        ->syncPermissions([
-            // view or read only
-            'view_users',
-            'read_user',
+            ->syncPermissions([
+                // view or read only
+                'view_users',
+                'read_user',
 
-            'view_grades',
-            'read_grade',
+                'view_grades',
+                'read_grade',
 
-            'view_sections',
-            'read_section',
+                'view_sections',
+                'read_section',
 
-            'change_password',
-        ]);
+                'change_password',
+            ]);
     }
 }

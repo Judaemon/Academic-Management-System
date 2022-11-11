@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Setting;
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class SettingSeeder extends Seeder
 {
@@ -20,18 +20,22 @@ class SettingSeeder extends Seeder
             [
                 'institute_name' => 'International State College of the Philippines',
                 'institute_acronym' => 'ISCP AIMS',
-                'logo' => 'images\system-assets\default\logo\iscp_logo.png',
+                'logo' => 'images\system\iscp_logo.png',
                 'address' => 'Biringan Philippines',
                 'academic_year_id' => '2',
+
+                'notify_grades' => false,
+                'notify_payments' => false,
+                'notification_channel' => 'Email',
+                'current_quarter' => "First quarter",
+                'isAbleToUploadGrade' => false,
+
+                'theme_color' => 'color1',
+                'theme_background' => 'light-bg',
 
                 'email' => 'iscp@gmail.com',
                 'mobile_1' => '0968-227-6795',
                 'mobile_2' => '0917-895-0544',
-
-                'profile_editing' => false,
-                'notify_grades' => false,
-                'notify_payments' => false,
-                'notification_type' => "none",
 
                 'website_link' => 'google.com',
                 'facebook_link' => 'facebook.com',

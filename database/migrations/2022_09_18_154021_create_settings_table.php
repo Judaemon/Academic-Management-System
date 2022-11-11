@@ -17,26 +17,26 @@ return new class extends Migration
             $table->string("address")->default('Sample CAIMS Address');
 
             $table->foreignId('academic_year_id')->constrained('academic_years', 'id')->onDelete('cascade');
-            
+
             // settings
-            $table->boolean("profile_editing")->default(false);
             $table->boolean("notify_grades")->default(false);
             $table->boolean("notify_payments")->default(false);
-            $table->string("notification_type")->default(null); // none | email | sms | both (email and sms)
-            $table->string("current_quarter")->default(1); // 1 | 2 | 3 | 4
-            // mga feature na that can be enabled and disabled
-            // profile editing: bool
-            // notification type: none | email | sms | both (email and sms)
-            // notify grades: bool
-            // notify payments: bool
-            // skins: [presets names] //tailwind class
+            // ['Email', 'SMS', 'Email and SMS']
+            $table->string("notification_channel")->default('email');
+            // ['First quarter', 'Second quarter', 'Third quarter', 'Fourth quarter']
+            $table->string("current_quarter")->default('First quarter');
+            $table->boolean("isAbleToUploadGrade")->default(false);
+
+            // theme
+            $table->string("theme_color");
+            $table->string("theme_background");
 
             // contacts
             $table->string("email")->default('caims@gmail.com');
             $table->string("mobile_1")->default('0968-227-6795');
             $table->string("mobile_2")->default('0917-895-0544');
             $table->string("telephone_1")->default('(074) 620 0585');
-            
+
             // social links
             $table->string("website_link")->default('google.com');
             $table->string("facebook_link")->default('google.com');
