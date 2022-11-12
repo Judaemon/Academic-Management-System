@@ -35,7 +35,7 @@
                                         <tr>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                 md label="{{ $grade->student_id }}"/></td>
-                                                <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->subject_id }}"/></td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                 md label="{{ $grade->first_quarter }}"/></td>

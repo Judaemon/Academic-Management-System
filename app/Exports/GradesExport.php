@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
-class GradessExport implements FromQuery, WithHeadings, WithMapping
+class GradesExport implements FromQuery, WithHeadings, WithMapping
 {
     use Exportable;
 
@@ -23,6 +23,7 @@ class GradessExport implements FromQuery, WithHeadings, WithMapping
     {
         return [
             'Student',
+            'Subject',
             'First Quarter',
             'Second Quarter',
             'Third Quarter',
@@ -34,7 +35,9 @@ class GradessExport implements FromQuery, WithHeadings, WithMapping
     public function map($grade): array
     {
         return [
-            $grade->user->last_name,
+            //$grade->user->last_name,
+            $grade->student_id,
+            $grade->subject_id,
             $grade->first_quarter,
             $grade->second_quarter,
             $grade->third_quarter,
@@ -46,6 +49,7 @@ class GradessExport implements FromQuery, WithHeadings, WithMapping
     public function fields(): array
     {
         return [
+            'student_id',
             'subject_id',
             'first_quarter',
             'second_quarter',
