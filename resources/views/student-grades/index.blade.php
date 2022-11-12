@@ -1,11 +1,12 @@
 <x-app-layout>
     <div class="p-4 flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-gray-700">Grades</h2>
+        <h1 class="text-2xl font-semibold text-main">Grades</h1>
 
         <div>
             @can('create_grade')
                 {{-- dapat dito is export grades, working on it as of now --}}
-                <x-button primary label="DOWNLOAD GRADES" onclick="livewire.emit('openModal', 'student-grades.student-create-grade')" />
+                <x-button primary label="DOWNLOAD GRADES"
+                    onclick="livewire.emit('openModal', 'student-grades.student-create-grade')" />
             @endcan
         </div>
     </div>
