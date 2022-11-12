@@ -8,7 +8,7 @@
             @endcan
 
             @can('create_account')
-                <x-button primary onclick="Livewire.emit('openModal', 'user.create-account')" label="CREATE NEW ACCOUNT" />
+                <x-button primary onclick="Livewire.emit('openModal', 'user.create-account')" label="CREATE NEW EMPLOYEE" />
             @endcan
         </div>
     </div>
