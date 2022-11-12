@@ -1,16 +1,57 @@
 <x-app-layout>
-    <div class="p-4 flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-gray-700">Grades</h2>
+    <div class="container p-2 bg-white rounded-lg shadow-md mb-2">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="overflow-hidden w-full py-2 px-4">
+                        <div class="card-header overflow-hidden flex justify-between w-full font-semibold text-2xl text-gray-800 leading-tight py-2">
+                            {{ __('Grades') }}
+                        </div>
 
-        <div>
-            @can('create_grade')
-                {{-- dapat dito is export grades, working on it as of now --}}
-                <x-button primary label="DOWNLOAD GRADES" onclick="livewire.emit('openModal', 'student-grades.student-create-grade')" />
-            @endcan
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                            <div class="mb-4 flex justify-between">
+                                    @livewire('student-grades.export')
+                            </div>
+        
+                            <table class="table mb-6 pt-4 w-full">
+                                <thead>
+                                    <tr>
+                                        <th><x-badge class="w-full mb-2" dark md label="Subject"/></th>
+                                        <th><x-badge class="w-full mb-2" dark md label="First Quarter"/></th>
+                                        <th><x-badge class="w-full mb-2" dark md label="Second Quarter"/></th>
+                                        <th><x-badge class="w-full mb-2" dark md label="Third Quarter"/></th>
+                                        <th><x-badge class="w-full mb-2" dark md label="Fourth Quarter"/></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mb-6 pt-4 w-full">
+                                    @foreach ($grades as $grade)
+                                        <tr>
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    md label="{{ $grade->subject_id }}"/></td>
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                md label="{{ $grade->first_quarter }}"/></td>
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                md label="{{ $grade->second_quarter }}"/></td>
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                md label="{{ $grade->third_quarter }}"/></td>
+                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                md label="{{ $grade->fourth_quarter }}"/></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                            {{ $grades->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="datatable-container bg-white p-4 rounded-lg border shadow-xs overflow-hidden">
-        @livewire('student-grades.student-grade-table')
     </div>
 </x-app-layout>
