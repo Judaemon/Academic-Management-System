@@ -73,13 +73,11 @@ return new class extends Migration
             $table->string('tin')->unique()->nullable();
 
             // For admission
-            // If there is no data on the admission table, that means a transferee or a new student.
-            // If theres no record on the admission table this will be displayed
-            $table->string('grade_level')->nullable();
-            $table->string('latest_average_grade')->nullable();
-            $table->string('status')->nullable();
+            // $table->string('grade_level')->nullable();
+            // $table->string('latest_average_grade')->nullable();
+            // $table->string('status')->nullable();
 
-            $table->string('grade_level_id')->nullable();
+            // $table->string('grade_level_id')->nullable();
 
             // this means the user is enrolled on the current academic year
             $table->boolean('currently_enrolled')->nullable();

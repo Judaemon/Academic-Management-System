@@ -312,6 +312,11 @@
                                 *default password = "complete first name"."first letter of last name"
                             </p>
                         </div>
+
+                        <div class="col-span-12 md:col-span-4">
+                            <x-select label="Role" wire:model="user_roles" placeholder="Select role" readonly
+                                :async-data="route('roles.roles')" option-label="name" option-value="id" multiselect />
+                        </div>
                     </div>
                 </section>
             </div>

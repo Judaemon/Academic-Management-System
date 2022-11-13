@@ -30,6 +30,7 @@ return new class extends Migration
             // theme
             $table->string("theme_color");
             $table->string("theme_background");
+            $table->string("custom_theme_color");
 
             // contacts
             $table->string("email")->default('caims@gmail.com');
