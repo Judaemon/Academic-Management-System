@@ -47,14 +47,18 @@
                                     @foreach ($grades as $grade)
                                         <tr>
                                             <td>
+                                                @if ($grade->student_id)
                                                 <x-badge
                                                     class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                    md label="{{ $grade->student_id }}" />
+                                                    md label="{{ $grade->student->last_name }}" />
+                                                @endif
                                             </td>
                                             <td>
+                                                @if ($grade->subject_id)
                                                 <x-badge
                                                     class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                    md label="{{ $grade->subject_id }}" />
+                                                    md label="{{ $grade->subject->name }}" />
+                                                @endif
                                             </td>
                                             <td>
                                                 <x-badge

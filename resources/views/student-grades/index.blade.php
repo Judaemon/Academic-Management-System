@@ -32,8 +32,11 @@
                                 <tbody class="mb-6 pt-4 w-full">
                                     @foreach ($grades as $grade)
                                         <tr>
-                                            <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                    md label="{{ $grade->subject_id }}"/></td>
+                                            <td>
+                                                @if ($grade->subject_id)
+                                                <x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    md label="{{ $grade->subject->name }}"/></td>
+                                                @endif
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                 md label="{{ $grade->first_quarter }}"/></td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"

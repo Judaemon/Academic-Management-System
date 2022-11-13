@@ -26,8 +26,8 @@ class GradesImport implements ToModel, WithHeadingRow, WithChunkReading
     public function model(array $row)
     {
         return new Grade([
-            // 'student_id' => $this->users[$row['student']],
-            // 'subject_id' => $this->subjects[$row['subject']],
+            'student_id' => $this->users[$row['student']],
+            'subject_id' => $this->subjects[$row['subject']],
             'first_quarter' => $row['first_quarter'],
             'second_quarter' => $row['second_quarter'],
             'third_quarter' => $row['third_quarter'],
