@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-semibold text-main">Grade Level</h1>
+        <h2 class="text-2xl font-semibold text-text">Grade Level</h2>
 
         <div>
             @can('create_grade_level')

@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 flex justify-between">
-        <h1 class="text-2xl font-semibold text-main">Roles and Permissions</h1>
+        <h1 class="text-2xl font-semibold text-text">Roles and Permissions</h1>
 
         <div class="flex justify-end gap-x-2">
             @can('assign_role')

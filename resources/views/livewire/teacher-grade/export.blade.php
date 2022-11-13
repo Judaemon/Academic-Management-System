@@ -7,6 +7,6 @@
     @endif
 
     @if($exportFinished)
-        Done. Download file<x-button class="text-blue-500" flat label="here" wire:click="downloadExport" />
+        Done. Download file <a class="stretched-link" wire:click="downloadExport">here</a>
     @endif
 </div>

@@ -64,7 +64,7 @@ class StudentDeleteGrade extends ModalComponent
     
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'Grade deleted successfully.'
+                $description = 'grade deleted successfully.'
             );
         }
     }

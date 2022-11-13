@@ -17,7 +17,7 @@ class FeeSeeder extends Seeder
     {
         Fee::create([
             'fee_name' => 'Tuition',
-            'amount' => '19631.18',
+            'amount' => '19631.00',
             'grade_level_id' => '1',
         ]);
 
@@ -66,6 +66,12 @@ class FeeSeeder extends Seeder
         Fee::create([
             'fee_name' => 'School Uniform',
             'amount' => '5000.00',
+            'grade_level_id' => NULL,
+        ]);
+
+        Fee::create([
+            'fee_name' => 'School ID',
+            'amount' => '100.00',
             'grade_level_id' => NULL,
         ]);
     }
