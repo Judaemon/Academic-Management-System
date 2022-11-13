@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <x-card title="Admit Student">
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-12 gap-4">
@@ -188,17 +188,17 @@
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 md:col-span-6 lg:col-span-3">
                             <x-input wire:model.defer="mobile_number" label="Mobile number"
-                                placeholder="Your mobile number" />
+                                placeholder="Mobile number of student" />
                         </div>
 
                         <div class="col-span-12 md:col-span-6 lg:col-span-3">
-                            <x-input wire:model.defer="email" label="Email" placeholder="Your email" />
+                            <x-input wire:model.defer="email" label="Email" placeholder="Email of student" />
                         </div>
 
                         <div class="col-span-12 lg:col-span-6">
                             <x-input wire:model.defer="address"
                                 label="Address (Unit, Street, Barangay, City/Municipality)"
-                                placeholder="Your address" />
+                                placeholder="Address of student" />
                         </div>
                     </div>
                 </section>

@@ -9,18 +9,25 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\Announcement;
+
 class AnnouncementMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $user;
+
+    public $announcement;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $announcement)
     {
-        //
+        $this->user = $user;
+        $this->announcement = $announcement;
     }
 
     /**
@@ -31,7 +38,7 @@ class AnnouncementMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Announcement Mail',
+            subject: $this->announcement->title,
         );
     }
 
@@ -54,6 +61,11 @@ class AnnouncementMail extends Mailable
      */
     public function attachments()
     {
-        return [];
+        if(!empty($this->announcement->main_image)) {
+            return "HELLO";
+        } else {
+            return [];
+        }
+    
     }
 }

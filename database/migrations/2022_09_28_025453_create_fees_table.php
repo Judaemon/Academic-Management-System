@@ -13,8 +13,8 @@ return new class extends Migration
             
             $table->string('fee_name');
 
-            $table->decimal('amount')
-                  ->default('0.00');
+            $table->decimal('amount', 10, 2)
+                  ->default('0');
 
             $table->foreignId('grade_level_id')
                   ->nullable()

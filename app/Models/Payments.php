@@ -13,19 +13,24 @@ class Payments extends Model
         'user_id',
         'accountant_id',
         'amount_paid',
-        'fee_id',
         'payment_method',
-        // 'payment_status',
+        'fee_id',
+        'balance',
         'others',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function fee()
     {
-        return $this->belongsTo(Fee::class);
+        return $this->belongsTo(Fee::class, 'fee_id', 'id');
+    }
+
+    public function accountant()
+    {
+        return $this->belongsTo(User::class, 'accountant_id', 'id');
     }
 }

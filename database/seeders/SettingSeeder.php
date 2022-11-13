@@ -32,6 +32,7 @@ class SettingSeeder extends Seeder
 
                 'theme_color' => 'color1',
                 'theme_background' => 'light-bg',
+                'custom_theme_color' => '7c3aed',
 
                 'email' => 'iscp@gmail.com',
                 'mobile_1' => '0968-227-6795',

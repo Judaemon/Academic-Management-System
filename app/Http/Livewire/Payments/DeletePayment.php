@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Payments;
 
+use Auth;
+
 class DeletePayment extends ModalComponent
 {
     use AuthorizesRequests, Actions;
@@ -28,20 +30,29 @@ class DeletePayment extends ModalComponent
 
     public function deleteDialog()
     {
-        $this->dialog()->confirm([
-            'title'       => 'Are you Sure?',
-            'description' => "This record will be Permanently Deleted",
-            'icon'        => 'warning',
-            'accept'      => [
-                'label'  => 'Yes, delete it',
-                'method' => 'submit',
-                'params' => 'Deleted',
-            ],
-            'reject' => [
-                'label'  => 'No, cancel',
-                'method' => 'closeModal',
-            ],
-        ]);
+        if(Auth::user()->id != $this->payment->accountant_id) {
+            $this->dialog()->error(
+                $title = 'Access Denied',
+                $description = "Current user does not have the permission to delete the record",
+            );
+
+            $this->closeModal();
+        } else {
+            $this->dialog()->confirm([
+                'title'       => 'Are you Sure?',
+                'description' => "This record will be Permanently Deleted",
+                'icon'        => 'warning',
+                'accept'      => [
+                    'label'  => 'Yes, delete it',
+                    'method' => 'submit',
+                    'params' => 'Deleted',
+                ],
+                'reject' => [
+                    'label'  => 'No, cancel',
+                    'method' => 'closeModal',
+                ],
+            ]);
+        }
     }
 
     public function submit()

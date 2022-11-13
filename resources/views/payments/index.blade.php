@@ -1,8 +1,7 @@
 <x-app-layout>
     <div class="p-4 block md:flex justify-between">
-        <h2 class="text-2xl font-semibold text-text w-full md:w-auto flex justify-center mb-4 md:mb-0">
-            Payments
-        </h2>
+        <h1 class="text-2xl font-semibold text-main">Payments</h1>
+
         <x-button icon="plus-circle" primary class="uppercase w-full md:w-auto" label="Add Payment Record"
             onclick="Livewire.emit('openModal', 'payments.create-payments')" />
     </div>

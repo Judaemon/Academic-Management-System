@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-text">Sections</h2>
+        <h2 class="text-2xl font-semibold text-main">Sections</h2>
 
         <div>
             @can('create_section')

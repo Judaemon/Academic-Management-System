@@ -1,279 +1,332 @@
-<div wire:ignore.self class="form-container">
+<div class="container">
     <x-card title="View User">
         <form wire:submit.prevent="save">
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- personal information -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>I. PERSONAL INFORMATION</strong></h1>
-                </div>
+            <div class="grid grid-cols-12 gap-4">
+                <!-- Personal and Physical Information -->
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Personal and Physical Information" />
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->first_name }}" label="First Name" placeholder="Juan" />
-                </div>
+                    <div class="grid grid-cols-12 gap-2 lg:gap-4">
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.first_name" label="First name" readonly
+                                placeholder="First name of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->last_name }}" label="Last Name" placeholder="Dela Cruz" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.middle_name" label="Middle name" readonly
+                                placeholder="Middle name of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->middle_name }}" label="Middle Name" placeholder="Cardo" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.last_name" label="Last name" readonly
+                                placeholder="Last name of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->suffix }}" label="Suffix" placeholder="Mr." />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.suffix" label="Suffix (if applicable)" readonly
+                                placeholder="Suffix of student(Jr./III/IV)" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->birth_date }}" label="Birth Date" placeholder="" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input type="date" wire:model.defer="user.birth_date" label="Birth date" readonly
+                                placeholder="Birth date of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->birth_place }}" label="Birth Place" placeholder="Baguio" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.birth_place" label="Birth place" readonly
+                                placeholder="Birth place of student" />
+                        </div>
 
-                <!-- drop down sana ng mga religions -->
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->religion }}" label="Religion" placeholder="Catholic" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.nationality" label="Nationality" readonly
+                                placeholder="Nationality of student" />
+                        </div>
 
-                <!-- drop down din sana pero di ko pa gets -->
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->gender }}" label="Gender" placeholder="Male/Female" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-select label="Gender" wire:model.defer="user.gender" readonly
+                                placeholder="Select gender of student">
+                                <x-select.option label="Male" value="Male" />
+                                <x-select.option label="Female" value="Female" />
+                            </x-select>
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mother_tongue }}" label="Mother Tongue" placeholder="English" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.religion" label="Religion (if applicable)" readonly
+                                placeholder="Religion of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->nationality }}" label="Nationality" placeholder="Filipino" />
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.mother_tongue" label="Mother tongue" readonly
+                                placeholder="Mother tongue of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->pwd_id }}" label="PWD ID" placeholder="XXXX0000" />
-                </div>
-            </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input type="number" wire:model.defer="user.weight"
+                                label="Weight (in cm) (if applicable)" readonly placeholder="Weight of student" />
+                        </div>
 
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- physical information -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>II. PHYSICAL INFORMATION</strong></h1>
-                </div>
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input type="number" wire:model.defer="user.height"
+                                label="Height (in kg) (if applicable)" readonly placeholder="Height of student" />
+                        </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->height }}" label="Height (in cm)" placeholder="165 cm" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->weight }}" label="Weight (in kg)" placeholder="70 kg" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- contact information -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>III. CONTACT INFORMATION</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mobile_number }}" label="Contact Number"
-                        placeholder="09*********" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->address }}" label="Address"
-                        placeholder="Unit, Street, Barangay, City/Municipality" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input autocomplete="randominput" readonly value="{{ $user->email }}" label="Email"
-                        placeholder="sample@email.com" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- educational background -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>IV. EDUCATIONAL BACKGROUND</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->school_kinder }}" label="Kinder" placeholder="School Name" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->school_kindergrad }}" label="Year Graduated (Kinder)"
-                        placeholder="Year" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->elementary_name }}" label="Elementary"
-                        placeholder="School Name" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->elementary_grad_date }}" label="Year Graduated (Elementary)"
-                        placeholder="Year" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->school_juniorhigh }}" label="Junior High School"
-                        placeholder="School Name" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- academic information -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>V. ACADEMIC INFORMATION</strong></h1>
-                </div>
-
-                <div class="col-span-6">
-                    <x-input readonly value="{{ $user->lrn }}" label="Learner's Reference Number" placeholder="" />
-                </div>
-
-                <div class="col-span-6">
-                    <x-input readonly value="{{ $user->esc }}" label="Education Service Contracting (ESC) No."
-                        placeholder="" />
-                </div>
-
-                <div class="col-span-6">
-                    <x-input readonly value="{{ $user->qvr }}" label="Qualified Vouchers Recipients (QVR)"
-                        placeholder="" />
-                </div>
-
-                <div class="col-span-6">
-                    <x-input readonly value="{{ $user->public_id }}" label="Public" placeholder="" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- government beneficiary -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>VI. GOVERNMENT BENEFICIARY</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->beneficiary }}" label="Beneficiary" placeholder="" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- emergency contact information -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>VII. EMERGENCY CONTACT PERSON</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->emergency_contact_name }}" label="Full Name"
-                        placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->emergency_contact_number }}" label="Contact Number"
-                        placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->emergency_contact_address }}" label="Address"
-                        placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->emergency_contact_relationship }}" label="Relationship"
-                        placeholder="" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- parents information -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>VIII. PARENTS INFORMATION</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-12">
-                    <x-card>Mother's Information:</x-card>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mparent_name }}" label="Full Name" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mparent_number }}" label="Contact Number" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mparent_occupation }}" label="Occupation" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->mparent_address }}" label="Address" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-12">
-                    <x-card>Father's Information:</x-card>
-                </div>
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->fparent_name }}" label="Full Name" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->fparent_number }}" label="Contact Number" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->fparent_occupation }}" label="Occupation" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->fparent_address }}" label="Address" placeholder="" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- government id -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>IX. GOVERNMENT ID NO.</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->pag_ibig }}" label="Pag-IBIG" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->philhealth }}" label="PhilHealth" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->sss }}" label="SSS" placeholder="" />
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input readonly value="{{ $user->tin }}" label="TIN" placeholder="" />
-                </div>
-            </div>
-
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
-                <!-- user password -->
-                <div class="sm:col-span-1 md:col-span-12">
-                    <h1><strong>PASSWORD</strong></h1>
-                </div>
-
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-inputs.password autocomplete="randominput" readonly value="{{ $user->password }}"
-                        label="Password" placeholder="" />
-                </div>
-            </div>
-
-                <x-slot name="footer">
-                    <div class="flex justify-end gap-x-4">
-                        <x-button primary icon="x" label="Close" wire:click="closeModal" />
-
+                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <x-input wire:model.defer="user.pwd_id" label="PWD ID (if applicable)" readonly
+                                placeholder="PWD ID of student" />
+                        </div>
                     </div>
-                </x-slot>
+                </section>
 
+                <!-- Educational Background -->
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Educational Background" />
+
+                    {{-- Kindergarten --}}
+                    <div class="grid grid-cols-12 gap-2 mb-2">
+                        <div class="col-span-12">
+                            <x-badge secondary label="Kindergarten" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.kinder_name" label="Name of school" readonly
+                                placeholder="The student's kindergarten school's name" />
+                        </div>
+
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.kinder_grad_date" label="Year graduated" readonly
+                                placeholder="Year the student completed kindergarten" />
+                        </div>
+                    </div>
+
+                    {{-- Elementary --}}
+                    <div class="grid grid-cols-12 gap-2 mb-2">
+                        <div class="col-span-12">
+                            <x-badge class="" secondary label="Elementary" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.elementary_name" label="Name of school" readonly
+                                placeholder="The user's elementary school's name" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.elementary_grad_date" label="Year graduated" readonly
+                                placeholder="Year the user completed elementary" />
+                        </div>
+                    </div>
+
+                    {{-- Junior High --}}
+                    <div class="grid grid-cols-12 gap-2">
+                        <div class="col-span-12">
+                            <x-badge class="flex px-2" secondary label="Junior High" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.junior_high_name" label="Name of school" readonly
+                                placeholder="The user's junior high school's name" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.elementary_grad_date" label="Year graduated" readonly
+                                placeholder="Year the user completed junior high" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Academic Information -->
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Academic Information" />
+
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.lrn"
+                                label="Learner reference number (LRN) (if applicable)" readonly
+                                placeholder="Learner reference number of user" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.esc" label="Education service contracting (ESC) number"
+                                readonly placeholder="Education service contracting number of user" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                            <x-input wire:model.defer="user.qvr" label="Qualified vouchers recipients (QVR)" readonly
+                                placeholder="Qualified vouchers recipients of user" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Information -->
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Contact Information" />
+
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                            <x-input wire:model.defer="user.mobile_number" label="Mobile number" readonly
+                                placeholder="Mobile number of user" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                            <x-input wire:model.defer="user.email" label="Email" readonly
+                                placeholder="Email of user" />
+                        </div>
+
+                        <div class="col-span-12 lg:col-span-6">
+                            <x-input wire:model.defer="user.address"
+                                label="Address (Unit, Street, Barangay, City/Municipality)" readonly
+                                placeholder="Address of user" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Parents Information -->
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Parents Information" />
+
+                    <!-- Mother -->
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12">
+                            <x-badge pink label="Mothers' Information" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.mother_name" label="Full name" readonly
+                                placeholder="Full name of user's mother" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.mother_number" label="Contact number" readonly
+                                placeholder="Contact number of user's father" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.mother_email" label="Email" readonly
+                                placeholder="Email of user's mother" />
+                        </div>
+
+                        <div class="col-span-12 lg:col-span-6">
+                            <x-input wire:model.defer="user.mother_address"
+                                label="Address (Unit, Street, Barangay, City/Municipality)" readonly
+                                placeholder="Address of user's father" />
+                        </div>
+                    </div>
+
+                    <!-- Father -->
+                    <div class="grid grid-cols-12 gap-4 mt-4">
+                        <div class="col-span-12">
+                            <x-badge blue label="Fathers' Information" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.father_name" label="Full name" readonly
+                                placeholder="Full name of user's father" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.father_number" label="Contact number" readonly
+                                placeholder="Contact number of user's father" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="father_email" label="Email" readonly
+                                placeholder="Email of student's father" />
+                        </div>
+
+                        <div class="col-span-12 lg:col-span-6">
+                            <x-input wire:model.defer="user.father_address"
+                                label="Address (Unit, Street, Barangay, City/Municipality)" readonly
+                                placeholder="Address of student's father" />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Emergency Contact Information -->
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Emergency Contact Information" />
+
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.emergency_contact_name" label="Full name" readonly
+                                placeholder="Full name of emergency contact person" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.emergency_contact_relationship" label="Relationship"
+                                readonly placeholder="Relationship of emergency contact person to student" />
+                        </div>
+
+                        <div class="col-span-12 md:col-span-6">
+                            <x-input wire:model.defer="user.emergency_contact_number" label="Contact number" readonly
+                                placeholder="Contact number of emergency contact person" />
+                        </div>
+
+                        <div class="col-span-12 lg:col-span-6">
+                            <x-input wire:model.defer="user.emergency_contact_address"
+                                label="Address (Unit, Street, Barangay, City/Municipality)" readonly
+                                placeholder="Address of emergency contact person" />
+                        </div>
+                    </div>
+                </section>
+
+                @unlessrole('Student')
+                    {{-- Government IDs --}}
+                    <section class="container col-span-12">
+                        <x-badge class="w-full mb-2" dark md label="Government IDs" />
+
+                        <div class="grid grid-cols-12 gap-4">
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="user.pag_ibig" label="Pag-IBIG" readonly
+                                    placeholder="Pag-IBIG ID number" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="user.philhealth" label="PhilHealth" readonly
+                                    placeholder="PhilHealth ID number" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="user.sss" label="SSS" readonly
+                                    placeholder="SSS ID number" />
+                            </div>
+
+                            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                <x-input wire:model.defer="user.tin" label="TIN" readonly
+                                    placeholder="TIN ID number" />
+                            </div>
+
+                        </div>
+                    </section>
+                @endhasrole
+
+                {{-- Account Information --}}
+                <section class="container col-span-12">
+                    <x-badge class="w-full mb-2" dark md label="Employee Account Information" />
+
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-8">
+                            <x-input wire:model.defer="user.password" label="Password" readonly
+                                placeholder="employee's password" />
+                            <p>*if empty will use default password</p>
+                            <p>
+                                *default password = "complete first name"."first letter of last name"
+                            </p>
+                        </div>
+
+                        <div class="col-span-12 md:col-span-4">
+                            <x-select label="Role" wire:model="user_roles" placeholder="Select role" readonly
+                                :async-data="route('roles.roles')" option-label="name" option-value="id" multiselect />
+                        </div>
+                    </div>
+                </section>
             </div>
+
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <span></span>
+                    <x-button wire:click="close" type="button" primary label="Close" />
+                </div>
+            </x-slot>
         </form>
     </x-card>
 </div>

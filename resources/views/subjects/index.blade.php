@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="p-4 flex justify-between">
-        <h2 class="text-2xl font-semibold text-text">Subjects</h2>
-        {{-- @livewire('subject.create-subject') --}}
+        <h2 class="text-2xl font-semibold text-main">Subjects</h2>
+
         <x-button primary onclick="Livewire.emit('openModal', 'subject.create-subject')" label="CREATE SUBJECT " />
     </div>
 

@@ -11,6 +11,7 @@ class Program extends Model
 
     protected $fillable = [
         'name',
+        'isEnabled',
         'starting_grade_level_id',
     ];
 

@@ -60,5 +60,5 @@ Route::middleware('auth')->group(function () {
     Route::get('subject-schedules', [\App\Http\Controllers\SubjectScheduleController::class, 'index'])->name('subject_schedules.index');
 
     // idk ¯\_(ツ)_/¯
-    Route::view('about', 'about')->name('about');
+    Route::view('system-guide', 'system-guide')->name('system-guide');
 });

@@ -66,30 +66,27 @@ return new class extends Migration
             $table->string('emergency_contact_number')->unique();
             $table->string('emergency_contact_address');
 
-            // account
-            $table->string('password');
-
             // For non student accounts
             $table->string('pag_ibig')->unique()->nullable();
             $table->string('philhealth')->unique()->nullable();
             $table->string('sss')->unique()->nullable();
             $table->string('tin')->unique()->nullable();
 
-            $table->timestamp('email_verified_at')->nullable();
-
-            $table->string('password_changed_at')->nullable();
-
             // For admission
-            // If there is no data on the admission table, that means a transferee or a new student.
-            // If theres no record on the admission table this will be displayed
-            $table->string('grade_level')->nullable();
-            $table->string('latest_average_grade')->nullable();
-            $table->string('status')->nullable();
+            // $table->string('grade_level')->nullable();
+            // $table->string('latest_average_grade')->nullable();
+            // $table->string('status')->nullable();
 
-            $table->string('grade_level_id')->nullable();
+            // $table->string('grade_level_id')->nullable();
 
             // this means the user is enrolled on the current academic year
             $table->boolean('currently_enrolled')->nullable();
+
+            // account
+            $table->string('password');
+
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password_changed_at')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
