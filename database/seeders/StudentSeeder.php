@@ -13,6 +13,7 @@ class StudentSeeder extends Seeder
     // 20 Students
     // 3 Student per grade level
     // 2 student pending for admission
+
     public function run()
     {
         User::create([
@@ -548,6 +549,64 @@ class StudentSeeder extends Seeder
             'emergency_contact_relationship' => 'Uncle',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password' => Hash::make('student17'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Student');
+
+        User::create([
+            'first_name' => 'ff',
+            'middle_name' => 'mm',
+            'last_name' => 'll',
+
+            'birth_date' => '2004-10-30',
+            'birth_place' => 'Baguio City',
+            'religion' => 'None',
+            'gender' => 'Male',
+            'mother_tongue' => 'English',
+            'nationality' => 'Filipino',
+
+            'height' => '168.4',
+            'weight' => '70.4',
+
+            'mobile_number' => '09554863422',
+            'email' => 'ffmm@s.caims.edu',
+            'address' => 'Suello, Baguio City',
+            'emergency_contact_name' => 'John Doe',
+            'emergency_contact_number' => '09770900909',
+            'emergency_contact_address' => 'Trancoville',
+            'emergency_contact_relationship' => 'Uncle',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student19'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Student');
+
+        User::create([
+            'first_name' => 'f',
+            'middle_name' => 'm',
+            'last_name' => 'l',
+
+            'birth_date' => '2004-10-30',
+            'birth_place' => 'Baguio City',
+            'religion' => 'None',
+            'gender' => 'Male',
+            'mother_tongue' => 'English',
+            'nationality' => 'Filipino',
+
+            'height' => '168.4',
+            'weight' => '70.4',
+
+            'mobile_number' => '09554863425',
+            'email' => 'fm@s.caims.edu',
+            'address' => 'Suello, Baguio City',
+            'emergency_contact_name' => 'John Doe',
+            'emergency_contact_number' => '097709009081',
+            'emergency_contact_address' => 'Trancoville',
+            'emergency_contact_relationship' => 'Uncle',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('student20'),
             'remember_token' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
