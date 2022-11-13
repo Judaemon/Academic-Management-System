@@ -41,6 +41,8 @@ class RoleSeeder extends Seeder
 
                 // can CRUD grades
                 'view_grades',
+                'assign_grades',
+                
                 'create_grade',
                 'read_grade',
                 'update_grade',

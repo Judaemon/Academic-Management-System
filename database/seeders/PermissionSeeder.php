@@ -131,6 +131,7 @@ class PermissionSeeder extends Seeder
 
         $teacher_permissions = [
             'view_grades',
+            'assign_grades',
             'create_grade',
             'read_grade',
             'update_grade',
