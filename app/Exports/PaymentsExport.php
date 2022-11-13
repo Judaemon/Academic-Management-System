@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Payments;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -12,6 +13,8 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 class PaymentsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths
 {
+    use Exportable;
+
     public $payments;
 
     public function __construct($payments) {
@@ -24,7 +27,7 @@ class PaymentsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wi
 
     public function headings():array{
         return[
-            'ID',
+            '#',
             'USER ID',
             'AMOUNT PAID',
             'METHOD OF PAYMENT',

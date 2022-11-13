@@ -22,7 +22,7 @@ class PaymentsTable extends DataTableComponent
     public array $bulkActions = [
         'exportXLSX' => 'Export as XLSX',
         'exportCSV' => 'Export as CSV',
-        // 'exportPDF' => 'Export as PDF',
+        'exportPDF' => 'Export as PDF',
     ];
 
     public function configure(): void
@@ -60,19 +60,19 @@ class PaymentsTable extends DataTableComponent
         }
     }
 
-    // public function exportPDF()
-    // {   $payments = $this->getSelected();
+    public function exportPDF()
+    {   $payments = $this->getSelected();
 
-    //     if(!empty($payments)) {
-    //         $this->clearSelected();
-    //         return Excel::download(new PaymentsExport($payments), 'payments.pdf');
-    //     } else {
-    //         $this->dialog()->error(
-    //             $title = 'No Payments Selected',
-    //             $description = "Please select which payments to export",
-    //         );
-    //     }
-    // }
+        if(!empty($payments)) {
+            $this->clearSelected();
+            return (new PaymentsExport($payments))->download('payments.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        } else {
+            $this->dialog()->error(
+                $title = 'No Payments Selected',
+                $description = "Please select which payments to export",
+            );
+        }
+    }
 
     public function columns(): array
     {
