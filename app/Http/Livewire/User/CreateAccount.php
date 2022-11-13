@@ -13,20 +13,29 @@ class CreateAccount extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $first_name;
-    public $middle_name;
     public $last_name;
+    public $middle_name;
+    public $email;
     public $suffix;
-
     public $birth_date;
     public $birth_place;
-    public $nationality;
-    public $gender;
     public $religion;
+    public $gender;
     public $mother_tongue;
+    public $nationality;
     public $pwd_id;
 
+    public $height;
+    public $weight;
+
+    public $beneficiary;
+
+    public $pag_ibig;
+    public $philhealth;
+    public $sss;
+    public $tin;
+
     public $mobile_number;
-    public $email;
     public $address;
 
     public $emergency_contact_name;
@@ -34,35 +43,39 @@ class CreateAccount extends ModalComponent
     public $emergency_contact_address;
     public $emergency_contact_relationship;
 
-    public $pag_ibig;
-    public $philhealth;
-    public $sss;
-    public $tin;
-
-    public $password;
-    public $employee_role;
-
     protected function rules()
     {
         return [
             // personal info
+            'email' => ['required', 'unique:users,email'],
             'first_name' => ['required'],
-            'middle_name' => ['nullable'],
             'last_name' => ['required'],
+            'middle_name' => ['nullable'],
             'suffix' => ['nullable'],
-
             'birth_date' => ['required'],
             'birth_place' => ['required'],
-            'nationality' => ['required'],
-            'gender' => ['required'],
             'religion' => ['required'],
+            'gender' => ['required'],
             'mother_tongue' => ['required'],
+            'nationality' => ['required'],
             'pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
-            // Contact information
-            'email' => ['required', 'unique:users,email'],
+            // physical info
+            'height' => ['nullable'],
+            'weight' => ['nullable'],
+
+            // beneficiary
+            'beneficiary' => ['nullable'],
+
+            // contact info
             'mobile_number' => ['required', 'unique:users,mobile_number'],
             'address' => ['required'],
+
+            // additional account info
+            'pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
+            'philhealth' => ['nullable', 'unique:users,philhealth'],
+            'sss' => ['nullable', 'unique:users,sss'],
+            'tin' => ['nullable', 'unique:users,tin'],
 
             // emergency contact
             'emergency_contact_name' => ['required'],
@@ -70,14 +83,7 @@ class CreateAccount extends ModalComponent
             'emergency_contact_address' => ['required'],
             'emergency_contact_relationship' => ['required'],
 
-            // Government information
-            'pag_ibig' => ['nullable', 'unique:users,pag_ibig'],
-            'philhealth' => ['nullable', 'unique:users,philhealth'],
-            'sss' => ['nullable', 'unique:users,sss'],
-            'tin' => ['nullable', 'unique:users,tin'],
-
-            'password' => ['sometimes'],
-            'employee_role' => ['required'],
+            // 'account_type' => ['required', 'in:Admin,Staff,Teacher,Student,Guest'],
         ];
     }
 
@@ -88,8 +94,6 @@ class CreateAccount extends ModalComponent
 
     public function save(): void
     {
-        // dd($this->employee_role);
-
         $this->validate();
 
         $this->dialog()->confirm([
@@ -116,40 +120,42 @@ class CreateAccount extends ModalComponent
 
         $user = User::create([
             'first_name' => $this->first_name,
-            'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
+            'email' => $this->email,
+            'password' => Hash::make($password),
+            'middle_name' => $this->middle_name,
             'suffix' => $this->suffix,
-
             'birth_date' => $this->birth_date,
             'birth_place' => $this->birth_place,
-            'nationality' => $this->nationality,
-            'gender' => $this->gender,
             'religion' => $this->religion,
+            'gender' => $this->gender,
             'mother_tongue' => $this->mother_tongue,
+            'nationality' => $this->nationality,
             'pwd_id' => $this->pwd_id,
 
-            // contact information
+            // physical info
+            'height' => $this->height,
+            'weight' => $this->weight,
+
+            // beneficiary
+            'beneficiary' => $this->beneficiary,
+
+            // contact info
             'mobile_number' => $this->mobile_number,
-            'email' => $this->email,
             'address' => $this->address,
 
-            // Emergency contact person
-            'emergency_contact_name' => $this->emergency_contact_name,
-            'emergency_contact_number' => $this->emergency_contact_number,
-            'emergency_contact_address' => $this->emergency_contact_address,
-            'emergency_contact_relationship' => $this->emergency_contact_relationship,
-
-            // Government IDs information
+            // additional account info
             'pag_ibig' => $this->pag_ibig,
             'philhealth' => $this->philhealth,
             'sss' => $this->sss,
             'tin' => $this->tin,
 
-            'password' => Hash::make($password),
-            'employee_role' => $this->employee_role,
+            // emergency contact person
+            'emergency_contact_name' => $this->emergency_contact_name,
+            'emergency_contact_number' => $this->emergency_contact_number,
+            'emergency_contact_address' => $this->emergency_contact_address,
+            'emergency_contact_relationship' => $this->emergency_contact_relationship,
         ]);
-
-        $user->assignRole($this->employee_role);
 
         $this->closeModal();
 

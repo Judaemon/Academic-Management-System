@@ -31,7 +31,7 @@ return new class extends Migration
                   ->nullable();
 
             $table->decimal('balance', 10, 2)
-                  ->default('0');
+                  ->nullable();
 
             $table->string('payment_method');
 

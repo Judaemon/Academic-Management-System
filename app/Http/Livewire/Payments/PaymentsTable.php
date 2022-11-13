@@ -4,14 +4,25 @@ namespace App\Http\Livewire\Payments;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+
 use App\Models\Payments;
+
+use App\Exports\PaymentsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+use WireUi\Traits\Actions;
+use PDF;
 
 class PaymentsTable extends DataTableComponent
 {
+    use Actions;
+
     protected $model = Payments::class;
 
     public array $bulkActions = [
-        'exportSelected' => 'Export',
+        'exportXLSX' => 'Export as XLSX',
+        'exportCSV' => 'Export as CSV',
+        // 'exportPDF' => 'Export as PDF',
     ];
 
     public function configure(): void
@@ -19,12 +30,49 @@ class PaymentsTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
-    public function exportSelected()
+    public function exportXLSX()
     {
-        foreach ($this->getSelected() as $item) {
-            // These are strings since they came from an HTML element
+        $payments = $this->getSelected();
+        
+        if(!empty($payments)) {
+            $this->clearSelected();
+            return Excel::download(new PaymentsExport($payments), 'payments.xlsx');
+        } else {
+            $this->dialog()->error(
+                $title = 'No Payments Selected',
+                $description = "Please select which payments to export",
+            );
         }
     }
+
+    public function exportCSV()
+    {
+        $payments = $this->getSelected();
+        
+        if(!empty($payments)) {
+            $this->clearSelected();
+            return Excel::download(new PaymentsExport($payments), 'payments.csv');
+        } else {
+            $this->dialog()->error(
+                $title = 'No Payments Selected',
+                $description = "Please select which payments to export",
+            );
+        }
+    }
+
+    // public function exportPDF()
+    // {   $payments = $this->getSelected();
+
+    //     if(!empty($payments)) {
+    //         $this->clearSelected();
+    //         return Excel::download(new PaymentsExport($payments), 'payments.pdf');
+    //     } else {
+    //         $this->dialog()->error(
+    //             $title = 'No Payments Selected',
+    //             $description = "Please select which payments to export",
+    //         );
+    //     }
+    // }
 
     public function columns(): array
     {

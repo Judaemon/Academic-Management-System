@@ -12,9 +12,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $now = Carbon::today()->format('Y-m-d');
+        $announcement_start_date = Carbon::today()->format('Y-m-d');
         return view('dashboard', [
-            'announcements' => Announcement::whereDate('start_date', '>=', $now)->whereDate('end_date', '<=', $now)->get(),
+            'announcements' => Announcement::whereDate('start_date', '=', $announcement_start_date)->get(),
         ]);
     }
 }

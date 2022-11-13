@@ -288,6 +288,75 @@ class AdmitStudent extends ModalComponent
             $this->password = strtolower(mb_substr($this->first_name, 0, 1, 'utf-8') . '.' . $this->last_name);
         }
 
+        // dd(
+        //     $this->first_name,
+        //     $this->middle_name,
+        //     $this->last_name,
+        //     $this->suffix,
+
+        //     $this->birth_date,
+        //     $this->birth_place,
+        //     $this->nationality,
+        //     $this->gender,
+        //     $this->mother_tongue,
+        //     $this->religion,
+
+        //     $this->weight,
+        //     $this->height,
+        //     $this->pwd_id,
+
+        //     $this->suffix,
+        //     $this->birth_date,
+        //     $this->birth_place,
+        //     $this->religion,
+        //     $this->gender,
+        //     $this->mother_tongue,
+        //     $this->nationality,
+
+        //     $this->mobile_number,
+        //     $this->email,
+        //     $this->address,
+
+        //     $this->kinder_name,
+        //     $this->kinder_grad_date,
+
+        //     $this->elementary_name,
+        //     $this->elementary_grad_date,
+
+        //     $this->junior_high_name,
+
+        //     $this->lrn,
+        //     $this->esc,
+        //     $this->qvr,
+
+        //     $this->mother_name,
+        //     $this->mother_number,
+        //     $this->mother_email,
+        //     $this->mother_address,
+
+        //     $this->father_name,
+        //     $this->father_number,
+        //     $this->father_email,
+        //     $this->father_address,
+
+        //     $this->emergency_contact_name,
+        //     $this->emergency_contact_relationship,
+        //     $this->emergency_contact_number,
+        //     $this->emergency_contact_address,
+
+        //     $this->password,
+
+        //     '---------------------',
+
+        //     setting('academic_year_id'),
+        //     auth()->id(),
+        //     $this->grade_level,
+        //     $this->section,
+        // );
+
+        // dd("for testing!!!!!!!!!");
+
+
         $user = User::create([
             'first_name' => $this->first_name,
             'middle_name' => $this->middle_name,

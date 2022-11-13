@@ -35,14 +35,11 @@ class UserSeeder extends Seeder
             'email' => 'sadmin@sadmin.com',
             'address' => 'Guisad Central, Baguio City',
 
-            'kinder_name' => 'super kinder',
-            'kinder_grad_date' => '2004',
-
             'elementary_name' => 'Calvary Baptist Elementary School',
             'elementary_grad_date' => '2010',
 
             'junior_high_name' => 'University of Baguio',
-            'junior_high_grad_date' => '2014',
+            'junior_high_grad_date' => '2010',
 
             'lrn' => 'QWER1234',
             'esc' => 'ZXCV1234',
@@ -194,7 +191,7 @@ class UserSeeder extends Seeder
             'first_name' => 'Julie',
             'middle_name' => 'Bondad',
             'last_name' => 'Abalos',
-
+            
             'birth_date' => '1998-11-01',
             'birth_place' => 'Baguio City',
             'religion' => 'Catholic',
@@ -206,7 +203,7 @@ class UserSeeder extends Seeder
 
             'height' => '150',
             'weight' => '58',
-
+            
             'mobile_number' => '09165438293',
             'email' => 'julsabalos@t.caims.com',
             'address' => 'Guisad Central, Baguio City',
@@ -284,7 +281,7 @@ class UserSeeder extends Seeder
             'mobile_number' => '09165438295',
             'email' => 'heiditabanda@t.caims.com',
             'address' => 'Badihoy, Baguio City',
-
+            
             'emergency_contact_name' => 'John Doe',
             'emergency_contact_number' => '09166825342',
             'emergency_contact_address' => 'Trancoville',
@@ -913,7 +910,7 @@ class UserSeeder extends Seeder
 
             'height' => '164.3',
             'weight' => '80.4',
-
+            
             'mobile_number' => '09333235321',
             'email' => 'gatebjohnrev@s.caims.edu',
             'address' => 'Fairview, Baguio City',

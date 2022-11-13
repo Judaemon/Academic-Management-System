@@ -33,21 +33,68 @@
             </div>
         </div>
 
+        @if(!empty($school_fees) && $payment->fee_id === NULL)
+            @if($school_fees->count() > 0)
+                <table class="w-full text-xs text-left text-gray-500 rounded-t-2">
+                    <thead class="text-[0.7rem] text-black uppercase bg-gray-200">
+                        <tr>
+                            <th scope="col" class="py-3 pl-2">Expenses</th>
+                            <th scope="col" class="py-3 pl-2">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($school_fees as $fee)
+                            <tr class="border-b">
+                                <th scope="row" class="py-2 font-medium text-gray-900">
+                                    <span class="ml-6">{{ $fee->fee_name }}</span>
+                                </th>
+                                <td class="py-2">
+                                    <span class="ml-6">Php {{ number_format($fee->amount, 2) }}</span>
+                                </td>
+                            </tr>
+                        @endforeach
+                        <tr class="border-b font-bold text-black">
+                            <th scope="row" class="py-2 pl-2 uppercase">Total</th>
+                            <td class="py-2 pl-2 uppercase">Php {{ number_format($total, 2) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            @endif
+        @endif
+
         <div class="flex w-full h-auto items-center my-4">
             <div class="font-bold w-1/4">Payment Type</div>
             <div class="w-3/4">
-                <<<<<<< HEAD <x-input
-                    value="@if (!empty($payment->fee_id)) {{ $payment->others }} @else {{ $payment->fee->fee_name }} ( Php {{ $payment->fee->amount }} ) @endif"
-                    readonly />
-                =======
                 @if (!empty($payment->fee_id))
                     <x-input value="{{ $payment->fee->fee_name }} ( Php {{ $payment->fee->amount }} )" readonly />
                 @else
                     <x-input value="{{ $payment->others }}" readonly />
                 @endif
-                >>>>>>> origin/dev_uB
             </div>
         </div>
+
+        @if(!empty($payment_history) && $payment->fee_id === NULL)
+            @if($payment_history->count() > 0)
+                <table class="w-full text-xs text-left text-gray-500 rounded-t-2 my-2">
+                    <thead class=" text-[0.7rem] text-black uppercase bg-gray-200">
+                        <tr>
+                            <th scope="col" class="py-2 pl-2">Payment Date</th>
+                            <th scope="col" class="py-2 text-center">Amount Paid</th>
+                            <th scope="col" class="py-2 text-center">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($payment_history as $payment)
+                            <tr class="border-b">
+                                <th scope="row" class="py-2 pl-4">{{ $payment->created_at->format('m-d-Y') }}</th>
+                                <td class="py-2 text-center">Php {{ number_format($payment->amount_paid, 2) }}</td>
+                                <td class="py-2 text-center">Php {{ number_format($payment->balance, 2) }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        @endif
 
         <div class="flex w-full h-auto items-center my-4">
             <div class="font-bold w-1/4">Amount Paid</div>

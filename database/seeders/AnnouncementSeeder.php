@@ -44,5 +44,14 @@ class AnnouncementSeeder extends Seeder
             'main_image' => NULL,
             'category' => 'Holiday'
         ]);
+
+        Announcement::create([
+            'title' => 'Harvest Town',
+            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
+            'start_date' => Carbon::now(),
+            'end_date' => Carbon::now()->addDays(7),
+            'main_image' => NULL,
+            'category' => 'Holiday'
+        ]);
     }
 }

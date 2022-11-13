@@ -8,7 +8,7 @@
             wire:ignore
             rightIcon="user"
             wire:model="name"
-            placeholder="Select "
+            placeholder="Select Users"
             :async-data="route('users.users')"
             option-label="name"
             option-value="id"
@@ -31,12 +31,12 @@
                   @foreach($school_fees as $fee)
                     <tr class="border-b">
                       <th scope="row" class="py-3 font-medium text-gray-900"><span class="ml-6">{{ $fee->fee_name }}</span></th>
-                      <td class="py-3"><span class="ml-6">Php {{ $fee->amount }}</span></td>
+                      <td class="py-3"><span class="ml-6">Php {{ number_format($fee->amount, 2) }}</span></td>
                     </tr>
                   @endforeach
                   <tr class="border-b font-bold text-black">
                     <th scope="row" class="py-3 pl-2 uppercase">Total</th>
-                    <td class="py-3 pl-2 uppercase">Php {{ $total }}</td>
+                    <td class="py-3 pl-2 uppercase">Php {{ number_format($total, 2) }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -49,53 +49,59 @@
           <div class="flex flex-col space-y-2 ml-4">
             @if(!empty($total))
               <div>
-                <x-radio id="radio" label="Pay By Total" wire:model="payment_options" value="by total" />
-                <div class="flex flex-col space-y-2 pl-6 mt-2 w-full {{ $payment_options === 'by total' ? 'block' : 'hidden'}}">
-                  <x-radio id="radio" label="Full Payment" wire:model="total_options" value="Full Payment" />
-                  <div>
-                    <x-radio id="radio" label="Partial Payment" wire:model="total_options" value="Partial Payment" />
-                    @if(!empty($past_payments))
-                      @if($past_payments->count() > 0)
-                        <table class="w-full text-xs text-left text-gray-500 rounded-t-2">
-                          <thead class="text-xs text-black uppercase bg-gray-200">
-                            <tr>
-                              <th scope="col" class="py-3 pl-2">Payment Date</th>
-                              <th scope="col" class="py-3 pl-2">Amount Paid</th>
-                              <th scope="col" class="py-3 pl-2">Remaining</th>
+                @if(!empty($payment_history_latest) && $payment_history_latest->balance === '0.00')
+                  <div class="flex">
+                    <x-radio id="radio" disabled />
+                    <span class="ml-2 py-0.5 px-4 shadow-md rounded-full bg-green-200 text-green-500 font-semibold text-xs ">
+                      Fully Paid on {{ date('F j, Y', strtotime($payment_history_latest->created_at)) }}
+                    </span>
+                  </div>
+                @else
+                  <x-radio id="radio" label="Pay By Total" wire:model="payment_options" value="by total" />
+                @endif
+
+                @if(!empty($payment_history) && !empty($payment_history_latest))
+                  <div class="pl-6 {{ $payment_history_latest->balance !== '0.00' ? 'block' : 'hidden' }}">
+                    @if($payment_history->count() > 0)
+                      <table class="w-full text-xs text-left text-gray-500 rounded-t-2 my-2">
+                        <thead class=" text-[0.7rem] text-black uppercase bg-gray-200">
+                          <tr>
+                            <th scope="col" class="py-2 pl-2">Payment Date</th>
+                            <th scope="col" class="py-2 text-center">Amount Paid</th>
+                            <th scope="col" class="py-2 text-center">Balance</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($payment_history as $payment)
+                            <tr class="border-b">
+                              <th scope="row" class="py-2 pl-4">{{ $payment->created_at->format('m-d-Y') }}</th>
+                              <td class="py-2 text-center">Php {{ number_format($payment->amount_paid, 2) }}</td>
+                              <td class="py-2 text-center">Php {{ number_format($payment->balance, 2) }}</td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            @foreach($past_payments as $payment)
-                              <tr class="border-b">
-                                <th scope="row" class="py-3 font-medium text-gray-900"><span class="ml-6">{{ $payment->created_at }}</span></th>
-                                <td class="py-3"><span class="ml-6">Php {{ $payment->amount_paid }}</span></td>
-                                <td class="py-3"><span class="ml-6">Php {{ $payment->amount_paid }}</span></td>
-                              </tr>
-                            @endforeach
-                          </tbody>
-                        </table>
-                      @endif
+                          @endforeach
+                        </tbody>
+                      </table>
                     @endif
                   </div>
-                </div>
+                @endif
               </div>
             @endif
 
             <div>
-              <x-radio id="radio" label="Pay Per Fee" wire:model="payment_options" value="per fee" />
-              <div class="pl-6 mt-2 w-full {{ $payment_options === 'per fee' ? 'block' : 'hidden'}}">
+              <x-radio id="radio" label="School Fees" wire:model="payment_options" value="other fees" />
+              <div class="pl-6 mt-2 w-full {{ $payment_options === 'other fees' ? 'block' : 'hidden'}}">
                 <x-select  
                   wire:ignore
                   placeholder="Select School Fees"
                   wire:model="school_fee"
-                  :async-data="route('fees.all', ['fee_id' => '$grade_level' ])"
+                  :async-data="route('other.fees')"
                   option-label="fee_name"
                   option-value="id"
                   option-description="amount"
                 />
               </div>
             </div>
-
+            
             <div>
               <x-radio id="radio" label="Others" wire:model="payment_options" value="others" />
               <div class="pl-6 mt-2 w-full {{ $payment_options === 'others' ? 'block' : 'hidden'}}">
@@ -105,10 +111,12 @@
           </div>
         </div>
 
-        <div class="col-span-4 flex flex-row space-x-10 mb-5">
-          <div class="w-1/2">
+        <div class="col-span-4 flex flex-row mb-5">
+          <div class="{{ !empty($payment_options) ? 'w-1/2 block mr-10' : 'hidden' }}">
             <x-inputs.currency label="Amount Paid" placeholder="0.00" wire:model="amount_paid" />
-            {{ $balance }}
+          </div>
+          <div class="{{ !empty($payment_options) ? 'hidden' : 'w-1/2 block mr-10' }}">
+            <x-inputs.currency label="Amount Paid" placeholder="0.00" disabled />
           </div>
           <div class="w-1/2">
             <x-select

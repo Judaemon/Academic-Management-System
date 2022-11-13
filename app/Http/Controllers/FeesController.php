@@ -14,13 +14,12 @@ class FeesController extends Controller
         return view('fees.index');
     }
 
-    public function fees(Request $request, $fee_id)
+    public function fees(Request $request)
     {
         return Fee::query()
             ->select('id', 'fee_name', 'amount')
             ->orderBy('fee_name')
-            ->where('grade_level_id', $fee_id)
-            ->orWhere('grade_level_id', NULL)
+            ->whereNull('grade_level_id')
             ->when(
                 $request->search,
                 fn (Builder $query) => $query
