@@ -8,6 +8,7 @@ use App\Models\User;
 class ViewUser extends ModalComponent
 {
     public $user;
+    public  $user_roles;
 
     protected function rules()
     {
@@ -72,6 +73,10 @@ class ViewUser extends ModalComponent
     public function mount(User $user)
     {
         $this->user = $user;
+        $this->user_roles = User::query()
+            ->find($user->id)
+            ->roles
+            ->pluck('id');
     }
 
     public function render()

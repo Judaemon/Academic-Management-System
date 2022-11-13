@@ -11,6 +11,7 @@ class RoleSeeder extends Seeder
     {
         Role::create(['name' => 'Super Admin']);
 
+        // Employee
         Role::create(['name' => 'Admin'])
             ->syncPermissions([
                 'view_users',
@@ -63,6 +64,7 @@ class RoleSeeder extends Seeder
 
                 'change_password',
             ]);;
+        // Employee
 
         Role::create(['name' => 'Student'])
             ->syncPermissions([

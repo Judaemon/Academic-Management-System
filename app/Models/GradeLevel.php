@@ -22,4 +22,9 @@ class GradeLevel extends Model
     {
         return $this->hasMany(Section::class);
     }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
 }

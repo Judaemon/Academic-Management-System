@@ -9,13 +9,9 @@ use Illuminate\Database\Seeder;
 
 class AdmissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        // Students ID starts with 8
         Admission::create([
             'status' => 'Admitted',
             'academic_year_id' => '2',
