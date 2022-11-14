@@ -26,6 +26,21 @@ class Grade extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'student_id', 'id');
+    }
+
+    // public function section_students()
+    // {
+    //     return $this->hasMany(Section::class, 'section_id', 'id');
+    // }
+
     protected $fillable = [
         'first_quarter',
         'second_quarter',
@@ -33,6 +48,7 @@ class Grade extends Authenticatable
         'fourth_quarter',
 
         'student_id',
+        'section_id',
         'subject_id',
     ];
 }

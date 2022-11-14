@@ -35,8 +35,9 @@
                                             <td>
                                                 @if ($grade->subject_id)
                                                 <x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
-                                                    md label="{{ $grade->subject->name }}"/></td>
+                                                    md label="{{ $grade->subject->name }}"/>
                                                 @endif
+                                            </td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                 md label="{{ $grade->first_quarter }}"/></td>
                                             <td><x-badge class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"

@@ -36,7 +36,6 @@ class GradesExport implements FromQuery, WithHeadings, WithMapping
     {
         return [
             $grade->student->last_name,
-            //$grade->student_id,
             $grade->subject->name,
             $grade->first_quarter,
             $grade->second_quarter,

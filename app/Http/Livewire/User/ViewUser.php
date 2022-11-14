@@ -21,7 +21,7 @@ class ViewUser extends ModalComponent
             'user.suffix' => ['nullable'],
             'user.birth_date' => ['required'],
             'user.birth_place' => ['required'],
-            'user.religion' => ['required'],
+            'user.religion' => ['nullable'],
             'user.gender' => ['required'],
             'user.mother_tongue' => ['required'],
             'user.nationality' => ['required'],

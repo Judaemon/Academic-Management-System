@@ -108,4 +108,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Admission::class, 'student_id', 'id');
     }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'student_id', 'id');
+    }
+
+    public function section_students()
+    {
+        return $this->hasMany(Section::class, 'section_id', 'id');
+    }
 }

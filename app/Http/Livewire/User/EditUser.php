@@ -28,7 +28,7 @@ class EditUser extends ModalComponent
                 'user.birth_place' => ['required'],
                 'user.nationality' => ['required'],
                 'user.gender' => ['required'],
-                'user.religion' => ['required'],
+                'user.religion' => ['nullable'],
                 'user.mother_tongue' => ['required'],
 
                 // physical info
@@ -81,7 +81,7 @@ class EditUser extends ModalComponent
             'user.suffix' => ['nullable'],
             'user.birth_date' => ['required'],
             'user.birth_place' => ['required'],
-            'user.religion' => ['required'],
+            'user.religion' => ['nullable'],
             'user.gender' => ['required'],
             'user.mother_tongue' => ['required'],
             'user.nationality' => ['required'],

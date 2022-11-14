@@ -22,14 +22,14 @@ class SectionSeeder extends Seeder
         Section::create([
             'name' => 'Orange',
             'capacity' => '20',
-            'teacher_id' => '5',
+            'teacher_id' => '6',
             'grade_level_id' => 1,
         ]);
 
         Section::create([
             'name' => 'Yellow',
             'capacity' => '15',
-            'teacher_id' => 1,
+            'teacher_id' => '7',
             'grade_level_id' => 2,
         ]);
 

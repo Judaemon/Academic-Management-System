@@ -31,6 +31,8 @@ class RoleSeeder extends Seeder
                 'delete_announcement',
 
                 'view_setting',
+
+                'change_password',
             ]);
 
         Role::create(['name' => 'Teacher'])
@@ -40,7 +42,7 @@ class RoleSeeder extends Seeder
                 'read_user',
 
                 // can CRUD grades
-                'view_grades',
+                //'view_grades',
                 'assign_grades',
                 
                 'create_grade',

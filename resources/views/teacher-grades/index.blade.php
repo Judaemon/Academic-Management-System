@@ -24,6 +24,9 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            <x-badge class="w-full mb-2" dark md label="Section" />
+                                        </th>
+                                        <th>
                                             <x-badge class="w-full mb-2" dark md label="Student" />
                                         </th>
                                         <th>
@@ -46,6 +49,13 @@
                                 <tbody class="mb-6 pt-4 w-full">
                                     @foreach ($grades as $grade)
                                         <tr>
+                                            <td>
+                                                @if ($grade->section_id)
+                                                <x-badge
+                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    md label="{{ $grade->section->name }}" />
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if ($grade->student_id)
                                                 <x-badge

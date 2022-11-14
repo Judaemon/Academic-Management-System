@@ -55,7 +55,7 @@ class CreateAccount extends ModalComponent
             'birth_place' => ['required'],
             'nationality' => ['required'],
             'gender' => ['required'],
-            'religion' => ['required'],
+            'religion' => ['nullable'],
             'mother_tongue' => ['required'],
             'pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
@@ -111,8 +111,10 @@ class CreateAccount extends ModalComponent
     {
         $this->authorize('create_account');
 
-        // last_name.first_letter_of_first_name ex. first_name = Mark, last_name = Zuckerberg, password = zuckerberg.m
-        $password = strtolower(mb_substr($this->last_name, 0, 1, 'utf-8') . '.' . $this->first_name);
+        if (empty($this->password)) {
+            // first_name.first_letter_of_last_name ex. first_name = Sample, last_name = Sample, password = sample.s
+            $this->password = strtolower(mb_substr($this->first_name, 0, 1, 'utf-8') . '.' . $this->last_name);
+        }
 
         $user = User::create([
             'first_name' => $this->first_name,
@@ -145,7 +147,7 @@ class CreateAccount extends ModalComponent
             'sss' => $this->sss,
             'tin' => $this->tin,
 
-            'password' => Hash::make($password),
+            'password' => Hash::make($this->password),
             'employee_role' => $this->employee_role,
         ]);
 

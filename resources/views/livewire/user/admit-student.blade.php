@@ -326,7 +326,7 @@
                             </div>
                             <p>*if empty will use default password</p>
                             <p>
-                                *default password = "complete first name"."first letter of last name"
+                                *default password = "complete last name"."first letter of first name"
                             </p>
                         </div>
                     </div>

@@ -324,7 +324,7 @@
             <x-slot name="footer">
                 <div class="flex justify-between gap-x-4">
                     <span></span>
-                    <x-button wire:click="close" type="button" primary label="Close" />
+                    <x-button wire:click="closeModal" type="button" primary label="Close" />
                 </div>
             </x-slot>
         </form>

@@ -25,6 +25,21 @@ class TeacherGrade extends Authenticatable
     {
         return $this->belongsTo(User::class);
     }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'student_id', 'id');
+    }
+
+    public function section_students()
+    {
+        return $this->hasMany(Section::class, 'section_id', 'id');
+    }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
     
     protected $fillable = [
         'first_quarter',
