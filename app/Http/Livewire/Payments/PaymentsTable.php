@@ -9,6 +9,7 @@ use App\Models\Payments;
 
 use App\Exports\PaymentsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 use WireUi\Traits\Actions;
 use PDF;
@@ -28,6 +29,28 @@ class PaymentsTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+    }
+
+    public function filters(): array
+    {
+        $payment_status = ['Paid', 'Pending', 'Refunded'];
+
+        $academic_year = [];
+
+        return [
+            SelectFilter::make('Payment Status')
+                ->options($payment_status)
+                ->filter(function(Builder $builder, string $value) {
+                    $builder->where('payment_status', $value);
+                }),
+
+            SelectFilter::make('Academic Year')
+                ->options([
+                    '' => 'All',
+                    'yes' => 'Yes',
+                    'no' => 'No',
+                ]),
+        ];
     }
 
     public function exportXLSX()
@@ -88,14 +111,13 @@ class PaymentsTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Amount Paid")
-                ->sortable()
-                ->format(fn ($value) => 'Php ' . number_format($value, 2))
-                ->collapseOnMobile(),
-
             Column::make("Payment Date", "created_at")
                 ->sortable()
                 ->format(fn ($value) => date('F j, Y', strtotime($value)))
+                ->collapseOnMobile(),
+
+            Column::make("Status", "payment_status")
+                ->sortable()
                 ->collapseOnMobile(),
 
             Column::make("Actions")

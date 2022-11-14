@@ -17,7 +17,11 @@ return new class extends Migration
 
             $table->foreignId('accountant_id')
                   ->constrained('users', 'id')
-                  ->onDelete('cascade');;
+                  ->onDelete('cascade');
+            
+            $table->foreignId('academic_year_id')
+                  ->constrained('academic_years', 'id')
+                  ->onDelete('cascade');
 
             $table->decimal('amount_paid', 10, 2)
                   ->default('0');
@@ -35,10 +39,8 @@ return new class extends Migration
 
             $table->string('payment_method');
 
-            // $table->enum('payment_status', [
-            //     'refund',
-            //     ''
-            // ]);
+            $table->string('payment_status')
+                  ->default('Paid');
 
             $table->timestamps();
         });

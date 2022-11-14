@@ -34,7 +34,7 @@ class ViewPayment extends ModalComponent
             $this->total = $this->school_fees->sum('amount');
 
             $this->payment_history = Payments::where('user_id', $user->student_id)
-                                               ->whereDate('created_at', '>=', $this->payment->created_at)
+                                               ->where('created_at', '<=', $payment->created_at)
                                                ->whereNotNull('balance')
                                                ->get();
         } else {

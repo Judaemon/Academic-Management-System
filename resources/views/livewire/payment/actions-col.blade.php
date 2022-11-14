@@ -5,9 +5,12 @@
         />
     @endcan
 
-    @can('delete_payment')
-        <x-button wire:ignore.self icon="trash" negative label="Delete"
-            onclick="livewire.emit('openModal', 'payments.delete-payment', {{ json_encode(['payment' => $row->id]) }})" 
-        />
+    {{-- //if payment status is refunded user cannot switch to pending/paid --}}
+    @can('refund_payment')
+        {{-- @if() --}}
+            <x-button wire:ignore.self icon="trash" negative label="Refund"
+                onclick="livewire.emit('openModal', 'payments.refund-payment', {{ json_encode(['payment' => $row->id]) }})" 
+            />
+        {{-- @endif --}}
     @endcan
 </div>
