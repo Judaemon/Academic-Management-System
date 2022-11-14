@@ -143,6 +143,12 @@ class PermissionSeeder extends Seeder
             'view_users',
             'read_user',
 
+            'view_attendance',
+            'create_attendances',
+            'read_attendances',
+            'update_attendances',
+            'delete_attendances',
+
             'change_password',
         ];
 

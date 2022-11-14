@@ -50,6 +50,12 @@ class RoleSeeder extends Seeder
                 'update_grade',
                 'delete_grade',
 
+                'view_attendance',
+                'create_attendances',
+                'read_attendances',
+                'update_attendances',
+                'delete_attendances',
+
                 'change_password',
             ]);
 
