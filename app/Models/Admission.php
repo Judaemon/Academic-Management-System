@@ -19,6 +19,11 @@ class Admission extends Model
         'section_id',
     ];
 
+    public function academic_year()
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
+
     public function student()
     {
         return $this->belongsTo(User::class);
@@ -29,13 +34,13 @@ class Admission extends Model
         return $this->belongsTo(User::class, 'enrolled_by', 'id');
     }
 
-    public function section()
-    {
-        return $this->belongsTo(Section::class);
-    }
-
     public function grade_level()
     {
         return $this->belongsTo(GradeLevel::class, 'admit_to_grade_level', 'id');
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 }

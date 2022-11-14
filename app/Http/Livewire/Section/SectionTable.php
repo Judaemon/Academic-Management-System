@@ -32,7 +32,7 @@ class SectionTable extends DataTableComponent
         return [
             SelectFilter::make('Grade Level')
                 ->options($option)
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     $builder->where('grade_levels.name', $value);
                 }),
         ];
@@ -41,6 +41,9 @@ class SectionTable extends DataTableComponent
     public function columns(): array
     {
         $columns = [
+            Column::make("Id", "id")
+                ->searchable()
+                ->sortable(),
             Column::make("Grade Level ID", "grade_level.name")
                 ->sortable()
                 ->searchable(),
