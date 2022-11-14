@@ -92,7 +92,9 @@
                                                     class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->fourth_quarter }}" />
                                             </td>
+                                            <td>
                                                 
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
