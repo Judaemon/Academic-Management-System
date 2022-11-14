@@ -25,14 +25,13 @@ class CreatePayments extends ModalComponent
     public $others;
 
     public $total;
-    public $total_options;
     public $payment_options;
+    public $payment_history_latest;
 
     public $isNull = true;
 
-    public $grade_level;
     public $school_fees;
-    public $past_payments;
+    public $payment_history;
 
     protected function rules()
     {
@@ -40,6 +39,7 @@ class CreatePayments extends ModalComponent
             'name' => ['required', 'unique:users,id,'.$this->name],
             'amount_paid' => ['required', 'numeric'],
             'school_fee' => ['nullable', 'unique:fees,id,'.$this->school_fee],
+            'balance' => ['nullable', 'numeric'],
             'payment_method' => ['required'],
             'others' => ['nullable'],
         ];
@@ -60,16 +60,21 @@ class CreatePayments extends ModalComponent
         if(!empty($this->name)) {
             $user = Admission::where('student_id', $this->name)->first();
             
-            if($user != NULL) {
+            if(!empty($user)) {
                 $this->isNull = false;
-                $this->grade_level = $user->admit_to_grade_level;
                 $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
                 $this->total = $this->school_fees->sum('amount');
+
+                $this->payment_history_latest = Payments::latest('created_at')
+                                                          ->where('user_id', $user->student_id)
+                                                          ->whereNotNull('balance')
+                                                          ->first();
+                $this->payment_history = Payments::where('user_id', $user->student_id)
+                                                   ->whereNotNull('balance')
+                                                   ->get();
             } else {
                 $this->isNull = true;
-                $this->grade_level = NULL;
                 $this->total = NULL;
-                $this->school_fees = Fee::where('grade_level_id', '=', NULL)->get();
             }
         } else {
             $this->isNull = true;
@@ -81,8 +86,7 @@ class CreatePayments extends ModalComponent
     {
         if($this->payment_options === 'by total') {
             $this->school_fee = NULL;
-            $this->others = "Grand Total (Php ".$this->total.")";
-        } else if($this->payment_options === 'per fee') {
+        } else if($this->payment_options === 'other fees') {
             $this->value = "School Fees";
             $this->others = NULL;
         } else if($this->payment_options === 'others') {
@@ -93,21 +97,22 @@ class CreatePayments extends ModalComponent
         }
     }
 
-    public function updatedTotalOptions()
+    public function updatedAmountPaid()
     {
-        if($this->total_options === 'Full Payment') {
-            $this->school_fee = NULL;
-            $this->others = "Grade Level Total Payment (Php ".$this->total.")";
-        } else if($this->total_options === 'Partial Payment') {
-            $this->others = "Remaining Total (Php ".$this->total.")";
-            $this->school_fee = NULL;
-            
-            if(!empty($amount_paid)) {
-                $this->balance = number_format($this->total - $this->amount_paid, 2);
-                // $this->balance = round($this->balance, 2);
+        if(!empty($this->amount_paid) && $this->payment_options === 'by total') {
+            if(!empty($this->payment_history_latest->balance) && $this->payment_history_latest->balance !== '0.00') {
+                $this->balance = floatval($this->payment_history_latest->balance - $this->amount_paid);              
             } else {
-                $this->balance = $this->total;
+                $this->balance = floatval($this->total - $this->amount_paid);
             }
+
+            if($this->balance > 0){
+                $this->others = "Partial Payment - Balance(Php ".number_format($this->balance, 2).")";
+            } else {
+                $this->others = "Full Payment (Php ".number_format($this->total, 2).")";
+            }
+        } else {
+            $this->balance = NULL;
         }
     }
 
@@ -138,6 +143,7 @@ class CreatePayments extends ModalComponent
             'amount_paid' => $this->amount_paid,
             'fee_id' => $this->school_fee,
             'payment_method' => $this->payment_method,
+            'balance' => $this->balance,
             'others' => $this->others,
         ]);
     
@@ -153,6 +159,6 @@ class CreatePayments extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '2xl';
+        return '4xl';
     }
 }

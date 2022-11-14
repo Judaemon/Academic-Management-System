@@ -14,6 +14,7 @@ class StudentSeeder extends Seeder
     // 3 Student per grade level
     // 2 student pending for admission
 
+    // ID starts with 8
     public function run()
     {
         User::create([

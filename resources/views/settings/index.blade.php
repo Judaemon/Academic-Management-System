@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="lg:p-4 lg:flex lg:justify-between items-center">
-        <h1 class="text-2xl font-semibold text-main">Settings</h1>
+        <h2 class="mb-4 lg:mb-0 font-semibold text-2xl text-text leading-tight">Settings</h2>
 
         <div class="overflow-hidden lg:max-w-lg flex justify-between w-full bg-white rounded-lg shadow-md">
             <div class="px-4 py-2 -mx-3">

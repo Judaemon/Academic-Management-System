@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Http\Livewire\SubjectSchedule;
+namespace App\Http\Livewire\StudentGrades;
 
-use App\Models\SubjectSchedule;
+use App\Models\Grade;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class DeleteSchedule extends ModalComponent
+class StudentDeleteGrade extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
-    public $schedule;
+    public $grade;
 
-    public function mount(SubjectSchedule $schedule)
+    public function mount(Grade $grade)
     {
-        $this->schedule = $schedule;
+        $this->grade = $grade;
     }
 
     public function render()
     {
-        return view('livewire.subject-schedule.delete-schedule');
+        return view('livewire.student-grade.student-delete-grade');
     }
 
     public function deleteDialog()
     {
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Delete this schedule?',
+            'description' => 'Delete this grade?',
             'icon'        => 'warning',
             'accept'      => [
                 'label'  => 'Yes, delete it',
@@ -47,16 +47,16 @@ class DeleteSchedule extends ModalComponent
 
     public function submit()
     {
-        //$this->authorize('delete_schedule');
+        //$this->authorize('delete_grade');
 
         // Check if user has permission
-        if (!auth()->user()->can('delete_schedule')) {
+        if (!auth()->user()->can('delete_grade')) {
             $this->dialog()->error(
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
         }else{
-            $this->schedule->delete();
+            $this->grade->delete();
 
             $this->closeModal();
     
@@ -64,7 +64,7 @@ class DeleteSchedule extends ModalComponent
     
             $this->dialog()->success(
                 $title = 'Successful!',
-                $description = 'Schedule deleted successfully!'
+                $description = 'grade deleted successfully.'
             );
         }
     }

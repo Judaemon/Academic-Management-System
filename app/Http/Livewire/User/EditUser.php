@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\User;
 
-use App\Models\Program;
 use App\Models\User;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
@@ -75,7 +74,7 @@ class EditUser extends ModalComponent
             // personal info
             'user.first_name' => ['required'],
             'user.last_name' => ['required'],
-            'user.email' => ['required', 'unique:users,email,' . $this->user->id],
+            'user.email' => ['required', 'unique:users,email'],
             'user.last_name' => ['required'],
             'user.middle_name' => ['nullable'],
             'user.suffix' => ['nullable'],
@@ -85,27 +84,44 @@ class EditUser extends ModalComponent
             'user.gender' => ['required'],
             'user.mother_tongue' => ['required'],
             'user.nationality' => ['required'],
-            'user.pwd_id' => ['nullable', 'unique:users,pwd_id,' . $this->user->id],
+            'user.pwd_id' => ['nullable', 'unique:users,pwd_id'],
 
             // physical info
             'user.height' => ['nullable'],
             'user.weight' => ['nullable'],
 
             // contact info
-            'user.mobile_number' => ['required', 'unique:users,mobile_number,' . $this->user->id],
+            'user.mobile_number' => ['required', 'unique:users,mobile_number'],
             'user.address' => ['required'],
 
-            // emergency contact
+            // educational background
+            'user.elementary_name' => ['nullable'],
+            'user.elementary_grad_date' => ['nullable'],
+            'user.junior_high_name' => ['nullable'],
+
+            // academic info
+            'user.lrn' => ['nullable', 'unique:users,lrn'],
+            'user.esc' => ['nullable', 'unique:users,esc'],
+            'user.qvr' => ['nullable', 'unique:users,qvr'],
+            'user.public_id' => ['nullable', 'unique:users,public_id'],
+
+            // beneficiary, emergency contact, and parents info
+            'user.beneficiary' => ['nullable'],
+
             'user.emergency_contact_name' => ['required'],
-            'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number,' . $this->user->id],
+            'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
             'user.emergency_contact_address' => ['required'],
             'user.emergency_contact_relationship' => ['required'],
 
-            // Government information
-            'user.pag_ibig' => ['nullable', 'unique:users,pag_ibig,' . $this->user->id],
-            'user.philhealth' => ['nullable', 'unique:users,philhealth,' . $this->user->id],
-            'user.sss' => ['nullable', 'unique:users,sss,' . $this->user->id],
-            'user.tin' => ['nullable', 'unique:users,tin,' . $this->user->id],
+            'user.mother_name' => ['nullable'],
+            'user.mother_number' => ['nullable', 'unique:users,mother_number'],
+            'user.mother_email' => ['nullable'],
+            'user.mother_address' => ['nullable'],
+
+            'user.father_name' => ['nullable'],
+            'user.father_number' => ['nullable', 'unique:users,father_number'],
+            'user.father_email' => ['nullable'],
+            'user.father_address' => ['nullable'],
         ];
     }
 
@@ -121,8 +137,6 @@ class EditUser extends ModalComponent
 
     public function save(): void
     {
-        $this->validate();
-
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
             'description' => 'Save the information?',

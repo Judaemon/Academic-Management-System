@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
 
     Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
+    // Route::get('payments/generate-pdf', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
 
     // academic
     Route::get('academic-year', [\App\Http\Controllers\AcademicYearController::class, 'index'])->name('academic_year.index');
@@ -57,8 +58,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admissions', [\App\Http\Controllers\AdmissionController::class, 'index'])->name('admissions.index');
 
-    Route::get('subject-schedules', [\App\Http\Controllers\SubjectScheduleController::class, 'index'])->name('subject_schedules.index');
-
     // idk ¯\_(ツ)_/¯
-    Route::view('system-guide', 'system-guide')->name('system-guide');
+    Route::view('about', 'about')->name('about');
 });

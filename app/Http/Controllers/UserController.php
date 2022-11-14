@@ -22,7 +22,6 @@ class UserController extends Controller
     {
         return User::query()
             ->select(DB::raw("CONCAT(first_name, ' ', last_name) AS name"), 'id', 'email')
-            ->orderBy('name')
             ->when(
                 $request->search,
                 fn (Builder $query) => $query
@@ -34,6 +33,7 @@ class UserController extends Controller
                 fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
                 fn (Builder $query) => $query->limit(10)
             )
+            ->orderBy('name')
             ->get();
     }
 

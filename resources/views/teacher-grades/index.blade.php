@@ -4,11 +4,10 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="overflow-hidden w-full py-2 px-4">
-                        <div
-                            class="card-header overflow-hidden flex justify-between w-full font-semibold text-2xl text-gray-800 leading-tight py-2">
+                        <div class="card-header overflow-hidden flex justify-between w-full font-semibold text-2xl text-gray-800 leading-tight py-2">
                             {{ __('Grades') }}
                         </div>
-
+    
                         <div class="card-body">
                             @if (session('status'))
                                 <div class="alert alert-success" role="alert">
@@ -17,9 +16,9 @@
                             @endif
 
                             <div class="mb-4 flex justify-between">
-                                @livewire('teacher-grades.export')
+                                    @livewire('teacher-grades.export')
                             </div>
-
+        
                             <table class="table mb-6 pt-4 w-full">
                                 <thead>
                                     <tr>
