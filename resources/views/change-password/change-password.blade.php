@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="md:w-2/3">
                                 <input class="bg-white appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                    id="oldPasswordInput" name="old_password" type="password" placeholder="Default Password = Lastname.First letter of Firstname (ex. doe.j)">
+                                    id="oldPasswordInput" name="old_password" type="password" placeholder="Default Password = Firstname.First letter of Lastname (ex. john.d)">
                                     @error('old_password')
                                         <span class="text-red-500">{{ $message }}</span>
                                     @enderror

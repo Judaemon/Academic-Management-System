@@ -43,6 +43,9 @@
                                         <th>
                                             <x-badge class="w-full mb-2" dark md label="Fourth Quarter" />
                                         </th>
+                                        <th>
+                                            <x-badge class="w-full mb-2" dark md label="Upload Grades" />
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="mb-6 pt-4 w-full">
@@ -51,52 +54,55 @@
                                             <td>
                                                 @if ($grade->section_id)
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->section->name }}" />
                                                 @endif
                                             </td>
                                             <td>
                                                 @if ($grade->student_id)
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->student->last_name }}" />
                                                 @endif
                                             </td>
                                             <td>
                                                 @if ($grade->subject_id)
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->subject->name }}" />
                                                 @endif
                                             </td>
                                             <td>
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->first_quarter }}" />
                                             </td>
                                             <td>
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->second_quarter }}" />
                                             </td>
                                             <td>
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->third_quarter }}" />
                                             </td>
                                             <td>
                                                 <x-badge
-                                                    class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800"
+                                                    class="bg-blue-100 text-black mb-2 py-3 w-full rounded dark:bg-blue-200 dark:text-blue-800"
                                                     md label="{{ $grade->fourth_quarter }}" />
+                                            </td>
+                                            <td>
+                                                <div class="bg-blue-100 text-black mb-2 w-full rounded dark:bg-blue-200 dark:text-blue-800">
+                                                    @livewire('teacher-grades.import')
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
 
-                            <div class="mb-4 flex justify-between">
-                                @livewire('teacher-grades.import')
-                            </div>
+                            
 
                             {{ $grades->links() }}
                         </div>
