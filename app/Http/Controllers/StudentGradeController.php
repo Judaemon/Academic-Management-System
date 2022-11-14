@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Grade;
 use App\Models\Section;
 use Illuminate\Http\Request;
-use App\Exports\GradesExport;
+use App\Exports\StudentGradesExport;
 use App\Imports\GradesImport;
 use Maatwebsite\Excel\Facades\Excel;
 
