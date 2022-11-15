@@ -4,10 +4,16 @@ namespace App\Http\Livewire\StudentGrade;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\Section;
 use App\Models\Grade;
+use App\Exports\StudentGradesExport;
+
+use Maatwebsite\Excel\Facades\Excel;
+use WireUi\Traits\Actions;
+use PDF;
 use Illuminate\Database\Eloquent\Builder;
 
 class StudentGradeTable extends DataTableComponent
@@ -18,6 +24,10 @@ class StudentGradeTable extends DataTableComponent
     }
 
     protected $model = Grade::class;
+
+    public array $bulkActions = [
+        'exportPDF' => 'Export as PDF',
+    ];
 
     // public function builder(): Builder
     // {
@@ -32,6 +42,20 @@ class StudentGradeTable extends DataTableComponent
     //         ->with('grades')
     //         ->get();
     // }
+
+    public function exportPDF()
+    {   $grade = $this->getSelected();
+
+        if(!empty($grade)) {
+            $this->clearSelected();
+            return (new StudentGradesExport($grade))->download('grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        } else {
+            $this->dialog()->error(
+                $title = 'Nothing Selected',
+                $description = "Please select which students/grades to export",
+            );
+        }
+    }
 
     public function columns(): array
     {
