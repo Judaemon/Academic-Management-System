@@ -10,8 +10,6 @@ use App\Models\Admission;
 use App\Models\Section;
 use App\Models\User;
 use App\Rules\NotAdmittedForCurrentAcademicYear;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class CreateAdmission extends ModalComponent
 {
@@ -19,6 +17,10 @@ class CreateAdmission extends ModalComponent
 
     public $student_id;
     public $student;
+
+    public $latest_admission;
+
+    public $available_grade_level;
 
     public $grade_level_id;
 
@@ -42,6 +44,32 @@ class CreateAdmission extends ModalComponent
     {
         $this->student = User::query()
             ->find($this->student_id);
+
+        $this->latest_admission = Admission::query()
+            ->where('student_id', $this->student->id)
+            ->latest()->first();
+
+        if ($this->latest_admission->status == 'Passed') {
+            $this->grade_level_id = Admission::where('id', '>', $this->latest_enrollment->admit_to_grade_level)
+                ->orderBy('id')
+                ->first();
+            $this->status = "Student can enroll to the next grade level.";
+        }
+
+        if ($this->latest_admission->status == 'Admitted') {
+            $this->grade_level_id = $this->latest_admission->admit_to_grade_level;
+            $this->status = "Student already have active admission record.";
+        }
+
+        if ($this->latest_admission->status == 'Pending') {
+            $this->grade_level_id = $this->latest_admission->admit_to_grade_level;
+            $this->status = "Student already have pending admission record.";
+        }
+
+        $this->grade_level_sections = Section::query()
+            ->where('grade_level_id', $this->grade_level_id)
+            ->get()
+            ->toArray();
     }
 
     public function updatedGradeLevelId($value)

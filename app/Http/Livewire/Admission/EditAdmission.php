@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Admission;
 use App\Models\Section;
-use App\Models\User;
 
 class EditAdmission extends ModalComponent
 {

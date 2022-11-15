@@ -19,9 +19,6 @@
                                     {{ $admission->student->email }}</p>
                                 <p class="text-sm">{{ $admission->student->grade_level }}</p>
                             </div>
-                            <div class="md:col-span-1 md:col-start-3 md:row-span-2">
-                                <x-badge positive class="float-right" label="{{ $admission->student->status }}" />
-                            </div>
                             <div class="md:col-span-3 md:row-span-1 md:row-start-3 flex items-stretch">
                                 <p class="self-end"> ID: {{ $admission->student->id }}</p>
                             </div>

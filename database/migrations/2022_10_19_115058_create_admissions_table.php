@@ -10,6 +10,8 @@ return new class extends Migration
     {
         Schema::create('admissions', function (Blueprint $table) {
             $table->id();
+
+            // Pending, Admitted, Passed
             $table->string('status');
 
             $table->foreignId('academic_year_id')

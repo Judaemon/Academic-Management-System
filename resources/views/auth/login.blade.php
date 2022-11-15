@@ -17,19 +17,10 @@
                         <x-input name="email" label="Email" placeholder="caims@edu.gmail.com" autofocus />
                     </div>
 
-                    <!-- Input[ype="password"] -->
                     <div class="mb-4">
                         <x-input type="password" name="password" label="Password" placeholder="Secret Password"
                             autofocus />
                     </div>
-
-                    {{-- <div class="mt-4">
-                        <x-label for="password" />
-                        <x-input type="password"
-                                 id="password"
-                                 name="password"
-                                 class="block w-full"/>
-                    </div> --}}
 
                     <div class="flex mt-6 text-sm">
                         <x-checkbox class="text-gray-700!" name="remember_me" md label="Remember me" />
