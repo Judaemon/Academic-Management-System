@@ -11,8 +11,6 @@
     </div>
 
     <div class="datatable-container bg-white p-4 rounded-lg border shadow-xs overflow-hidden">
-        {{-- @livewire('teacher-grade.teacher-grade-table', {{ json_encode(['section' => 5]) }} ) --}}
-        <livewire:teacher-grade.teacher-grade-table section="{{ 5 }}" />
-        {{-- <livewire:teacher-grade-table section="{{ json_encode(['grade' => $value]) }}" /> --}}
+        @livewire('teacher-grade.teacher-grade-table')
     </div>
 </x-app-layout>

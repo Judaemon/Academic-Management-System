@@ -2,7 +2,7 @@
 
     @can ('view_grades')
     <x-button wire:ignore.self icon="eye" green label="View Grades"  
-        onclick="livewire.emit('openModal', 'student-grade.view-grade', {{ json_encode(['grade' => $value]) }})" 
+        onclick="livewire.emit('openModal', 'student-grade.view-grade', {{ json_encode(['admission' => $value]) }})" 
     />
     @endcan
 

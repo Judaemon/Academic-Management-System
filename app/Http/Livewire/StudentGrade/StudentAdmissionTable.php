@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\Section;
 use App\Models\Grade;
+use App\Models\Admission;
 use App\Exports\StudentGradesExport;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,32 +17,33 @@ use WireUi\Traits\Actions;
 use PDF;
 use Illuminate\Database\Eloquent\Builder;
 
-class StudentGradeTable extends DataTableComponent
+class StudentAdmissionTable extends DataTableComponent
 {
+    use Actions;
+    
+    protected $grade;
+    
+    protected $model = Grade::class;
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
     }
 
-    protected $model = Grade::class;
-
     public array $bulkActions = [
         'exportPDF' => 'Export as PDF',
     ];
 
-    // public function builder(): Builder
-    // {
-    //     $this->sections = Section::query()
-    //         ->where('teacher_id', 5)
-    //         ->firstOrFail();
+    public function builder(): Builder
+    {
+        return Admission::query()
+            ->where('student_id', auth()->user()->id);
+    }
 
-    //     $this->section_students = User::query()
-    //         ->whereHas('admission', function ($q) {
-    //             $q->where('section_id', $this->section->id);
-    //         })
-    //         ->with('grades')
-    //         ->get();
-    // }
+    public function mount($section)
+    {
+        $this->section = $section;
+    }
 
     public function exportPDF()
     {   $grade = $this->getSelected();
@@ -60,19 +62,10 @@ class StudentGradeTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Subject", "subject.name")
+            Column::make("Grade Level", "grade_level.name")
                 ->sortable()
                 ->searchable(),
-            Column::make("First Quarter", "first_quarter")
-                ->sortable()
-                ->searchable(),
-            Column::make("Second Quarter", "second_quarter")
-                ->sortable()
-                ->searchable(),
-            Column::make("Third Quarter", "third_quarter")
-                ->sortable()
-                ->searchable(),
-            Column::make("Fourth Quarter", "fourth_quarter")
+            Column::make("Academic year", "academic_year.title")
                 ->sortable()
                 ->searchable(),
             Column::make("Actions", "id")->view('livewire.student-grade.actions-col'),

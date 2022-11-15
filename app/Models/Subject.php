@@ -26,6 +26,11 @@ class Subject extends Authenticatable
         return $this->belongsTo(GradeLevel::class);
     }
 
+    public function grades()
+    {
+        return $this->hasOne(Grade::class);
+    }
+
     protected $fillable = [
         'name',
         'subject_code',

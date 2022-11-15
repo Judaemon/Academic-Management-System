@@ -23,8 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('attendance', [\App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance.index');
-
     // announcement
     Route::get('announcement', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcement.index');
     Route::get('announcement/send-mail', [\App\Http\Controllers\AnnouncementController::class, 'sendMail'])->name('announcement.mail');

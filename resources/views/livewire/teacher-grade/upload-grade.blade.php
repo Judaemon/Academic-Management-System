@@ -8,19 +8,8 @@
 
                     <div class="grid grid-cols-12 gap-2 lg:gap-4">
                         <div class="col-span-12 md:col-span-6 lg:col-span-5">
-                            <x-select
-                                wire:ignore
-                                label="Students"
-                                rightIcon="user"
-                                wire:model.defer="student_id"
-                                placeholder="Select Students"
-                                :async-data="route('users.users')"
-                                option-label="name"
-                                option-value="id"
-                                option-description="email"
-                                multiselect
-                                class="w-5/6"
-                            />
+                            <x-input readonly value="{{$student->first_name}} {{$student->last_name}}" label="Student Name:"
+                                placeholder="" />
                         </div>
                     </div>
                 </section>
@@ -30,15 +19,8 @@
 
                     <div class="grid grid-cols-12 gap-2 lg:gap-4">
                         <div class="col-span-12 md:col-span-6 lg:col-span-5">
-                            <x-select
-                                label="Subjects"
-                                placeholder="Select subjects"
-                                wire:model.defer="subjects"
-                                :async-data="route('subjects.subjects')"
-                                option-label="name"
-                                option-value="id"
-                                multiselect
-                            />
+                            <x-input wire:model.defer="grade.subject_id" label="Subjects List:"
+                                placeholder="" />
                         </div>
                     </div>
                 </section>
@@ -48,22 +30,22 @@
 
                     <div class="grid grid-cols-12 gap-2 lg:gap-4">
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="first_quarter" label="First Quarter"
+                            <x-input wire:model.defer="grade.first_quarter" label="First Quarter"
                                 placeholder="" />
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="second_quarter" label="Second Quarter"
+                            <x-input wire:model.defer="grade.second_quarter" label="Second Quarter"
                                 placeholder="" />
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="third_quarter" label="Third Quarter"
+                            <x-input wire:model.defer="grade.third_quarter" label="Third Quarter"
                                 placeholder="" />
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="fourth_quarter" label="Fourth Quarter"
+                            <x-input wire:model.defer="grade.fourth_quarter" label="Fourth Quarter"
                                 placeholder="" />
                         </div>
                     </div>

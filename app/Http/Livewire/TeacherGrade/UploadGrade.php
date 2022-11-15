@@ -5,6 +5,8 @@ namespace App\Http\Livewire\TeacherGrade;
 use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\Admission;
+use App\Models\Section;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -22,7 +24,8 @@ class UploadGrade extends ModalComponent
     public $third_quarter;
     public $fourth_quarter;
 
-    public $grade;
+    public $student;
+    public $section;
 
     protected function rules()
     {
@@ -38,6 +41,25 @@ class UploadGrade extends ModalComponent
         ];
     }
 
+    public function mount(User $student)
+    {
+        $this->student = $student;
+
+        $this->admission = Admission::query()
+            ->orderBy('created_at', 'desc')
+            ->latest()
+            ->first();
+        
+        $this->subjects = Subject::query()
+            ->where('grade_level_id', $this->admission->id)
+            ->get();
+
+        $this->section = Section::query()
+            ->where('teacher_id', auth()->user()->id)
+            ->latest()
+            ->first();
+    }
+
     public function render()
     {
         return view('livewire.teacher-grade.upload-grade');
@@ -45,6 +67,7 @@ class UploadGrade extends ModalComponent
 
     public function save(): void
     {
+        // dd($this->section);
         $this->validate();
 
         $this->dialog()->confirm([
@@ -87,6 +110,6 @@ class UploadGrade extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '3xl';
+        return '7xl';
     }
 }

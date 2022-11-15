@@ -4,6 +4,7 @@
     </div>
 
     <div class="datatable-container bg-white p-4 rounded-lg border shadow-xs overflow-hidden">
-        @livewire('student-grade.student-grade-table')
+        {{-- @livewire('student-grade.student-admission-table') --}}
+        <livewire:student-grade.student-admission-table section="{{ 12 }}" />
     </div>
 </x-app-layout>

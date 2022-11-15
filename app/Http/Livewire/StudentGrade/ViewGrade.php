@@ -5,6 +5,7 @@ namespace App\Http\Livewire\StudentGrade;
 use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\Admission;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -14,6 +15,8 @@ class ViewGrade extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $grade;
+    public $subjects;
+    public $admission;
 
     protected function rules()
     {
@@ -27,10 +30,21 @@ class ViewGrade extends ModalComponent
         ];
     }
 
-    public function mount(Grade $grade)
+    public function mount(Admission $admission)
     {
-        $this->grade = $grade;
+        $this->admission = $admission;
+        $this->subjects = Subject::query()
+            ->where('grade_level_id', $admission->admit_to_grade_level)
+            ->with(['grades' => function ($q) use($admission) {
+                    $q->where('student_id', $admission->student_id);
+            }])
+            ->get();
     }
+
+    // public function test()
+    // {
+    //     dd($this->subjects);
+    // }
 
     public function render()
     {
@@ -39,6 +53,6 @@ class ViewGrade extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '3xl';
+        return '7xl';
     }
 }
