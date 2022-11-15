@@ -43,7 +43,7 @@
                 </li>
             @endcan
 
-            {{-- need can and endcan for admission --}}
+            @role('Admin')
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('admissions.index') }}" :active="request()->routeIs('admissions.index')">
                     <x-slot name="icon">
@@ -56,7 +56,9 @@
                     {{ __('Admission') }}
                 </x-nav-link>
             </li>
+            @endrole
 
+            @role('Student')
             @can('view_grades')
                 <li class="relative px-6 py-3">
                     <x-nav-link href="{{ route('student_grades.index') }}" :active="request()->routeIs('student_grades.index')">
@@ -70,7 +72,9 @@
                     </x-nav-link>
                 </li>
             @endcan
+            @endrole
 
+            @role('Teacher')
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('teacher_grades.index') }}" :active="request()->routeIs('teacher_grades.index')">
                     <x-slot name="icon">
@@ -82,6 +86,7 @@
                     {{ __('Assign Grades') }}
                 </x-nav-link>
             </li>
+            @endrole
             
             @can('view_attendance')
                 <li class="relative px-6 py-3">

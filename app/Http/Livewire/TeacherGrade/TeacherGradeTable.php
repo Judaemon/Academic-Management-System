@@ -18,12 +18,15 @@ use Illuminate\Database\Eloquent\Builder;
 
 class TeacherGradeTable extends DataTableComponent
 {
+
+    protected $section;
+    
     public function configure(): void
     {
         $this->setPrimaryKey('id');
     }
 
-    protected $model = Grade::class;
+    //protected $model = Grade::class;
 
     public array $bulkActions = [
         'exportXLSX' => 'Export as XLSX',
@@ -31,18 +34,31 @@ class TeacherGradeTable extends DataTableComponent
         'exportPDF' => 'Export as PDF',
     ];
 
+    public function builder(): Builder
+    {
+        // $this->sections = Section::query()
+        //     ->where('teacher_id', 5)
+        //     ->firstOrFail();
+
+        return User::query()
+            ->whereHas('admission', function ($q) {
+                $q->where('section_id', $this->section);
+            });
+    }
+
+    public function mount($section)
+    {
+        $this->section = $section;
+    }
+
     // public function builder(): Builder
     // {
-    //     $this->sections = Section::query()
-    //         ->where('teacher_id', 5)
-    //         ->firstOrFail();
-
-    //     $this->section_students = User::query()
-    //         ->whereHas('admission', function ($q) {
-    //             $q->where('section_id', $this->section->id);
-    //         })
-    //         ->with('grades')
-    //         ->get();
+    //     return Subject::query()
+    //         ->whereHas('grade_level', function ($q) {
+    //             $q->whereHas('program', function ($q) {
+    //                 $q->where('isEnabled', true);
+    //             });
+    //         });
     // }
 
     public function exportXLSX()
@@ -92,24 +108,24 @@ class TeacherGradeTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Student", "student.last_name")
+            Column::make("Student", "first_name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Subject", "subject.name")
-                ->sortable()
-                ->searchable(),
-            Column::make("First Quarter", "first_quarter")
-                ->sortable()
-                ->searchable(),
-            Column::make("Second Quarter", "second_quarter")
-                ->sortable()
-                ->searchable(),
-            Column::make("Third Quarter", "third_quarter")
-                ->sortable()
-                ->searchable(),
-            Column::make("Fourth Quarter", "fourth_quarter")
-                ->sortable()
-                ->searchable(),
+            // Column::make("Subject", "id")
+            //     ->sortable()
+            //     ->searchable(),
+            // Column::make("First Quarter", "first_quarter")
+            //     ->sortable()
+            //     ->searchable(),
+            // Column::make("Second Quarter", "second_quarter")
+            //     ->sortable()
+            //     ->searchable(),
+            // Column::make("Third Quarter", "third_quarter")
+            //     ->sortable()
+            //     ->searchable(),
+            // Column::make("Fourth Quarter", "fourth_quarter")
+            //     ->sortable()
+            //     ->searchable(),
             Column::make("Actions", "id")->view('livewire.teacher-grade.actions-col'),
         ];
     }
