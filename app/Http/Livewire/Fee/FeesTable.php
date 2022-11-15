@@ -12,10 +12,15 @@ class FeesTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id');        
+        
+        $this->setThAttributes(function(Column $column) {
+            if ($column->getTitle() == "Actions") {
+                return ['class' => 'text-center',];
+            } 
+            return [];
+        });
     }
-
-    //add grade_level_filter multi (use checkbox)
 
     public function columns(): array
     {

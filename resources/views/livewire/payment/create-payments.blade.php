@@ -1,23 +1,25 @@
 <div wire:ignore.self>
   <div wire:loading.flex wire:target="submit">
-    <div class="w-full h-96 flex justify-center items-center">
-      <div class="space-y-8">
-        <div style="color:#012560" class="la-line-spin-clockwise-fade la-3x">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+    <div class="w-full h-96 flex justify-center items-center space-y-8">
+      <div>
+        <div class="w-full flex justify-center pb-10">
+          <div style="color:#012560" class="la-line-spin-clockwise-fade la-3x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>  
         </div>
-        <div class="text-center text-2xl font-bold uppercase">loading</div>
+        <div class="text-center text-2xl font-bold uppercase">Processing Payment....</div>
       </div>
     </div>
   </div>
 
-  <div wire:loading.class="hidden" wire:target="submit" >
+  <div wire:loading.class="hidden" wire:target="submit">
     <x-card title="Create Payment Record">
       <form wire:submit.prevent="save">
         <div class="grid grid-cols-1 px-4 py-2">
@@ -52,8 +54,8 @@
             </div>
           </div>
 
-          <div class="{{ $isNull ? 'hidden' : 'block col-span-4 mb-8' }}">
-            @if(!empty($school_fees))
+          @if(!empty($school_fees))
+            <div class="block col-span-4 mb-8">
               @if($school_fees->count() > 0)
                 <table class="w-full text-xs text-left text-gray-500 rounded-t-2">
                   <thead class="text-xs text-black uppercase bg-gray-200">
@@ -76,15 +78,15 @@
                   </tbody>
                 </table>
               @endif
-            @endif
-          </div>
+            </div>
+          @endif
 
           <div class="col-span-4 mb-6">
             <div class="text-sm uppercase mb-3">In Payment of</div>
             <div class="flex flex-col space-y-2 ml-4">
               @if(!empty($total))
                 <div>
-                  @if(!empty($latest) && $latest->balance === '0.00')
+                  @if(!empty($latest) && $latest->balance === '0.00' && $latest->payment_status !== "Refunded")
                     <div class="flex">
                       <x-radio id="radio" disabled />
                       <span class="ml-2 py-0.5 px-4 shadow-md rounded-full bg-green-200 text-green-500 font-semibold text-xs ">

@@ -14,6 +14,7 @@ use App\Models\Fee;
 use App\Notifications\PaymentNotification;
 
 use Auth;
+use Carbon\Carbon;
 
 class CreatePayments extends ModalComponent
 {
@@ -70,11 +71,14 @@ class CreatePayments extends ModalComponent
                 $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
                 $this->total = $this->school_fees->sum('amount');
 
-                $this->latest = Payments::latest('created_at')
+                $this->latest = Payments::where('payment_status', 'Paid')
                                           ->where('user_id', $user->student_id)
+                                          ->latest('created_at')
                                           ->whereNotNull('balance')
                                           ->first();
+
                 $this->history = Payments::where('user_id', $user->student_id)
+                                           ->where('payment_status', 'Paid')
                                            ->whereNotNull('balance')
                                            ->get();
             } else {
@@ -183,18 +187,27 @@ class CreatePayments extends ModalComponent
     public function sendMail()
     {
         $user = User::find($this->name);
+
+        if(!empty($this->fee_id)) {
+            $type = Fee::select('fee_name')->where('id', $this->fee_id)->first();
+        } else {
+            $type = $this->others;
+        }
+
         $payment = [
             'name' => $this->name,
             'accountant' => Auth::user()->id,
             'amount_paid' => $this->amount_paid,
-            'fee' => $this->school_fee,
+            'payment_type' => $type,
             'method' => $this->method,
             'balance' => $this->balance,
             'academic_year' => $this->academic_year,
             'status' => $this->status,
         ];
 
-        Notification::sendNow($user, new PaymentNotification($payment));
+        $message = "We would like to inform you that your payment for <b>".$type."</b> has been processed this <b>".Carbon::today()->format('F j\, Y')."</b>.";
+
+        Notification::sendNow($user, new PaymentNotification($payment, $message));
     }
 
     public static function closeModalOnClickAway(): bool

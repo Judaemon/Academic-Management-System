@@ -4,19 +4,24 @@ namespace App\Http\Livewire\Payments;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-
-use App\Models\Payments;
-
-use App\Exports\PaymentsExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
+use App\Models\AcademicYear;
+use App\Models\Payments;
+use App\Models\User;
+
+use App\Exports\PaymentsExport;
+use App\Notifications\PaymentNotification;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Eloquent\Builder;
+
 use WireUi\Traits\Actions;
-use PDF;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Notification;
 
 class PaymentsTable extends DataTableComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     protected $model = Payments::class;
 
@@ -29,28 +34,13 @@ class PaymentsTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-    }
 
-    public function filters(): array
-    {
-        $payment_status = ['Paid', 'Pending', 'Refunded'];
-
-        $academic_year = [];
-
-        return [
-            SelectFilter::make('Payment Status')
-                ->options($payment_status)
-                ->filter(function(Builder $builder, string $value) {
-                    $builder->where('payment_status', $value);
-                }),
-
-            SelectFilter::make('Academic Year')
-                ->options([
-                    '' => 'All',
-                    'yes' => 'Yes',
-                    'no' => 'No',
-                ]),
-        ];
+        $this->setThAttributes(function(Column $column) {
+            if ($column->isField('payment_status')) {
+                return ['class' => 'flex justify-center mt-1',];
+            } 
+            return ['class' => 'text-center',];
+          });       
     }
 
     public function exportXLSX()
@@ -84,7 +74,8 @@ class PaymentsTable extends DataTableComponent
     }
 
     public function exportPDF()
-    {   $payments = $this->getSelected();
+    {   
+        $payments = $this->getSelected();
 
         if(!empty($payments)) {
             $this->clearSelected();
@@ -103,28 +94,136 @@ class PaymentsTable extends DataTableComponent
             Column::make("Id")
                 ->sortable(),
 
-            Column::make("First Name", "user.first_name")
+            Column::make("Name", "user_id")
                 ->sortable()
-                ->searchable(),
+                ->searchable(fn(Builder $query, $term) => 
+                        $query->whereHas('user', function($query) use ($term) {
+                            $query->where('first_name', 'like', '%'.$term.'%')
+                                  ->orWhere('last_name', 'like', '%'.$term.'%');
+                        })
+                    )
+                ->format(fn($value, $row) => $row->user->first_name.' '.$row->user->last_name )
+                ->eagerLoadRelations(),
 
-            Column::make("Last Name", "user.last_name")
+            Column::make("Status", "payment_status")
                 ->sortable()
-                ->searchable(),
-
+                ->format(function($value) {
+                    if($value === 'Pending') {
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-indigo-300 text-indigo-700 font-bold text-xs uppercase">'.$value.'</div>';
+                    } if($value === 'Paid') {
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-green-300 text-green-700 font-bold text-xs uppercase">'.$value.'</div>';
+                    } else {
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-red-300 text-red-700 font-bold text-xs uppercase">'.$value.'</div>';
+                    }
+                  })
+                ->html(),
+            
             Column::make("Payment Date", "created_at")
                 ->sortable()
                 ->format(fn ($value) => date('F j, Y', strtotime($value)))
                 ->collapseOnMobile(),
 
-            Column::make("Status", "payment_status")
-                ->sortable()
-                ->collapseOnMobile(),
-
             Column::make("Actions")
-                ->label(
-                    fn ($row, Column $column) => view('livewire.payment.actions-col')->withRow($row)
-                )
+                ->label(fn ($row, Column $column) => view('livewire.payment.actions-col')->withRow($row))
                 ->collapseOnMobile(),
         ];
+    }
+
+    public function filters(): array
+    {
+        return [
+            SelectFilter::make('Payment Status')
+                ->options([
+                    '' => 'All',
+                    'Paid' => 'Paid', 
+                    'Pending' => 'Pending', 
+                    'Refunded' => 'Refunded'
+                ])
+                ->filter(function(Builder $builder, string $value) {
+                    if ($value === 'Paid') {
+                        $builder->where('payment_status', 'Paid');
+                    } else if ($value === 'Pending') {
+                        $builder->where('payment_status', 'Pending');
+                    } else {
+                        $builder->where('payment_status', 'Refunded');
+                    }
+                }),
+        ];
+    }
+
+    public function builder(): Builder
+    {
+        return Payments::whereHas('academic_year', function($query) {
+                $query->where('status', "Ongoing");
+            });
+    }
+
+    public function refund($id)
+    {
+        if($this->authorize('update_payment')) {
+            $this->dialog()->confirm([
+                'title'       => 'Are you Sure?',
+                'description' => "This payment will be recorded as Refunded",
+                'icon'        => 'warning',
+                'accept'      => [
+                    'label'  => 'Yes, refund',
+                    'method' => 'update',
+                    'params' => $id,
+                ],
+                'reject' => [
+                    'label'  => 'No, cancel',
+                    'method' => '',
+                ],
+            ]);
+        } else {
+            $this->dialog()->error(
+                $title = 'Access Denied',
+                $description = "Current user does not have the permission to update the record",
+            );
+        }
+    }
+
+    public function update($id)
+    {
+        $payments = Payments::find($id);
+
+        $payments->forceFill([
+            'payment_status' => "Refunded",
+        ])->save();
+
+        $this->sendMail($payments);
+
+        $this->emit('refreshDatatable');
+    
+        $this->dialog()->success(
+            $title = 'Success!',
+            $description = 'Record is now successfully updated. Payment is Refunded.'
+        );
+    }
+
+    public function sendMail(Payments $payments)
+    {
+        $user = User::find($payments->user_id);
+
+        if(!empty($payments->fee_id)) {
+            $type = $payments->fee->fee_name;
+        } else {
+            $type = $payments->others;
+        }
+        
+        $payment = [
+            'name' => $payments->user_id,
+            'accountant' => $payments->accountant_id,
+            'amount_paid' => $payments->amount_paid,
+            'payment_type' => $type,
+            'method' => $payments->payment_method,
+            'balance' => $payments->balance,
+            'academic_year' => $payments->academic_year_id,
+            'status' => $payments->payment_status,
+        ];
+
+        $message = "We would to inform you that your request for a refund for your payment in <b>".$type."</b> with the amount of <b> Php ".number_format($payments->amount_paid, 2)."</b> is now being processed.";
+
+        Notification::sendNow($user, new PaymentNotification($payment, $message));
     }
 }
