@@ -34,11 +34,11 @@ Route::middleware('auth')->group(function () {
 
     // teacher & student grades export/import
     Route::get('teacher-grades', [\App\Http\Controllers\TeacherGradeController::class, 'index'])->name('teacher_grades.index');
-    Route::get('teacher-grades/export', \App\Http\Livewire\TeacherGrades\Export::class)->name('teacher_grades.export');
-    Route::put('teacher-grades/import', \App\Http\Livewire\TeacherGrades\Import::class)->name('teacher_grades.import');
+    Route::get('teacher-grades/export', \App\Http\Livewire\TeacherGrade\Export::class)->name('teacher_grades.export');
+    Route::put('teacher-grades/import', \App\Http\Livewire\TeacherGrade\Import::class)->name('teacher_grades.import');
 
     Route::get('student-grades', [\App\Http\Controllers\StudentGradeController::class, 'index'])->name('student_grades.index');
-    Route::get('student-grades/export', \App\Http\Livewire\StudentGrades\Export::class)->name('student_grades.export');
+    Route::get('student-grades/export', \App\Http\Livewire\StudentGrade\Export::class)->name('student_grades.export');
 
     // settings
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');

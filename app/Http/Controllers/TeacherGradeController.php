@@ -14,20 +14,7 @@ class TeacherGradeController extends Controller
 {
     public function index()
     {
-        $grades = Grade::with('user')->simplePaginate(10);
-
-        return view('teacher-grades.index', compact('grades'));
-
-        $this->sections = Section::query()
-            ->where('teacher_id', 5)
-            ->firstOrFail();
-
-        $this->section_students = User::query()
-            ->whereHas('admission', function ($q) {
-                $q->where('section_id', $this->section->id);
-            })
-            ->with('grades')
-            ->get();
+        return view('teacher-grades.index');
     }
 
     public function export()

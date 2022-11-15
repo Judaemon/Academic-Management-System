@@ -20,7 +20,6 @@ class SectionTable extends DataTableComponent
         // $this->setSearchDebounce(1000);
     }
 
-    // FILTER NEEDS FIXING/CHECKING
     public function filters(): array
     {
         $option = GradeLevel::query()

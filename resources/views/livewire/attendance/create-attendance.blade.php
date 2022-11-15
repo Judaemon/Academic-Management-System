@@ -2,6 +2,14 @@
     <x-card title="Create Attendance">
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-1 p-4">
+
+                <div class="col-span-12 flex flex-row space-x-6 mb-5">
+                    <x-select label="Status" wire:model.defer="status" placeholder="Select Status">
+                        <x-select.option label="Present" value="Present" />
+                        <x-select.option label="Absent" value="Absent" />
+                    </x-select>
+                </div>
+                
                 <div class="col-span-12 flex flex-row space-x-6 mb-5">
                     <div class="w-1/2">
                         <x-datetime-picker
@@ -10,13 +18,6 @@
                             label="Date" 
                         />
                     </div>
-                </div>
-
-                <div class="col-span-12 flex flex-row space-x-6 mb-5">
-                    <x-select label="Status" wire:model.defer="status" placeholder="Select Status">
-                        <x-select.option label="Present" value="Present" />
-                        <x-select.option label="Absent" value="Absent" />
-                    </x-select>
                 </div>
 
                 <div class="col-span-12">
