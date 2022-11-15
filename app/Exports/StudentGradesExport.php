@@ -3,56 +3,57 @@
 namespace App\Exports;
 
 use App\Models\Grade;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-
-class GradesExport implements FromQuery, WithHeadings, WithMapping
+class StudentGradesExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths
 {
     use Exportable;
 
-    public function query()
-    {
-        return Grade::query()->with('user');
+    public $grade;
+
+    public function __construct($grade) {
+        $this->grade = $grade;
     }
 
-    public function headings(): array
-    {
-        return [
+    public function headings():array{
+        return[
             'Subject',
             'First Quarter',
             'Second Quarter',
             'Third Quarter',
             'Fourth Quarter',
-            //'Average Grade',
+        ];
+    } 
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 10, 
+            'B' => 18,
+            'C' => 18,   
+            'D' => 18, 
+            'E' => 18,     
         ];
     }
 
-    public function map($grade): array
+    public function styles(Worksheet $sheet)
     {
         return [
-            //$grade->user->last_name,
-            $grade->subject_id,
-            $grade->first_quarter,
-            $grade->second_quarter,
-            $grade->third_quarter,
-            $grade->fourth_quarter,
-            //$grade->average_grade,
+            'A1:E1' => [ 'font' => ['bold' => true ]],
+            'A1:E1' => [ 'font' => ['size' => 14 ]],
         ];
     }
 
-    public function fields(): array
+    public function collection()
     {
-        return [
-            'subject_id',
-            'first_quarter',
-            'second_quarter',
-            'third_quarter',
-            'fourth_quarter',
-            //'average_grade',
-        ];
+        return Grade::select('subject_id', 'first_quarter', 'second_quarter', 'third_quarter', 'fourth_quarter')
+                         ->whereIn('id', $this->grade)
+                         ->get();
     }
 }

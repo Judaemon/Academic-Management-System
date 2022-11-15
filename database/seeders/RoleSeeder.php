@@ -37,24 +37,15 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Teacher'])
             ->syncPermissions([
-                // for viewing students (?)
                 'view_users',
                 'read_user',
 
-                // can CRUD grades
-                //'view_grades',
                 'assign_grades',
                 
                 'create_grade',
                 'read_grade',
                 'update_grade',
                 'delete_grade',
-
-                'view_attendance',
-                'create_attendances',
-                'read_attendances',
-                'update_attendances',
-                'delete_attendances',
 
                 'change_password',
             ]);
@@ -78,15 +69,11 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Student'])
             ->syncPermissions([
-                // view or read only
-                'view_users',
-                'read_user',
-
                 'view_grades',
                 'read_grade',
 
-                'view_sections',
-                'read_section',
+                'view_users',
+                'read_user',
 
                 'change_password',
             ]);

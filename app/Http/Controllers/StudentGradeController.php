@@ -14,9 +14,7 @@ class StudentGradeController extends Controller
 {
     public function index()
     {
-        $grades = Grade::with('user')->simplePaginate(10);
-
-        return view('student-grades.index', compact('grades'));
+        return view('student-grades.index');
     }
 
     public function export()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\TeacherGrades;
+namespace App\Http\Livewire\StudentGrade;
 
 use Livewire\Component;
 use App\Jobs\ExportJob;
@@ -15,7 +15,7 @@ class Export extends Component
 
     public function render()
     {
-        return view('livewire.teacher-grade.export');
+        return view('livewire.student-grade.export');
     }
 
     public function export()
