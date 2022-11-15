@@ -4,43 +4,49 @@ namespace App\Http\Livewire\Payments;
 
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Admission;
 use App\Models\Payments;
 use App\Models\User;
 use App\Models\Fee;
+use App\Notifications\PaymentNotification;
 
 use Auth;
+use Carbon\Carbon;
 
 class CreatePayments extends ModalComponent
 {
     use AuthorizesRequests, Actions;
 
     public $name;
+    public $academic_year;
     public $amount_paid;
-    public $payment_method;
+    public $method;
     public $balance;
     public $school_fee;
     public $others;
+    public $status;
 
     public $total;
-    public $payment_options;
-    public $payment_history_latest;
+    public $options;
+    public $latest;
 
     public $isNull = true;
 
     public $school_fees;
-    public $payment_history;
+    public $history;
 
     protected function rules()
     {
         return [
             'name' => ['required', 'unique:users,id,'.$this->name],
+            'academic_year' => ['required', 'unique:academic_years,id,'.$this->academic_year],
             'amount_paid' => ['required', 'numeric'],
             'school_fee' => ['nullable', 'unique:fees,id,'.$this->school_fee],
             'balance' => ['nullable', 'numeric'],
-            'payment_method' => ['required'],
+            'method' => ['required'],
             'others' => ['nullable'],
         ];
     }
@@ -65,13 +71,16 @@ class CreatePayments extends ModalComponent
                 $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
                 $this->total = $this->school_fees->sum('amount');
 
-                $this->payment_history_latest = Payments::latest('created_at')
-                                                          ->where('user_id', $user->student_id)
-                                                          ->whereNotNull('balance')
-                                                          ->first();
-                $this->payment_history = Payments::where('user_id', $user->student_id)
-                                                   ->whereNotNull('balance')
-                                                   ->get();
+                $this->latest = Payments::where('payment_status', 'Paid')
+                                          ->where('user_id', $user->student_id)
+                                          ->latest('created_at')
+                                          ->whereNotNull('balance')
+                                          ->first();
+
+                $this->history = Payments::where('user_id', $user->student_id)
+                                           ->where('payment_status', 'Paid')
+                                           ->whereNotNull('balance')
+                                           ->get();
             } else {
                 $this->isNull = true;
                 $this->total = NULL;
@@ -82,14 +91,13 @@ class CreatePayments extends ModalComponent
         }
     }
 
-    public function updatedPaymentOptions()
+    public function updatedOptions()
     {
-        if($this->payment_options === 'by total') {
+        if($this->options === 'total fee') {
             $this->school_fee = NULL;
-        } else if($this->payment_options === 'other fees') {
-            $this->value = "School Fees";
+        } else if($this->options === 'other fees') {
             $this->others = NULL;
-        } else if($this->payment_options === 'others') {
+        } else if($this->options === 'others') {
             $this->school_fee = NULL;
         } else {
             $this->school_fee = NULL;
@@ -99,20 +107,33 @@ class CreatePayments extends ModalComponent
 
     public function updatedAmountPaid()
     {
-        if(!empty($this->amount_paid) && $this->payment_options === 'by total') {
-            if(!empty($this->payment_history_latest->balance) && $this->payment_history_latest->balance !== '0.00') {
-                $this->balance = floatval($this->payment_history_latest->balance - $this->amount_paid);              
+        if(!empty($this->amount_paid) && $this->options === 'total fee') {
+            if(!empty($this->latest->balance) && $this->latest->balance !== '0.00') {
+                $this->balance = floatval($this->latest->balance - $this->amount_paid);              
             } else {
                 $this->balance = floatval($this->total - $this->amount_paid);
             }
 
             if($this->balance > 0){
-                $this->others = "Partial Payment - Balance(Php ".number_format($this->balance, 2).")";
+                $this->others = "Total Fee - Partial Payment";
             } else {
-                $this->others = "Full Payment (Php ".number_format($this->total, 2).")";
+                $this->others = "Total Fee - Full Payment";
             }
         } else {
             $this->balance = NULL;
+        }
+    }
+
+    public function updatedMethod()
+    {
+        if(!empty($this->method)) {
+            if($this->method === 'Over the Counter') {
+                $this->status = "Paid";
+            } else {
+                $this->status = "Pending";
+            }
+        } else {
+            $this->status = NULL;
         }
     }
 
@@ -142,10 +163,16 @@ class CreatePayments extends ModalComponent
             'accountant_id' => Auth::user()->id,
             'amount_paid' => $this->amount_paid,
             'fee_id' => $this->school_fee,
-            'payment_method' => $this->payment_method,
+            'payment_method' => $this->method,
             'balance' => $this->balance,
             'others' => $this->others,
+            'academic_year_id' => $this->academic_year,
+            'payment_status' => $this->status,
         ]);
+
+        if($this->status === 'Paid') {
+            $this->sendMail();
+        }
     
         $this->emit('refreshDatatable');
 
@@ -155,6 +182,37 @@ class CreatePayments extends ModalComponent
             $title = 'Successful!',
             $description = 'Payment has been Recorded.'
         );
+    }
+
+    public function sendMail()
+    {
+        $user = User::find($this->name);
+
+        if(!empty($this->fee_id)) {
+            $type = Fee::select('fee_name')->where('id', $this->fee_id)->first();
+        } else {
+            $type = $this->others;
+        }
+
+        $payment = [
+            'name' => $this->name,
+            'accountant' => Auth::user()->id,
+            'amount_paid' => $this->amount_paid,
+            'payment_type' => $type,
+            'method' => $this->method,
+            'balance' => $this->balance,
+            'academic_year' => $this->academic_year,
+            'status' => $this->status,
+        ];
+
+        $message = "We would like to inform you that your payment for <b>".$type."</b> has been processed this <b>".Carbon::today()->format('F j\, Y')."</b>.";
+
+        Notification::sendNow($user, new PaymentNotification($payment, $message));
+    }
+
+    public static function closeModalOnClickAway(): bool
+    {
+        return false;
     }
 
     public static function modalMaxWidth(): string

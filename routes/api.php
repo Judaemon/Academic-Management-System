@@ -5,6 +5,8 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FeesController;
+use App\Http\Controllers\AcademicYearController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +25,5 @@ Route::get('subjects', [SubjectController::class, 'subjects'])->name('subjects.s
 Route::get('grade_level', [GradeLevelController::class, 'grade_level'])->name('grade_level.grade_level');
 
 Route::get('fees', [FeesController::class, 'fees'])->name('other.fees');
+
+Route::get('academic_year', [AcademicYearController::class, 'academic_year'])->name('api.academic_year');
