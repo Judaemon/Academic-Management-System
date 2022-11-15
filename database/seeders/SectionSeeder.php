@@ -29,7 +29,7 @@ class SectionSeeder extends Seeder
         Section::create([
             'name' => 'Yellow',
             'capacity' => '15',
-            'teacher_id' => 1,
+            'teacher_id' => '7',
             'grade_level_id' => 2,
         ]);
 

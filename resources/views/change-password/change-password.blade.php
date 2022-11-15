@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="px-2 py-2 -mx-2">
                                     <div class="mx-2">
-                                        <span class="font-semibold text-blue-700 text-base">Hello, {{ auth()->user()->first_name }}. You are updating your password.</span>
+                                        <span class="font-semibold text-blue-700 text-base">Hello, {{ auth()->user()->first_name }}! Please update your password immediately.</span>
                                     </div>
                                 </div>
                         </div>
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="md:w-2/3">
                                 <input class="bg-white appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                    id="oldPasswordInput" name="old_password" type="password" placeholder="">
+                                    id="oldPasswordInput" name="old_password" type="password" placeholder="Default Password = Firstname.First letter of Lastname (ex. john.d)">
                                     @error('old_password')
                                         <span class="text-red-500">{{ $message }}</span>
                                     @enderror

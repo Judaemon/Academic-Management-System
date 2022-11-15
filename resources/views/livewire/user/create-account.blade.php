@@ -135,9 +135,15 @@
                     <h1><strong>VI. GOVERNMENT ID NO.</strong></h1>
                 </div>
 
-                <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="pag_ibig" label="Pag-IBIG" placeholder="" />
-                </div>
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-8">
+                            <x-input wire:model.defer="password" label="Password"
+                                placeholder="employee's password" />
+                            <p>*if empty will use default password</p>
+                            <p>
+                                *default password = "complete last name"."first letter of first name"
+                            </p>
+                        </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="philhealth" label="PhilHealth" placeholder="" />

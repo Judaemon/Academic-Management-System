@@ -15,6 +15,61 @@ class EditUser extends ModalComponent
 
     protected function rules()
     {
+        if ($this->user->hasRole('Student')) {
+            return [
+                // personal info
+                'user.first_name' => ['required'],
+                'user.middle_name' => ['nullable'],
+                'user.last_name' => ['required'],
+                'user.suffix' => ['nullable'],
+
+                'user.birth_date' => ['required'],
+                'user.birth_place' => ['required'],
+                'user.nationality' => ['required'],
+                'user.gender' => ['required'],
+                'user.religion' => ['nullable'],
+                'user.mother_tongue' => ['required'],
+
+                // physical info
+                'user.height' => ['nullable'],
+                'user.weight' => ['nullable'],
+                'user.pwd_id' => ['nullable', 'unique:users,pwd_id,' . $this->user->id],
+
+                // contact info
+                'user.email' => ['required', 'unique:users,email,' . $this->user->id],
+                'user.mobile_number' => ['required', 'unique:users,mobile_number,' . $this->user->id],
+                'user.address' => ['required'],
+
+                // educational background
+                'user.kinder_name' => ['nullable'],
+                'user.kinder_grad_date' => ['sometimes'],
+                'user.elementary_name' => ['nullable'],
+                'user.elementary_grad_date' => ['sometimes'],
+                'user.junior_high_name' => ['nullable'],
+                'user.junior_high_grad_date' => ['sometimes'],
+
+                // academic info
+                'user.lrn' => ['nullable', 'unique:users,lrn'],
+                'user.esc' => ['nullable', 'unique:users,esc'],
+                'user.qvr' => ['nullable', 'unique:users,qvr'],
+
+                'user.mother_name' => ['nullable'],
+                'user.mother_number' => ['nullable', 'unique:users,mother_number,' . $this->user->id],
+                'user.mother_email' => ['nullable'],
+                'user.mother_address' => ['nullable'],
+
+                'user.father_name' => ['nullable'],
+                'user.father_number' => ['nullable', 'unique:users,father_number,' . $this->user->id],
+                'user.father_email' => ['nullable'],
+                'user.father_address' => ['nullable'],
+
+                'user.emergency_contact_name' => ['required'],
+                'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number,' . $this->user->id],
+                'user.emergency_contact_address' => ['required'],
+                'user.emergency_contact_relationship' => ['required'],
+            ];
+        }
+
         return [
             // personal info
             'user.first_name' => ['required'],
@@ -25,7 +80,7 @@ class EditUser extends ModalComponent
             'user.suffix' => ['nullable'],
             'user.birth_date' => ['required'],
             'user.birth_place' => ['required'],
-            'user.religion' => ['required'],
+            'user.religion' => ['nullable'],
             'user.gender' => ['required'],
             'user.mother_tongue' => ['required'],
             'user.nationality' => ['required'],

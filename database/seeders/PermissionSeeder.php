@@ -130,7 +130,8 @@ class PermissionSeeder extends Seeder
         }
 
         $teacher_permissions = [
-            'view_grades',
+            //'view_grades',
+            'assign_grades',
             'create_grade',
             'read_grade',
             'update_grade',
@@ -141,6 +142,12 @@ class PermissionSeeder extends Seeder
 
             'view_users',
             'read_user',
+
+            'view_attendance',
+            'create_attendances',
+            'read_attendances',
+            'update_attendances',
+            'delete_attendances',
 
             'change_password',
         ];
