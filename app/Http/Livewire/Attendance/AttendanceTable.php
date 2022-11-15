@@ -21,7 +21,8 @@ class AttendanceTable extends DataTableComponent
         return [
             Column::make("Date", "attendance_date")
                 ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->format(fn($value) => date('F j, Y', strtotime($value))),
 
             Column::make("Status", "status")
                 ->searchable()

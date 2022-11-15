@@ -23,7 +23,7 @@ class CreateAttendance extends ModalComponent
     protected function rules()
     {
         return [
-            'attendance_date' => ['required'],
+            'attendance_date' => ['required', 'date'],
             'status' => ['nullable'],
             'student_id' => ['nullable'],
         ];
@@ -67,7 +67,7 @@ class CreateAttendance extends ModalComponent
         $this->authorize('create_attendance');
 
         Attendance::create([
-            'attendance_date' => $this->attendance_date,
+            'attendance_date' => Carbon::parse($this->attendance_date)->toDateString(),
             'status' => $this->status,
             'student_id' => $this->student_id,
         ]);

@@ -14,7 +14,7 @@ return new class extends Migration
 
             $table->date('attendance_date');
             
-            $table->date('status')->nullable();
+            $table->string('status')->nullable();
 
             $table->foreignId('student_id')
                 ->nullable()
