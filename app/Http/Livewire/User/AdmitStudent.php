@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Twilio\Rest\Client;
 
 class AdmitStudent extends ModalComponent
 {
@@ -419,7 +420,7 @@ class AdmitStudent extends ModalComponent
 
         // Granting the Student role to the newly created user
         $user->assignRole('Student');
-
+        $this->sendMessage('Account registration successful!', '+63 976 054 2645');
         // if isTransferee == false
         if ($this->isTransferee == false) {
             $this->grade_level = $this->program->starting_grade_level_id;
@@ -436,6 +437,8 @@ class AdmitStudent extends ModalComponent
             'section_id' => $this->section,
         ]);
 
+        $this->sendMessage('Your Admission has been recorded!', '+63 976 054 2645');
+
         $this->closeModal();
 
         $this->emit('refreshDatatable');
@@ -449,5 +452,17 @@ class AdmitStudent extends ModalComponent
     public static function modalMaxWidth(): string
     {
         return '7xl';
+    }
+
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            $recipients,
+            ['from' => $twilio_number, 'body' => $message]
+        );
     }
 }
