@@ -12,9 +12,7 @@ use App\Models\Grade;
 use App\Models\Admission;
 use App\Exports\StudentGradesExport;
 
-use Maatwebsite\Excel\Facades\Excel;
 use WireUi\Traits\Actions;
-use PDF;
 use Illuminate\Database\Eloquent\Builder;
 
 class StudentAdmissionTable extends DataTableComponent
@@ -30,10 +28,6 @@ class StudentAdmissionTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
-    public array $bulkActions = [
-        'exportPDF' => 'Export as PDF',
-    ];
-
     public function builder(): Builder
     {
         return Admission::query()
@@ -43,20 +37,6 @@ class StudentAdmissionTable extends DataTableComponent
     public function mount($section)
     {
         $this->section = $section;
-    }
-
-    public function exportPDF()
-    {   $grade = $this->getSelected();
-
-        if(!empty($grade)) {
-            $this->clearSelected();
-            return (new StudentGradesExport($grade))->download('grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-        } else {
-            $this->dialog()->error(
-                $title = 'Nothing Selected',
-                $description = "Please select which students/grades to export",
-            );
-        }
     }
 
     public function columns(): array

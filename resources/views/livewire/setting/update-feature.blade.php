@@ -2,7 +2,7 @@
     <div class="lg:flex">
         <div class="mb-2 lg:w-1/3 lg:pr-4">
             <h2 class="text-lg font-medium text-text">Features</h2>
-            <p class="text-sm text-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, ea?
+            <p class="text-sm text-text">Set preferences for features of the system.
         </div>
 
         <div class="bg-bg p-4 lg:w-2/3 rounded-md">
@@ -14,8 +14,7 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Grades</label>
                         </label>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Enable notification of grades to user.
                         </div>
                     </div>
 
@@ -25,8 +24,7 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Payments</label>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Enable notification of payments to user.
                         </div>
                     </div>
 
@@ -53,8 +51,7 @@
                                 grades</label>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Allow teacher to upload grades.
                         </div>
                     </div>
 
@@ -75,8 +72,7 @@
                             </div>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Set available programs that will be offered.
                         </div>
                         @error($programs)
                             <p class="mt-2 text-sm text-negative-600">
