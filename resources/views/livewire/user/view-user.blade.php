@@ -229,7 +229,7 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <x-input wire:model.defer="father_email" label="Email" readonly
+                            <x-input wire:model.defer="user.father_email" label="Email" readonly
                                 placeholder="Email of student's father" />
                         </div>
 

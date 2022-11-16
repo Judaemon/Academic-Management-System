@@ -53,6 +53,15 @@ class EditAdmission extends ModalComponent
 
     public function save(): void
     {
+        if ($this->admission->academic_year_id != setting('academic_year_id')) {
+
+            $this->dialog()->info(
+                $title = 'You cant do that!',
+                $description = 'Past admission record cannot be modified.'
+            );
+
+            return;
+        }
         $this->validate();
 
         $this->dialog()->confirm([

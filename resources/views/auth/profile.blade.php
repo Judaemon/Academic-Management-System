@@ -13,7 +13,13 @@
                         <h2 class="font-semibold">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }} </h2>
                         <x-badge dark rounded md label="20192151" />
                     </div>
-                    <p class="text-sm">Elementary - Grade level</p>
+
+                    @forelse ($roles as $role)
+                        <p class="text-sm">{{ $role }}</p>
+                    @empty
+                        <p class="text-sm">No role</p>
+                    @endforelse
+
                 </div>
 
                 @hasrole('Student')
@@ -293,11 +299,26 @@
             </section>
         @endunlessrole
 
-        <section class="container col-span-12 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
-            <x-button icon="pencil" info label="Edit Contact Information"
-                onclick="livewire.emit('openModal', 'profile.update-contact-information')" />
+        <section class="container col-span-12 grid  gap-4 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
+            <div class="col-span-12">
+                <x-badge class="mb-2 w-full" dark md label="Update Profile" />
+            </div>
 
-            {{-- To update guardian information, click HERE --}}
+            <div class="col-span-12">
+                <x-button class="w-full" icon="pencil" info label="Edit Contact Information"
+                    onclick="livewire.emit('openModal', 'profile.update-contact-information')" />
+            </div>
+
+            <div class="col-span-12">
+                <x-button class="w-full" icon="pencil" info label="Edit Guardian Information"
+                    onclick="livewire.emit('openModal', 'profile.update-guardian-information')" />
+            </div>
+
+            <div class="col-span-12">
+                <x-button class="w-full" icon="pencil" info label="Edit Parent Information"
+                    onclick="livewire.emit('openModal', 'profile.update-parent-information')" />
+            </div>
+
             {{-- To update parents information, click HERE --}}
         </section>
 

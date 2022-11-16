@@ -36,9 +36,12 @@ class ViewUser extends ModalComponent
             'user.address' => ['required'],
 
             // educational background
+            'user.kinder_name' => ['nullable'],
+            'user.kinder_grad_date' => ['sometimes'],
             'user.elementary_name' => ['nullable'],
-            'user.elementary_grad_date' => ['nullable'],
+            'user.elementary_grad_date' => ['sometimes'],
             'user.junior_high_name' => ['nullable'],
+            'user.junior_high_grad_date' => ['sometimes'],
 
             // academic information
             'user.lrn' => ['nullable', 'lrn', 'unique:users,lrn, ' . $this->user->id],

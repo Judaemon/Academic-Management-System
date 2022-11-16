@@ -42,6 +42,11 @@
                         <x-input label="Admission status" readonly value="{{ $admission->status }}"
                             placeholder="Admission Status" />
                     </div>
+
+                    <div class="sm:col-span-1 md:col-span-4">
+                        <x-input label="Academic year" readonly value="{{ $admission->academic_year->title }}"
+                            placeholder="Admission Status" />
+                    </div>
                 </div>
 
                 <div class="col-span-1 md:col-span-6">

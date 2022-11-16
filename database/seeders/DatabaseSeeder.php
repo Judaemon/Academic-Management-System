@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             GradeSeeder::class,
 
+            PastAcademicYearAdmissionSeeder::class,
             AdmissionSeeder::class,
 
             FeeSeeder::class,
