@@ -347,7 +347,7 @@
             @endcanany
 
             {{-- student --}}
-            {{-- @role('Student')
+            @role('Student')
                 <li class="relative px-6 py-3">
                     <x-nav-link href="{{ route('student.payments') }}" :active="request()->routeIs('student.payments')">
                         <x-slot name="icon">
@@ -360,7 +360,7 @@
                         {{ __('Accounts & Assessment') }}
                     </x-nav-link>
                 </li>
-            @endrole --}}
+            @endrole
             {{-- student --}}
 
             {{-- teacher --}}

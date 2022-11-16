@@ -64,7 +64,7 @@ class CreatePayments extends ModalComponent
     public function updatedName()
     {
         if(!empty($this->name)) {
-            $user = Admission::where('student_id', $this->name)->first();
+            $user = Admission::where('student_id', $this->name)->latest()->first();
             
             if(!empty($user)) {
                 $this->isNull = false;
@@ -73,13 +73,19 @@ class CreatePayments extends ModalComponent
 
                 $this->latest = Payments::where('payment_status', 'Paid')
                                           ->where('user_id', $user->student_id)
-                                          ->latest('created_at')
+                                          ->latest()
+                                          ->whereHas('academic_year', function($query) {
+                                                $query->where('status', "Ongoing");
+                                            })
                                           ->whereNotNull('balance')
                                           ->first();
 
                 $this->history = Payments::where('user_id', $user->student_id)
                                            ->where('payment_status', 'Paid')
                                            ->whereNotNull('balance')
+                                           ->whereHas('academic_year', function($query) {
+                                                $query->where('status', "Ongoing");
+                                            })
                                            ->get();
             } else {
                 $this->isNull = true;

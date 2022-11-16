@@ -20,6 +20,7 @@
                             without-time
                             wire:model="start_date" 
                             label="Start Date" 
+                            readonly
                         />
                     </div>
       
