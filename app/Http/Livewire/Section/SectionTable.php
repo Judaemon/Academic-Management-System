@@ -16,8 +16,6 @@ class SectionTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-
-        // $this->setSearchDebounce(1000);
     }
 
     public function filters(): array

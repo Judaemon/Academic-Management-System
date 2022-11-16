@@ -41,13 +41,16 @@ class RoleSeeder extends Seeder
                 'read_user',
 
                 'assign_grades',
-                
+
                 'create_grade',
                 'read_grade',
                 'update_grade',
                 'delete_grade',
 
                 'change_password',
+
+                'update_emergency_contact_information',
+                'update_contact_information',
             ]);
 
         Role::create(['name' => 'Accountant'])
@@ -64,6 +67,9 @@ class RoleSeeder extends Seeder
                 'view_payments',
 
                 'change_password',
+
+                'update_emergency_contact_information',
+                'update_contact_information',
             ]);;
         // Employee
 
@@ -76,6 +82,9 @@ class RoleSeeder extends Seeder
                 'read_user',
 
                 'change_password',
+
+                'update_emergency_contact_information',
+                'update_contact_information',
             ]);
     }
 }

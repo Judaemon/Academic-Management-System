@@ -103,10 +103,6 @@ class EditUser extends ModalComponent
             'user.lrn' => ['nullable', 'unique:users,lrn'],
             'user.esc' => ['nullable', 'unique:users,esc'],
             'user.qvr' => ['nullable', 'unique:users,qvr'],
-            'user.public_id' => ['nullable', 'unique:users,public_id'],
-
-            // beneficiary, emergency contact, and parents info
-            'user.beneficiary' => ['nullable'],
 
             'user.emergency_contact_name' => ['required'],
             'user.emergency_contact_number' => ['required', 'unique:users,emergency_contact_number'],
@@ -122,6 +118,20 @@ class EditUser extends ModalComponent
             'user.father_number' => ['nullable', 'unique:users,father_number'],
             'user.father_email' => ['nullable'],
             'user.father_address' => ['nullable'],
+
+            // educational background
+            'user.kinder_name' => ['nullable'],
+            'user.kinder_grad_date' => ['sometimes'],
+            'user.elementary_name' => ['nullable'],
+            'user.elementary_grad_date' => ['sometimes'],
+            'user.junior_high_name' => ['nullable'],
+            'user.junior_high_grad_date' => ['sometimes'],
+
+            // government ids info
+            'user.pag_ibig' => ['nullable', 'unique:users,pag_ibig, ' . $this->user->id],
+            'user.philhealth' => ['nullable', 'unique:users,philhealth, ' . $this->user->id],
+            'user.sss' => ['nullable', 'unique:users,sss, ' . $this->user->id],
+            'user.tin' => ['nullable', 'unique:users,tin, ' . $this->user->id],
         ];
     }
 
@@ -157,7 +167,6 @@ class EditUser extends ModalComponent
         $this->authorize('update_user');
 
         $this->user->save();
-
         $this->emit('refreshDatatable');
 
         $this->closeModal();

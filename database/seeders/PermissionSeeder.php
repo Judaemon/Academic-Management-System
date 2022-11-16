@@ -49,6 +49,15 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
+        $profile_permissions = [
+            'update_emergency_contact_information',
+            'update_contact_information',
+        ];
+
+        foreach ($profile_permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
         $fee_permissions = [
             'create_fee',
             'update_fee',

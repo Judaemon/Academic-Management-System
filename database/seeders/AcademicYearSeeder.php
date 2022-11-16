@@ -9,8 +9,11 @@ class AcademicYearSeeder extends Seeder
 {
     public function run()
     {
+        // Accurate na yung information nato
+        //  Don't touch na
+
         AcademicYear::create([
-            'title' => 'Academic Year 2021 - 2022',
+            'title' => 'AY 2021 - 2022',
             'is_open_for_admission' => '0',
             'status' => 'Closed',
 
@@ -20,13 +23,13 @@ class AcademicYearSeeder extends Seeder
         ]);
 
         AcademicYear::create([
-            'title' => 'Academic Year 2022 - 2023',
+            'title' => 'AY 2022 - 2023',
             'is_open_for_admission' => '0',
             'status' => 'Ongoing',
 
             'start_date' => '2022-08-22',
             'school_days' => 203,
-            'end_date' => '2023-07-07',
+            'end_date' => '2023-11-07',
         ]);
     }
 }

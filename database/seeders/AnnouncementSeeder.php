@@ -48,8 +48,8 @@ class AnnouncementSeeder extends Seeder
         Announcement::create([
             'title' => 'Christmas Break',
             'description' => 'No classes all levels.',
-            'start_date' => Carbon::create('2022', '11', '14'),
-            'end_date' => Carbon::create('2022', '11', '19'),
+            'start_date' => Carbon::now(),
+            'end_date' => Carbon::now()->addDays(7),
             'main_image' => NULL,
             'category' => 'Holiday'
         ]);

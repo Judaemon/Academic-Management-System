@@ -156,9 +156,9 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-4">
-                            <x-select label="Employee role" wire:model.defer="employee_role"
+                            <x-select label="Employee role" wire:model.defer="employee_roles"
                                 placeholder="employees' role" :async-data="route('roles.roles')" option-label="name"
-                                option-value="id" />
+                                option-value="name" />
                         </div>
                     </div>
                 </section>
