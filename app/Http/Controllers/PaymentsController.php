@@ -12,9 +12,4 @@ class PaymentsController extends Controller
     {
         return view('payments.index');
     }
-
-    public function generateInvoice($id)
-    {
-
-    }
 }

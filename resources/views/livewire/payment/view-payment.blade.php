@@ -14,7 +14,7 @@
                         <div></div>
                     </div>  
                 </div>
-                <div class="text-center text-2xl font-bold uppercase">Processing Payment....</div>
+                <div class="text-center text-lg md:text-2xl font-bold uppercase">Processing Payment....</div>
             </div>
         </div>
     </div>
@@ -46,17 +46,17 @@
         </div>
 
         <div class="w-full text-sm px-10 py-1">
-            <div class="w-full justify-between flex uppercase">
-                <div class="flex w-1/2 h-auto items-center my-4">
-                    <div class="w-1/6 font-bold mr-4">Status :</div>
-                    <div class="w-5/6 py-1 text-center rounded-full font-bold text-sm shadow-md uppercase {{ ($status == 'Pending') ? 'bg-indigo-300 text-indigo-700' : 
-                        (($status == 'Paid') ? 'bg-green-300 text-green-700' : 'bg-red-300 text-red-700') }}">
-                        {{ $payment->payment_status }}
-                    </div>
-                </div>
-                <div class="flex w-1/2 h-auto items-center justify-end my-4">
+            <div class="w-full block lg:flex justify-between uppercase">
+                <div class="flex w-full lg:w-1/2 h-auto items-center justify-start lg:justify-end my-4">
                     <span class="font-bold mr-4">Payment Date :</span>
                     {{ date('F j, Y', strtotime($payment->created_at)) }}
+                </div>
+                <div class="flex w-full lg:w-1/2 h-auto items-center my-4">
+                    <div class="w-1/4 md:w-1/5 lg:w-1/6 font-bold mr-4">Status :</div>
+                    <div class="w-3/4 md:w-4/5 lg:w-5/6 py-1 text-center rounded-full font-bold text-sm shadow-md uppercase {{ ($status == 'Pending') ? 'bg-indigo-300 text-indigo-700' : 
+                        (($status == 'Paid') ? 'bg-green-300 text-green-700' : 'bg-orange-300 text-orange-700') }}">
+                        {{ $payment->payment_status }}
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                     <table class="w-full text-xs text-left text-gray-500 rounded-t-2">
                         <thead class="text-[0.7rem] text-black uppercase bg-gray-200">
                             <tr>
-                                <th scope="col" class="py-3 pl-2">Expenses</th>
+                                <th scope="col" class="py-3 pl-2">Educational Expenses</th>
                                 <th scope="col" class="py-3 pl-2">Amount</th>
                             </tr>
                         </thead>
@@ -82,7 +82,7 @@
                                 </tr>
                             @endforeach
                             <tr class="border-b font-bold text-black">
-                                <th scope="row" class="py-2 pl-2 uppercase">Total</th>
+                                <th scope="row" class="py-2 pl-2 uppercase">Grand Total</th>
                                 <td class="py-2 pl-2 uppercase">Php {{ number_format($total, 2) }}</td>
                             </tr>
                         </tbody>

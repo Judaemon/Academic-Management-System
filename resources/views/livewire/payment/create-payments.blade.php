@@ -14,7 +14,7 @@
             <div></div>
           </div>  
         </div>
-        <div class="text-center text-2xl font-bold uppercase">Processing Payment....</div>
+        <div class="text-center text-lg md:text-2xl font-bold uppercase">Processing Payment....</div>
       </div>
     </div>
   </div>
@@ -23,9 +23,9 @@
     <x-card title="Create Payment Record">
       <form wire:submit.prevent="save">
         <div class="grid grid-cols-1 px-4 py-2">
-          <div class="col-span-4 flex flex-row space-x-10 mb-8 items-center">
-            <div class="w-1/2 flex items-center">
-              <span class="text-sm w-1/6">Name</span>
+          <div class="col-span-4 block lg:flex flex-row space-x-0 lg:space-x-10 mb-8 items-center">
+            <div class="w-full lg:w-1/2 mb-5 lg:mb-0 block lg:flex items-center">
+              <div class="text-sm w-full lg:w-1/6 mb-1 lg:mb-0">Name</div>
               <x-select
                 wire:ignore
                 rightIcon="user"
@@ -35,11 +35,11 @@
                 option-label="name"
                 option-value="id"
                 option-description="email"
-                class="w-5/6"
+                class="w-full lg:w-5/6"
               />
             </div>
-            <div class="w-1/2 flex items-center mr-4">
-              <span class="text-sm w-1/3">Academic Year</span>
+            <div class="w-full lg:w-1/2 block lg:flex items-center mr-0 lg:mr-4">
+              <div class="text-sm w-full lg:w-1/3 mb-1 lg:mb-0">Academic Year</div>
               <x-select
                 wire:ignore
                 rightIcon="calendar"
@@ -49,7 +49,7 @@
                 option-label="title"
                 option-value="id"
                 option-description="date"
-                class="w-2/3"
+                class="w-full lg:w-2/3"
               />
             </div>
           </div>
@@ -60,7 +60,7 @@
                 <table class="w-full text-xs text-left text-gray-500 rounded-t-2">
                   <thead class="text-xs text-black uppercase bg-gray-200">
                     <tr>
-                      <th scope="col" class="py-3 pl-2">Expenses</th>
+                      <th scope="col" class="py-3 pl-2">Educational Expenses</th>
                       <th scope="col" class="py-3 pl-2">Amount</th>
                     </tr>
                   </thead>
@@ -72,7 +72,7 @@
                       </tr>
                     @endforeach
                     <tr class="border-b font-bold text-black">
-                      <th scope="row" class="py-3 pl-2 uppercase">Total</th>
+                      <th scope="row" class="py-3 pl-2 uppercase">Grand Total</th>
                       <td class="py-3 pl-2 uppercase">Php {{ number_format($total, 2) }}</td>
                     </tr>
                   </tbody>
@@ -148,14 +148,14 @@
             </div>
           </div>
 
-          <div class="col-span-4 flex flex-row mb-5">
-            <div class="{{ !empty($options) ? 'w-1/2 block mr-10' : 'hidden' }}">
+          <div class="col-span-4 block lg:flex flex-row mb-5">
+            <div class="{{ !empty($options) ? 'w-full lg:w-1/2 block mr-10 mb-5 lg:mb-0' : 'hidden' }}">
               <x-inputs.currency label="Amount Paid" placeholder="0.00" wire:model="amount_paid" />
             </div>
-            <div class="{{ !empty($options) ? 'hidden' : 'w-1/2 block mr-10' }}">
+            <div class="{{ !empty($options) ? 'hidden' : 'w-full lg:w-1/2 block mr-10 mb-5 lg:mb-0' }}">
               <x-inputs.currency label="Amount Paid" placeholder="0.00" disabled />
             </div>
-            <div class="w-1/2">
+            <div class="w-full lg:w-1/2">
               <x-select
                 wire:ignore 
                 label="Method of Payment"  

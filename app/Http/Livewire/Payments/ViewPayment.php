@@ -33,16 +33,18 @@ class ViewPayment extends ModalComponent
         $this->payment = $payment;
         $this->status =  $payment->payment_status;
 
-        $user = Admission::where('student_id', $this->payment->user_id)->first();
+        $user = Admission::where('student_id', $this->payment->user_id)->latest()->first();
 
         if(!empty($user)) {
-            $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)
-                                      ->get();
+            $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
             $this->total = $this->school_fees->sum('amount');
 
             $this->history = Payments::where('user_id', $user->student_id)
                                        ->where('payment_status', 'Paid')
                                        ->where('created_at', '<=', $payment->created_at)
+                                       ->whereHas('academic_year', function($query) {
+                                            $query->where('status', "Ongoing");
+                                        })
                                        ->whereNotNull('balance')
                                        ->get();
         } else {

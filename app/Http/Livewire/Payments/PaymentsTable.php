@@ -113,19 +113,20 @@ class PaymentsTable extends DataTableComponent
                     } if($value === 'Paid') {
                         return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-green-300 text-green-700 font-bold text-xs uppercase">'.$value.'</div>';
                     } else {
-                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-red-300 text-red-700 font-bold text-xs uppercase">'.$value.'</div>';
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-orange-300 text-orange-700 font-bold text-xs uppercase">'.$value.'</div>';
                     }
                   })
-                ->html(),
+                ->html()
+                ->collapseOnTablet(),
             
             Column::make("Payment Date", "created_at")
                 ->sortable()
                 ->format(fn ($value) => date('F j, Y', strtotime($value)))
-                ->collapseOnMobile(),
+                ->collapseOnTablet(),
 
             Column::make("Actions")
                 ->label(fn ($row, Column $column) => view('livewire.payment.actions-col')->withRow($row))
-                ->collapseOnMobile(),
+                ->collapseOnTablet(),
         ];
     }
 
