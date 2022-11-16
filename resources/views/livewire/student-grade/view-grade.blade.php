@@ -3,44 +3,46 @@
         <form wire:submit.prevent="save">
             <div class="form-container grid grid-cols-12 gap-4">
 
-                <section class="container col-span-12">
+                <div class="container col-span-12 md:col-span-4">
                     <x-badge class="w-full mb-2" dark md label="Subjects" />
 
-                    <div class="grid grid-cols-12 gap-2 lg:gap-4">
-                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            {{-- <x-input readonly value="{{ $grade->subject->name }}" label="Subject"
-                                placeholder="" /> --}}
+                    <div class="gap-2 lg:gap-4">
+                        {{-- pa-check nalang or paayos ty --}}
+                        @foreach ($grades as $grade)
+                        <div class="col-span-4 md:col-span-4 lg:col-span-3 px-1 py-1">
+                            <x-input readonly value="{{ $grade->name }}" label="Name"
+                                placeholder="" />
                         </div>
+                        @endforeach
                     </div>
-                </section>
+                </div>
 
-                
-                <section class="container col-span-12">
+                <div class="container col-span-12 md:col-span-8">
                     <x-badge class="w-full mb-2" dark md label="Grades" />
                     @foreach ($subjects as $subject)
-                        <div class="grid grid-cols-12 gap-2 lg:gap-4">
-                            <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                        <div class="grid grid-cols-12 gap-8 lg:gap-4">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-1 py-1">
                                 <x-input readonly value="{{$subject->grades->first_quarter}}" label="First Quarter"
                                     placeholder="" />
                             </div>
 
-                            <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-1 py-1">
                                 <x-input readonly value="{{$subject->grades->second_quarter }}" label="Second Quarter"
                                     placeholder="" />
                             </div>
 
-                            <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-1 py-1">
                                 <x-input readonly value="{{$subject->grades->second_quarter }}" label="Third Quarter"
                                     placeholder="" />
                             </div>
 
-                            <div class="col-span-12 md:col-span-4 lg:col-span-3">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-1 py-1">
                                 <x-input readonly value="{{$subject->grades->fourth_quarter }}" label="Fourth Quarter"
                                     placeholder="" />
                             </div>
                         </div>
                     @endforeach
-                </section>
+                </div>
             
             </div>
 

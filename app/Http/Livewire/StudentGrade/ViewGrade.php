@@ -17,6 +17,7 @@ class ViewGrade extends ModalComponent
     public $grade;
     public $subjects;
     public $admission;
+    public $grades;
 
     protected function rules()
     {
@@ -33,11 +34,18 @@ class ViewGrade extends ModalComponent
     public function mount(Admission $admission)
     {
         $this->admission = $admission;
+
         $this->subjects = Subject::query()
             ->where('grade_level_id', $admission->admit_to_grade_level)
             ->with(['grades' => function ($q) use($admission) {
                     $q->where('student_id', $admission->student_id);
             }])
+            ->get();
+        
+        // idk if tama lol sry eto yung sa pagkuha sana ng subjects ng user sa view grades niya
+        // ang naretrieve na subjects kay cayden sa blade is mathematics science english soc sci, pero ang section id niya is 1 so kinder siya
+        $this->grades = Subject::query()
+            ->where('grade_level_id', $this->admission->id)
             ->get();
     }
 

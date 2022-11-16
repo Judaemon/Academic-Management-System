@@ -3,53 +3,52 @@
         <form wire:submit.prevent="save">
             <div class="form-container grid grid-cols-12 gap-4">
 
-                <section class="container col-span-12">
+                <div class="container col-span-12">
                     <x-badge class="w-full mb-2" dark md label="Student" />
 
                     <div class="grid grid-cols-12 gap-2 lg:gap-4">
                         <div class="col-span-12 md:col-span-6 lg:col-span-5">
-                            <x-input readonly value="{{$student->first_name}} {{$student->last_name}}" label="Student Name:"
+                            <x-input readonly value="{{$student->first_name}} {{$student->middle_name}} {{$student->last_name}}" label="Student Name:"
                                 placeholder="" />
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <section class="container col-span-12">
-                    <x-badge class="w-full mb-2" dark md label="Subjects" />
+                
+                <div class="container col-span-12 md:col-span-4">
+                        <x-badge class="w-full mb-2" dark md label="Subjects" />
 
-                    <div class="grid grid-cols-12 gap-2 lg:gap-4">
-                        <div class="col-span-12 md:col-span-6 lg:col-span-5">
-                            <x-input wire:model.defer="grade.subject_id" label="Subjects List:"
-                                placeholder="" />
+                        @foreach($subjects as $subject)
+                        <div class="gap-2 lg:gap-4">
+                            <div class="col-span-4 md:col-span-4 lg:col-span-4 py-2">
+                                <x-input value="{{$subject->name}}" label=""
+                                    placeholder="" />
+                            </div>
                         </div>
-                    </div>
-                </section>
+                        @endforeach
+                </div>
 
-                <section class="container col-span-12">
-                    <x-badge class="w-full mb-2" dark md label="Grades" />
-
-                    <div class="grid grid-cols-12 gap-2 lg:gap-4">
-                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="grade.first_quarter" label="First Quarter"
-                                placeholder="" />
+                <div class="container col-span-12 md:col-span-8">
+                        <x-badge class="w-full mb-2" dark md label="Quarters" />
+                        <div class="grid grid-cols-12 gap-8 lg:gap-4">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 py-2 px-2">
+                                <x-input wire:model.defer="" label=""
+                                    placeholder="1st" />
+                            </div>
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 py-2 px-2">
+                                <x-input wire:model.defer="" label=""
+                                    placeholder="2nd" />
+                            </div>
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 py-2 px-2">
+                                <x-input wire:model.defer="" label=""
+                                    placeholder="3rd" />
+                            </div>
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 py-2 px-2">
+                                <x-input wire:model.defer="" label=""
+                                    placeholder="4th" />
+                            </div>
                         </div>
-
-                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="grade.second_quarter" label="Second Quarter"
-                                placeholder="" />
-                        </div>
-
-                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="grade.third_quarter" label="Third Quarter"
-                                placeholder="" />
-                        </div>
-
-                        <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input wire:model.defer="grade.fourth_quarter" label="Fourth Quarter"
-                                placeholder="" />
-                        </div>
-                    </div>
-                </section>
+                </div>
                 
             </div>
 
