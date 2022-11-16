@@ -44,7 +44,7 @@
                         wire:ignore 
                         label="Category"  
                         placeholder="Select Category"
-                        :options="['Emergency', 'Holiday', 'Events']"
+                        :options="['Emergency', 'Holiday', 'Event']"
                         wire:model.defer="category" 
                     />
                 </div>

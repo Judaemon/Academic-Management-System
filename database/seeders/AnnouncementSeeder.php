@@ -38,7 +38,7 @@ class AnnouncementSeeder extends Seeder
 
         Announcement::create([
             'title' => 'Bonifacio Day',
-            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
+            'description' => 'It is a national holiday commemorating Andrés Bonifacio, a national hero. Bonifacio was one of the founders of a secret society of revolutionaries commonly known as the Katipunan. Acknowledged as the "Father of the Philippine Revolution", he initiated the Philippine revolution against the Spanish Empire.',
             'start_date' => Carbon::create('2022', '11', '29'),
             'end_date' => Carbon::create('2022', '11', '30'),
             'main_image' => NULL,
@@ -46,12 +46,12 @@ class AnnouncementSeeder extends Seeder
         ]);
 
         Announcement::create([
-            'title' => 'Harvest Town',
-            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
-            'start_date' => Carbon::now(),
-            'end_date' => Carbon::now()->addDays(7),
+            'title' => 'The standard Lorem Ipsum passage, used since the 1500s',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            'start_date' => Carbon::create('2022', '11', '14'),
+            'end_date' => Carbon::create('2022', '11', '18'),
             'main_image' => NULL,
-            'category' => 'Holiday'
+            'category' => 'Event'
         ]);
     }
 }
