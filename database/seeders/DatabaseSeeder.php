@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             AdmissionSeeder::class,
 
             FeeSeeder::class,
+            PaymentSeeder::class,
         ]);
     }
 }

@@ -38,7 +38,7 @@ class AnnouncementSeeder extends Seeder
 
         Announcement::create([
             'title' => 'Bonifacio Day',
-            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
+            'description' => 'It is a national holiday commemorating Andrés Bonifacio, a national hero. Bonifacio was one of the founders of a secret society of revolutionaries commonly known as the Katipunan. Acknowledged as the "Father of the Philippine Revolution", he initiated the Philippine revolution against the Spanish Empire.',
             'start_date' => Carbon::create('2022', '11', '29'),
             'end_date' => Carbon::create('2022', '11', '30'),
             'main_image' => NULL,
@@ -51,7 +51,7 @@ class AnnouncementSeeder extends Seeder
             'start_date' => Carbon::now(),
             'end_date' => Carbon::now()->addDays(7),
             'main_image' => NULL,
-            'category' => 'Holiday'
+            'category' => 'Event'
         ]);
     }
 }
