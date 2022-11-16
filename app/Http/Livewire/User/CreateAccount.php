@@ -45,6 +45,7 @@ class CreateAccount extends ModalComponent
 
     public $password;
     public $employee_roles;
+    public $employee_role;
 
     protected function rules()
     {
@@ -59,7 +60,7 @@ class CreateAccount extends ModalComponent
             'birth_place' => ['required'],
             'nationality' => ['required'],
             'gender' => ['required'],
-            'religion' => ['required'],
+            'religion' => ['nullable'],
             'mother_tongue' => ['required'],
             'nationality' => ['required'],
             'pwd_id' => ['nullable', 'unique:users,pwd_id'],
@@ -157,6 +158,7 @@ class CreateAccount extends ModalComponent
             'sss' => $this->sss,
             'tin' => $this->tin,
 
+            'employee_role' => $this->employee_role,
             'password' => Hash::make($this->password),
         ]);
 

@@ -15,18 +15,13 @@ class DashboardController extends Controller
             return redirect(route('change-password'));
         } else {
             $now = Carbon::today()->format('Y-m-d');
+            $announcements = Announcement::where('start_date', '<=', $now)
+                ->where('end_date', '>=', $now)
+                ->get();
+
             return view('dashboard', [
-                'announcements' => Announcement::whereDate('start_date', '>=', $now)->whereDate('end_date', '<=', $now)->get(),
+                'announcements' => $announcements,
             ]);
         }
-
-        $now = Carbon::today()->format('Y-m-d');
-        $announcements = Announcement::where('start_date', '<=', $now)
-            ->where('end_date', '>=', $now)
-            ->get();
-
-        return view('dashboard', [
-            'announcements' => $announcements,
-        ]);
     }
 }

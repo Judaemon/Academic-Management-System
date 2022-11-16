@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->boolean('is_open_for_admission')->default('0');
-            $table->string('status');
+            $table->string('status')->nullable();
 
             $table->date('start_date');
 

@@ -106,6 +106,7 @@
             @endrole
 
             {{-- Accounting: isAccountingMenuOpen --}}
+            @role('Accountant')
             @canany(['view_fees', 'view_payments'])
                 <li class="relative px-6 py-3">
                     <button
@@ -168,6 +169,7 @@
                     </template>
                 </li>
             @endcanany
+            @endrole
 
             {{-- Academic: isAcademicMenuOpen --}}
             @canany(['view_sections', 'view_subjects', 'view_grade_levels'])

@@ -40,6 +40,8 @@ class CreateAdmission extends ModalComponent
         return view('livewire.admission.create-admission');
     }
 
+    // yung mga list na lumalabas pagkaclick ng create admission modal is mga naadmit na student na ngay, diba dapat yung mga pending?
+    
     public function updatedStudentId()
     {
         $this->student = User::query()
@@ -58,12 +60,12 @@ class CreateAdmission extends ModalComponent
 
         if ($this->latest_admission->status == 'Admitted') {
             $this->grade_level_id = $this->latest_admission->admit_to_grade_level;
-            $this->status = "Student already have active admission record.";
+            $this->status = "Student already has active admission record.";
         }
 
         if ($this->latest_admission->status == 'Pending') {
             $this->grade_level_id = $this->latest_admission->admit_to_grade_level;
-            $this->status = "Student already have pending admission record.";
+            $this->status = "Student already has pending admission record.";
         }
 
         $this->grade_level_sections = Section::query()

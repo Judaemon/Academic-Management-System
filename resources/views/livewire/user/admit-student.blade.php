@@ -105,12 +105,12 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input type="number" wire:model.defer="weight" label="Weight (in cm) (if applicable)"
+                            <x-input type="number" wire:model.defer="weight" label="Weight (in kg) (if applicable)"
                                 placeholder="Weight of student" />
                         </div>
 
                         <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                            <x-input type="number" wire:model.defer="height" label="Height (in kg) (if applicable)"
+                            <x-input type="number" wire:model.defer="height" label="Height (in cm) (if applicable)"
                                 placeholder="Height of student" />
                         </div>
 

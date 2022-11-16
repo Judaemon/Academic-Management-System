@@ -44,7 +44,7 @@ class UploadGrade extends ModalComponent
     public function mount(User $student)
     {
         $this->student = $student;
-
+        
         $this->admission = Admission::query()
             ->orderBy('created_at', 'desc')
             ->latest()
