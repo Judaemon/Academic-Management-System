@@ -46,8 +46,8 @@ class AnnouncementSeeder extends Seeder
         ]);
 
         Announcement::create([
-            'title' => 'Harvest Town',
-            'description' => 'qwerty uiop asdfg hjkl zxc vbnmm',
+            'title' => 'Christmas Break',
+            'description' => 'No classes all levels.',
             'start_date' => Carbon::now(),
             'end_date' => Carbon::now()->addDays(7),
             'main_image' => NULL,

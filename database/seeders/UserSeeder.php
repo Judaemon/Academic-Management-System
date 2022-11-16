@@ -109,8 +109,6 @@ class UserSeeder extends Seeder
             'emergency_contact_number' => '09176820766',
             'emergency_contact_address' => 'Trancoville',
 
-            'password' => Hash::make('student'),
-
             'pag_ibig' => 'FSAD4239',
             'philhealth' => 'FADS4281',
             'sss' => 'DAFS2034',

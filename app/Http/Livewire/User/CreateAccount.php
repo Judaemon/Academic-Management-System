@@ -43,6 +43,10 @@ class CreateAccount extends ModalComponent
     public $emergency_contact_address;
     public $emergency_contact_relationship;
 
+    public $employee_role;
+
+    public $password;
+
     protected function rules()
     {
         return [
@@ -56,7 +60,7 @@ class CreateAccount extends ModalComponent
             'birth_place' => ['required'],
             'nationality' => ['required'],
             'gender' => ['required'],
-            'religion' => ['required'],
+            'religion' => ['nullable'],
             'mother_tongue' => ['required'],
             'nationality' => ['required'],
             'pwd_id' => ['nullable', 'unique:users,pwd_id'],
@@ -125,7 +129,6 @@ class CreateAccount extends ModalComponent
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'password' => Hash::make($password),
             'middle_name' => $this->middle_name,
             'suffix' => $this->suffix,
             'birth_date' => $this->birth_date,
@@ -153,8 +156,13 @@ class CreateAccount extends ModalComponent
             'sss' => $this->sss,
             'tin' => $this->tin,
 
-            'password' => Hash::make($password),
+            'emergency_contact_name' => $this->emergency_contact_name,
+            'emergency_contact_relationship' => $this->emergency_contact_relationship,
+            'emergency_contact_number' => $this->emergency_contact_number,
+            'emergency_contact_address' => $this->emergency_contact_address,
+
             'employee_role' => $this->employee_role,
+            'password' => Hash::make($this->password),
         ]);
 
         $this->closeModal();
