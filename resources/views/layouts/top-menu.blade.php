@@ -11,7 +11,7 @@
                 </div>
                 <div
                     class="flex justify-end space-x-4 w-44 px-4 py-2 text-sm font-medium leading-5 text-center text-text">
-                    <span class="float-right">{{ Auth::user()->first_name }}</span>
+                    <span class="float-right">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                     <x-icon name="chevron-down" class="w-4 h-4" />
                 </div>
             </x-slot>
@@ -28,12 +28,16 @@
                 <span>My profile</span>
             </x-dropdown.item>
 
-            <x-dropdown.item :href="route('change-password')">
-                <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                </svg>
+            <x-dropdown.item>
+                <div class="flex" onclick="livewire.emit('openModal', 'user.change-password')">
+                    <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                    </svg>
 
-                <span>Change Password</span>
+                    <span>Change Password</span>
+                </div>
             </x-dropdown.item>
 
             <form method="POST" action="{{ route('logout') }}">
