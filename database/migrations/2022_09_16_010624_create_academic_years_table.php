@@ -13,17 +13,19 @@ return new class extends Migration
 
             $table->string('title')->nullable();
             $table->boolean('is_open_for_admission')->default('0');
+
+            // Open, Ongoing, Closed
             $table->string('status')->nullable();
 
             $table->date('start_date');
 
             $table->integer('school_days')
-                  ->nullable()
-                  ->default('0');
-            
+                ->nullable()
+                ->default('0');
+
             $table->date('end_date')
-                  ->nullable();
-            
+                ->nullable();
+
             $table->timestamps();
         });
     }
