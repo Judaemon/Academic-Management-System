@@ -39,6 +39,26 @@ class StudentAdmissionTable extends DataTableComponent
         $this->section = $section;
     }
 
+    // if ever di magawa yung sa download modal keep muna yung code dito for student export
+    public array $bulkActions = [
+        'downloadGrade' => 'Export as PDF',
+    ];
+
+    public function downloadGrade()
+    {
+        $grades = $this->getSelected();
+
+        if (!empty($grades)) {
+            $this->clearSelected();
+            return (new StudentGradesExport($grades))->download('Grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        } else {
+            $this->dialog()->error(
+                $title = 'Nothing Selected',
+                $description = "Please select which students/grades to export",
+            );
+        }
+    }
+
     public function columns(): array
     {
         return [

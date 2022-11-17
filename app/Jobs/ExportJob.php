@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
-use App\Exports\GradesExport;
+use App\Exports\TeacherGradesExport;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,6 +16,6 @@ class ExportJob implements ShouldQueue
 
     public function handle()
     {
-        (new GradesExport)->store('public/grades.csv');
+        (new TeacherGradesExport)->store('public/grades.csv');
     }
 }

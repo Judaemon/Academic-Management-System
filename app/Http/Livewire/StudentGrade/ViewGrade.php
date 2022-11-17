@@ -6,9 +6,14 @@ use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\Admission;
+
 use LivewireUI\Modal\ModalComponent;
-use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentGradesExport;
+use WireUi\Traits\Actions;
+use PDF;
 
 class ViewGrade extends ModalComponent
 {
@@ -59,7 +64,19 @@ class ViewGrade extends ModalComponent
 
     public function downloadGrade()
     {
-        dd("Download Grades");
+        // $grades = $this->getSelected();
+        // for testing pdf layout on download
+        $grades = $this->getRules();
+
+        if (!empty($grades)) {
+            // $this->clearSelected();
+            return (new StudentGradesExport($grades))->download('Grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        } else {
+            $this->dialog()->error(
+                $title = 'Nothing Selected',
+                $description = "Please select which students/grades to export",
+            );
+        }
     }
 
     public static function modalMaxWidth(): string
