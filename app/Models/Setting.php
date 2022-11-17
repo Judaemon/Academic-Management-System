@@ -14,12 +14,18 @@ class Setting extends Model
         'institute_acronym',
         'logo',
         'address',
-        'academic_year',
 
-        'profile_editing',
-        'notification_type',
+        'academic_year_id',
+
         'notify_grades',
         'notify_payments',
+        'notification_channel',
+        'current_quarter',
+        'isAbleToUploadGrade',
+
+        'theme_color',
+        'theme_background',
+        'custom_theme_color',
 
         'email',
         'mobile_1',

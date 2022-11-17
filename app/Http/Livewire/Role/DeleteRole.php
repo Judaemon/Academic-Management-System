@@ -34,6 +34,7 @@ class DeleteRole extends ModalComponent
 
             return;
         }
+
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
             'description' => 'Delete this role?',
