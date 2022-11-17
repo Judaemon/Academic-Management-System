@@ -331,7 +331,7 @@ class GradeSeeder extends Seeder
             'third_quarter' => '84',
             'fourth_quarter' => '83',
 
-            'section_id' => '2',
+            'section_id' => '3',
             'subject_id' => '9',
             'student_id' => '21',
         ]);
@@ -342,7 +342,7 @@ class GradeSeeder extends Seeder
             'third_quarter' => '87',
             'fourth_quarter' => '86',
 
-            'section_id' => '2',
+            'section_id' => '3',
             'subject_id' => '10',
             'student_id' => '21',
         ]);
@@ -353,7 +353,7 @@ class GradeSeeder extends Seeder
             'third_quarter' => '84',
             'fourth_quarter' => '86',
 
-            'section_id' => '2',
+            'section_id' => '3',
             'subject_id' => '11',
             'student_id' => '21',
         ]);
@@ -364,7 +364,7 @@ class GradeSeeder extends Seeder
             'third_quarter' => '82',
             'fourth_quarter' => '84',
 
-            'section_id' => '2',
+            'section_id' => '3',
             'subject_id' => '12',
             'student_id' => '21',
         ]);
