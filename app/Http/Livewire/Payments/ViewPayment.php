@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Payments;
 
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -11,8 +12,10 @@ use App\Models\Payments;
 use App\Models\Admission;
 use App\Models\Fee;
 use App\Models\User;
+use App\Models\Setting;
 
 use App\Notifications\PaymentNotification;
+use Auth;
 
 class ViewPayment extends ModalComponent
 {
@@ -86,11 +89,21 @@ class ViewPayment extends ModalComponent
 
     public function update()
     {
+        $settings = Setting::find(1);
+
         $this->payment->forceFill([
             'payment_status' => "Paid",
+            'accountant_id' => Auth::user()->id,
         ])->save();
 
-        $this->sendMail();
+        if($settings->notification_channel === "Email") {
+            $this->sendMail();
+        } else if($settings->notification_channel === "SMS") {
+            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+        } else if($settings->notification_channel === "Email and SMS") {
+            $this->sendMail();
+            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+        }
 
         $this->emit('refreshDatatable');
 
@@ -114,7 +127,7 @@ class ViewPayment extends ModalComponent
 
         $payment = [
             'name' => $this->payment->user_id,
-            'accountant' => $this->payment->accountant_id,
+            'accountant' => Auth::user()->id,
             'amount_paid' => $this->payment->amount_paid,
             'fee' => $this->payment->fee_id,
             'method' => $this->payment->payment_method,
@@ -126,6 +139,18 @@ class ViewPayment extends ModalComponent
         $message = "We would to inform you that your payment for <b>".$type."</b> with the amount of <b> Php ".$this->payment->amount_paid."</b> has now been confirmed.";
 
         Notification::sendNow($user, new PaymentNotification($payment, $message));
+    }
+
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            $recipients,
+            ['from' => $twilio_number, 'body' => $message]
+        );
     }
 
     public function download()

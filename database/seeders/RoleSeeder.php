@@ -25,7 +25,6 @@ class RoleSeeder extends Seeder
                 'read_role',
                 'update_role',
 
-                'view_announcement',
                 'create_announcement',
                 'update_announcement',
                 'delete_announcement',
@@ -80,6 +79,8 @@ class RoleSeeder extends Seeder
 
                 'view_users',
                 'read_user',
+
+                'create_payment',
 
                 'change_password',
 
