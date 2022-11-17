@@ -51,7 +51,7 @@ class AnnouncementSeeder extends Seeder
             'start_date' => Carbon::now(),
             'end_date' => Carbon::now()->addDays(7),
             'main_image' => NULL,
-            'category' => 'Event'
+            'category' => 'Holiday'
         ]);
     }
 }

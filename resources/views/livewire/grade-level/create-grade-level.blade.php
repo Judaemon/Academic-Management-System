@@ -12,7 +12,7 @@
                         placeholder="Select subjects"
                         wire:model.defer="subjects"
                         :async-data="route('subjects.subjects')"
-                        option-label="name"
+                        option-label="subject_code"
                         option-value="id"
                         multiselect
                     />

@@ -6,9 +6,14 @@ use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\Admission;
+
 use LivewireUI\Modal\ModalComponent;
-use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentGradesExport;
+use WireUi\Traits\Actions;
+use PDF;
 
 class ViewGrade extends ModalComponent
 {
@@ -31,6 +36,11 @@ class ViewGrade extends ModalComponent
         ];
     }
 
+    public function render()
+    {
+        return view('livewire.student-grade.view-grade');
+    }
+
     public function mount(Admission $admission)
     {
         $this->admission = $admission;
@@ -42,21 +52,31 @@ class ViewGrade extends ModalComponent
             }])
             ->get();
         
-        // idk if tama lol sry eto yung sa pagkuha sana ng subjects ng user sa view grades niya
-        // ang naretrieve na subjects kay cayden sa blade is mathematics science english soc sci, pero ang section id niya is 1 so kinder siya
+        // pa-check nalang, ginaya ko yung sa taas para makuha din yung student and makuha yung tamang subjects sa modal,
+        // triny ko tignan na yung kay cayden and kay kyla lao is tama na yung mga subjects
         $this->grades = Subject::query()
-            ->where('grade_level_id', $this->admission->id)
+            ->where('grade_level_id', $this->admission->admit_to_grade_level)
+            ->with(['grades' => function ($q) use($admission) {
+                $q->where('student_id', $admission->student_id);
+            }])
             ->get();
     }
 
-    // public function test()
-    // {
-    //     dd($this->subjects);
-    // }
-
-    public function render()
+    public function downloadGrade()
     {
-        return view('livewire.student-grade.view-grade');
+        // $grades = $this->getSelected();
+        // for testing pdf layout on download
+        $grades = $this->getRules();
+
+        if (!empty($grades)) {
+            // $this->clearSelected();
+            return (new StudentGradesExport($grades))->download('Grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        } else {
+            $this->dialog()->error(
+                $title = 'Nothing Selected',
+                $description = "Please select which students/grades to export",
+            );
+        }
     }
 
     public static function modalMaxWidth(): string

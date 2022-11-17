@@ -2,7 +2,7 @@
     <div class="lg:flex">
         <div class="mb-2 lg:w-1/3 lg:pr-4">
             <h2 class="text-lg font-medium text-text">Features</h2>
-            <p class="text-sm text-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, ea?
+            <p class="text-sm text-text">Set preferences for features of the system.
         </div>
 
         <div class="bg-bg p-4 lg:w-2/3 rounded-md">
@@ -14,7 +14,8 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Grades</label>
                         </label>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Send notification to students if the grades are already posted through either by email or sms, or by both.
+                            Send notification to students if the grades are already posted through either by email or
+                            sms, or by both.
                         </div>
                     </div>
 
@@ -24,16 +25,15 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Payments</label>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Send notification if the payments are confirmed or refunded through either by email or sms, or by both.
+                            Send notification if the payments are confirmed or refunded through either by email or sms,
+                            or by both.
                         </div>
                     </div>
 
                     <div class="mt-3 max-w-xl text-sm mb-4">
                         <label class="text-text block text-sm font-medium mb-1">Select notification channel</label>
                         <div>
-                            <x-select 
-                                placeholder="Select one notification channel" 
-                                :options="['Email', 'SMS', 'Email and SMS']"
+                            <x-select placeholder="Select one notification channel" :options="['Email', 'SMS', 'Email and SMS']"
                                 wire:model.defer="notification_channel" />
                         </div>
                     </div>
@@ -53,8 +53,7 @@
                                 grades</label>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Allow teacher to upload grades.
                         </div>
                     </div>
 
@@ -75,8 +74,7 @@
                             </div>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Set available programs that will be offered.
                         </div>
                         @error($programs)
                             <p class="mt-2 text-sm text-negative-600">

@@ -7,7 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 use App\Models\User;
 use App\Models\Grade;
-use App\Exports\GradesExport;
+use App\Exports\TeacherGradesExport;
 
 use Maatwebsite\Excel\Facades\Excel;
 use WireUi\Traits\Actions;
@@ -50,7 +50,7 @@ class TeacherGradeTable extends DataTableComponent
 
         if (!empty($grade)) {
             $this->clearSelected();
-            return Excel::download(new GradesExport($grade), 'grades.xlsx');
+            return Excel::download(new TeacherGradesExport($grade), 'grades.xlsx');
         } else {
             $this->dialog()->error(
                 $title = 'Nothing Selected',
@@ -65,7 +65,7 @@ class TeacherGradeTable extends DataTableComponent
 
         if (!empty($grade)) {
             $this->clearSelected();
-            return Excel::download(new GradesExport($grade), 'grades.csv');
+            return Excel::download(new TeacherGradesExport($grade), 'grades.csv');
         } else {
             $this->dialog()->error(
                 $title = 'Nothing Selected',
@@ -80,7 +80,7 @@ class TeacherGradeTable extends DataTableComponent
 
         if (!empty($grade)) {
             $this->clearSelected();
-            return (new GradesExport($grade))->download('grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+            return (new TeacherGradesExport($grade))->download('Grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         } else {
             $this->dialog()->error(
                 $title = 'Nothing Selected',
@@ -92,7 +92,7 @@ class TeacherGradeTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Student", "id")
+            Column::make("Student ID", "id")
                 ->sortable()
                 ->searchable(),
             Column::make("Student")

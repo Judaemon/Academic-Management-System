@@ -183,9 +183,9 @@ class AdmissionSeeder extends Seeder
             'academic_year_id' => '2',
 
             'student_id' => '21',
-            'enrolled_by' => '1',
-            'admit_to_grade_level' => '5',
-            'section_id' => '6',
+            'enrolled_by' => '2',
+            'admit_to_grade_level' => '3',
+            'section_id' => '4',
         ]);
 
         Admission::create([
