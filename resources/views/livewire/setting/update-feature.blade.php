@@ -14,7 +14,8 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Grades</label>
                         </label>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Enable notification of grades to user.
+                            Send notification to students if the grades are already posted through either by email or
+                            sms, or by both.
                         </div>
                     </div>
 
@@ -24,7 +25,8 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Payments</label>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Enable notification of payments to user.
+                            Send notification if the payments are confirmed or refunded through either by email or sms,
+                            or by both.
                         </div>
                     </div>
 
