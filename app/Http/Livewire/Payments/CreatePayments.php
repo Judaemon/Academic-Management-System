@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Payments;
 
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -11,6 +12,7 @@ use App\Models\Admission;
 use App\Models\Payments;
 use App\Models\User;
 use App\Models\Fee;
+use App\Models\Setting;
 use App\Notifications\PaymentNotification;
 
 use Auth;
@@ -164,6 +166,8 @@ class CreatePayments extends ModalComponent
 
     public function submit()
     {
+        $settings = Setting::find(1);
+        
         Payments::create([
             'user_id' => $this->name,
             'accountant_id' => Auth::user()->id,
@@ -176,8 +180,13 @@ class CreatePayments extends ModalComponent
             'payment_status' => $this->status,
         ]);
 
-        if($this->status === 'Paid') {
+        if($settings->notification_channel === "Email") {
             $this->sendMail();
+        } else if($settings->notification_channel === "SMS") {
+            $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
+        } else if($settings->notification_channel === "Email and SMS") {
+            $this->sendMail();
+            $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
         }
     
         $this->emit('refreshDatatable');
@@ -214,6 +223,18 @@ class CreatePayments extends ModalComponent
         $message = "We would like to inform you that your payment for <b>".$type."</b> has been processed this <b>".Carbon::today()->format('F j\, Y')."</b>.";
 
         Notification::sendNow($user, new PaymentNotification($payment, $message));
+    }
+
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            $recipients,
+            ['from' => $twilio_number, 'body' => $message]
+        );
     }
 
     public static function closeModalOnClickAway(): bool
