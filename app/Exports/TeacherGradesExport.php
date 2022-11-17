@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Grade;
-
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -15,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Style\Style;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class StudentGradesExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths, WithDrawings
+class TeacherGradesExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths, WithDrawings
 {
     use Exportable;
 
@@ -38,34 +37,36 @@ class StudentGradesExport implements FromCollection, WithHeadings, ShouldAutoSiz
 
     public function headings():array{
         return[
+            'Student',
             'Subject',
             'First Quarter',
             'Second Quarter',
             'Third Quarter',
             'Fourth Quarter',
         ];
-    } 
+    }
 
     public function columnWidths():array{
         return [
-            'A' => 12, 
-            'B' => 18,
-            'C' => 18,   
-            'D' => 18, 
-            'E' => 18,     
+            'A' => 12,
+            'B' => 12,
+            'C' => 18,
+            'D' => 18,
+            'E' => 18,
+            'F' => 18,
         ];
     }
 
     public function styles(Worksheet $sheet){
         return [
-            'A1:E1' => [ 'font' => ['bold' => true ]],
-            'A1:E1' => [ 'font' => ['size' => 16 ]],
-            'A1:E1' => [ 'font' => ['family' => 'Times New Roman' ]],
+            'A1:F1' => [ 'font' => ['bold' => true ]],
+            'A1:F1' => [ 'font' => ['size' => 16 ]],
+            'A1:F1' => [ 'font' => ['family' => 'Times New Roman' ]],
         ];
     }
 
     public function collection(){
-        return Grade::select('subject_id', 'first_quarter', 'second_quarter', 'third_quarter', 'fourth_quarter')
+        return Grade::select('student_id', 'subject_id', 'first_quarter', 'second_quarter', 'third_quarter', 'fourth_quarter')
                          ->whereIn('id', $this->grades)
                          ->get();
     }

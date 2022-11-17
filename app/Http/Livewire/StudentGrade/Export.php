@@ -41,7 +41,7 @@ class Export extends Component
 
     public function downloadExport()
     {
-        return Storage::download('public/grades.csv');
+        return Storage::download('public/Grades.csv');
     }
 
     public function updateExportProgress()
