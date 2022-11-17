@@ -36,8 +36,8 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Teacher'])
             ->syncPermissions([
-                'view_users',
-                'read_user',
+                // 'view_users',
+                // 'read_user',
 
                 'assign_grades',
 
@@ -77,8 +77,8 @@ class RoleSeeder extends Seeder
                 'view_grades',
                 'read_grade',
 
-                'view_users',
-                'read_user',
+                // 'view_users',
+                // 'read_user',
 
                 'create_payment',
 

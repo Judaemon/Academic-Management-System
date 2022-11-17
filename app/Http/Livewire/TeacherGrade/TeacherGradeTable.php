@@ -6,8 +6,6 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 use App\Models\User;
-use App\Models\Subject;
-use App\Models\Section;
 use App\Models\Grade;
 use App\Exports\GradesExport;
 
@@ -23,7 +21,7 @@ class TeacherGradeTable extends DataTableComponent
     protected $section;
 
     protected $model = Grade::class;
-    
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
@@ -39,6 +37,7 @@ class TeacherGradeTable extends DataTableComponent
     {
         return User::query()
             ->whereHas('admission', function ($q) {
+                $q->where('academic_year_id', setting('academic_year_id'));
                 $q->whereHas('section', function ($q) {
                     $q->where('teacher_id', auth()->user()->id);
                 });
@@ -48,8 +47,8 @@ class TeacherGradeTable extends DataTableComponent
     public function exportXLSX()
     {
         $grade = $this->getSelected();
-        
-        if(!empty($grade)) {
+
+        if (!empty($grade)) {
             $this->clearSelected();
             return Excel::download(new GradesExport($grade), 'grades.xlsx');
         } else {
@@ -63,8 +62,8 @@ class TeacherGradeTable extends DataTableComponent
     public function exportCSV()
     {
         $grade = $this->getSelected();
-        
-        if(!empty($grade)) {
+
+        if (!empty($grade)) {
             $this->clearSelected();
             return Excel::download(new GradesExport($grade), 'grades.csv');
         } else {
@@ -76,9 +75,10 @@ class TeacherGradeTable extends DataTableComponent
     }
 
     public function exportPDF()
-    {   $grade = $this->getSelected();
+    {
+        $grade = $this->getSelected();
 
-        if(!empty($grade)) {
+        if (!empty($grade)) {
             $this->clearSelected();
             return (new GradesExport($grade))->download('grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         } else {
@@ -92,7 +92,13 @@ class TeacherGradeTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Student", "last_name")
+            Column::make("Student", "id")
+                ->sortable()
+                ->searchable(),
+            Column::make("Student")
+                ->label(
+                    fn ($row) =>  User::find($row->id)->complete_name
+                )
                 ->sortable()
                 ->searchable(),
             Column::make("Actions", "id")->view('livewire.teacher-grade.actions-col'),

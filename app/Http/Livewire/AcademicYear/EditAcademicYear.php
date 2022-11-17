@@ -24,6 +24,9 @@ class EditAcademicYear extends ModalComponent
     {
         $this->academic_year = $academic_year;
 
+        $this->title = $academic_year->title;
+        $this->status = $academic_year->status;
+
         $this->start_date = $academic_year->start_date;
         $this->school_days = $academic_year->school_days;
         $this->end_date = $academic_year->end_date;
@@ -32,6 +35,9 @@ class EditAcademicYear extends ModalComponent
     protected function rules()
     {
         return [
+            'title' => ['required'],
+            'status' => ['required'],
+
             'start_date' => ['required', 'date'],
             'school_days' => ['nullable', 'numeric'],
             'end_date' => ['nullable', 'date', 'after:start_date'],
@@ -45,7 +51,7 @@ class EditAcademicYear extends ModalComponent
 
     public function updatedEndDate()
     {
-        if($this->end_date != NULL) {
+        if ($this->end_date != NULL) {
             $this->school_days = Carbon::parse($this->start_date)->diffInDays($this->end_date);
         } else {
             $this->school_days = 0;
@@ -54,7 +60,7 @@ class EditAcademicYear extends ModalComponent
 
     public function updatedSchoolDays()
     {
-        if($this->school_days > 0) {
+        if ($this->school_days > 0) {
             $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
         } else {
             $this->end_date = NULL;
@@ -83,8 +89,11 @@ class EditAcademicYear extends ModalComponent
     public function submit()
     {
         $this->authorize('update_academic_year');
-        
+
         $this->academic_year->forceFill([
+            'title' => $this->title,
+            'status' => $this->status,
+
             'start_date' => Carbon::parse($this->start_date)->toDateString(),
             'school_days' => $this->school_days,
             'end_date' => Carbon::parse($this->end_date)->toDateString(),

@@ -11,17 +11,17 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        if ((Auth::user()->password_changed_at == null)) {
-            return redirect(route('change-password'));
-        } else {
-            $now = Carbon::today()->format('Y-m-d');
-            $announcements = Announcement::where('start_date', '<=', $now)
-                ->where('end_date', '>=', $now)
-                ->get();
+        // if ((Auth::user()->password_changed_at == null)) {
+        //     return redirect(route('change-password'));
+        // } else {
+        $now = Carbon::today()->format('Y-m-d');
+        $announcements = Announcement::where('start_date', '<=', $now)
+            ->where('end_date', '>=', $now)
+            ->get();
 
-            return view('dashboard', [
-                'announcements' => $announcements,
-            ]);
-        }
+        return view('dashboard', [
+            'announcements' => $announcements,
+        ]);
+        // }
     }
 }
