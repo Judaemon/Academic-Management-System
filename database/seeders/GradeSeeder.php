@@ -197,7 +197,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '88',
 
             'section_id' => '4',
-            'subject_id' => '9',
+            'subject_id' => '5',
             'student_id' => '14',
         ]);
 
@@ -208,7 +208,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '92',
 
             'section_id' => '4',
-            'subject_id' => '10',
+            'subject_id' => '6',
             'student_id' => '14',
         ]);
 
@@ -219,7 +219,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '88',
 
             'section_id' => '4',
-            'subject_id' => '11',
+            'subject_id' => '7',
             'student_id' => '14',
         ]);
 
@@ -230,7 +230,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '84',
 
             'section_id' => '4',
-            'subject_id' => '12',
+            'subject_id' => '8',
             'student_id' => '14',
         ]);
 
@@ -242,7 +242,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '95',
 
             'section_id' => '4',
-            'subject_id' => '9',
+            'subject_id' => '5',
             'student_id' => '15',
         ]);
 
@@ -253,7 +253,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '93',
 
             'section_id' => '4',
-            'subject_id' => '10',
+            'subject_id' => '6',
             'student_id' => '15',
         ]);
 
@@ -264,7 +264,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '95',
 
             'section_id' => '4',
-            'subject_id' => '11',
+            'subject_id' => '7',
             'student_id' => '15',
         ]);
 
@@ -275,7 +275,7 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '93',
 
             'section_id' => '4',
-            'subject_id' => '12',
+            'subject_id' => '8',
             'student_id' => '15',
         ]);
 
@@ -287,8 +287,8 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '83',
 
             'section_id' => '4',
-            'subject_id' => '9',
-            'student_id' => '10',
+            'subject_id' => '5',
+            'student_id' => '16',
         ]);
 
         Grade::create([
@@ -298,8 +298,8 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '86',
 
             'section_id' => '4',
-            'subject_id' => '10',
-            'student_id' => '10',
+            'subject_id' => '6',
+            'student_id' => '16',
         ]);
 
         Grade::create([
@@ -309,8 +309,8 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '86',
 
             'section_id' => '4',
-            'subject_id' => '11',
-            'student_id' => '10',
+            'subject_id' => '7',
+            'student_id' => '16',
         ]);
 
         Grade::create([
@@ -320,8 +320,98 @@ class GradeSeeder extends Seeder
             'fourth_quarter' => '84',
 
             'section_id' => '4',
+            'subject_id' => '8',
+            'student_id' => '16',
+        ]);
+
+        // Grades for Student ID 21 - Derek Sanchez - for old admission
+        Grade::create([
+            'first_quarter' => '82',
+            'second_quarter' => '83',
+            'third_quarter' => '84',
+            'fourth_quarter' => '83',
+
+            'section_id' => '2',
+            'subject_id' => '9',
+            'student_id' => '21',
+        ]);
+
+        Grade::create([
+            'first_quarter' => '85',
+            'second_quarter' => '87',
+            'third_quarter' => '87',
+            'fourth_quarter' => '86',
+
+            'section_id' => '2',
+            'subject_id' => '10',
+            'student_id' => '21',
+        ]);
+
+        Grade::create([
+            'first_quarter' => '84',
+            'second_quarter' => '83',
+            'third_quarter' => '84',
+            'fourth_quarter' => '86',
+
+            'section_id' => '2',
+            'subject_id' => '11',
+            'student_id' => '21',
+        ]);
+
+        Grade::create([
+            'first_quarter' => '83',
+            'second_quarter' => '84',
+            'third_quarter' => '82',
+            'fourth_quarter' => '84',
+
+            'section_id' => '2',
             'subject_id' => '12',
-            'student_id' => '10',
+            'student_id' => '21',
+        ]);
+
+        // Grades for Student ID 21 - Derek Sanchez - for current admission
+        Grade::create([
+            'first_quarter' => '82',
+            'second_quarter' => '83',
+            'third_quarter' => '84',
+            'fourth_quarter' => '83',
+
+            'section_id' => '4',
+            'subject_id' => '5',
+            'student_id' => '21',
+        ]);
+
+        Grade::create([
+            'first_quarter' => '85',
+            'second_quarter' => '87',
+            'third_quarter' => '87',
+            'fourth_quarter' => '86',
+
+            'section_id' => '4',
+            'subject_id' => '6',
+            'student_id' => '21',
+        ]);
+
+        Grade::create([
+            'first_quarter' => '84',
+            'second_quarter' => '83',
+            'third_quarter' => '84',
+            'fourth_quarter' => '86',
+
+            'section_id' => '4',
+            'subject_id' => '7',
+            'student_id' => '21',
+        ]);
+
+        Grade::create([
+            'first_quarter' => '83',
+            'second_quarter' => '84',
+            'third_quarter' => '82',
+            'fourth_quarter' => '84',
+
+            'section_id' => '4',
+            'subject_id' => '8',
+            'student_id' => '21',
         ]);
     }
 }

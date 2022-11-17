@@ -47,35 +47,6 @@ class SubjectSeeder extends Seeder
             'grade_level_id' => 1
         ]);
 
-        // Kinder 2
-        Subject::create([
-            'name' => 'Alphabet',
-            'teacher_id' => 1,
-            'subject_code' => 'alphabet-2',
-            'grade_level_id' => 2
-        ]);
-
-        Subject::create([
-            'name' => 'Numbers',
-            'teacher_id' => 1,
-            'subject_code' => 'numbers-2',
-            'grade_level_id' => 2
-        ]);
-
-        Subject::create([
-            'name' => 'Shapes',
-            'teacher_id' => 1,
-            'subject_code' => 'shapes-2',
-            'grade_level_id' => 2
-        ]);
-
-        Subject::create([
-            'name' => 'Colors',
-            'teacher_id' => 1,
-            'subject_code' => 'colors-2',
-            'grade_level_id' => 2
-        ]);
-
         // Elementary Subjects
         // Mathematics, Science, English, and Social Sciences
 
@@ -108,6 +79,35 @@ class SubjectSeeder extends Seeder
             'grade_level_id' => 3
         ]);
 
+        // Kinder 2
+        Subject::create([
+            'name' => 'Alphabet',
+            'teacher_id' => 1,
+            'subject_code' => 'alphabet-2',
+            'grade_level_id' => 2
+        ]);
+
+        Subject::create([
+            'name' => 'Numbers',
+            'teacher_id' => 1,
+            'subject_code' => 'numbers-2',
+            'grade_level_id' => 2
+        ]);
+
+        Subject::create([
+            'name' => 'Shapes',
+            'teacher_id' => 1,
+            'subject_code' => 'shapes-2',
+            'grade_level_id' => 2
+        ]);
+
+        Subject::create([
+            'name' => 'Colors',
+            'teacher_id' => 1,
+            'subject_code' => 'colors-2',
+            'grade_level_id' => 2
+        ]);
+        
         // Grade 2
         Subject::create([
             'name' => 'Mathematics',
