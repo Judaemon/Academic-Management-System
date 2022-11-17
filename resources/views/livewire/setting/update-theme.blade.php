@@ -2,7 +2,7 @@
     <div class="lg:flex">
         <div class="mb-2 lg:w-1/3 md:pr-4">
             <h2 class="text-lg font-medium text-text">Themes</h2>
-            <p class=" text-sm text-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, ea?
+            <p class=" text-sm text-text">Style or change the website's current theme and color.
             </p>
         </div>
         <div class="bg-bg p-4 lg:w-2/3 rounded-md">

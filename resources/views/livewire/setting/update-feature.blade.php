@@ -14,8 +14,7 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Grades</label>
                         </label>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Send notification to students if the grades are already posted through either by email or sms, or by both.
                         </div>
                     </div>
 
@@ -25,15 +24,16 @@
                             <label class="ml-2 text-text block text-sm font-medium mb-1">Notify Payments</label>
                         </div>
                         <div class="pl-6 mt-0 max-w-xl text-sm text-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus sed
-                            vero vel pariatur recusandae doloribus, et optio blanditiis autem.
+                            Send notification if the payments are confirmed or refunded through either by email or sms, or by both.
                         </div>
                     </div>
 
                     <div class="mt-3 max-w-xl text-sm mb-4">
                         <label class="text-text block text-sm font-medium mb-1">Select notification channel</label>
                         <div>
-                            <x-select placeholder="Select one notification channel" :options="['Email', 'SMS', 'Email and SMS']"
+                            <x-select 
+                                placeholder="Select one notification channel" 
+                                :options="['Email', 'SMS', 'Email and SMS']"
                                 wire:model.defer="notification_channel" />
                         </div>
                     </div>
