@@ -144,10 +144,6 @@
       </div>
     </div>
   </div>
-
-  {{ $balance }}
-  {{ $others }}
-  {{ $acad_year}}
   
   @if(!empty($history) && $history->count() > 0)
     <div class="w-full px-0 lg:px-8">

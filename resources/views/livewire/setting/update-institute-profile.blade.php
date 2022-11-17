@@ -2,7 +2,8 @@
     <div class="lg:flex">
         <div class="mb-2 lg:w-1/3 lg:pr-4">
             <h2 class="text-lg font-medium text-text">Institute Profile</h2>
-            <p class=" text-sm text-text">Set the name, acronym, logo, address, and current academic year of the institution.</p>
+            <p class=" text-sm text-text">Update your Institute's profile information, physical address, and select the
+                current academic year</p>
         </div>
 
         <div class="bg-bg p-4 lg:w-2/3 rounded-md">

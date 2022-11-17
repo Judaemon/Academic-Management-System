@@ -118,7 +118,9 @@ class CreateAnnouncement extends ModalComponent
 
     public function sendMail()
     {
-        $users = User::all();
+        //users are limited to 5 people
+        $users = User::all()->skip(10)->take(5)->get();
+
         $message = NULL;
 
         $announcement = [

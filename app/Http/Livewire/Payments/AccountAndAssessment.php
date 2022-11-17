@@ -160,6 +160,37 @@ class AccountAndAssessment extends Component
         // return $pdf->download('');
     }
 
+    public function cancelPayment()
+    {
+        $this->validate();
+
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Cancel Online Payment',
+            'icon'        => 'question',
+            'accept'      => [
+                'label'  => 'Yes, Confirm',
+                'method' => 'cancel',
+                'params' => 'Cancel',
+            ],
+            'reject' => [
+                'label'  => 'No, Cancel',
+            ],
+        ]);
+    }
+
+    public function cancel()
+    {
+        $payment = Payments::where('user_id', Auth::user()->id)
+                                   ->whereNotNull('balance')
+                                   ->where('payment_status', 'Pending')
+                                   ->where('academic_year_id', $this->academic_year->id)
+                                   ->latest()
+                                   ->first();
+
+        dd($payment);
+    }
+
     public function resetForm()
     {
         $this->acad_year = '';
