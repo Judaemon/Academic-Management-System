@@ -5,7 +5,9 @@ namespace App\Http\Livewire\Subject;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Subject;
+use App\Models\GradeLevel;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class SubjectTable extends DataTableComponent
 {
@@ -22,6 +24,23 @@ class SubjectTable extends DataTableComponent
                     $q->where('isEnabled', true);
                 });
             });
+    }
+
+    public function filters(): array
+    {
+        $option = GradeLevel::query()
+            ->pluck('name')
+            ->toArray();
+
+        $option = array_combine($option, $option);
+
+        return [
+            SelectFilter::make('Grade Level')
+                ->options($option)
+                ->filter(function (Builder $builder, string $value) {
+                    $builder->where('grade_levels.name', $value);
+                }),
+        ];
     }
 
     public function columns(): array
