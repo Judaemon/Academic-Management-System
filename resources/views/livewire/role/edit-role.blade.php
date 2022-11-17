@@ -2,7 +2,11 @@
     <x-card title="Edit role">
         <div class="flex gap-4">
             <div class="lg:w-4/12 mb-4">
-                <x-input wire:model.defer="role.name" label="Name" placeholder="Type role name here" />
+                @if($role->id === 1 || $role->id === 3 || $role->id === 4 || $role->id === 5)
+                    <x-input wire:model.defer="role.name" label="Name" readonly />
+                @else
+                    <x-input wire:model.defer="role.name" label="Name" placeholder="Type role name here" />
+                @endif
             </div>
             <div class="lg:w-8/12 mb-4">
                 <x-label>Selected permissions</x-label>

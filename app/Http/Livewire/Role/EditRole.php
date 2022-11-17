@@ -59,12 +59,18 @@ class EditRole extends ModalComponent
 
     public function submit()
     {
-        $this->authorize('create_role');
+        $this->authorize('update_role');
 
-        $this->role->save();
-
-        $this->role->syncPermissions($this->role_permissions);
-
+        if($this->role->id === 3 || $this->role->id === 4 || $this->role->id === 5) {
+            $this->dialog()->error(
+                $title = 'Role Name Cannot Be Edited',
+                $description = "Please do not change this role's name",
+            );
+        } else {
+            $this->role->save();
+            $this->role->syncPermissions($this->role_permissions);
+        }
+        
         $this->emit('refreshDatatable');
 
         $this->closeModal();
