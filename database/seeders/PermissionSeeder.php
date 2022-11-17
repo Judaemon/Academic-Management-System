@@ -92,7 +92,6 @@ class PermissionSeeder extends Seeder
         }
 
         $announcement_permissions = [
-            'view_announcement',
             'create_announcement',
             'update_announcement',
             'delete_announcement',
@@ -162,6 +161,8 @@ class PermissionSeeder extends Seeder
         $student_permissions = [
             'view_grades',
             'read_grade',
+
+            'create_payment',
 
             'view_users',
             'read_user',

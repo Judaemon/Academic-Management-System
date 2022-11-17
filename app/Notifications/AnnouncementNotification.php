@@ -7,38 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 
-use App\Models\User;
-
-class PaymentNotification extends Notification
+class AnnouncementNotification extends Notification
 {
     use Queueable;
 
-    private $payment;
+    private $announcement;
     private $message;
-
-    private $user;
-    private $accountant;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($payment, $message)
+    public function __construct($announcement, $message)
     {
-        $this->payment = $payment;
+        $this->announcement = $announcement;
         $this->message = $message;
-
-        $this->user = User::select('first_name')
-                            ->where('id', $payment['name'])
-                            ->first();
-
-        $this->accountant = User::select('email')
-                                  ->where('id', $payment['accountant'])
-                                  ->first();
     }
 
     /**
@@ -61,9 +47,8 @@ class PaymentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Greetings '.$this->user->first_name.', ')
-                    ->line(new HtmlString('<p>'.$this->message.'</p><p>Thank you and God Bless.</p>'))
-                    ->line(new HtmlString("For Any Correction and Clarification, kindly contact <a style='text-decoration-line: underline;'>".$this->accountant->email."</a> or visit the Cashier's Office"));
+            ->greeting($this->announcement['title'])
+            ->line($this->announcement['description']);
     }
 
     /**

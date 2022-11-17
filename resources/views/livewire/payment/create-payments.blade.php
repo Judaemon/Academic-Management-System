@@ -129,13 +129,14 @@
                 <div class="pl-6 mt-2 w-full {{ $options === 'other fees' ? 'block' : 'hidden'}}">
                   <x-select  
                     wire:ignore
-                    placeholder="Select School Fees"
+                    placeholder="Select Other School Fees"
                     wire:model="school_fee"
                     :async-data="route('other.fees')"
                     option-label="fee_name"
                     option-value="id"
                     option-description="amount"
                   />
+                  <span class="w-full text-[0.7rem]">**School Fees that are not included in the educational expenses</span>
                 </div>
               </div>
               

@@ -9,6 +9,7 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use App\Models\AcademicYear;
 use App\Models\Payments;
 use App\Models\User;
+use App\Models\Setting;
 
 use App\Exports\PaymentsExport;
 use App\Notifications\PaymentNotification;
@@ -16,8 +17,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Builder;
 
 use WireUi\Traits\Actions;
+use Twilio\Rest\Client;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Notification;
+
+use Auth;
 
 class PaymentsTable extends DataTableComponent
 {
@@ -187,12 +191,27 @@ class PaymentsTable extends DataTableComponent
     public function update($id)
     {
         $payments = Payments::find($id);
+        $settings = Setting::find(1);
+
+        if(!empty($payments->accountant_id)) {
+            $accountant = $payments->accountant_id;
+        } else {
+            $accountant = Auth::user()->id;
+        }
 
         $payments->forceFill([
-            'payment_status' => "Refunded",
+            'payment_status' => 'Refunded',
+            'accountant_id' => $accountant,
         ])->save();
 
-        $this->sendMail($payments);
+        if($settings->notification_channel === "Email") {
+            $this->sendMail($payments);
+        } else if($settings->notification_channel === "SMS") {
+            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+        } else if($settings->notification_channel === "Email and SMS") {
+            $this->sendMail($payments);
+            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+        }
 
         $this->emit('refreshDatatable');
     
@@ -226,5 +245,17 @@ class PaymentsTable extends DataTableComponent
         $message = "We would to inform you that your request for a refund for your payment in <b>".$type."</b> with the amount of <b> Php ".number_format($payments->amount_paid, 2)."</b> is now being processed.";
 
         Notification::sendNow($user, new PaymentNotification($payment, $message));
+    }
+
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            $recipients,
+            ['from' => $twilio_number, 'body' => $message]
+        );
     }
 }
