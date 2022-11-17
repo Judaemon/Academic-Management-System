@@ -11,7 +11,7 @@
                 <div>
                     <div class="flex justify-between">
                         <h2 class="font-semibold">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }} </h2>
-                        <x-badge dark rounded md label="20192151" />
+                        <x-badge dark rounded md label="ID: {{ auth()->user()->id }}" />
                     </div>
 
                     @forelse ($roles as $role)
@@ -299,25 +299,25 @@
             </section>
         @endunlessrole
 
-        <section class="container col-span-12 grid  gap-4 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
-            <div class="col-span-12">
-                <x-badge class="mb-2 w-full" dark md label="Update Profile" />
+        <section class="container col-span-12 md:col-span-6 p-4 bg-white rounded-lg shadow-md">
+            <x-badge class="mb-2 w-full" dark md label="Update Profile" />
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 lg:col-span-6">
+                    <x-button class="w-full" icon="pencil" info label="Edit Contact Information"
+                        onclick="livewire.emit('openModal', 'profile.update-contact-information')" />
+                </div>
+
+                <div class="col-span-12 lg:col-span-6">
+                    <x-button class="w-full" icon="pencil" info label="Edit Guardian Information"
+                        onclick="livewire.emit('openModal', 'profile.update-guardian-information')" />
+                </div>
+
+                <div class="col-span-12 lg:col-span-6">
+                    <x-button class="w-full" icon="pencil" info label="Edit Parent Information"
+                        onclick="livewire.emit('openModal', 'profile.update-parent-information')" />
+                </div>
             </div>
 
-            <div class="col-span-12">
-                <x-button class="w-full" icon="pencil" info label="Edit Contact Information"
-                    onclick="livewire.emit('openModal', 'profile.update-contact-information')" />
-            </div>
-
-            <div class="col-span-12">
-                <x-button class="w-full" icon="pencil" info label="Edit Guardian Information"
-                    onclick="livewire.emit('openModal', 'profile.update-guardian-information')" />
-            </div>
-
-            <div class="col-span-12">
-                <x-button class="w-full" icon="pencil" info label="Edit Parent Information"
-                    onclick="livewire.emit('openModal', 'profile.update-parent-information')" />
-            </div>
 
             {{-- To update parents information, click HERE --}}
         </section>

@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             'height' => '168',
             'pwd_id' => 'ASDF1234',
 
-            'mobile_number' => '09176820721',
+            'mobile_number' => '+63 976 054 2645',
             'email' => 'sadmin@sadmin.com',
             'address' => 'Guisad Central, Baguio City',
 
