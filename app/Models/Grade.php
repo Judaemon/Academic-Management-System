@@ -42,13 +42,14 @@ class Grade extends Authenticatable
     }
 
     protected $fillable = [
+        'student_id',
+        'section_id',
+        'subject_id',
+
         'first_quarter',
         'second_quarter',
         'third_quarter',
         'fourth_quarter',
 
-        'student_id',
-        'section_id',
-        'subject_id',
     ];
 }

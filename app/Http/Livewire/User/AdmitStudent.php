@@ -420,6 +420,7 @@ class AdmitStudent extends ModalComponent
 
         // Granting the Student role to the newly created user
         $user->assignRole('Student');
+
         $this->sendMessage('Account registration successful!', '+63 976 054 2645');
         // if isTransferee == false
         if ($this->isTransferee == false) {

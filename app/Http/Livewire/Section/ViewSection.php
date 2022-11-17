@@ -17,6 +17,8 @@ class ViewSection extends ModalComponent
 
     public $grade_level;
 
+    public $section_students;
+
     public $grade_level_subjects = [];
 
     protected function rules()
@@ -39,6 +41,15 @@ class ViewSection extends ModalComponent
         $this->grade_level_subjects = GradeLevel::query()
             ->find($section->grade_level_id)
             ->subjects;
+
+        $this->section_students = User::query()
+            ->whereHas('admission', function ($q) {
+                $q->where('academic_year_id', setting('academic_year_id'));
+                $q->whereHas('section', function ($q) {
+                    $q->where('id', $this->section->id);
+                });
+            })
+            ->get();
     }
 
     public function render()
