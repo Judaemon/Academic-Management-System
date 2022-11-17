@@ -7,6 +7,7 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Models\Admission;
 use App\Models\Section;
+use Illuminate\Database\Eloquent\Builder;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -17,7 +18,6 @@ class UploadGrade extends ModalComponent
 
     public $section_id;
     public $student_id;
-    public $subject_id;
 
     public $first_quarter;
     public $second_quarter;
@@ -26,38 +26,51 @@ class UploadGrade extends ModalComponent
 
     public $student;
     public $section;
+    public $subject;
 
     protected function rules()
     {
         return [
-            'section_id' => ['required'],
-            'student_id' => ['required'],
-            'subject_id' => ['required'],
+            // 'section_id' => ['required'],
+            // 'student_id' => ['required'],
 
-            'first_quarter' => ['nullable'],
-            'second_quarter' => ['nullable'],
-            'third_quarter' => ['nullable'],
-            'fourth_quarter' => ['nullable'],
+            'grades.*.first_quarter' => ['nullable'],
+            'grades.*.second_quarter' => ['nullable'],
+            'grades.*.third_quarter' => ['nullable'],
+            'grades.*.fourth_quarter' => ['nullable'],
         ];
     }
 
     public function mount(User $student)
     {
         $this->student = $student;
-        
-        $this->admission = Admission::query()
-            ->orderBy('created_at', 'desc')
-            ->latest()
-            ->first();
-        
-        $this->subjects = Subject::query()
-            ->where('grade_level_id', $this->admission->id)
-            ->get();
 
-        $this->section = Section::query()
-            ->where('teacher_id', auth()->user()->id)
+        $this->admission = Admission::query()
+            ->where('student_id', $this->student->id)
             ->latest()
             ->first();
+
+        $this->grades = Grade::query()
+            ->where('student_id', $this->student->id)
+            ->with('subject')
+            ->get();
+        // $this->subjects = Subject::query()
+        //     ->where('grade_level_id', $this->admission->admit_to_grade_level)
+        //     // // ->whereHas('program', function ($q) {
+        //     // // $q->where('isEnabled', true);
+        //     // // })
+        //     ->whereHas('grades', function (Builder $query) {
+        //         $query->where('student_id', $this->student->id);
+        //     })
+        //     ->with('grades', function ($q) {
+        //         $q->where('student_id', $this->student->id);
+        //     })
+        //     ->get();
+
+        // $this->section = Section::query()
+        //     ->where('teacher_id', auth()->user()->id)
+        //     ->latest()
+        //     ->first();
     }
 
     public function render()
@@ -65,9 +78,11 @@ class UploadGrade extends ModalComponent
         return view('livewire.teacher-grade.upload-grade');
     }
 
-    public function save(): void
+    public function save1(): void
     {
-        // dd($this->section);
+        // dd($this->grades);
+        // dd($this->subjects);
+        // dd($this->admission, $this->subjects);
         $this->validate();
 
         $this->dialog()->confirm([
@@ -87,16 +102,20 @@ class UploadGrade extends ModalComponent
 
     public function submit()
     {
-        $grade = Grade::create([
-            'section_id' => $this->section_id,
-            'student_id' => $this->student_id,
-            'subject_id' => $this->subject_id,
+        // $grade = Grade::create([
+        //     'section_id' => $this->section_id,
+        //     'student_id' => $this->student_id,
+        //     'subject_id' => $this->subject_id,
 
-            'first_quarter' => $this->first_quarter,
-            'second_quarter' => $this->second_quarter,
-            'third_quarter' => $this->third_quarter,
-            'fourth_quarter' => $this->fourth_quarter,
-        ]);
+        //     'first_quarter' => $this->first_quarter,
+        //     'second_quarter' => $this->second_quarter,
+        //     'third_quarter' => $this->third_quarter,
+        //     'fourth_quarter' => $this->fourth_quarter,
+        // ]);
+
+        $this->grades->each(function ($grade) {
+            $grade->save();
+        });
 
         $this->closeModal();
 

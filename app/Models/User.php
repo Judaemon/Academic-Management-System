@@ -89,6 +89,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['complete_name'];
+
+    public function getCompleteNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
     public function isTeacher()
     {
         return $this->hasRole('Teacher');

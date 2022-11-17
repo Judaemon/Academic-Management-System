@@ -9,11 +9,6 @@ class Section extends Model
 {
     use HasFactory;
 
-    public function subjects()
-    {
-        return $this->belongsToMany(Subject::class);
-    }
-
     public function teacher()
     {
         return $this->belongsTo(User::class);
@@ -22,6 +17,11 @@ class Section extends Model
     public function grade_level()
     {
         return $this->belongsTo(GradeLevel::class);
+    }
+
+    public function admission()
+    {
+        return $this->hasMany(admission::class);
     }
 
     protected $fillable = [

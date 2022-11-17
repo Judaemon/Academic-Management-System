@@ -10,7 +10,7 @@
                     {{-- <x-button label="{{ Auth::user()->first_name }}" flat secondary md right-icon="chevron-down" /> --}}
                 </div>
                 <div
-                    class="flex justify-end space-x-4 w-44 px-4 py-2 text-sm font-medium leading-5 text-center text-text">
+                    class="flex justify-end space-x-4 w-80 px-4 py-2 text-sm font-medium leading-5 text-center text-text">
                     <span class="float-right">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                     <x-icon name="chevron-down" class="w-4 h-4" />
                 </div>
