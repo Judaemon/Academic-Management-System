@@ -115,6 +115,7 @@ class StudentSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
+        // Jacqueline is student_id = 10
 
         User::create([
             'first_name' => 'Jose',
@@ -174,7 +175,7 @@ class StudentSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
-        // 5
+        // Stacey is student_id = 12
 
         User::create([
             'first_name' => 'Beatrice',
@@ -262,6 +263,7 @@ class StudentSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
+        // Eric is student_id = 15
 
         User::create([
             'first_name' => 'Charles',
@@ -291,7 +293,6 @@ class StudentSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
-        // 10
 
         User::create([
             'first_name' => 'Jin',
@@ -408,7 +409,7 @@ class StudentSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
-        // 15
+        // 20
 
         User::create([
             'first_name' => 'Derek',
@@ -612,6 +613,6 @@ class StudentSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
-        // 20
+        // 27
     }
 }

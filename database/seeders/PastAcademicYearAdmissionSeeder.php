@@ -52,5 +52,25 @@ class PastAcademicYearAdmissionSeeder extends Seeder
             'admit_to_grade_level' => '1',
             'section_id' => '1',
         ]);
+
+        Admission::create([
+            'status' => 'Passed',
+            'academic_year_id' => '1',
+
+            'student_id' => '13',
+            'enrolled_by' => '1',
+            'admit_to_grade_level' => '1',
+            'section_id' => '1',
+        ]);
+
+        Admission::create([
+            'status' => 'Passed',
+            'academic_year_id' => '1',
+
+            'student_id' => '21',
+            'enrolled_by' => '2',
+            'admit_to_grade_level' => '1',
+            'section_id' => '2',
+        ]);
     }
 }
