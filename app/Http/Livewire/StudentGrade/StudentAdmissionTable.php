@@ -5,9 +5,6 @@ namespace App\Http\Livewire\StudentGrade;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
-use App\Models\User;
-use App\Models\Subject;
-use App\Models\Section;
 use App\Models\Grade;
 use App\Models\Admission;
 use App\Exports\StudentGradesExport;
@@ -18,9 +15,9 @@ use Illuminate\Database\Eloquent\Builder;
 class StudentAdmissionTable extends DataTableComponent
 {
     use Actions;
-    
+
     protected $grade;
-    
+
     protected $model = Grade::class;
 
     public function configure(): void

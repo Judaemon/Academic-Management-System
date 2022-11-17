@@ -7,7 +7,9 @@ use WireUi\Traits\Actions;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\Admission;
+use App\Models\Grade;
 use App\Models\Section;
+use App\Models\Subject;
 
 class EditAdmission extends ModalComponent
 {
@@ -81,6 +83,25 @@ class EditAdmission extends ModalComponent
 
     public function submit()
     {
+        if ($this->admission->status == "Admitted") {
+            $grade_level_subjects = Subject::query()
+                ->where('grade_level_id', $this->admission->admit_to_grade_level)
+                ->get();
+
+            foreach ($grade_level_subjects as $key => $subject) {
+                Grade::create([
+                    'first_quarter' => '',
+                    'second_quarter' => '',
+                    'third_quarter' => '',
+                    'fourth_quarter' => '',
+
+                    'section_id' => $this->admission->section_id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $this->admission->student_id,
+                ]);
+            }
+        }
+
         $this->authorize('update_admission');
 
         $this->admission->save();
