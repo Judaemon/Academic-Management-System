@@ -180,13 +180,15 @@ class CreatePayments extends ModalComponent
             'payment_status' => $this->status,
         ]);
 
-        if($settings->notification_channel === "Email") {
-            $this->sendMail();
-        } else if($settings->notification_channel === "SMS") {
-            $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
-        } else if($settings->notification_channel === "Email and SMS") {
-            $this->sendMail();
-            $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
+        if($settings->notify_payments === 1 && $this->status === "Paid") {
+            if($settings->notification_channel === "Email") {
+                $this->sendMail();
+            } else if($settings->notification_channel === "SMS") {
+                $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
+            } else if($settings->notification_channel === "Email and SMS") {
+                $this->sendMail();
+                $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
+            }
         }
     
         $this->emit('refreshDatatable');
