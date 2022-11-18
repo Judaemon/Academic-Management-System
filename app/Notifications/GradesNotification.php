@@ -6,6 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\HtmlString;
 
 class GradesNotification extends Notification
 {
@@ -22,7 +25,7 @@ class GradesNotification extends Notification
     public function __construct($message, $user)
     {
         $this->message = $message;
-        $this->user = User::find(useruseruser);
+        $this->user = User::find($user);
     }
 
     /**

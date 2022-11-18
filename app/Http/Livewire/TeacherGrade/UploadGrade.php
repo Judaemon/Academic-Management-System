@@ -155,7 +155,7 @@ class UploadGrade extends ModalComponent
 
     public function sendMail()
     {
-        $user = User::find($this->student);
+        $user = User::find($this->student->id);
 
         $message = "We would like to inform you that your grades are now uploaded.";
 
