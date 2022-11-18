@@ -118,10 +118,8 @@ class CreateAnnouncement extends ModalComponent
 
     public function sendMail()
     {
-        //users are limited to 5 people
-        $users = User::all()->skip(10)->take(5)->get();
-
-        $message = NULL;
+        //users are limited to 1 people
+        $users = User::find(25);
 
         $announcement = [
             'title' => $this->title,
@@ -129,10 +127,11 @@ class CreateAnnouncement extends ModalComponent
             'start_date' => Carbon::parse($this->start_date)->toDateString(),
             'end_date' => Carbon::parse($this->end_date)->toDateString(),
             'category' => $this->category,
-            'main_image' => $this->main_image,
         ];
 
-        Notification::sendNow($users, new AnnouncementNotification($announcement, $message));
+        // $message = "We would like to inform you of an announcement in the "
+
+        Notification::sendNow($users, new AnnouncementNotification($announcement));
     }
 
     private function sendMessage($message, $recipients)

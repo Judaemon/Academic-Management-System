@@ -14,17 +14,16 @@ class AnnouncementNotification extends Notification
     use Queueable;
 
     private $announcement;
-    private $message;
+    // private $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($announcement, $message)
+    public function __construct($announcement)
     {
         $this->announcement = $announcement;
-        $this->message = $message;
     }
 
     /**
