@@ -15,6 +15,8 @@ use App\Exports\StudentGradesExport;
 use WireUi\Traits\Actions;
 use PDF;
 
+use Auth;
+
 class ViewGrade extends ModalComponent
 {
     use AuthorizesRequests, Actions;
@@ -70,7 +72,11 @@ class ViewGrade extends ModalComponent
 
         if (!empty($grades)) {
             // $this->clearSelected();
-            return (new StudentGradesExport($grades))->download('Grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+            // return (new StudentGradesExport($grades))->download('Grades.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+            $user = Auth::user()->id;
+            $admission = $this->admission->id;
+
+            return redirect()->route('student_grades.pdf', ['user' => $user, 'admission' => $admission]);
         } else {
             $this->dialog()->error(
                 $title = 'Nothing Selected',
