@@ -17,6 +17,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+use Carbon\Carbon;
+
 class StudentGradeController extends Controller
 {
     public function index()
@@ -31,9 +33,12 @@ class StudentGradeController extends Controller
 
     public function generate_pdf($user, $admission)
     {   
-        $admission = Admission::find($admission);
         $settings = Setting::find(1);
         $users = User::find($user);
+
+        $now = Carbon::today()->format('Y-m-d');
+
+        $admission = Admission::find($admission)->where('student_id', $users->id)->first();
         $academic_year = AcademicYear::where('status', 'Ongoing')->first();
 
         $subjects = Subject::query()
@@ -50,7 +55,7 @@ class StudentGradeController extends Controller
                                 }])
                            ->get();
 
-        $pdf = Pdf::loadView('student-grades.report-card', compact('users', 'settings', 'academic_year', 'subjects', 'grades'));  
+        $pdf = Pdf::loadView('student-grades.report-card', compact('users', 'settings', 'academic_year', 'subjects', 'grades', 'admission', 'now'));  
         return $pdf->download();
     }
 }

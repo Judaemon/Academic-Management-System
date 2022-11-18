@@ -22,7 +22,7 @@ h5 {
 
     </style>
   </head>
-  <body style="margin: 0 !important; padding: 0 !important;">
+  <body style="margin: 0 !important; padding: 0 !important; font-family:Georgia, 'Times New Roman', Times, serif;">
     
 <div style="width: 42.9rem; background: rgb(245, 242, 242);" >
     
@@ -41,6 +41,11 @@ h5 {
       <h5>LRN : {{ $users->lrn }}</h5>
       <h5>Name: {{ $users->first_name }} {{ $users->middle_name }} {{ $users->last_name }}</h5>
       <h5>School Year: {{ $academic_year->title }}</h5>
+    </div>
+    <div style="width: 50%; justify-content:space-between; float:left; padding-top:0.5rem;">
+      <h5>Sex : {{ $users->gender }}</h5>
+      <h5>School Year: {{ $academic_year->title }}</h5>
+      <h5>Grade & Section: {{ $admission->grade_level->name }}</h5>
     </div>
   </div>
 
@@ -74,6 +79,19 @@ h5 {
     </table> 
   </div>
 
+  <div style="height: 6.5rem; width:100%; margin-top:">
+    <div style="width: 50%; justify-content:space-between; float:right; text-align:right; padding-top:0.5rem;">
+      <h5>LRN : {{ $users->lrn }}</h5>
+      <h5>Name: {{ $users->first_name }} {{ $users->middle_name }} {{ $users->last_name }}</h5>
+      <h5>School Year: {{ $academic_year->title }}</h5>
+    </div>
+  </div>
+
+  <div style="height: 6.5rem; width:100%; display:flex; position:relative; justify-content:space-between; border-top: 2px double rgb(134, 134, 134);">
+    <div style="width: 50%; justify-content:space-between; float:right; text-align:right; padding-top:0.5rem;">
+      <h5>**This report card was downloaded this  {{ date('F j, Y', strtotime($now)) }}</h5>
+    </div>
+  </div>
 </div>
 
   </body>

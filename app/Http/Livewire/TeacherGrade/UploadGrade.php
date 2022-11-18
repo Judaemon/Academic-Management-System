@@ -7,9 +7,13 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Models\Admission;
 use App\Models\Section;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\GradesNotification;
 use WireUi\Traits\Actions;
+use Twilio\Rest\Client;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UploadGrade extends ModalComponent
@@ -102,6 +106,7 @@ class UploadGrade extends ModalComponent
 
     public function submit()
     {
+        $settings = Setting::find(1);
         // $grade = Grade::create([
         //     'section_id' => $this->section_id,
         //     'student_id' => $this->student_id,
@@ -117,6 +122,17 @@ class UploadGrade extends ModalComponent
             $grade->save();
         });
 
+        if($settings->notify_grades === 1) {
+            if($settings->notification_channel === "Email") {
+                $this->sendMail();
+            } else if($settings->notification_channel === "SMS") {
+                $this->sendMessage('Grades are Now Uploaded', '+63 976 054 2645');
+            } else if($settings->notification_channel === "Email and SMS") {
+                $this->sendMail();
+                $this->sendMessage('Grades are Now Uploaded', '+63 976 054 2645');
+            }
+        }
+
         $this->closeModal();
 
         $this->emit('refreshDatatable');
@@ -124,6 +140,27 @@ class UploadGrade extends ModalComponent
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Grades successfully uploaded.'
+        );
+    }
+
+    public function sendMail()
+    {
+        $user = User::find($this->student);
+
+        $message = "We would like to inform you that your grades are now uploaded.";
+
+        Notification::sendNow($user, new GradesNotification($message, $user->id));
+    }
+
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            $recipients,
+            ['from' => $twilio_number, 'body' => $message]
         );
     }
 
