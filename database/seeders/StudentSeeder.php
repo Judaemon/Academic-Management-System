@@ -614,5 +614,42 @@ class StudentSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ])->assignRole('Student');
         // 27
+
+        // teacher_id = 28
+        User::create([
+            'first_name' => 'Arceli',
+            'middle_name' => 'Sanchez',
+            'last_name' => 'Arboleda',
+
+            'birth_date' => '1995-08-03',
+            'birth_place' => 'Pangasinan',
+            'religion' => 'Born Again',
+            'gender' => 'Female',
+            'mother_tongue' => 'English',
+            'nationality' => 'Filipino',
+            'gender' => 'Female',
+            'religion' => 'Catholic',
+
+            'height' => '157',
+            'weight' => '62',
+
+            'mobile_number' => '09175458200',
+            'email' => 'arceliarboleda@t.caims.com',
+            'address' => 'Quezon Hill, Baguio City',
+
+            'emergency_contact_name' => 'John Doe',
+            'emergency_contact_number' => '09162345344',
+            'emergency_contact_address' => 'Trancoville',
+            'emergency_contact_relationship' => 'Father',
+            'pag_ibig' => 'FSAD4431',
+            'philhealth' => 'FADS4440',
+            'sss' => 'DASF1444',
+            'tin' => 'FSAD4444',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'password' => Hash::make('teacher4'),
+            'remember_token' => NULL,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ])->assignRole('Teacher');
     }
 }

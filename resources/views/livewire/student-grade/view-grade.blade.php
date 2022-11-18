@@ -24,15 +24,15 @@
                                 <x-input readonly value="{{$subject->grades->first_quarter}}"/>
                             </div>
 
-                            <div class="col-span-2 md:col-span-3 lg:col-span-2 px-2 py-2">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-2 py-2">
                                 <x-input readonly value="{{$subject->grades->second_quarter }}"/>
                             </div>
 
-                            <div class="col-span-2 md:col-span-3 lg:col-span-2 px-2 py-2">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-2 py-2">
                                 <x-input readonly value="{{$subject->grades->second_quarter }}"/>
                             </div>
 
-                            <div class="col-span-2 md:col-span-3 lg:col-span-2 px-2 py-2">
+                            <div class="col-span-2 md:col-span-8 lg:col-span-3 px-2 py-2">
                                 <x-input readonly value="{{$subject->grades->fourth_quarter }}"/>
                             </div>
                         </div>
