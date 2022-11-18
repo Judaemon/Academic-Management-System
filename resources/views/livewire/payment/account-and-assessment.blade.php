@@ -49,7 +49,7 @@
         </div>
         <div class="w-1/4 flex justify-end items-center">
           @if(!empty($current) && $current->count() > 0)
-            <x-button wire:ignore.self primary icon="arrow-down" label="Download" wire:click="download({{ $academic_year->id }})" class="w-full" />
+            <x-button wire:ignore.self primary icon="arrow-down" label="Download" wire:click="download({{ $latest_total->id }})" class="w-full" />
           @else
             <x-button primary icon="credit-card" label="Online Payment" x-on:click="pay_online = ! pay_online" class="w-full" />
           @endif
@@ -92,12 +92,6 @@
           <div class="w-full justify-end" :class="pay_online ? 'hidden' : 'block lg:flex'">
             <x-button icon="credit-card" primary class="w-full lg:w-auto h-auto" label="Online Payment" x-on:click="pay_online = true" />
           </div>
-        @else
-          @if($current->payment_status === 'Pending')
-            <div class="w-full block lg:flex justify-end">
-              <x-button icon="x-circle" negative class="w-full lg:w-auto h-auto" label="Cancel Payment" wire:click="cancelPayment" />
-            </div>
-          @endif
         @endif
       @endif
       <div x-show="pay_online" class="w-full mt-12">
@@ -160,7 +154,7 @@
             </div>
             <div class="hidden lg:flex w-1/4 justify-between items-center space-x-10">
               <x-button wire:ignore.self positive icon="table" label="View" x-on:click="open = ! open" class="w-1/2" />
-              <x-button wire:ignore.self primary icon="arrow-down" label="Download" wire:click="download({{ $yr }})" class="w-1/2" />
+              <x-button wire:ignore.self primary icon="arrow-down" label="Download" wire:click="processDownload({{ $yr->id }})" class="w-1/2" />
             </div>
             <div class="flex lg:hidden w-1/4 justify-between items-center space-x-10">
               <x-button wire:ignore.self positive icon="table" x-on:click="open = ! open" class="w-1/2" />

@@ -96,13 +96,15 @@ class ViewPayment extends ModalComponent
             'accountant_id' => Auth::user()->id,
         ])->save();
 
-        if($settings->notification_channel === "Email") {
-            $this->sendMail();
-        } else if($settings->notification_channel === "SMS") {
-            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
-        } else if($settings->notification_channel === "Email and SMS") {
-            $this->sendMail();
-            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+        if($settings->notify_payments === 1) {
+            if($settings->notification_channel === "Email") {
+                $this->sendMail();
+            } else if($settings->notification_channel === "SMS") {
+                $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
+            } else if($settings->notification_channel === "Email and SMS") {
+                $this->sendMail();
+                $this->sendMessage('Payment Confirmed', '+63 976 054 2645');
+            }
         }
 
         $this->emit('refreshDatatable');
@@ -155,7 +157,10 @@ class ViewPayment extends ModalComponent
 
     public function download()
     {
-        dd("Show a preview.Before Downloading.");
+        $user = $this->payment->user_id;
+        $payment = $this->payment->id;
+
+        return redirect()->route('payments.pdf', ['user' => $user, 'payments' => $payment]);
     }
 
     public static function closeModalOnClickAway(): bool

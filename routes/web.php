@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
 
     Route::get('payments', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('payments.index');
+    Route::get('payments/{user}/{payments}', [\App\Http\Controllers\PaymentsController::class, 'generate_pdf'])->name('payments.pdf');
     Route::get('student/payments', \App\Http\Livewire\Payments\AccountAndAssessment::class)->name('student.payments');
 
     // academic

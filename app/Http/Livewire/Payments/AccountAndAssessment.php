@@ -14,7 +14,6 @@ use App\Models\User;
 use App\Models\GradeLevel;
 
 use Auth;
-use PDF;
 
 class AccountAndAssessment extends Component
 {
@@ -138,57 +137,30 @@ class AccountAndAssessment extends Component
             
         $this->dialog()->success(
             $title = 'Successful!',
-            $description = 'Payment has been Recorded.'
+            $description = 'Payment is now being Processed.'
         );
 
         return redirect()->route('student.payments');
     }
 
-    public function download(AcademicYear $year)
-    { 
-        $payment = Payments::where('user_id', Auth::user()->id)
-                             ->whereNotNull('balance')
-                             ->whereHas('academic_year', function($query) use ($year) {
-                                    $query->where('id', $year->id);
+    public function processDownload($id)
+    {
+        $past = Payments::where('user_id', Auth::user()->id)
+                          ->where('academic_year_id', $id)
+                          ->where('balance', '0.00')
+                          ->whereHas('academic_year', function($query) {
+                                    $query->where('status', "Closed");
                                 })
-                             ->get();
-        dd("Confirm");
-        
-        // view()->share(, $data);
-        // $pdf = PDF::loadView()
-        
-        // return $pdf->download('');
+                          ->first();
+
+        $this->download($past->id);
     }
 
-    public function cancelPayment()
+    public function download($id)
     {
-        $this->validate();
+        $user = Auth::user()->id;
 
-        $this->dialog()->confirm([
-            'title'       => 'Are you Sure?',
-            'description' => 'Cancel Online Payment',
-            'icon'        => 'question',
-            'accept'      => [
-                'label'  => 'Yes, Confirm',
-                'method' => 'cancel',
-                'params' => 'Cancel',
-            ],
-            'reject' => [
-                'label'  => 'No, Cancel',
-            ],
-        ]);
-    }
-
-    public function cancel()
-    {
-        $payment = Payments::where('user_id', Auth::user()->id)
-                                   ->whereNotNull('balance')
-                                   ->where('payment_status', 'Pending')
-                                   ->where('academic_year_id', $this->academic_year->id)
-                                   ->latest()
-                                   ->first();
-
-        dd($payment);
+        return redirect()->route('payments.pdf', ['user' => $user, 'payments' => $id]);
     }
 
     public function resetForm()

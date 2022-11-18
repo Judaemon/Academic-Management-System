@@ -206,13 +206,15 @@ class PaymentsTable extends DataTableComponent
             'accountant_id' => $accountant,
         ])->save();
 
-        if ($settings->notification_channel === "Email") {
-            $this->sendMail($payments);
-        } else if ($settings->notification_channel === "SMS") {
-            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
-        } else if ($settings->notification_channel === "Email and SMS") {
-            $this->sendMail($payments);
-            $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+        if ($settings->notify_payments === 1) {
+            if ($settings->notification_channel === "Email") {
+                $this->sendMail($payments);
+            } else if ($settings->notification_channel === "SMS") {
+                $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+            } else if ($settings->notification_channel === "Email and SMS") {
+                $this->sendMail($payments);
+                $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+            }
         }
 
         $this->emit('refreshDatatable');
