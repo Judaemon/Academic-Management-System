@@ -39,19 +39,19 @@ class PaymentsTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
 
-        $this->setThAttributes(function(Column $column) {
+        $this->setThAttributes(function (Column $column) {
             if ($column->isField('payment_status')) {
                 return ['class' => 'flex justify-center mt-1',];
-            } 
+            }
             return ['class' => 'text-center',];
-          });       
+        });
     }
 
     public function exportXLSX()
     {
         $payments = $this->getSelected();
-        
-        if(!empty($payments)) {
+
+        if (!empty($payments)) {
             $this->clearSelected();
             return Excel::download(new PaymentsExport($payments), 'payments.xlsx');
         } else {
@@ -65,8 +65,8 @@ class PaymentsTable extends DataTableComponent
     public function exportCSV()
     {
         $payments = $this->getSelected();
-        
-        if(!empty($payments)) {
+
+        if (!empty($payments)) {
             $this->clearSelected();
             return Excel::download(new PaymentsExport($payments), 'payments.csv');
         } else {
@@ -78,10 +78,10 @@ class PaymentsTable extends DataTableComponent
     }
 
     public function exportPDF()
-    {   
+    {
         $payments = $this->getSelected();
 
-        if(!empty($payments)) {
+        if (!empty($payments)) {
             $this->clearSelected();
             return (new PaymentsExport($payments))->download('payments.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         } else {
@@ -100,29 +100,31 @@ class PaymentsTable extends DataTableComponent
 
             Column::make("Name", "user_id")
                 ->sortable()
-                ->searchable(fn(Builder $query, $term) => 
-                        $query->whereHas('user', function($query) use ($term) {
-                            $query->where('first_name', 'like', '%'.$term.'%')
-                                  ->orWhere('last_name', 'like', '%'.$term.'%');
-                        })
-                    )
-                ->format(fn($value, $row) => $row->user->first_name.' '.$row->user->last_name )
+                ->searchable(
+                    fn (Builder $query, $term) =>
+                    $query->whereHas('user', function ($query) use ($term) {
+                        $query->where('first_name', 'like', '%' . $term . '%')
+                            ->orWhere('last_name', 'like', '%' . $term . '%');
+                    })
+                )
+                ->format(fn ($value, $row) => $row->user->first_name . ' ' . $row->user->last_name)
                 ->eagerLoadRelations(),
 
             Column::make("Status", "payment_status")
                 ->sortable()
-                ->format(function($value) {
-                    if($value === 'Pending') {
-                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-indigo-300 text-indigo-700 font-bold text-xs uppercase">'.$value.'</div>';
-                    } if($value === 'Paid') {
-                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-green-300 text-green-700 font-bold text-xs uppercase">'.$value.'</div>';
-                    } else {
-                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-orange-300 text-orange-700 font-bold text-xs uppercase">'.$value.'</div>';
+                ->format(function ($value) {
+                    if ($value === 'Pending') {
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-indigo-300 text-indigo-700 font-bold text-xs uppercase">' . $value . '</div>';
                     }
-                  })
+                    if ($value === 'Paid') {
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-green-300 text-green-700 font-bold text-xs uppercase">' . $value . '</div>';
+                    } else {
+                        return '<div class="w-32 py-1 text-center rounded-full shadow-sm bg-orange-300 text-orange-700 font-bold text-xs uppercase">' . $value . '</div>';
+                    }
+                })
                 ->html()
                 ->collapseOnTablet(),
-            
+
             Column::make("Payment Date", "created_at")
                 ->sortable()
                 ->format(fn ($value) => date('F j, Y', strtotime($value)))
@@ -140,11 +142,11 @@ class PaymentsTable extends DataTableComponent
             SelectFilter::make('Payment Status')
                 ->options([
                     '' => 'All',
-                    'Paid' => 'Paid', 
-                    'Pending' => 'Pending', 
+                    'Paid' => 'Paid',
+                    'Pending' => 'Pending',
                     'Refunded' => 'Refunded'
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     if ($value === 'Paid') {
                         $builder->where('payment_status', 'Paid');
                     } else if ($value === 'Pending') {
@@ -158,14 +160,14 @@ class PaymentsTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Payments::whereHas('academic_year', function($query) {
-                $query->where('status', "Ongoing");
-            });
+        return Payments::whereHas('academic_year', function ($query) {
+            $query->where('status', "Ongoing");
+        });
     }
 
     public function refund($id)
     {
-        if($this->authorize('update_payment')) {
+        if ($this->authorize('update_payment')) {
             $this->dialog()->confirm([
                 'title'       => 'Are you Sure?',
                 'description' => "This payment will be recorded as Refunded",
@@ -193,7 +195,7 @@ class PaymentsTable extends DataTableComponent
         $payments = Payments::find($id);
         $settings = Setting::find(1);
 
-        if(!empty($payments->accountant_id)) {
+        if (!empty($payments->accountant_id)) {
             $accountant = $payments->accountant_id;
         } else {
             $accountant = Auth::user()->id;
@@ -204,19 +206,19 @@ class PaymentsTable extends DataTableComponent
             'accountant_id' => $accountant,
         ])->save();
 
-        if($settings->notify_payments === 1) {
-            if($settings->notification_channel === "Email") {
+        if ($settings->notify_payments === 1) {
+            if ($settings->notification_channel === "Email") {
                 $this->sendMail($payments);
-            } else if($settings->notification_channel === "SMS") {
+            } else if ($settings->notification_channel === "SMS") {
                 $this->sendMessage('Payment Refunded', '+63 976 054 2645');
-            } else if($settings->notification_channel === "Email and SMS") {
+            } else if ($settings->notification_channel === "Email and SMS") {
                 $this->sendMail($payments);
                 $this->sendMessage('Payment Refunded', '+63 976 054 2645');
             }
         }
 
         $this->emit('refreshDatatable');
-    
+
         $this->dialog()->success(
             $title = 'Success!',
             $description = 'Record is now successfully updated. Payment is Refunded.'
@@ -227,12 +229,12 @@ class PaymentsTable extends DataTableComponent
     {
         $user = User::find($payments->user_id);
 
-        if(!empty($payments->fee_id)) {
+        if (!empty($payments->fee_id)) {
             $type = $payments->fee->fee_name;
         } else {
             $type = $payments->others;
         }
-        
+
         $payment = [
             'name' => $payments->user_id,
             'accountant' => $payments->accountant_id,
@@ -244,7 +246,7 @@ class PaymentsTable extends DataTableComponent
             'status' => $payments->payment_status,
         ];
 
-        $message = "We would to inform you that your request for a refund for your payment in <b>".$type."</b> with the amount of <b> Php ".number_format($payments->amount_paid, 2)."</b> is now being processed.";
+        $message = "We would like to inform you that your request for a refund for your payment in <b>" . $type . "</b> with the amount of <b> Php " . number_format($payments->amount_paid, 2) . "</b> is now being processed.";
 
         Notification::sendNow($user, new PaymentNotification($payment, $message));
     }

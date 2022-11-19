@@ -302,7 +302,7 @@
     @livewire('livewire-ui-modal')
     @livewireScripts
 
-    <div>
+    <div class="hidden">
         <span
             class="
                 light-bg dim-bg dark-bg

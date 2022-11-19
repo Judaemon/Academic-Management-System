@@ -18,6 +18,16 @@ class SectionTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
+    public function builder(): Builder
+    {
+        return Section::query()
+            ->whereHas('grade_level', function ($q) {
+                $q->whereHas('program', function ($q) {
+                    $q->where('isEnabled', true);
+                });
+            });
+    }
+
     public function filters(): array
     {
         $option = GradeLevel::query()

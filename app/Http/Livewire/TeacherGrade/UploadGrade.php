@@ -82,11 +82,21 @@ class UploadGrade extends ModalComponent
         return view('livewire.teacher-grade.upload-grade');
     }
 
-    public function save1(): void
+    public function save(): void
     {
-        // dd($this->grades);
         // dd($this->subjects);
-        // dd($this->admission, $this->subjects);
+        // dd(setting('isAbleToUploadGrade'));
+        if (!setting('isAbleToUploadGrade')) {
+            $this->dialog()->warning(
+                $title = 'Upload of grades not enabled!',
+                $description = "Uploading of grades is still disabled."
+            );
+
+            $this->closeModal();
+
+            return;
+        }
+
         $this->validate();
 
         $this->dialog()->confirm([
