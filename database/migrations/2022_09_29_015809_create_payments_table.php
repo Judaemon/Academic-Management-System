@@ -12,36 +12,40 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')
-                  ->constrained('users', 'id')
-                  ->onDelete('cascade');
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
 
             $table->foreignId('accountant_id')
-                  ->nullable()
-                  ->constrained('users', 'id')
-                  ->onDelete('cascade');
-            
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
+
             $table->foreignId('academic_year_id')
-                  ->constrained('academic_years', 'id')
-                  ->onDelete('cascade');
+                ->constrained('academic_years', 'id')
+                ->onDelete('cascade');
 
             $table->decimal('amount_paid', 10, 2)
-                  ->default('0');
+                ->default('0');
 
             $table->foreignId('fee_id')
-                  ->nullable()
-                  ->constrained('fees', 'id')
-                  ->onDelete('cascade');
+                ->nullable()
+                ->constrained('fees', 'id')
+                ->onDelete('cascade');
 
             $table->string('others')
                 ->nullable();
 
             $table->decimal('balance', 10, 2)
-                  ->nullable();
+                ->nullable();
 
-            $table->string('payment_method');
+            $table->decimal('refund_reason', 10, 2)
+                ->nullable();
+
+            $table->string('payment_method')
+                ->nullable();
 
             $table->string('payment_status')
-                  ->default('Paid');
+                ->default('Paid');
 
             $table->timestamps();
         });
