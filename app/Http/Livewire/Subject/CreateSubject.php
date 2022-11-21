@@ -7,33 +7,27 @@ use App\Models\Subject;
 use App\Rules\Teacher;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CreateSubject extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
-    public $subject;
+    public $name;
+    public $subject_code;
 
     public $teacher;
-
     public $grade_level;
 
-    public $grade_levels;
-    
     protected function rules()
     {
         return [
-            'subject.name' => ['required'],
+            'name' => ['required'],
+            'subject_code' => ['required'],
+
             'teacher' => ['required', new Teacher],
-            'subject.subject_code' => ['required'],
             'grade_level' => ['required'],
         ];
-    }
-
-
-    public function mount()
-    {
-        $this->grade_levels = GradeLevel::all();
     }
 
     public function render()
@@ -62,28 +56,24 @@ class CreateSubject extends ModalComponent
 
     public function submit()
     {
-        
-        $tst =Subject::create([
-            'name' => $this->subject['name'],
-            'subject_code' => $this->subject['subject_code'],
+        $subject = Subject::create([
+            'name' => $this->name,
+            'subject_code' => $this->subject_code,
 
             'teacher_id' => $this->teacher,
             'grade_level_id' => $this->grade_level,
-
         ]);
-
-        // dd($tst);
 
         $this->closeModal();
 
         $this->emit('refreshDatatable');
-        
+
         $this->dialog()->success(
             $title = 'Successful!',
             $description = 'Subject successfully Created.'
         );
     }
-    
+
     public static function modalMaxWidth(): string
     {
         return '3xl';

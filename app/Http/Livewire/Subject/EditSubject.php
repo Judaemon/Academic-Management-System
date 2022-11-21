@@ -2,42 +2,32 @@
 
 namespace App\Http\Livewire\Subject;
 
-use App\Models\GradeLevel;
 use App\Models\Subject;
 use App\Rules\Teacher;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EditSubject extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $subject;
-
-    public $teacher;
-    public $grade_level;
 
     protected function rules()
     {
         return [
             'subject.name' => ['required'],
-            'teacher' => ['required', new Teacher],
-            'subject.teacher_id' => [],
             'subject.subject_code' => ['required'],
-            'grade_level' => ['required'],
+
+            'subject.teacher_id' => ['required', new Teacher],
+            'subject.grade_level_id' => ['required'],
         ];
     }
 
-    public function mount(subject $subject)
+    public function mount(Subject $subject)
     {
         $this->subject = $subject;
-        
-        // pass selected values to select
-        $this->teacher = $subject->teacher_id;
-        $this->grade_level = (string)$subject->grade_level_id;
-
-        // select options
-        $this->grade_levels = GradeLevel::all();
     }
 
     public function render()
@@ -66,8 +56,7 @@ class EditSubject extends ModalComponent
 
     public function submit()
     {
-        $this->subject->teacher_id = $this->teacher;
-        $this->subject->grade_level_id = $this->grade_level;
+        $this->authorize('update_subject');
 
         $this->subject->save();
 

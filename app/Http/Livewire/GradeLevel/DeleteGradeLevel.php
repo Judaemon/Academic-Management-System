@@ -5,10 +5,11 @@ namespace App\Http\Livewire\GradeLevel;
 use App\Models\GradeLevel;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DeleteGradeLevel extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $grade_level;
 
@@ -46,23 +47,17 @@ class DeleteGradeLevel extends ModalComponent
 
     public function submit()
     {
-        // Check if user has permission
-        if (!auth()->user()->can('delete_grade_level')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $this->grade_level->delete();
+        $this->authorize('delete_grade_level');
 
-            $this->closeModal();
-    
-            $this->emit('refreshDatatable');
-    
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Grade Level deleted successfully.'
-            );
-        }
+        $this->grade_level->delete();
+
+        $this->closeModal();
+
+        $this->emit('refreshDatatable');
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Grade Level deleted successfully.'
+        );
     }
 }

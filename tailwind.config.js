@@ -1,43 +1,23 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
-const Color = require("color");
 
 module.exports = {
     presets: [
-        require('./vendor/wireui/wireui/tailwind.config.js')
+        require('./vendor/wireui/wireui/tailwind.config.js'),
     ],
     darkMode: 'class',
     content: [
-        // Laravel
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
 
-        // Laravel Livewire Tables
-        // https://rappasoft.com/docs/laravel-livewire-tables/v2/start/configuration
-        './vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php',
-
-        // Wire UI
-        // https://livewire-wireui.com/docs/get-started
         './vendor/wireui/wireui/resources/**/*.blade.php',
         './vendor/wireui/wireui/ts/**/*.ts',
         './vendor/wireui/wireui/src/View/**/*.php',
 
-        
-        // livewire Modal
-        // https://github.com/wire-elements/modal
-        './vendor/wire-elements/modal/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        './vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php',
     ],
-    // Livewire Modal
-    // https://github.com/wire-elements/modal/issues/150
-    safelist: [
-        {
-           pattern: /max-w-(sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
-           variants: ['sm', 'md', 'lg', 'xl', '2xl'],
-        },
-     ],
+
     theme: {
         themeVariants: ["dark"],
         Forms: (theme) => ({
@@ -193,12 +173,18 @@ module.exports = {
                 0: "0",
                 xl: "36rem",
             },
-            // fontFamily: {
-            //     sans: ["Inter", ...defaultTheme.fontFamily.sans],
-            // },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                bg:         "var(--bg-color)",
+                main:       "var(--main-color)",
+                sec:        "var(--sub-color)",
+
+                caret:      "var(--caret-color)",
+                sub_alt:    "var(--sub-alt-color)",
+                text:       "var(--text-color)",
+            }
         },
     },
     variants: {
@@ -221,6 +207,6 @@ module.exports = {
     },
     plugins: [
         require("@tailwindcss/forms"),
-        require('tailwind-scrollbar'),
+        require('tailwind-scrollbar')({ nocompatible: true }),
     ],
 };

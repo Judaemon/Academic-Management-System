@@ -10,21 +10,16 @@ return new class extends Migration
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
+            
             $table->string('fee_name');
-            $table->decimal('amount')
-                  ->default('0.00');
 
-            $table->foreignId('academic_year_id')
+            $table->decimal('amount', 10, 2)
+                  ->default('0');
+
+            $table->foreignId('grade_level_id')
                   ->nullable()
-                  ->constrained('academic_years', 'id')
+                  ->constrained('grade_levels', 'id')
                   ->onDelete('cascade');
-
-            // $table->foreignId('grade_level_id')
-            //       ->unsigned()
-            //       ->references('id')
-            //       ->on('grade_level')
-            //       ->nullable()
-            //       ->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -19,35 +19,20 @@ class CreateSection extends ModalComponent
     public $capacity;
 
     public $teacher;
-    public $teachers;
 
     public $grade_level;
-    public $grade_levels;
-
-    public $section_subjects = [];
-    public $subjects;
+    public $grade_level_subjects = [];
 
     protected function rules()
     {
         return [
-            'name' => ['required'],
-            'capacity' => ['required'],
+            'name' => ['required', 'unique:sections,name'],
+            'capacity' => ['required', 'numeric', 'min:0', 'max:60'],
 
             'teacher' => ['required', new Teacher],
-            
+
             'grade_level' => ['required'],
-
-            'section_subjects' => ['required'],
         ];
-    }
-
-    public function mount()
-    {
-        $this->teachers = User::role('Teacher')->get();
-
-        $this->grade_levels = GradeLevel::all();
-
-        $this->subjects = Subject::all();
     }
 
     public function render()
@@ -57,11 +42,9 @@ class CreateSection extends ModalComponent
 
     public function updatedGradeLevel($value)
     {
-        $this->section_subjects = [];
-
-        $this->subjects = Subject::query()
-            ->where('grade_level_id', $value)
-            ->get();
+        if (!empty($value)) {
+            $this->grade_level_subjects = GradeLevel::find($value)->subjects;
+        }
     }
 
     public function save(): void
@@ -87,14 +70,12 @@ class CreateSection extends ModalComponent
     {
         $this->authorize('create_section');
 
-        $section = Section::create([
+        Section::create([
             'name' => $this->name,
             'capacity' => $this->capacity,
             'teacher_id' => $this->teacher,
             'grade_level_id' => $this->grade_level,
         ]);
-
-        $section->subjects()->attach($this->section_subjects);
 
         $this->emit('refreshDatatable');
 

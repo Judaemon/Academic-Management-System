@@ -10,10 +10,22 @@ return new class extends Migration
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->date('start_year');
-            $table->date('end_year');
-            $table->text('curriculum');
-            
+
+            $table->string('title')->nullable();
+            $table->boolean('is_open_for_admission')->default('0');
+
+            // Open, Ongoing, Closed
+            $table->string('status')->nullable();
+
+            $table->date('start_date');
+
+            $table->integer('school_days')
+                ->nullable()
+                ->default('0');
+
+            $table->date('end_date')
+                ->nullable();
+
             $table->timestamps();
         });
     }

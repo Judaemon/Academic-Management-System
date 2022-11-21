@@ -24,6 +24,17 @@ class DeleteRole extends ModalComponent
 
     public function deleteDialog()
     {
+        if ($this->role->name == 'Student' || $this->role->name == 'Accountant' || $this->role->name == 'Teacher') {
+            $this->dialog()->warning(
+                $title = 'Action cant be done!',
+                $description = "You can't delete this role."
+            );
+
+            $this->closeModal();
+
+            return;
+        }
+
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
             'description' => 'Delete this role?',
@@ -51,7 +62,7 @@ class DeleteRole extends ModalComponent
                 $title = 'Error !!!',
                 $description = 'You do not have permission for this action.'
             );
-        }else{
+        } else {
             $this->role->delete();
 
             $this->closeModal();
@@ -63,6 +74,5 @@ class DeleteRole extends ModalComponent
                 $description = 'Role deleted successfully.'
             );
         }
-
     }
 }

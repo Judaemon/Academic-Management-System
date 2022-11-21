@@ -10,8 +10,12 @@ class AcademicYear extends Model
     use HasFactory;
 
     protected $fillable = [
-        'start_year',
-        'end_year',
-        'curriculum',
+        'title',
+        'is_open_for_admission',
+        'status',
+
+        'start_date',
+        'school_days',
+        'end_date',
     ];
 }

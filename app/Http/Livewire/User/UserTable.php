@@ -20,7 +20,7 @@ class UserTable extends DataTableComponent
 
     public function filters(): array
     {
-        $option = Role::query()
+        $option = Role::all()
             ->pluck('name')
             ->toArray();
 
@@ -29,7 +29,7 @@ class UserTable extends DataTableComponent
         return [
             SelectFilter::make('Role')
                 ->options($option)
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     $builder->role($value);
                 }),
         ];
@@ -41,10 +41,10 @@ class UserTable extends DataTableComponent
             Column::make("ID", "id")
                 ->sortable()
                 ->searchable(),
-            Column::make("First Name", "firstname")
+            Column::make("First Name", "first_name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Last Name", "lastname")
+            Column::make("Last Name", "last_name")
                 ->sortable()
                 ->searchable(),
             Column::make("Email", "email")

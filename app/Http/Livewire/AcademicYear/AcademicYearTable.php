@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AcademicYear;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+
 use App\Models\AcademicYear;
 
 class AcademicYearTable extends DataTableComponent
@@ -17,26 +18,36 @@ class AcademicYearTable extends DataTableComponent
 
     public function columns(): array
     {
-        $columns = [
-            Column::make("Id", "id")
-            ->searchable()
-                ->sortable(),
-            Column::make("Year", "start_year")
+        return [
+            Column::make("Id")
                 ->searchable()
                 ->sortable(),
-            Column::make("Year", "end_year")
+
+            Column::make("Title")
                 ->searchable()
                 ->sortable(),
-            Column::make("Curriculum", "curriculum")
+
+            Column::make("Start Date")
                 ->searchable()
-                ->sortable(),
+                ->format(fn ($value) => date('F j, Y', strtotime($value))),
+
+            Column::make("End Date")
+                ->searchable()
+                ->format(function ($value) {
+                    if (!empty($value)) {
+                        return date('F j, Y', strtotime($value));
+                    } else {
+                        return " ";
+                    }
+                }),
+
+            Column::make("Status")
+                ->searchable()
+                ->collapseOnMobile(),
+
+            Column::make("Actions", "id")
+                ->view('livewire.academic-year.actions-col')
+                ->collapseOnMobile(),
         ];
-
-        if (auth()->user()->can('read_academic_years') || auth()->user()->can('update_academic_years') || auth()->user()->can('delete_academic_years')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.academic-year.actions-col'));
-        }
-
-        return $columns;
     }
-
 }

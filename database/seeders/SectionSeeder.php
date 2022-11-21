@@ -3,71 +3,62 @@
 namespace Database\Seeders;
 
 use App\Models\Section;
-
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 
 class SectionSeeder extends Seeder
 {
     public function run()
     {
+        // 1 section per grade level
+        // except kinder 1 which has 2 section (for demo)
+
         Section::create([
             'name' => 'Red',
-            'capacity' => '15',
-            'teacher_id' => '3',
+            'capacity' => '20',
+            'teacher_id' => '5',
             'grade_level_id' => 1
         ]);
 
         Section::create([
             'name' => 'Orange',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'capacity' => '20',
+            'teacher_id' => 1,
+            'grade_level_id' => 1,
         ]);
 
         Section::create([
             'name' => 'Yellow',
             'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'teacher_id' => '7',
+            'grade_level_id' => 2,
         ]);
 
         Section::create([
             'name' => 'Green',
             'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'teacher_id' => '6',
+            'grade_level_id' => 3,
         ]);
 
         Section::create([
-            'name' => 'Blue',
+            'name' => 'blue',
             'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'teacher_id' => 1,
+            'grade_level_id' => 4,
         ]);
 
         Section::create([
-            'name' => 'Indigo',
+            'name' => 'indigo',
             'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'teacher_id' => 1,
+            'grade_level_id' => 5,
         ]);
 
         Section::create([
-            'name' => 'Violet',
+            'name' => 'violet',
             'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
-        ]);
-
-        Section::create([
-            'name' => 'Gray',
-            'capacity' => '15',
-            'teacher_id' => '3',
-            'grade_level_id' => 1
+            'teacher_id' => 1,
+            'grade_level_id' => 6,
         ]);
     }
 }

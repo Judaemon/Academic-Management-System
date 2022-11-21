@@ -3,25 +3,35 @@
 namespace App\Http\Livewire\GradeLevel;
 
 use App\Models\GradeLevel;
+use App\Models\Subject;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EditGradeLevel extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $grade_level;
+
+    public $grade_level_subjects_old = [];
+    public $grade_level_subjects = [];
 
     public function mount(GradeLevel $grade_level)
     {
         $this->grade_level = $grade_level;
-        $this->card_title = "Editing Grade Level";
+
+        $grade_level_subject_ids = $grade_level->subjects->pluck('id')->toArray();
+
+        $this->grade_level_subjects_old = $grade_level_subject_ids;
+        $this->grade_level_subjects = $grade_level_subject_ids;
     }
 
     protected function rules()
     {
         return [
-            'grade_level.name' => ['required'],
+            'grade_level.name' => ['required', 'unique:grade_levels,name,' . $this->grade_level->id],
+            'grade_level_subjects' => ['required'],
         ];
     }
 
@@ -51,23 +61,30 @@ class EditGradeLevel extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('edit_grade_level')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        } else {
-            $this->grade_level->save();
+        $this->authorize('update_grade_level');
 
-            $this->emit('refreshDatatable');
+        $this->grade_level->save();
 
-            $this->closeModal();
+        // removed
+        $removed_subjects = array_diff($this->grade_level_subjects_old, $this->grade_level_subjects);
 
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Grade Level information successfully Updated.'
-            );
-        }
+        Subject::query()
+            ->whereIn('id', $removed_subjects)
+            ->update(['grade_level_id' => null]);
+
+        // update selected subjects
+        Subject::query()
+            ->whereIn('id', $this->grade_level_subjects)
+            ->update(['grade_level_id' => $this->grade_level->id]);
+
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Grade Level information successfully Updated.'
+        );
     }
 
     public static function modalMaxWidth(): string

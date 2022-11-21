@@ -2,32 +2,30 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use App\Models\AcademicYear;
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CreateAcademicYear extends Component
+use App\Models\AcademicYear;
+
+use Carbon\Carbon;
+
+class CreateAcademicYear extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
-    public $modalCreate;
+    public $start_date;
+    public $end_date = NULL;
+    public $school_days = 0;
 
-    public $academic_year;
+    public $isNull = true;
 
-    public function mount()
-    {
-        $this->academic_year['start_year'] = null;
-        $this->academic_year['end_year'] = null;
-    }
-
-    // https://laravel-livewire.com/docs/2.x/input-validation
-    // error messaged should be changed
     protected function rules()
     {
         return [
-            'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
-            'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
-            'academic_year.curriculum' => ['required'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['nullable', 'date', 'after:start_date'],
+            'school_days' => ['nullable', 'numeric'],
         ];
     }
 
@@ -36,11 +34,32 @@ class CreateAcademicYear extends Component
         return view('livewire.academic-year.create-academic-year');
     }
 
+    public function updatedStartDate()
+    {
+        if(!empty($this->start_date)) {
+            $this->isNull = false;
+        } else {
+            $this->isNull = true;
+        }
+    }
+
+    public function updatedEndDate()
+    {
+        if(!empty($this->end_date)) {
+            $this->school_days = Carbon::parse($this->start_date)->diffInDays($this->end_date);
+        }
+    }
+
+    public function updatedSchoolDays()
+    {
+        if($this->school_days > 0) {
+            $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
+        } 
+    }
+
     public function save(): void
     {
         $this->validate();
-
-        $this->modalCreate = false;
 
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
@@ -59,31 +78,26 @@ class CreateAcademicYear extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_academic_year')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        } else {
-            AcademicYear::create([
-                'start_year' => $this->academic_year['start_year'],
-                'end_year' => $this->academic_year['end_year'],
-                'curriculum' => $this->academic_year['curriculum'],
-            ]);
-    
-            $this->emit('refreshDatatable');
-    
-            $this->reset();
-            
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Academic Year successfully Created.'
-            );
-        }
+        $this->authorize('create_academic_year');
+
+        AcademicYear::create([
+            'start_date' => Carbon::parse($this->start_date)->toDateString(),
+            'school_days' => $this->school_days,
+            'end_date' => Carbon::parse($this->end_date)->toDateString(),
+        ]);
+
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Academic Year successfully Created.'
+        );
     }
 
-    public function closeModal()
+    public static function modalMaxWidth(): string
     {
-        $this->modalCreate = false;
+        return '2xl';
     }
 }

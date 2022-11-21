@@ -2,56 +2,31 @@
 
 namespace App\Http\Livewire\Role;
 
+use App\Models\Permission;
 use App\Models\Role;
-use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class CreateRole extends Component
+class CreateRole extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
-    public $createRoleModal;
+    public $name;
 
-    public $newRoleName;
-
-    public $user_permissions = []; //View id is 1
-
-    public function updatedUserPermissions($value)
-    {
-        $isViewEnabled = in_array("1", $this->user_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->user_permissions, "1");
-        }
-    }
-
-    public $role_permissions = []; //View id is 6
-
-    public function updatedRolePermissions($value)
-    {
-        $isViewEnabled = in_array("6", $this->role_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->role_permissions, "6");
-        }
-    }
-
-    public $system_permissions = []; ////View id is 11
-
-    public function updatedSystemPermissions($value)
-    {
-        $isViewEnabled = in_array("11", $this->system_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->system_permissions, "11");
-        }
-    }
+    public $permissions;
+    public $selected_permissions = [];
 
     protected function rules()
     {
         return [
-            'newRoleName' => ['required', 'unique:roles,name'],
+            'name' => ['required', 'unique:roles,name'],
         ];
+    }
+
+    public function mount()
+    {
+        $this->permissions = Permission::all();
     }
 
     public function render()
@@ -63,11 +38,9 @@ class CreateRole extends Component
     {
         $this->validate();
 
-        $this->createRoleModal = false;
-
         $this->dialog()->confirm([
             'title'       => 'Are you Sure?',
-            'description' => 'Create this new role '.$this->newRoleName.'?',
+            'description' => 'Create this role?',
             'icon'        => 'question',
             'accept'      => [
                 'label'  => 'Yes, create it',
@@ -82,33 +55,26 @@ class CreateRole extends Component
 
     public function submit()
     {
-        if (!auth()->user()->can('create_user')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        }else{
-            $role = Role::create([
-                'name' => $this->newRoleName,
-            ]);
-    
-            $permissions = array_merge($this->user_permissions, $this->role_permissions, $this->system_permissions);
-            
-            $role->syncPermissions($permissions);
-    
-            $this->emit('refreshDatatable');
-    
-            $this->reset();
-            
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Role successfully created.'
-            );
-        }
+        $this->authorize('create_role');
+ 
+        $role = Role::create([
+            'name' => $this->name,
+        ]);
+
+        $role->syncPermissions($this->selected_permissions);
+
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Role successfully created.'
+        );
     }
 
-    public function closeModal()
+    public static function modalMaxWidth(): string
     {
-        $this->createRoleModal = false;
+        return '4xl';
     }
 }

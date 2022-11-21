@@ -2,55 +2,26 @@
 
 namespace App\Http\Livewire\Role;
 
+use App\Models\Permission;
 use App\Models\Role;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
 class EditRole extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $role;
 
     public $permissions;
+    public $role_permissions = [];
 
-    public $user_permissions = []; //View id is 1
-
-    public function updatedUserPermissions($value)
-    {
-        $isViewEnabled = in_array("1", $this->user_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->user_permissions, "1");
-        }
-    }
-
-    public $role_permissions = []; //View id is 6
-
-    public function updatedRolePermissions($value)
-    {
-        $isViewEnabled = in_array("6", $this->role_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->role_permissions, "6");
-        }
-    }
-
-    public $system_permissions = []; ////View id is 11
-
-    public function updatedSystemPermissions($value)
-    {
-        $isViewEnabled = in_array("11", $this->system_permissions);
-        
-        if (!$isViewEnabled && $value != null) {
-            array_push($this->system_permissions, "11");
-        }
-    }
 
     protected function rules()
     {
         return [
-            'role.name' => ['required'],
+            'role.name' => ['required', 'unique:roles,name,'.$this->role->id],
         ];
     }
 
@@ -58,33 +29,8 @@ class EditRole extends ModalComponent
     {
         $this->role = $role;
 
-        if ($role->name == "Super Admin") {
-            $this->user_permissions = [1, 2, 3, 4, 5];
-            $this->role_permissions = [6, 7, 8, 9, 10];
-            $this->system_permissions = [11, 12, 13];
-        }else {
-            $permissions = $this->role->permissions->pluck('id')->toArray();
-
-            foreach ($permissions as $key => $permission) {
-                if (in_array($permission, [1, 2, 3, 4, 5])) {
-                    array_push($this->user_permissions, $permission);
-                }
-            }
-
-            foreach ($permissions as $key => $permission) {
-                if (in_array($permission, [6, 7, 8, 9, 10])) {
-                    array_push($this->role_permissions, $permission);
-                }
-            }
-
-            foreach ($permissions as $key => $permission) {
-                if (in_array($permission, [11, 12, 13])) {
-                    array_push($this->system_permissions, $permission);
-                }
-            }
-        }
-
-        $this->cardTitle = $role->name." Information";
+        $this->permissions = Permission::all();
+        $this->role_permissions = $this->role->permissions->pluck('name')->toArray();
     }
 
     public function render()
@@ -113,28 +59,26 @@ class EditRole extends ModalComponent
 
     public function submit()
     {
-        // Check if user has permission
-        if (!auth()->user()->can('update_role')) {
+        $this->authorize('update_role');
+
+        if($this->role->id === 3 || $this->role->id === 4 || $this->role->id === 5) {
             $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
+                $title = 'Role Name Cannot Be Edited',
+                $description = "Please do not change this role's name",
             );
-        }else{
+        } else {
             $this->role->save();
-    
-            $permissions = array_merge($this->user_permissions, $this->role_permissions, $this->system_permissions);
-    
-            $this->role->syncPermissions($permissions);
-    
-            $this->emit('refreshDatatable');
-    
-            $this->closeModal();
-    
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'User information successfully saved.'
-            );
+            $this->role->syncPermissions($this->role_permissions);
         }
+        
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Role information successfully saved.'
+        );
     }
 
     public static function modalMaxWidth(): string

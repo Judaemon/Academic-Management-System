@@ -2,8 +2,7 @@
     <div class="flex flex-col overflow-y-auto md:flex-row">
         <div class="h-32 md:h-auto md:w-1/2">
             <img aria-hidden="true" class="object-cover w-full h-full"
-                 src="{{ asset('images/system-assets/auth/login-office.jpeg') }}"
-                 alt="Office"/>
+                src="{{ asset('images/system/bg/login-office.jpeg') }}" alt="Office" />
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
@@ -12,27 +11,19 @@
                 </h1>
 
                 <form method="POST" action="{{ route('login') }}">
-                @csrf
+                    @csrf
 
                     <div class="mb-4">
-                        <x-input name="email" label="Email" placeholder="caims@edu.gmail.com" autofocus/>
+                        <x-input name="email" label="Email" placeholder="caims@edu.gmail.com" autofocus />
                     </div>
 
-                    <!-- Input[ype="password"] -->
                     <div class="mb-4">
-                        <x-input type="password" name="password" label="Password" placeholder="Secret Password" autofocus/>
+                        <x-input type="password" name="password" label="Password" placeholder="Secret Password"
+                            autofocus />
                     </div>
-
-                    {{-- <div class="mt-4">
-                        <x-label for="password" />
-                        <x-input type="password"
-                                 id="password"
-                                 name="password"
-                                 class="block w-full"/>
-                    </div> --}}
 
                     <div class="flex mt-6 text-sm">
-                        <x-checkbox class="text-gray-700!" name="remember_me" md label="Remember me"/>
+                        <x-checkbox class="text-gray-700!" name="remember_me" md label="Remember me" />
                     </div>
 
                     <div class="mt-4">
@@ -40,12 +31,12 @@
                     </div>
                 </form>
 
-                <hr class="mt-10 mb-8"/>
+                <hr class="mt-10 mb-8" />
 
                 @if (Route::has('password.request'))
                     <p class="mt-4">
                         <a class="text-sm font-medium text-secondary-600 hover:underline"
-                           href="{{ route('password.request') }}">
+                            href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     </p>

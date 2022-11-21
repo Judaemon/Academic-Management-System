@@ -11,59 +11,87 @@ class RoleSeeder extends Seeder
     {
         Role::create(['name' => 'Super Admin']);
 
+        // Employee
         Role::create(['name' => 'Admin'])
-        ->syncPermissions([
-            'view_users',
-            'create_user',
-            'read_user',
-            'update_user',
+            ->syncPermissions([
+                'view_users',
+                'create_student',
+                'create_account',
+                'read_user',
+                'update_user',
 
-            'view_roles',
-            'create_role',
-            'read_role',
-            'update_role',
+                'create_fee',
+                'update_fee',
+                'delete_fee',
 
-            'view_setting',
-        ]);
+                'read_payment',
+                'create_payment',
+                'update_payment',
 
-        Role::create(['name' => 'Teacher']);
-        // ->syncPermissions([
-        //     // for viewing students (?)
-        //     'view_users',
-        //     'read_user',
+                'view_payments',
+                'view_fees',
 
-        //     // can CRUD grades
-        //     'view_grades',
-        //     'create_grade',
-        //     'read_grade',
-        //     'update_grade',
-        // ]);
+                'view_roles',
+                'create_role',
+                'read_role',
+                'update_role',
+
+                'create_announcement',
+                'update_announcement',
+                'delete_announcement',
+
+                'view_setting',
+
+                'change_password',
+            ]);
+
+        Role::create(['name' => 'Teacher'])
+            ->syncPermissions([
+                // 'view_users',
+                // 'read_user',
+
+                'assign_grades',
+
+                'create_grade',
+                'read_grade',
+                'update_grade',
+                'delete_grade',
+
+                'change_password',
+
+                'update_emergency_contact_information',
+                'update_contact_information',
+            ]);
 
         Role::create(['name' => 'Accountant'])
-        ->syncPermissions([
-            'view_fees',
-            'create_fee',
-            'read_fee',
-            'edit_fee',
-            'delete_fee',
+            ->syncPermissions([
+                'read_payment',
+                'create_payment',
+                'update_payment',
 
-            'view_payments',
-            'create_payment',
-            'read_payment',
-            'delete_payment',
-        ]);;
+                'view_payments',
 
-        Role::create(['name' => 'Student']);
-        // ->syncPermissions([
-        //     // view or read only
-        //     'view_users',
-        //     'read_user',
+                'change_password',
 
-        //     'view_grades',
-        //     'read_grade',
+                'update_emergency_contact_information',
+                'update_contact_information',
+            ]);;
+        // Employee
 
-        //     'view_sections',
-        //     'read_section',
-        // ]);
+        Role::create(['name' => 'Student'])
+            ->syncPermissions([
+                'view_grades',
+                'read_grade',
+
+                // 'view_users',
+                // 'read_user',
+
+                'create_payment',
+
+                'change_password',
+
+                'update_emergency_contact_information',
+                'update_contact_information',
+            ]);
     }
 }

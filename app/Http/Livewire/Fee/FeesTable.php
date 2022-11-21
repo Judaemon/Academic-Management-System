@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Fee;
 
+use App\Models\Fee;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Fee;
 
 class FeesTable extends DataTableComponent
 {
@@ -12,31 +12,38 @@ class FeesTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id');        
+        
+        $this->setThAttributes(function(Column $column) {
+            if ($column->getTitle() == "Actions") {
+                return ['class' => 'text-center',];
+            } 
+            return [];
+        });
     }
 
     public function columns(): array
     {
-        $columns = [
-            Column::make("Id", "id")
+        return [
+            Column::make("Id")
                 ->sortable(),
+
             Column::make("Fee Name", "fee_name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
+
             Column::make("Amount")
                 ->sortable()
-                ->format(function($value) {
-                    return 'Php '.number_format($value, 2);
-                }),
-            Column::make("Academic Year", "academic_year.start_year")
-                ->sortable(),
-            // Column::make("Grade Level", "grade_level_id")
-            //     ->sortable(),
+                ->format(fn ($value) => 'Php ' . number_format($value, 2))
+                ->collapseOnMobile(),
+
+            Column::make("Grade Level", "grade_level.name")
+                ->sortable()
+                ->collapseOnMobile(),
+
+            Column::make("Actions", "id")
+                ->view('livewire.fee.actions-col')
+                ->collapseOnMobile(),
         ];
-
-        if (auth()->user()->can('read_fees')) {
-            array_push($columns, Column::make("Actions", "id")->view('livewire.fee.actions-col'));
-        }
-
-        return $columns;
     }
 }

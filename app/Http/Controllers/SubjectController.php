@@ -3,84 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $subjects = Subject::paginate();
-
-        return view('subjects.index', compact('subjects'));
+        return view('subjects.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function subjects(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subject $subject)
-    {
-        //
+        return Subject::query()
+            ->orderBy('id')
+            ->when(
+                $request->search,
+                fn (Builder $query) => $query
+                    ->where('name', 'like', "%{$request->search}%")
+                    ->orWhere('id', 'like', "%{$request->search}%")
+            )
+            ->when(
+                $request->exists('selected'),
+                fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
+                fn (Builder $query) => $query->limit(10)
+            )
+            ->get();
     }
 }

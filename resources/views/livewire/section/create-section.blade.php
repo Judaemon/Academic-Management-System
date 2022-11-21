@@ -1,52 +1,58 @@
 <div wire:ignore.self>
     <x-card title="Create Section">
         <form wire:submit.prevent="save">
-            <div class="sm:grid sm:grid-cols-2 md:grid-cols-12 gap-4">
+            <div class="grid sm:grid-cols-2 md:grid-cols-12 gap-4">
                 <div class="sm:col-span-1 md:col-span-4">
                     <x-input wire:model.defer="name" label="Name" placeholder="Type section name here" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-input wire:model.defer="capacity" label="Capacity" placeholder="Type maximum capacity here" type="number" min="0"  />
+                    <x-input wire:model.defer="capacity" label="Capacity" placeholder="Type maximum capacity here"
+                        type="number" min="0" max="60" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-select
-                        label="Teacher"
-                        wire:model.defer="teacher"
-                        placeholder="Select teacher"
-                    >
-                        @foreach ($teachers as $teacher)
-                            <x-select.option label="{{ $teacher->firstname }} {{ $teacher->lastname }}" value="{{ $teacher->id }}" />
-                        @endforeach
-                    </x-select>
+                    <x-select label="Teacher" wire:model.defer="teacher" placeholder="Select teacher" :async-data="route('users.teachers')"
+                        option-label="full_name" option-value="id" />
                 </div>
 
                 <div class="sm:col-span-1 md:col-span-4">
-                    <x-select
-                        label="Grade level"
-                        wire:model="grade_level"
-                        placeholder="Select grade level"
-                    >
-                        @foreach ($grade_levels as $grade_level)
-                            <x-select.option label="{{ $grade_level->name }}" value="{{ $grade_level->id }}" />
-                        @endforeach
-                    </x-select>
+                    <x-select label="Grade level" wire:model="grade_level" placeholder="Select grade level"
+                        :async-data="route('grade_level.grade_level')" option-label="name" option-value="id" />
                 </div>
 
-                <div class="sm:col-span-2 md:col-span-8">
-                    <x-select
-                        label="Add subjects"
-                        placeholder="Select subjects"
-                        wire:model.defer="section_subjects"
-                        multiselect
-                    >
+                @if (!empty($grade_level))
+                    <div class="sm:col-span-2 md:col-span-12">
+                        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead
+                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="py-3 px-6">
+                                            Subjects
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($grade_level_subjects as $subject)
+                                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td class="py-4 px-6">
+                                                {{ $subject->name }}
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td class="py-4 px-6">
+                                                No subjects found
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
 
-                        @foreach ($subjects as $subject)
-                            <x-select.option label="{{ $subject->name }}" value="{{ $subject->id }}" />
-                        @endforeach
-                    </x-select>
-                </div>
             </div>
 
             <x-slot name="footer">

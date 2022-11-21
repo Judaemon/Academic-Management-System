@@ -2,34 +2,69 @@
 
 namespace App\Http\Livewire\AcademicYear;
 
-use App\Models\AcademicYear;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use App\Models\AcademicYear;
+
+use Carbon\Carbon;
 
 class EditAcademicYear extends ModalComponent
 {
-    use Actions;
+    use AuthorizesRequests, Actions;
 
     public $academic_year;
+
+    public $start_date;
+    public $school_days = 0;
+    public $end_date;
 
     public function mount(AcademicYear $academic_year)
     {
         $this->academic_year = $academic_year;
-        $this->card_title = "Editing Academic Year";
+
+        $this->title = $academic_year->title;
+        $this->status = $academic_year->status;
+
+        $this->start_date = $academic_year->start_date;
+        $this->school_days = $academic_year->school_days;
+        $this->end_date = $academic_year->end_date;
     }
 
     protected function rules()
     {
         return [
-            'academic_year.start_year' => ['required', 'date', 'before:academic_year.end_year'],
-            'academic_year.end_year' => ['required', 'date', 'after:academic_year.start_year'],
-            'academic_year.curriculum' => ['required'],
+            'title' => ['required'],
+            'status' => ['required'],
+
+            'start_date' => ['required', 'date'],
+            'school_days' => ['nullable', 'numeric'],
+            'end_date' => ['nullable', 'date', 'after:start_date'],
         ];
     }
 
     public function render()
     {
         return view('livewire.academic-year.edit-academic-year');
+    }
+
+    public function updatedEndDate()
+    {
+        if ($this->end_date != NULL) {
+            $this->school_days = Carbon::parse($this->start_date)->diffInDays($this->end_date);
+        } else {
+            $this->school_days = 0;
+        }
+    }
+
+    public function updatedSchoolDays()
+    {
+        if ($this->school_days > 0) {
+            $this->end_date = Carbon::parse($this->start_date)->addDays($this->school_days);
+        } else {
+            $this->end_date = NULL;
+        }
     }
 
     public function save(): void
@@ -53,22 +88,29 @@ class EditAcademicYear extends ModalComponent
 
     public function submit()
     {
-        if (!auth()->user()->can('edit_academic_year')) {
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'You do not have permission for this action.'
-            );
-        } else {
-            $this->academic_year->save();
+        $this->authorize('update_academic_year');
 
-            $this->emit('refreshDatatable');
+        $this->academic_year->forceFill([
+            'title' => $this->title,
+            'status' => $this->status,
 
-            $this->closeModal();
+            'start_date' => Carbon::parse($this->start_date)->toDateString(),
+            'school_days' => $this->school_days,
+            'end_date' => Carbon::parse($this->end_date)->toDateString(),
+        ])->save();
 
-            $this->dialog()->success(
-                $title = 'Successful!',
-                $description = 'Academic information successfully Updated.'
-            );
-        }
+        $this->emit('refreshDatatable');
+
+        $this->closeModal();
+
+        $this->dialog()->success(
+            $title = 'Successful!',
+            $description = 'Academic information successfully Updated.'
+        );
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
     }
 }

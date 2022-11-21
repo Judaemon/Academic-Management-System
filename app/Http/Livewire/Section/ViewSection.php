@@ -15,52 +15,41 @@ class ViewSection extends ModalComponent
 
     public $section;
 
-    public $teacher;
-    public $teachers;
-
     public $grade_level;
-    public $grade_levels;
 
-    public $section_subjects = [];
-    public $subjects;
+    public $section_students;
+
+    public $grade_level_subjects = [];
 
     protected function rules()
     {
         return [
-            'section.name' => ['required'],
+            'section.name' => ['required', 'unique:sections,name'],
             'section.capacity' => ['required'],
 
             'section.teacher_id' => ['required'],
             'section.grade_level_id' => ['required'],
-
-            'teacher.firstname' => ['required'],
-            'teacher.lastname' => ['required'],
         ];
     }
-    
+
     public function mount(Section $section)
     {
         $this->authorize('view_section');
 
         $this->section = $section;
 
-        $this->teachers = User::role('Teacher')->get();
+        $this->grade_level_subjects = GradeLevel::query()
+            ->find($section->grade_level_id)
+            ->subjects;
 
-        $this->grade_levels = GradeLevel::all();
-        
-        $this->subjects = Subject::all();
-
-        // converted to string because option value are string
-        // if removed the teacher id is int and will not be selected 
-        $this->teacher = (string)$section->teacher_id;
-        
-        $this->grade_level = (string)$section->grade_level_id;
-
-        // subjects of section based on pivot table
-        $section_subjects = $section->subjects->pluck('id')->toArray();
-
-        // used as selected values
-        $this->section_subjects = array_map('strval', $section_subjects);
+        $this->section_students = User::query()
+            ->whereHas('admission', function ($q) {
+                $q->where('academic_year_id', setting('academic_year_id'));
+                $q->whereHas('section', function ($q) {
+                    $q->where('id', $this->section->id);
+                });
+            })
+            ->get();
     }
 
     public function render()

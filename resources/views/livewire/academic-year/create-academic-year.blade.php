@@ -1,36 +1,52 @@
-<div>
-    <x-button primary onclick="$openModal('modalCreate')" label="ADD ACADEMIC YEAR" />
-    
-    <x-modal wire:model.defer="modalCreate" max-width="2xl">
-        <x-card title="New academic year">
-            <div class="grid grid-cols-1 gap-4">
-                <div class="flex flex-row space-x-4">
-                    <div class="grow">
-                        <x-input type="date" wire:model.defer="academic_year.start_year" label="Start of Academic Year" placeholder="" />
+<div wire:ignore.self>
+    <x-card title="Create Academic Year">
+        <form wire:submit.prevent="save">
+            <div class="grid grid-cols-1 p-4">
+                <div class="col-span-4 flex flex-row space-x-6 mb-5">
+                    <div class="w-1/2">
+                        <x-datetime-picker
+                            without-time
+                            wire:model="start_date" 
+                            label="Start Date" 
+                        />
                     </div>
       
-                    <div class="pt-5">
-                        <span class="font-bold text-xl-center text-gray-400">_</span>
+                    <div class="flex justify-center items-center pt-5 uppercase text-sm text-gray-400">
+                        TO
                     </div>
 
-                    <div class="grow">
-                        <x-input type="date" wire:model.defer="academic_year.end_year" label="End of Academic Year" placeholder="" />
+                    <div class="w-1/2 {{ $isNull ? 'hidden' : ''}}">
+                        <x-datetime-picker 
+                            without-time
+                            wire:model="end_date" 
+                            label="End Date" 
+                        />
+                    </div>
+                    <div class="w-1/2 {{ $isNull ? '' : 'hidden'}}">
+                        <x-input label="End Date" rightIcon="calendar" disabled />
                     </div>
                 </div>
 
-                <div class="col-span-1">
-                    <x-textarea wire:model.defer="academic_year.curriculum" label="Curriculum" placeholder="Enter curriculum description..." />
+                <div class="col-span-4 {{ $isNull ? 'hidden' : ''}}">
+                    <x-input
+                        type="number"
+                        label="Number of School Days" 
+                        corner-hint="Ex: 128 days" 
+                        wire:model="school_days" 
+                        suffix="days"
+                    />
                 </div>
-  
+                <div class="col-span-4 {{ $isNull ? '' : 'hidden'}}">
+                    <x-input label="Number of School Days" corner-hint="Ex: 128 days" suffix="days" disabled />
+                </div>
             </div>
   
             <x-slot name="footer">
                 <div class="flex justify-end gap-x-4">
                     <x-button flat label="Cancel" wire:click="closeModal" />
-  
-                    <x-button wire:click="save" type="button" primary label="Save" />
+                    <x-button wire:click.prevent="save" type="submit" primary label="Save" />
                 </div>
             </x-slot>
-        </x-card>
-    </x-modal>
+        </form>
+    </x-card>
 </div>

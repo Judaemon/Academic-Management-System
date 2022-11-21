@@ -11,12 +11,12 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('capacity');
 
-            $table->foreignId('teacher_id')->references('id')->on('users')->nullable();
+            $table->foreignId('teacher_id')->references('id')->on('users');
 
-            $table->foreignId('grade_level_id')->references('id')->on('grade_levels');
+            $table->foreignId('grade_level_id')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -1,69 +1,56 @@
 <div wire:ignore.self class="form-container">
-    <x-card title="{{ $cardTitle }}">
-        <div class="role-form mb-2">
-            <style>
-                .center-label label{
-                    width: 100%;
-                    text-align: center;
-                }
-            </style>
-
-            <div class="col-span-12 flex justify-center center-label">
-                <div class="w-60">
-                    <x-input wire:model.defer="role.name" label="ROLE NAME" placeholder="Admin" />
+    <x-card title="Edit role">
+        <div class="flex gap-4">
+            <div class="lg:w-4/12 mb-4">
+                @if($role->id === 1 || $role->id === 3 || $role->id === 4 || $role->id === 5)
+                    <x-input wire:model.defer="role.name" label="Name" readonly />
+                @else
+                    <x-input wire:model.defer="role.name" label="Name" placeholder="Type role name here" />
+                @endif
+            </div>
+            <div class="lg:w-8/12 mb-4">
+                <x-label>Selected permissions</x-label>
+                <div>
+                    @forelse ($role_permissions as $permission)
+                        <x-badge outline dark label="{{ $permission}}" />
+                    @empty
+                        <x-badge outline dark label="Select permission" />
+                    @endforelse
                 </div>
             </div>
         </div>
 
-        <div class="permission-form grid md:grid-cols-3">
-            <div class="flex flex-col w-full my-2">
-                <div class="main-checkbox py-2">
-                    {{-- view_users --}}
-                    <x-checkbox id="view_users" label="View User" value="1" wire:model="user_permissions" />
-                </div>
-                <div class="sub-checkbox pl-5 mt-0 space-y-2">
-                    {{-- create_users --}}
-                    <x-checkbox id="create_user" label="Create User" value="2" wire:model="user_permissions" />
-                    {{-- read_users --}}
-                    <x-checkbox id="read_users" label="Read User" value="3" wire:model="user_permissions" />
-                    {{-- update_users --}}
-                    <x-checkbox id="update_users" label="Update User" value="4" wire:model="user_permissions" />
-                    {{-- delete_users --}}
-                    <x-checkbox id="delete_users" label="Delete User" value="5" wire:model="user_permissions" />
-                </div>                
-            </div>
-
-            <div class="flex flex-col w-full my-2">
-                <div class="main-checkbox py-2">
-                    {{-- view_roles --}}
-                    <x-checkbox id="view_roles" label="View Roles" value="6" wire:model="role_permissions" />
-                </div>
-                <div class="sub-checkbox pl-5 mt-0 space-y-2">
-                    {{-- create_roles --}}
-                    <x-checkbox id="create_roles" label="Create Role" value="7" wire:model="role_permissions" />
-                    {{-- read_roles --}}
-                    <x-checkbox id="read_roles" label="Read Role" value="8" wire:model="role_permissions" />
-                    {{-- update_roles --}}
-                    <x-checkbox id="update_roles" label="Update Role" value="9" wire:model="role_permissions" />
-                    {{-- delete_roles --}}
-                    <x-checkbox id="delete_roles" label="Delete Role" value="10" wire:model="role_permissions" />
-                </div>                
-            </div>
-
-            <div class="flex flex-col w-full my-2">
-                <div class="main-checkbox py-2">
-                    <x-checkbox id="view_setting" label="View System Settings" value="11" wire:model="system_permissions" />
-                </div>
-                <div class="sub-checkbox pl-5 mt-0 space-y-2">
-                    <x-checkbox id="update_setting" label="Update  System Settings" value="12" wire:model="system_permissions" />
-                </div>                
-            </div>
+        <div class="overflow-x-auto relative sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="py-3 px-6">
+                            Permissions
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Selected
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($permissions as $permission)
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $permission->name}}
+                        </th>
+                        <td class="py-4 px-6">
+                            <x-checkbox id="checkbox" value="{{ $permission->name}}" wire:model.lazy="role_permissions" />
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        
+
         <x-slot name="footer">
             <div class="flex justify-between gap-x-4">
-                <x-button flat label="Cancel" wire:click="$emit('closeModal')" />
-                
+                <x-button flat label="Cancel" wire:click="closeModal" />
+
                 <x-button wire:click="save" type="button" primary label="Save" />
             </div>
         </x-slot>
