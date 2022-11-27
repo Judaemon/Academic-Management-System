@@ -169,6 +169,8 @@ class PaymentsTable extends DataTableComponent
     {
         if ($this->authorize('update_payment')) {
             $this->dialog()->confirm([
+                'id' => 'custom',
+                'style' => "center",
                 'title'       => 'Are you Sure?',
                 'description' => "This payment will be recorded as Refunded",
                 'icon'        => 'warning',
@@ -192,6 +194,7 @@ class PaymentsTable extends DataTableComponent
 
     public function update($id)
     {
+        dd("qwe");
         $payments = Payments::find($id);
         $settings = Setting::find(1);
 
