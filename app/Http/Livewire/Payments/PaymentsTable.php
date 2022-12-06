@@ -194,7 +194,7 @@ class PaymentsTable extends DataTableComponent
 
     public function update($id)
     {
-        dd("qwe");
+        //dd("qwe");
         $payments = Payments::find($id);
         $settings = Setting::find(1);
 

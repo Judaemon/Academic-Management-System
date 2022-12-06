@@ -9,8 +9,8 @@
             <x-button icon="receipt-refund" warning label="Refund" wire:click="refund({{ $row->id }})" />
         @endif
 
-        <x-dialog id="custom" title="User information" description="Complete your profile, give your name">
-            <x-input label="What's your name?" placeholder="your name bro" x-model="name" />
+        <x-dialog id="custom" title="Refunds" description="Before proceeding with the refund,">
+            <x-input label="state the reason:" placeholder="" x-model="name" />
         </x-dialog>
     @endcan
 
