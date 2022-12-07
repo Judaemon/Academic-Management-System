@@ -60,8 +60,9 @@ td{
     <div style="width: 25%; height: 4.5rem;">
       <img src="{{ $settings->logo }}" alt="logo" style="max-width: 100%; max-height: 100%;"/>
     </div>
-    <div style="position:absolute; right:0; top:0; display:flex; justify-content:center; align-items: center; width: 75%; color: #222; height: 20rem; padding: 5px; text-align:center;"> 
+    <div style="position:absolute; right:0; top:-0.5rem; display:flex; justify-content:center; align-items: center; width: 75%; color: #222; height: 20rem; padding: 5px; text-align:center;"> 
       <h2 style="width: 100%;">{{ $settings->institute_name }}</h2>
+      <p style="font-size: 0.7rem; width: 100%;">{{ $settings->address }}</p>
     </div>
   </div>
       
@@ -74,9 +75,12 @@ td{
     </div>
   </div>
 
-  @if(!empty($school_fees))
-    <div style="border-bottom: 2px solid rgb(123, 123, 123);">
-      <h2 style="text-transform:uppercase; width: 100%";>SchoolFees</h2>
+  <div style="padding-bottom: 3mm; border-bottom: 2px solid rgb(123, 123, 123);">
+    <h2 style="text-transform:uppercase;">
+      Order No. {{ $pay->id }}
+    </h2>
+    @if(!empty($school_fees))
+      <h2 style="text-transform:uppercase; width: 100%";>School Fees</h2>
       <div id="table">
         <table style="color:#222; font-size: .85em;">
           @foreach($school_fees as $fee)
@@ -91,27 +95,24 @@ td{
       </div>
     @endif
       
-  <div id="bot">
     <h2 style="text-transform:uppercase;">Educational Expenses</h2>
     <div id="table">
       <table style="color:#222; font-size: .85em;">
-        @foreach($payment as $pay)
+        @foreach($payment as $payment)
           <tr class="tabletitle" style="color:#222; font-size: .85em; width:100%;">
-            <td style="color:#222; width:50%;">{{ $pay->created_at->format('m-d-Y') }}</td>
+            <td style="color:#222; width:50%;">{{ $payment->created_at->format('m-d-Y') }}</td>
             <td class="payment" style="color:#222; width:50%;">
-              <h2>Php {{ number_format($pay->amount_paid, 2) }}</h2>
+              <h2>Php {{ number_format($payment->amount_paid, 2) }}</h2>
             </td>
           </tr>
         @endforeach
       </table>
-    </div>
-  
-    <div style="margin-top: 5mm; width: 20rem;">
-      <p style="text-align: center; font-size: 0.9em; line-height: 1.2em;">
-        **For Any Correction and Clarification, kindly contact {{ $accountant->email }} or visit the Cashier's Office.
-      </p>
-    </div>
-  
+    </div>  
+  </div>
+  <div style="margin-top: 2mm; width: 20rem;">
+    <p style="text-align: center; font-size: 0.9em; line-height: 1.2em;">
+      **For Any Correction and Clarification, kindly contact {{ $accountant->email }} or visit the Cashier's Office.
+    </p>
   </div>
 </div>
 

@@ -51,23 +51,23 @@ h5 {
 
   <div style="padding: 0.5rem;">
     <table style="width:100%; text-align:left; color: rgb(112, 114, 117, 2); margin-top:1rem;">
-      <thead style="line-height:1rem; font-size:0.75rem; color:white; text-transform:uppercase; background:black;">
+      <thead style="font-size:0.75rem; color:white; text-transform:uppercase; background:black;">
         <tr>
-          <th scope="col" class="thead">Subjects</th>
-          <th scope="col" class="thead">1st</th>
-          <th scope="col" class="thead">2nd</th>
-          <th scope="col" class="thead">3rd</th>
-          <th scope="col" class="thead"">4th</th>
+          <th scope="col" class="thead" style="padding-top:0.625rem;  padding-bottom: 0.625rem;">Subjects</th>
+          <th scope="col" class="thead" style="padding-top:0.625rem;  padding-bottom: 0.625rem;">1st</th>
+          <th scope="col" class="thead" style="padding-top:0.625rem;  padding-bottom: 0.625rem;">2nd</th>
+          <th scope="col" class="thead" style="padding-top:0.625rem;  padding-bottom: 0.625rem;">3rd</th>
+          <th scope="col" class="thead" style="padding-top:0.625rem;  padding-bottom: 0.625rem;">4th</th>
         </tr>
       </thead>
       <tbody>
         @foreach ($subjects as $subject)
           <tr style="border-bottom: 1px solid black; background:white;">
-            <th scope="row" style="padding:0.625rem 0rem 0rem 0.625rem; padding-left:1rem;">{{ $subject->name }}</th>
-            <td style="padding:0.625rem 0rem 0rem 0.625rem; text-align:center;">{{$subject->grades->first_quarter}}</td>
-            <td style="padding:0.625rem 0rem 0rem 0.625rem; text-align:center;">{{$subject->grades->second_quarter }}</td>
-            <td style="padding:0.625rem 0rem 0rem 0.625rem; text-align:center;">{{$subject->grades->second_quarter }}</td>
-            <td style="padding:0.625rem 0rem 0rem 0.625rem; text-align:center;">{{$subject->grades->fourth_quarter }}</td>
+            <th scope="row" style="padding-top:0.625rem;  padding-bottom: 0.625rem; padding-left:1rem;">{{ $subject->name }}</th>
+            <td style="padding-top:0.625rem;  padding-bottom: 0.625rem; text-align:center;">{{$subject->grades->first_quarter}}</td>
+            <td style="padding-top:0.625rem;  padding-bottom: 0.625rem; text-align:center;">{{$subject->grades->second_quarter }}</td>
+            <td style="padding-top:0.625rem;  padding-bottom: 0.625rem; text-align:center;">{{$subject->grades->second_quarter }}</td>
+            <td style="padding-top:0.625rem;  padding-bottom: 0.625rem; text-align:center;">{{$subject->grades->fourth_quarter }}</td>
           </tr>
         @endforeach
       </tbody>
@@ -79,17 +79,18 @@ h5 {
     </table> 
   </div>
 
-  <div style="height: 6.5rem; width:100%; margin-top:">
-    <div style="width: 50%; justify-content:space-between; float:right; text-align:right; padding-top:0.5rem;">
-      <h5>LRN : {{ $users->lrn }}</h5>
-      <h5>Name: {{ $users->first_name }} {{ $users->middle_name }} {{ $users->last_name }}</h5>
-      <h5>School Year: {{ $academic_year->title }}</h5>
+  <div style="height: 5rem; width:100%; margin-top: 2rem;">
+    <div style="width: 50%; display:flex; justify-content:flex-end; float:right; text-align:right; padding-top:0.5rem;">
+      <div style="text-align: center; margin-right:2rem;">
+        <div style="border-bottom: 2px solid black; width: 15rem; float:right;"></div>
+        <h5 style="margin-right:-2.5rem;">Teacher/Adviser</h5>
+      </div>
     </div>
   </div>
 
-  <div style="height: 6.5rem; width:100%; display:flex; position:relative; justify-content:space-between; border-top: 2px double rgb(134, 134, 134);">
-    <div style="width: 50%; justify-content:space-between; float:right; text-align:right; padding-top:0.5rem;">
-      <h5>**This report card was downloaded this  {{ date('F j, Y', strtotime($now)) }}</h5>
+  <div style="height: 5rem; width:100%; display:flex; position:relative; justify-content:space-between; border-top: 2px double rgb(134, 134, 134);">
+    <div style="width: 100%; justify-content:space-between; float:right; text-align:right; padding-top:0.5rem;">
+      <p style="color:rgb(60, 54, 54);">**This report card was downloaded this  {{ date('F j, Y', strtotime($now)) }}</p>
     </div>
   </div>
 </div>
