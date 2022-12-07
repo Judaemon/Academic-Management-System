@@ -26,6 +26,29 @@
                         </div>
                     </div>
 
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-12 gap-4">
+                            <div class="container col-span-12 md:col-span-4">
+                                {{-- <x-badge class="w-full mb-2" dark md label="Subjects" /> --}}
+                            </div>
+
+                            <div class="container col-span-12 md:col-span-2">
+                                <x-badge class="w-full mb-2" dark md label="First Quarter" />
+                            </div>
+                            <div class="container col-span-12 md:col-span-2">
+                                <x-badge class="w-full mb-2" dark md label="Second Quarter" />
+                            </div>
+
+                            <div class="container col-span-12 md:col-span-2">
+                                <x-badge class="w-full mb-2" dark md label="Third Quarter" />
+                            </div>
+
+                            <div class="container col-span-12 md:col-span-2">
+                                <x-badge class="w-full mb-2" dark md label="Fourth Quarter" />
+                            </div>
+                        </div>
+                    </div>
+
                     @foreach ($grades as $index => $grade)
                         <div class="container col-span-12 md:col-span-4">
                             <div class="gap-2 lg:gap-4">
