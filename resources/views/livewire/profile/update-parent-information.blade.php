@@ -1,5 +1,5 @@
 <div class="container">
-    <x-card title="Update Contact Information">
+    <x-card title="Update Parent Information">
         <form wire:submit.prevent="save">
             <div class="grid gap-4">
                 <div class="grid grid-cols-12 gap-4">
