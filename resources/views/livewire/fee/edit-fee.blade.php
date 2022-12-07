@@ -19,6 +19,7 @@
                         option-label="name"
                         option-value="id"
                     />
+                    <span class="w-full text-[0.7rem] text-gray-600 italic">**If left blank, school fee will not be included in the total</span>
                 </div>
             </div>
 
