@@ -19,9 +19,11 @@ class AnnouncementTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Title", "title")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Actions", "id")
                 ->view('livewire.announcement.actions-col')
                 ->collapseOnMobile(),
