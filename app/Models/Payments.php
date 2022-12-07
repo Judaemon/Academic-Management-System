@@ -12,6 +12,7 @@ class Payments extends Model
     protected $fillable = [
         'user_id',
         'accountant_id',
+        'refunder_account_id',
         'academic_year_id',
         'amount_paid',
         'payment_method',
@@ -39,5 +40,10 @@ class Payments extends Model
     public function accountant()
     {
         return $this->belongsTo(User::class, 'accountant_id', 'id');
+    }
+
+    public function refund()
+    {
+        return $this->belongsTo(User::class, 'refunder_account_id', 'id');
     }
 }

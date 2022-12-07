@@ -106,6 +106,8 @@ class EditAdmission extends ModalComponent
 
         $this->admission->save();
 
+        // if($this->admission[status]); send mail that student is now admitted
+
         $this->emit('refreshDatatable');
 
         $this->closeModal();

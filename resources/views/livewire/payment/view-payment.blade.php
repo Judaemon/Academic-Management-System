@@ -23,7 +23,7 @@
         <div class="bg-iscp_primary min-h-16 w-full rounded-t-lg px-10 py-4">
             <div class="flex justify-start items-center">
                 <img src="{{ asset('images/avatar-svgrepo-com.svg') }}" class="w-20 h-20" />
-                <div class="ml-10 text-white">
+                <div class="ml-10 text-white w-1/2">
                     <div class="text-xl uppercase font-bold tracking-wide">
                         {{ $payment->user->first_name }} {{ $payment->user->last_name }}
                     </div>
@@ -42,25 +42,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="ml-10 text-white w-1/2">
+                    <div class="text-sm text-gray-300 ml-4">
+                        <div class="flex mt-px items-center">
+                            <span class="font-bold mr-4">Order No :</span>
+                            {{ $payment->id }}
+                        </div>
+                        <div class="flex mt-px items-center">
+                            <span class="font-bold mr-4">Payment Date :</span>
+                            {{ date('F j, Y', strtotime($payment->created_at)) }}
+                        </div>
+                        <div class="flex mt-px items-center">
+                            <div class="w-1/4 md:w-1/5 lg:w-1/6 font-bold mr-4">Status :</div>
+                            <div class="w-3/4 md:w-4/5 lg:w-5/6 py-1 text-center rounded-full font-bold text-sm shadow-md uppercase {{ ($status == 'Pending') ? 'bg-indigo-300 text-indigo-700' : 
+                                (($status == 'Paid') ? 'bg-green-300 text-green-700' : 'bg-orange-300 text-orange-700') }}">
+                                {{ $payment->payment_status }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="w-full text-sm px-10 py-1">
-            <div class="w-full block lg:flex justify-between items-center uppercase">
-                <div class="flex w-full lg:w-1/2 h-auto items-center my-4">
-                    <div class="w-1/4 md:w-1/5 lg:w-1/6 font-bold mr-4">Status :</div>
-                    <div class="w-3/4 md:w-4/5 lg:w-5/6 py-1 text-center rounded-full font-bold text-sm shadow-md uppercase {{ ($status == 'Pending') ? 'bg-indigo-300 text-indigo-700' : 
-                        (($status == 'Paid') ? 'bg-green-300 text-green-700' : 'bg-orange-300 text-orange-700') }}">
-                        {{ $payment->payment_status }}
-                    </div>
-                </div>
-                <div class="flex w-full lg:w-1/2 h-auto items-center justify-start lg:justify-end my-4">
-                    <span class="font-bold mr-4">Payment Date :</span>
-                    {{ date('F j, Y', strtotime($payment->created_at)) }}
-                </div>
-            </div>
-
-
             @if(!empty($school_fees) && $payment->fee_id === NULL)
                 @if($school_fees->count() > 0)
                     <table class="w-full text-xs text-left text-gray-500 rounded-t-2">

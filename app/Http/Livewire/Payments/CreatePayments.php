@@ -178,6 +178,7 @@ class CreatePayments extends ModalComponent
             'others' => $this->others,
             'academic_year_id' => $this->academic_year,
             'payment_status' => $this->status,
+            'refunder_account_id' => NULL,
         ]);
 
         if($settings->notify_payments === 1 && $this->status === "Paid") {

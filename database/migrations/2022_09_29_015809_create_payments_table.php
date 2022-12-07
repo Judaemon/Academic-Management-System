@@ -20,6 +20,11 @@ return new class extends Migration
                 ->constrained('users', 'id')
                 ->onDelete('cascade');
 
+            $table->foreignId('refunder_account_id')
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('cascade');
+
             $table->foreignId('academic_year_id')
                 ->constrained('academic_years', 'id')
                 ->onDelete('cascade');

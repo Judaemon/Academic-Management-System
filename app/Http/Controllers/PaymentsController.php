@@ -52,7 +52,7 @@ class PaymentsController extends Controller
                                  ->get();
         }
       
-        $pdf = Pdf::loadView('payments.receipt', compact('users', 'payment', 'settings', 'accountant', 'admit', 'school_fees'));  
+        $pdf = Pdf::loadView('payments.receipt', compact('users', 'pay', 'payment', 'settings', 'accountant', 'admit', 'school_fees'));  
         return $pdf->download();
     }
 }

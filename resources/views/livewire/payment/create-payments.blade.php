@@ -136,7 +136,7 @@
                     option-value="id"
                     option-description="amount"
                   />
-                  <span class="w-full text-[0.7rem]">**School Fees that are not included in the educational expenses</span>
+                  <span class="w-full text-[0.7rem] text-gray-600 italic">**School Fees that are not included in the educational expenses</span>
                 </div>
               </div>
               

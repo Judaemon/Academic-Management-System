@@ -3,15 +3,24 @@
 namespace App\Exports;
 
 use App\Models\Payments;
+
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-class PaymentsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithDefaultStyles;
+
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithMapping;
+
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Style\Style;
+
+class PaymentsExport implements FromCollection, WithHeadings, WithColumnWidths, WithMapping, WithDefaultStyles, WithEvents
 {
     use Exportable;
 
@@ -27,46 +36,86 @@ class PaymentsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wi
 
     public function headings():array{
         return[
-            '#',
+            'ORDER NO',
             'USER ID',
+            'IN PAYMENT OF',
             'AMOUNT PAID',
-            'METHOD OF PAYMENT',
-            'FEE ID',
             'BALANCE',
-            'OTHERS',
-            'PAYMENT DATE'
+            'METHOD OF PAYMENT',
+            'PAYMENT DATE',
+            'STATUS'
         ];
     } 
 
     public function columnWidths(): array
     {
         return [
-            'A' => 6,
-            'B' => 11, 
-            'C' => 20,
+            'A' => 15,
+            'B' => 30, 
+            'C' => 30,
             'D' => 25,   
-            'E' => 15, 
-            'F' => 15,    
-            'G' => 47, 
-            'H' => 30,  
+            'E' => 25, 
+            'F' => 25,    
+            'G' => 20, 
+            'H' => 20,  
         ];
     }
 
-    public function styles(Worksheet $sheet)
+    public function defaultStyles(Style $defaultStyle)
     {
         return [
-            'A1:H1' => [
-                'font' => [
-                    'bold' => true
-                    ]
-                ],
+            'fill' => [
+                'fillType'   => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['argb' => \PhpOffice\PhpSpreadsheet\Style\Color::BLACK],
+            ],
+            'font' => [
+                'name' => 'Cambria',
+                'size' => 12,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ]
         ];
     }
 
     public function collection()
     {
-        return Payments::select('id', 'user_id', 'amount_paid', 'payment_method', 'fee_id', 'balance', 'others', 'created_at')
-                         ->whereIn('id', $this->payments)
+        return Payments::whereIn('id', $this->payments)
                          ->get();
+    }
+
+    public function map($row): array
+    {
+        if(!empty($row->others)) {
+            $payment_type = $row->others;
+        } else {
+            $payment_type = $row->fee->fee_name;
+        }
+
+        return [
+            $row->id,
+            $row->user->first_name.' '.$row->user->last_name,
+            $payment_type,
+            $row->amount_paid,
+            $row->balance,
+            $row->payment_method,
+            \PhpOffice\PhpSpreadsheet\Shared\Date::dateTimeToExcel($row->created_at),
+            $row->payment_status,                
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getDefaultRowDimension()->setRowHeight(20);
+                // $event->sheet->styleCells('A1:H1', [
+                //     'font' => [
+                //         'bold' => true,
+                //     ]
+                // ]);
+            },
+        ];
     }
 }
