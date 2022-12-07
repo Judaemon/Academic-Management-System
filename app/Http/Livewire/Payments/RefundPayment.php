@@ -14,6 +14,7 @@ use App\Models\Setting;
 use App\Notifications\PaymentNotification;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Hash;
 
 use Auth;
 
@@ -38,45 +39,42 @@ class RefundPayment extends ModalComponent
 
     public function refund()
     {
-        if ($this->authorize('update_payment')) {
-            $this->update();
+        if (Hash::check($this->confirm_password, Auth::user()->password)) {
+            $settings = Setting::find(1);
+
+            $this->payment->forceFill([
+                'refunder_account_id' => Auth::user()->id,
+                'payment_status' => 'Refunded',
+            ])->save();
+    
+            if ($settings->notify_payments === 1) {
+                if ($settings->notification_channel === "Email") {
+                    $this->sendMail();
+                } else if ($settings->notification_channel === "SMS") {
+                    $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+                } else if ($settings->notification_channel === "Email and SMS") {
+                    $this->sendMail();
+                    $this->sendMessage('Payment Refunded', '+63 976 054 2645');
+                }
+            }
+    
+            $this->emit('refreshDatatable');
+    
+            $this->closeModal();
+    
+            $this->dialog()->success(
+                $title = 'Success!',
+                $description = 'Record is now successfully updated. Payment is Refunded.'
+            );
         } else {
             $this->dialog()->error(
                 $title = 'Access Denied',
-                $description = "Current user does not have the permission to update the record",
+                $description = "Password does not match. Please enter the password.",
             );
         }
     }
 
-    public function update()
-    {
-        $settings = Setting::find(1);
-
-        $this->payment->forceFill([
-            'refunder_account_id' => Auth::user()->id,
-            'payment_status' => 'Refunded',
-        ])->save();
-
-        if ($settings->notify_payments === 1) {
-            if ($settings->notification_channel === "Email") {
-                $this->sendMail($payments);
-            } else if ($settings->notification_channel === "SMS") {
-                $this->sendMessage('Payment Refunded', '+63 976 054 2645');
-            } else if ($settings->notification_channel === "Email and SMS") {
-                $this->sendMail($payments);
-                $this->sendMessage('Payment Refunded', '+63 976 054 2645');
-            }
-        }
-
-        $this->emit('refreshDatatable');
-
-        $this->dialog()->success(
-            $title = 'Success!',
-            $description = 'Record is now successfully updated. Payment is Refunded.'
-        );
-    }
-
-    public function sendMail(Payments $payments)
+    public function sendMail()
     {
         $user = User::find($this->payment->user_id);
 

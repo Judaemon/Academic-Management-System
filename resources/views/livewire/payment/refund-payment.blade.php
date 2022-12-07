@@ -6,7 +6,7 @@
                     Confirm Password
                 </div>
                 <div class="col-span-4 mb-6"> 
-                    <x-input 
+                    <x-inputs.password 
                         wire:model="confirm_password" 
                         label="For security, please confirm your password to continue." 
                         placeholder="Enter your password"

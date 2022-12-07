@@ -84,7 +84,7 @@ class PaymentsTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Order No", "id")
+            Column::make("Or No", "id")
                 ->sortable(),
 
             Column::make("Name", "user_id")
