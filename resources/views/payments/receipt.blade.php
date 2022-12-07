@@ -77,7 +77,7 @@ td{
 
   <div style="padding-bottom: 3mm; border-bottom: 2px solid rgb(123, 123, 123);">
     <h2 style="text-transform:uppercase;">
-      Order No. {{ $pay->id }}
+      Or No. {{ $pay->id }}
     </h2>
     @if(!empty($school_fees))
       <h2 style="text-transform:uppercase; width: 100%";>School Fees</h2>
