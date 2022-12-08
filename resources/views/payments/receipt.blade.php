@@ -95,19 +95,41 @@ td{
       </div>
     @endif
       
-    <h2 style="text-transform:uppercase;">Educational Expenses</h2>
-    <div id="table">
-      <table style="color:#222; font-size: .85em;">
-        @foreach($payment as $payment)
+    @if(!empty($pay->balance))
+      <h2 style="text-transform:uppercase;">Educational Expenses</h2>
+      <div id="table">
+        <table style="color:#222; font-size: .85em;">
+          @foreach($payment as $payment)
+            <tr class="tabletitle" style="color:#222; font-size: .85em; width:100%;">
+              <td style="color:#222; width:50%;">{{ $payment->created_at->format('m-d-Y') }}</td>
+              <td class="payment" style="color:#222; width:50%;">
+                <h2>Php {{ number_format($payment->amount_paid, 2) }}</h2>
+              </td>
+            </tr>
+          @endforeach
+        </table>
+      </div>  
+    @endif
+
+    @if(empty($pay->balance))
+      <h2 style="text-transform:uppercase;">
+        @if(!empty($pay->fee_id))
+          {{ $pay->fee->fee_name }}
+        @else
+          {{ $pay->others }}
+        @endif
+      </h2>
+      <div id="table">
+        <table style="color:#222; font-size: .85em;">
           <tr class="tabletitle" style="color:#222; font-size: .85em; width:100%;">
-            <td style="color:#222; width:50%;">{{ $payment->created_at->format('m-d-Y') }}</td>
+            <td style="color:#222; width:50%;">{{ $pay->created_at->format('m-d-Y') }}</td>
             <td class="payment" style="color:#222; width:50%;">
-              <h2>Php {{ number_format($payment->amount_paid, 2) }}</h2>
+              <h2>Php {{ number_format($pay->amount_paid, 2) }}</h2>
             </td>
           </tr>
-        @endforeach
-      </table>
-    </div>  
+        </table>
+      </div>  
+    @endif
   </div>
   <div style="margin-top: 2mm; width: 20rem;">
     <p style="text-align: center; font-size: 0.9em; line-height: 1.2em;">

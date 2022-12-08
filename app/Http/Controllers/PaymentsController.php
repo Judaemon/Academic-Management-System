@@ -30,7 +30,7 @@ class PaymentsController extends Controller
         $accountant = User::where('id', $pay->accountant_id)->first();
         $latest_acad_yr = AcademicYear::where('status', "Ongoing")->first();
 
-        if($pay->academic_year_id === $latest_acad_yr->id) {
+        if($pay->academic_year_id === $latest_acad_yr->id && !empty($pay->balance)) {
             $school_fees = Fee::where('grade_level_id', $admit->admit_to_grade_level)->get();
             $payment = Payments::where('user_id', $user)
                             ->where('payment_status', 'Paid')
