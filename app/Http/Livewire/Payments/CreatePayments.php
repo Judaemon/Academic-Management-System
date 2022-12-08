@@ -35,8 +35,6 @@ class CreatePayments extends ModalComponent
     public $options;
     public $latest;
 
-    public $isNull = true;
-
     public $school_fees;
     public $history;
 
@@ -69,7 +67,6 @@ class CreatePayments extends ModalComponent
             $user = Admission::where('student_id', $this->name)->latest()->first();
             
             if(!empty($user)) {
-                $this->isNull = false;
                 $this->school_fees = Fee::where('grade_level_id', $user->admit_to_grade_level)->get();
                 $this->total = $this->school_fees->sum('amount');
 
@@ -90,11 +87,9 @@ class CreatePayments extends ModalComponent
                                             })
                                            ->get();
             } else {
-                $this->isNull = true;
                 $this->total = NULL;
             }
         } else {
-            $this->isNull = true;
             $this->total = NULL;
         }
     }

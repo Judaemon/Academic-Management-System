@@ -37,13 +37,14 @@ return new class extends Migration
                 ->constrained('fees', 'id')
                 ->onDelete('cascade');
 
+            $table->text('refund_reason')
+                ->nullable()
+                ->default(NULL);
+
             $table->string('others')
                 ->nullable();
 
             $table->decimal('balance', 10, 2)
-                ->nullable();
-
-            $table->decimal('refund_reason', 10, 2)
                 ->nullable();
 
             $table->string('payment_method')

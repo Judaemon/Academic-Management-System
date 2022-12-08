@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 
     // settings
     Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('setting.index');
-
+ 
     // accounting
     Route::get('fees', [\App\Http\Controllers\FeesController::class, 'index'])->name('fees.index');
 

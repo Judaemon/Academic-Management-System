@@ -23,7 +23,17 @@ class RefundPayment extends ModalComponent
     use AuthorizesRequests, Actions;
 
     public $payment;
+
     public $confirm_password;
+    public $reason_for_refund;
+
+    protected function rules()
+    {
+        return [
+            'confirm_password' => ['required'],
+            'reason_for_refund' => ['required'],
+        ];
+    }
 
     public function mount(Payments $payment)
     {
@@ -44,9 +54,10 @@ class RefundPayment extends ModalComponent
 
             $this->payment->forceFill([
                 'refunder_account_id' => Auth::user()->id,
+                'refund_reason' => $this->reason_for_refund,
                 'payment_status' => 'Refunded',
             ])->save();
-    
+        
             if ($settings->notify_payments === 1) {
                 if ($settings->notification_channel === "Email") {
                     $this->sendMail();
@@ -57,11 +68,11 @@ class RefundPayment extends ModalComponent
                     $this->sendMessage('Payment Refunded', '+63 976 054 2645');
                 }
             }
-    
+        
             $this->emit('refreshDatatable');
     
             $this->closeModal();
-    
+        
             $this->dialog()->success(
                 $title = 'Success!',
                 $description = 'Record is now successfully updated. Payment is Refunded.'
