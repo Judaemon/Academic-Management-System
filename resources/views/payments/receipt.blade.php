@@ -125,7 +125,7 @@ td{
             <td style="color:#222; width:50%;">{{ $pay->created_at->format('m-d-Y') }}</td>
             <td class="payment" style="color:#222; width:50%;">
               <h2>Php {{ number_format($pay->amount_paid, 2) }}</h2>
-            </td>
+            </td> 
           </tr>
         </table>
       </div>  
